@@ -37,4 +37,4 @@ const companyUrl = title.toLowerCase().replace(/\s+/g, '-');
   )
 }
 
-export default Card
+export default Card 
