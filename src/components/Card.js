@@ -27,7 +27,7 @@ const companyUrl = title.toLowerCase().replace(/\s+/g, '-');
                 <button
                     class={cardButton}
                     type="button">
-                    Read More
+                    Read More Details
                 </button>
                 </Link>
             </div>
