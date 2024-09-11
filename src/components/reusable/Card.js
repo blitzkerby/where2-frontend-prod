@@ -218,6 +218,7 @@ const Card = ({
                         <div className={styles.descriptionContainer}>
                             <p className={`text-justify`}>{description}</p>
                         </div>
+<<<<<<< HEAD
                         <div className={styles.footerContainer}>
                             <div className={styles.socialContainer}>
                                 {socialMediaIcons.map(({ icon: Icon, linkKey, isExternal }, index) => {
@@ -269,6 +270,15 @@ const Card = ({
 =======
 >>>>>>> ef33a06 (MODIFIED : card.js)
                         </div>
+=======
+// I comment this to avoid error, since We don't have the Link set in App.js file yet.
+                        {/* <Link to={`/company/companydetail/:company`} className="text-blue-500 hover:underline">
+                            <Button className="font- text-1xl p-2 px-3" variant="primary" size="large">
+                                Read More
+                            </Button>
+                        </Link> */}
+
+>>>>>>> 6459814 (commented on Link on card component)
                     </div>
                 </div>
             </div>
