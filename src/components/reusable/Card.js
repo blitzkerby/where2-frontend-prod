@@ -89,7 +89,7 @@ const Card = ({
                                 <img src={Map} alt="Map" />
                             </Link> */}
                         </div>
-
+// I comment this to avoid error, since We don't have the Link set in App.js file yet.
                         {/* <Link to={`/company/companydetail/:company`} className="text-blue-500 hover:underline">
                             <Button className="font- text-1xl p-2 px-3" variant="primary" size="large">
                                 Read More
