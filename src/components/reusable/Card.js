@@ -8,7 +8,7 @@ import MiniMap from '../../assets/svg/miniMap.svg'
 import MiniClock from '../../assets/svg/miniClock.svg';
 import Calender from '../../assets/svg/calender.svg';
 import { cardBody, cardDescription, cardTitle } from './tailwindcardclass/cardClass';
-// import NODE_ENV
+// import NODE_ENV (No .env file)
 
 const Card = ({
     image,
