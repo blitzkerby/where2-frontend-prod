@@ -11,6 +11,7 @@ import Button from './Button';
 import MiniMap from '../../assets/svg/miniMap.svg'
 import MiniClock from '../../assets/svg/miniClock.svg';
 import Calender from '../../assets/svg/calender.svg';
+<<<<<<< HEAD
 import { cardBody, cardDescription, cardTitle } from './tailwindcardclass/cardClass';
 // import NODE_ENV (No .env file)
 =======
@@ -18,6 +19,13 @@ import MiniMap from '../../assets/svg/miniMap.svg'
 import MiniClock from '../../assets/svg/miniClock.svg';
 import Calender from '../../assets/svg/calender.svg';
 >>>>>>> ef4bf0d (REMOVED : test/ folder)
+=======
+<<<<<<< HEAD
+=======
+import { cardBody, cardDescription, cardTitle } from './tailwindcardclass/cardClass';
+// import NODE_ENV (No .env file)
+>>>>>>> 134478d (added the comment on Button.js)
+>>>>>>> ac86c7b (added the comment on Button.js)
 
 // constants
 // import { NODE_ENV } from '../../constants';
