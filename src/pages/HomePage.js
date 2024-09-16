@@ -1,4 +1,4 @@
-import Footer from "../components/reusable/footerComponent/Footer";
+import Footer from "../components/reusable/Footer";
 const HomePage = () => {
   return (
     <div>
