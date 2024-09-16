@@ -3,9 +3,14 @@ REVIEWBOARD_URL = "http://review.clp.kr/"
 REPOSITORY = "Luck/Where2"
 REPOSITORY_TYPE = "git"
 <<<<<<< HEAD
+<<<<<<< HEAD
 BRANCH = "feature/ft2.1-scholarshippage"
 LAND_DEST_BRANCH = "feature/ft2.1-scholarshippage"
 =======
 BRANCH = "develop"
 LAND_DEST_BRANCH = "develop"
 >>>>>>> f4391db (user profile)
+=======
+BRANCH = "feature/ft#8-studentLoan"
+LAND_DEST_BRANCH = "feature/ft#8-studentLoan"
+>>>>>>> 835841b (reconfigured reviewboard file)
