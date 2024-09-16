@@ -1,14 +1,21 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Card from "./components/reusable/Card";
 import SearchBar from "./components/reusable/SearchBar";
 import HomePage from "./pages/HomePage";
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> 6aad705 (ft#8-studentLoan: added the route for studentLoan Page)
 // import Card from "./components/reusable/Card";
 // import SearchBar from "./components/reusable/SearchBar";
 // import Card from "./components/reusable/Card";
 // import SearchBar from "./components/reusable/SearchBar";
+=======
+import Card from "./components/reusable/Card";
+import SearchBar from "./components/reusable/SearchBar";
+>>>>>>> e1c602e (ft#8-studentLoan: added the route for studentLoan Page)
 import HomePage from "./pages/HomePage";
 >>>>>>> 34efb6a (ft2.1-scholashippage: trying to rebase 5th time)
 import LoginPage from "./pages/LoginPage";
