@@ -1,5 +1,5 @@
 REVIEWBOARD_URL = "https://review.clp.kr/"
 REPOSITORY = "Luck/Where2"
 REPOSITORY_TYPE = "git"
-BRANCH = "feature/ft#3-searchbar"
-LAND_DEST_BRANCH = "feature/ft#3-searchbar"
+BRANCH = "feature/ft#8-studentLoan"
+LAND_DEST_BRANCH = "feature/ft#8-studentLoan"
