@@ -31,7 +31,7 @@ const Card = ({
         { icon: Youtube, linkKey: youtubeLink },
         { icon: Chrome, linkKey: websiteLink, isExternal: true },
     ];
-    const companyUrl = title.toLowerCase().replace(/\s+/g, '-');
+    // const companyUrl = title.toLowerCase().replace(/\s+/g, '-');
     const workDetails = [
         { icon: MiniClock, linkKey: timeOut },
         { icon: Calender, linkKey: deadLine },
@@ -85,16 +85,16 @@ const Card = ({
                             <div>
                                 <img src={BookMark} alt="Bookmark" />
                             </div>
-                            {/* <Link to="">
+                            <Link to="">
                                 <img src={Map} alt="Map" />
-                            </Link> */}
+                            </Link>
                         </div>
-// I comment this to avoid error, since We don't have the Link set in App.js file yet.
-                        {/* <Link to={`/company/companydetail/:company`} className="text-blue-500 hover:underline">
-                            <Button className="font- text-1xl p-2 px-3" variant="primary" size="large">
+{/* // I comment this to avoid error, since We don't have the Link set in App.js file yet. */}
+                        <Link to={`/company/companydetail/:company`} className="text-blue-500 hover:underline">
+                            {/* <Button className="font- text-1xl p-2 px-3" variant="primary" size="large">
                                 Read More
-                            </Button>
-                        </Link> */}
+                            </Button> */}
+                        </Link>
 
                     </div>
                 </div>

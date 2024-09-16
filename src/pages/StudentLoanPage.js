@@ -1,6 +1,8 @@
+import StudentLoanCard from "../components/reusable/StudentLoanCard";
+
 function StudentLoanPage() {
     return (<div>
-Hello From StudentLoanPage.
+<StudentLoanCard></StudentLoanCard>
     </div>)
 };
 
