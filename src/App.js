@@ -7,7 +7,7 @@ import SearchBar from "./components/reusable/SearchBar";
   
 function App() {
   return (
-<div>Welcome to Where2</div>
+    <div>Welcome to Where2</div>
   );
 }
 
