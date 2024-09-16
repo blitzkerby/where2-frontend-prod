@@ -47,7 +47,6 @@ const Card = ({
         { icon: Youtube, linkKey: youtubeLink },
         { icon: Chrome, linkKey: websiteLink, isExternal: true },
     ];
-
     const workDetails = [
         { icon: MiniClock, linkKey: timeOut },
         { icon: Calender, linkKey: deadLine },
