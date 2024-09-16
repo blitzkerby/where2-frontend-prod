@@ -65,10 +65,17 @@ const Card = ({
         { icon: Chrome, linkKey: websiteLink, isExternal: true },
     ];
 <<<<<<< HEAD
+<<<<<<< HEAD
     // const companyUrl = title.toLowerCase().replace(/\s+/g, '-');
 =======
 
 >>>>>>> ef4bf0d (REMOVED : test/ folder)
+=======
+
+=======
+    // const companyUrl = title.toLowerCase().replace(/\s+/g, '-');
+>>>>>>> 1b362f0 (ft#8-studentLoan: Added route for student loan and tested using reusable card component on StudentLoanPage)
+>>>>>>> e47aa8b (ft#8-studentLoan: Added route for student loan and tested using reusable card component on StudentLoanPage)
     const workDetails = [
         { icon: MiniClock, linkKey: timeOut },
         { icon: Calender, linkKey: deadLine },
@@ -222,6 +229,7 @@ const Card = ({
                             ))}
                         </div>
                     </div>
+<<<<<<< HEAD
                     <div className={`${styles.bodyContainer.large} ${styles.bodyContainer.small}`}>
                         <div className={styles.descriptionContainer}>
                             <p className={`text-justify`}>{description}</p>
@@ -282,9 +290,47 @@ const Card = ({
 // I comment this to avoid error, since We don't have the Link set in App.js file yet.
                         {/* <Link to={`/company/companydetail/:company`} className="text-blue-500 hover:underline">
                             <Button className="font- text-1xl p-2 px-3" variant="primary" size="large">
+=======
+                    <div className="text-clip overflow-hidden w-full h-[200px]">
+                        <p className={`${cardDescription} mt-3 text-justify`}>{description}</p>
+                    </div>
+                </div>
+                <div className="p-6 pt-0">
+                    <div className="social flex py-6 justify-around max-w-[200px]">
+                        {socialMediaIcons.map(({ icon: Icon, linkKey, isExternal }, index) => {
+                            // if (NODE_ENV === 'development') {
+                            //     console.log(linkKey)
+                            // }
+                            return linkKey ? (
+                                isExternal ? (
+                                    <a href={linkKey} key={index} target="_blank" rel="noopener noreferrer">
+                                        <Icon />
+                                    </a>
+                                ) : (
+                                        "testing"
+                                    // <Link to={linkKey} key={index}>
+                                    //     <Icon />
+                                    // </Link>
+                                )
+                            ) : null;
+                        })}
+                    </div>
+                    <div className="flex justify-between">
+                        <div className="w-[100px] flex justify-around">
+                            <div>
+                                <img src={BookMark} alt="Bookmark" />
+                            </div>
+                            <Link to="">
+                                <img src={Map} alt="Map" />
+                            </Link>
+                        </div>
+{/* // I comment this to avoid error, since We don't have the Link set in App.js file yet. */}
+                        <Link to={`/company/companydetail/:company`} className="text-blue-500 hover:underline">
+                            {/* <Button className="font- text-1xl p-2 px-3" variant="primary" size="large">
+>>>>>>> 1b362f0 (ft#8-studentLoan: Added route for student loan and tested using reusable card component on StudentLoanPage)
                                 Read More
-                            </Button>
-                        </Link> */}
+                            </Button> */}
+                        </Link>
 
 >>>>>>> 6459814 (commented on Link on card component)
                     </div>
