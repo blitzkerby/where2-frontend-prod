@@ -14,3 +14,5 @@ LAND_DEST_BRANCH = "develop"
 BRANCH = "feature/ft#8-studentLoan"
 LAND_DEST_BRANCH = "feature/ft#8-studentLoan"
 >>>>>>> 835841b (reconfigured reviewboard file)
+BRANCH = "feature/ft2.1-scholarshippage"
+LAND_DEST_BRANCH = "feature/ft2.1-scholarshippage"
