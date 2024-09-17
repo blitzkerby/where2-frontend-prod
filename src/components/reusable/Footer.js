@@ -12,14 +12,12 @@ const FooterLink = ({ href, children }) => (
     {children}
   </Link>
 );
-
 const SocialIcon = ({ Icon }) => (
   <div className="w-8 h-8 rounded-full bg-[#87CEEB] flex items-center justify-center text-white cursor-pointer " style={{ filter: 'drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))' }} >
     <Icon />
   </div>
 );
-
-const Footer = () => {
+function Footer () {
   return (
     <footer className="bg-[#E6F3F9] text-gray-700 py-8 px-4 w-full bottom-0 mt-[64px] ">
       <div className="container mx-auto max-w-[1440px]">
@@ -37,7 +35,6 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-
           {/* Desktop: Middle columns, Mobile: Middle section */}
           <div className="mb-8 md:mb-0 w-1/2 md:w-1/4 p-2">
             <h2 className="font-bold mb-2  underline decoration-[3px] underline-offset-8 mb-6"><FooterLink href="/about-us">About Us</FooterLink></h2>
@@ -69,7 +66,6 @@ const Footer = () => {
               </li>
             </ul>
             <div className="md:hidden">
-              {/* <h2 className="font-bold mb-2  underline decoration-[3px] underline-offset-8">Our Social</h2> */}
               <div className="flex space-x-2  ">
                 <SocialIcon Icon={FaTwitter} />
                 <SocialIcon Icon={FaInstagram} />
@@ -77,7 +73,6 @@ const Footer = () => {
               </div>
             </div>
           </div>
-
           {/* Desktop: Social icons column */}
           <div className="hidden md:block">
 						<h2 className="font-bold mb-2 underline decoration-[3px] underline-offset-8 mb-6">Our Social</h2>
@@ -87,7 +82,6 @@ const Footer = () => {
 							<SocialIcon Icon={FaFacebookF} />
 						</div>
 					</div>
-
         </div>
 
         {/* Copyright */}
