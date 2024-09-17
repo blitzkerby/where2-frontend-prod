@@ -8,6 +8,7 @@ REPOSITORY_TYPE = "git"
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 BRANCH = "feature/ft#8-studentLoan"
 LAND_DEST_BRANCH = "feature/ft#8-studentLoan"
 =======
@@ -38,3 +39,7 @@ LAND_DEST_BRANCH = "feature/krisna"
 BRANCH = "develop"
 LAND_DEST_BRANCH = "develop"
 >>>>>>> 4b0f127 (review board erorr)
+=======
+BRANCH = "feature/ft2.1-scholarshippage"
+LAND_DEST_BRANCH = "feature/ft2.1-scholarshippage"
+>>>>>>> bb9f1e0 (ft2.1-scholarshippage: change config in the reviewbaord file)
