@@ -3,3 +3,4 @@ REPOSITORY = "Luck/Where2"
 REPOSITORY_TYPE = "git"
 BRANCH = "feature/ft2.1-scholarshippage"
 LAND_DEST_BRANCH = "feature/ft2.1-scholarshippage"
+
