@@ -6,6 +6,7 @@ REPOSITORY_TYPE = "git"
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 BRANCH = "feature/ft#8-studentLoan"
 LAND_DEST_BRANCH = "feature/ft#8-studentLoan"
 =======
@@ -28,3 +29,7 @@ LAND_DEST_BRANCH = "feature/krisna"
 BRANCH = "develop"
 LAND_DEST_BRANCH = "develop"
 >>>>>>> 02d4c25 (review board erorr)
+=======
+BRANCH = "feature/krisna"
+LAND_DEST_BRANCH = "feature/krisna"
+>>>>>>> f9ea941 (testing review board)
