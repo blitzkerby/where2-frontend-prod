@@ -1,5 +1,4 @@
 REVIEWBOARD_URL = "http://review.clp.kr/"
-
 REPOSITORY = "Luck/Where2"
 REPOSITORY_TYPE = "git"
 <<<<<<< HEAD
