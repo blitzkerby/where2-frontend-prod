@@ -1,5 +1,0 @@
-REVIEWBOARD_URL = "https://review.clp.kr/"
-REPOSITORY = "Luck/Where2"
-REPOSITORY_TYPE = "git"
-BRANCH = "feature/ft#7-card"
-LAND_DEST_BRANCH = "feature/ft#7-card"
