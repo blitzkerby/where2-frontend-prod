@@ -38,3 +38,5 @@ yarn-error.log*
 pnpm-lock.yaml
 
 temp/
+
+.reviewboardrc
