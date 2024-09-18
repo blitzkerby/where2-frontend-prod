@@ -1,7 +1,8 @@
 import Card from "./reusable/Card";
 
 function AccommodationsList({accommodations}) {
-  const preset = [{
+  // I MAKE THIS COMMENT TO POST ON REVIEWBOARD
+  const preData = [{
     imageUrl: "https://picsum.photos/200",
     imageAlt: "Picture",
     title: "Title",
@@ -15,7 +16,7 @@ function AccommodationsList({accommodations}) {
     deadLine: "01-01-3000",
     timeOut: "25:61"
   }]
-  const rendered = preset.map( (acc) => {
+  const rendered = preData.map( (acc) => {
     return <Card 
       image={acc.imageUrl}  
       imageAlt={acc.imageAlt} 
