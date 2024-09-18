@@ -1,6 +1,7 @@
-REVIEWBOARD_URL = "http://review.clp.kr/"
+REVIEWBOARD_URL = "https://review.clp.kr/"
 REPOSITORY = "Luck/Where2"
 REPOSITORY_TYPE = "git"
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -23,3 +24,7 @@ LAND_DEST_BRANCH = "develop"
 BRANCH = "feature/krisna"
 LAND_DEST_BRANCH = "feature/krisna"
 >>>>>>> 7fd78f3 (testing review board)
+=======
+BRANCH = "develop"
+LAND_DEST_BRANCH = "develop"
+>>>>>>> 02d4c25 (review board erorr)
