@@ -13,6 +13,11 @@ import VerificationPage from "./pages/VerificationPage";
   const router = createBrowserRouter([
     {
       path:'/',
+      index:true,
+      element:<HomePage/>
+    },
+    {
+      path:"/home",
       element:<HomePage/>
     },
     { path: "/login",element: <LoginPage />},

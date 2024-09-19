@@ -17,7 +17,7 @@ const LoginComponent = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/homepage");
+      navigate("/home");
     }
   }, [isAuthenticated, navigate]);
 
@@ -30,7 +30,7 @@ const LoginComponent = () => {
     try {
       const resultAction = await dispatch(login({ email, password }));
       if (login.fulfilled.match(resultAction)) {
-        navigate("/homepage");
+        navigate("/home");
       }
     } catch (err) {
       console.error("Failed to log in. Please try again!");
