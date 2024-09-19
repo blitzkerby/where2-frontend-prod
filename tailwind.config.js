@@ -10,6 +10,7 @@ module.exports = {
       },
       screens: {
         'sm': {'max': '980px'},
+        'rd' : {'min' : '981px', 'max' : '1003px' },
         'lg': { 'min' : '1004px' },
         'custom-blue' : 'rbg(0, 122, 255)'
       },
