@@ -7,7 +7,6 @@ import { BiTargetLock } from "react-icons/bi";
 import { PiPersonSimpleHike } from "react-icons/pi";
 
 const FooterLink = ({ href, children }) => (
-
   <Link to={href} className="hover:underline">
     {children}
   </Link>
@@ -17,6 +16,7 @@ const SocialIcon = ({ Icon }) => (
     <Icon />
   </div>
 );
+
 function Footer () {
   return (
     <footer className="bg-[#E6F3F9] text-gray-700 py-8 px-4 w-full bottom-0 mt-[64px] ">
