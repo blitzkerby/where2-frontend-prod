@@ -10,6 +10,7 @@ import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
 import VerificationPage from "./pages/VerificationPage";
 import JobPage from "./pages/JobPage";
 import JobDetailPage from "./pages/JobDetailPage";
+import UserProfile from "./components/UserProfile";
 
 
   const router = createBrowserRouter([
@@ -28,9 +29,10 @@ import JobDetailPage from "./pages/JobDetailPage";
     { path: "/reset-password/:token", element: <ResetPasswordPage />},
     { path: "/terms-and-conditions", element: <TermsAndConditionsPage/>},
     { path: "/signup/verification", element: <VerificationPage/> },
-    { path: "/dashboard/:userName", element: <HomePage /> },
+    { path: "/dashboard/:userName", element: <UserProfile /> },
     { path: "/job", element: <JobPage /> },
     { path: "/job-detail/:id", element: <JobDetailPage />},
+    
   ])
   
 function App() {
