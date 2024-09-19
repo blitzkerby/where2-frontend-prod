@@ -165,10 +165,29 @@ import config from "../../config"
           email,
           password,
         });
-        const { token, id, userName, ...userData } = response.data;
-        localStorage.setItem("authData", JSON.stringify({ token, id, userName }));
-        return { token, id, userName, ...userData };
+        
+        const { token, id, userName, entity, data } = response.data;
+        
+        const authData = {
+          token,
+          id,
+          userName,
+          entity,
+        };
+        localStorage.setItem("authData", JSON.stringify(authData));
+        
+        if (config.isDevelopment) {
+          console.log("Login successful. Stored auth data:", authData);
+        }
+  
+        return { 
+          ...authData, 
+          user: data.user
+        };
       } catch (error) {
+        if (config.isDevelopment) {
+          console.error("Login failed:", error);
+        }
         return thunkAPI.rejectWithValue(
           handleAsyncError(error, "Failed to log in. Please try again.")
         );

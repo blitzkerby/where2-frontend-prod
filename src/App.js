@@ -26,6 +26,7 @@ import VerificationPage from "./pages/VerificationPage";
     { path: "/reset-password/:token", element: <ResetPasswordPage />},
     { path: "/terms-and-conditions", element: <TermsAndConditionsPage/>},
     { path: "/signup/verification", element: <VerificationPage/> },
+    { path: "/dashboard/:userName", element: <HomePage/> },
   ])
   
 function App() {

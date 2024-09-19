@@ -7,17 +7,43 @@ import User from "./../../assets/svg/user.svg";
 import config from "../../config";
 
 const MenuIcon = <img src={Menu} alt="Menu" />;
-const DashboardIcon = (
-  <Link to="/dashboard" aria-label="Dashboard">
-    <img src={Dashboard} alt="Dashboard" />
-  </Link>
-);
+const DashboardIcon = ({ username, entity }) => {
+  const actualIdentifier = username || entity || "entity";
+  const encodedIdentifier = encodeURIComponent(actualIdentifier);
+  const dynamicDashboardUrl = `/dashboard/${encodedIdentifier}`;
+
+  return (
+    <Link to={dynamicDashboardUrl}>
+      <img src={Dashboard} alt="Dashboard"/>
+    </Link>
+  );
+};
+
 const UserIcon = <img src={User} alt="User" />;
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showDashboard, setShowDashboard] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+  const [entity, setEntity] = useState("");
+
+  const fetchUserData = useCallback(() => {
+    const authData = JSON.parse(localStorage.getItem('authData'));
+    if (authData && authData.userName) {
+      setUsername(authData.userName);
+      setEntity("");
+      setIsLoggedIn(true);
+    } else if (authData && authData.entity) {
+      setEntity(authData.entity);
+      setUsername("");
+      setIsLoggedIn(true);
+    } else {
+      setUsername("");
+      setEntity("");
+      setIsLoggedIn(false);
+    }
+  }, []);
 
   const fetchUserRole = useCallback(async () => {
     const authData = localStorage.getItem('authData');
@@ -31,44 +57,45 @@ const Navbar = () => {
           if (response.ok) {
             const data = await response.json();
             setShowDashboard(data.role === 'admin' || data.role === 'developer');
-            setIsLoggedIn(true);
           } else {
-            setIsLoggedIn(false);
             setShowDashboard(false);
           }
         } else {
-          setIsLoggedIn(false);
           setShowDashboard(false);
         }
       } catch (error) {
         console.error('Error fetching user role:', error);
-        setIsLoggedIn(false);
         setShowDashboard(false);
       }
     } else {
-      setIsLoggedIn(false);
       setShowDashboard(false);
     }
   }, []);
 
   useEffect(() => {
+    fetchUserData();
     fetchUserRole();
-    const intervalId = setInterval(fetchUserRole, 600000);
+    const intervalId = setInterval(() => {
+      fetchUserData();
+      fetchUserRole();
+    }, 600000);
 
     return () => clearInterval(intervalId);
-  }, [fetchUserRole]);
+  }, [fetchUserData, fetchUserRole]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  // NavBar menuItems
   const menuItems = [
     { name: "Universities", to: "/universities" },
     { name: "Scholarships", to: "/scholarships" },
     { name: "Livelihood", to: "/livelihood" },
     { name: "About Us", to: "/about-us" },
   ];
+
+  const identifier = username || entity;
+  const encodedIdentifier = encodeURIComponent(identifier);
 
   return (
     <>
@@ -83,9 +110,9 @@ const Navbar = () => {
             ))}
           </div>
           <div className="flex items-center space-x-4">
-            {showDashboard && DashboardIcon}
+            {showDashboard && <DashboardIcon username={username} entity={entity} />}
             <button className="p-2 rounded-full hover:bg-gray-300" aria-label="Profile">
-              {isLoggedIn ? <Link to="/profile">{UserIcon}</Link> : <Link to="/login">{UserIcon}</Link>}
+              {isLoggedIn ? <Link to={`/profile/${encodedIdentifier}`}>{UserIcon}</Link> : <Link to="/login">{UserIcon}</Link>}
             </button>
           </div>
         </div>
@@ -117,6 +144,15 @@ const Navbar = () => {
                   {item.name}
                 </Link>
               ))}
+              {showDashboard && (
+                <Link
+                  to={`/dashboard/${encodedIdentifier}`}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  onClick={toggleMenu}
+                >
+                  Dashboard
+                </Link>
+              )}
             </div>
           </div>
         </div>
