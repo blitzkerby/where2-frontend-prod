@@ -35,6 +35,7 @@ const getEnvVariable = (key, defaultValue = "") => {
       resetPasswordUrl: (token) => `${API_URL}/api/users/resetPassword/${token}`,
       refreshTokenUrl: `${API_URL}/api/users/refreshToken`,
       fetchProfileUrl: (username) => `${API_URL}/api/users/profile/${username}`,
+      getUserRole: `${API_URL}/api/users/login/getRole`,
     },
     // You can add more variables here
     user: {

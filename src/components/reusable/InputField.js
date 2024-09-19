@@ -12,8 +12,8 @@ const FormInput = ({
     ...props
   }) => {
     return (
-      <div>
-        <label htmlFor={name} className="block text-sm font-medium text-gray-700">
+      <div className="flex-1">
+        <label htmlFor={name} className="block text-sm font-medium text-gray-700 whitespace-nowrap">
           {label}
         </label>
         <input
