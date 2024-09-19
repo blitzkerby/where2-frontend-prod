@@ -27,7 +27,7 @@ function Footer () {
             <h2 className="font-bold mb-2  underline decoration-[3px] underline-offset-8"><FooterLink href="/universities">Universities</FooterLink></h2>
             <h2 className="font-bold mb-2  underline decoration-[3px] underline-offset-8"><FooterLink href="/scholarships">Scholarships</FooterLink></h2>
             <div className="mb-4">
-              <h2 className="font-bold mb-2  underline decoration-[3px] underline-offset-8 mb-6"><FooterLink href="/livelihood">Livelihood</FooterLink></h2>
+              <h2 className="font-bold mb-2  underline decoration-[3px] underline-offset-8"><FooterLink href="/livelihood">Livelihood</FooterLink></h2>
               <ul className=" text-sm" style={{color:'rgba(157, 160, 161, 1)'}}>
                 <li><FooterLink href="/part-time-job">Part Time Job</FooterLink></li>
                 <li><FooterLink href="/student-loan">Student Loan</FooterLink></li>
@@ -37,7 +37,7 @@ function Footer () {
           </div>
           {/* Desktop: Middle columns, Mobile: Middle section */}
           <div className="mb-8 md:mb-0 w-1/2 md:w-1/4 p-2">
-            <h2 className="font-bold mb-2  underline decoration-[3px] underline-offset-8 mb-6"><FooterLink href="/about-us">About Us</FooterLink></h2>
+            <h2 className="font-bold mb-2  underline decoration-[3px] underline-offset-8"><FooterLink href="/about-us">About Us</FooterLink></h2>
             <ul className=" text-sm" style={{color:'rgba(157, 160, 161, 1)'}}>
               <li className="flex items-center">
                 <span className="mr-2"><BiTargetLock /></span>
@@ -75,7 +75,7 @@ function Footer () {
           </div>
           {/* Desktop: Social icons column */}
           <div className="hidden md:block">
-						<h2 className="font-bold mb-2 underline decoration-[3px] underline-offset-8 mb-6">Our Social</h2>
+						<h2 className="font-bold mb-2 underline decoration-[3px] underline-offset-8">Our Social</h2>
 						<div className="space-y-2 flex flex-col items-center">
 							<SocialIcon Icon={FaTwitter} />
 							<SocialIcon Icon={FaInstagram} />
