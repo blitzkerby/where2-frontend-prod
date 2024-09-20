@@ -81,7 +81,7 @@ const LoginComponent = () => {
         </Link>
         <p className="mt-6 text-sm text-gray-600 ">
           Don't have an Account?{" "}
-          <Link to="/register" className="text-[rgb(0,122,255)] underline">
+          <Link to="/signup" className="text-[rgb(0,122,255)] underline">
             Sign Up
           </Link>
         </p>
