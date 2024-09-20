@@ -39,7 +39,9 @@ const getEnvVariable = (key, defaultValue = "") => {
     },
     // You can add more variables here
     user: {
-      upload: `${API_URL}/api/upload`
+      upload: `${API_URL}/api/upload`,
+      visitorTrack: `${API_URL}/api/visitors/track-visit`,
+      visits: `${API_URL}/api/visitors/visits`
     }
   };
   
