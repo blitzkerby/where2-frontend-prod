@@ -107,9 +107,9 @@ const Navbar = () => {
   return (
     <>
       <nav className="bg-gray-100 h-[64px] w-full fixed top-0 left-0 right-0 z-[1002]">
-        <div className="flex justify-between gap-x-10 items-center px-4 py-3 h-full sm:hidden m-auto lg:w-7/12">
+        <div className="flex justify-between gap-x-10 items-center px-4 py-3 h-full sm:hidden m-auto lg:w-9/12">
           <Link to="/" className="text-xl font-bold">WHERE2</Link>
-          <div className="flex align-center justify-between space-x-10 h-full lg:w-[60%]">
+          <div className="flex align-center justify-between h-full lg:w-9/12">
             {menuItems.map((item) => (
               <Link key={item.name} to={item.to} className="flex my-[6px] mx-0 whitespace-nowrap text-gray-700 hover:text-gray-900 h-full">
                 {item.name}
