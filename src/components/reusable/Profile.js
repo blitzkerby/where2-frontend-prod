@@ -1,35 +1,135 @@
-import React, { useState , createContext } from "react";
-import { Menu, Edit2 } from "lucide-react";
+import React, { useState, createContext } from "react";
+import { Menu, Edit2, BusFront , Pen , Trash } from "lucide-react";
 import { useParams } from "react-router-dom";
 import Sidebar from "./Sidebar.js";
 import { useEffect } from "react";
+import ContainerComponent from "./ContainerComponent.js";
 
+// const FormInput = ({
+//   label,
+//   value,
+//   placeholder,
+//    = false,
+//   type = "text",
+//   onChange,
+// }) => {
+//   const [showPassword, setShowPassword] = useState(false);
+//   return (
+//     <div>
+//       <label className="block text-sm font-medium text-gray-700 mb-1">
+//         {label}
+//       </label>
+//       <div className="relative">
+//         <input
+//           type={type === "password" && showPassword ? "text" : type}
+//           value={value}
+//           placeholder={placeholder}
+//           className="p-2 rounded-[20px] border-[1px] border-black w-full lg:max-w-[300px]"
+//           ={}
+//           onChange={onChange}
+//         />
+//       </div>
+//     </div>
+//   );
+// };
 
-const ProfileField = ({
+const FormInput = ({
   label,
+  name,
+  type,
   value,
-  placeholder,
-  readOnly = false,
-  type = "text",
   onChange,
+  required,
+  autoComplete,
+  autoCorrect,
+  rounded,
+  autoCapitalize,
+  className = "",
+  ...props
 }) => {
-  const [showPassword, setShowPassword] = useState(false);
   return (
-    <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">
+    <div className="flex-1">
+      <label htmlFor={name} className="block text-sm font-medium text-gray-700">
         {label}
       </label>
-      <div className="relative">
-        <input
-          type={type === "password" && showPassword ? "text" : type}
-          value={value}
-          placeholder={placeholder}
-          className="p-2 rounded-[20px] border-[1px] border-black w-full lg:max-w-[300px]"
-          readOnly={readOnly}
-          onChange={onChange}
-        />
-      </div>
+      <input
+        id={name}
+        name={name}
+        type={type}
+        value={value}
+        onChange={onChange}
+        required={required}
+        autoComplete={autoComplete}
+        autoCorrect={autoCorrect}
+        autoCapitalize={autoCapitalize}
+        className={`${
+          rounded ? "rounded-[19px]" : ""
+        } mt-3 block w-full rounded-md border-gray-300 h-[50px] shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm ${className} border-[2px]`}
+        {...props}
+      />
     </div>
+  );
+};
+
+const ButtonComponent = ({
+  children,
+  variant = "primary",
+  size = "medium",
+  width = "auto",
+  height = "auto",
+  fullWidth = false,
+  disabled = false,
+  onClick,
+  className,
+}) => {
+  const baseStyles =
+    "font-semibold rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200";
+
+  const variants = {
+    primary: "bg-sky-400 text-white hover:bg-sky-300 focus:ring-sky-500",
+    secondary:
+      "bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-gray-500",
+    outline:
+      "bg-transparent text-gray-800 border border-gray-300 hover:bg-gray-100 focus:ring-gray-500",
+    ghost: "bg-transparent text-gray-800 hover:bg-gray-100 focus:ring-gray-500",
+    danger: "bg-red-500 text-white hover:bg-red-600 focus:ring-red-500",
+    success: "bg-green-500 text-white hover:bg-green-600 focus:ring-green-500",
+  };
+
+  const sizes = {
+    small: "px-3 py-1 text-sm",
+    medium: "px-4 py-2",
+    large: "px-6 py-3 text-lg",
+  };
+
+  const widthStyle = fullWidth
+    ? "w-full"
+    : width === "auto"
+    ? ""
+    : `w-[${width}]`;
+
+  const heightStyle = height === "auto" ? "" : `h-[${height}]`;
+  const disabledClass = disabled ? "opacity-50 cursor-not-allowed" : "";
+
+  const buttonClasses = `
+    ${baseStyles}
+    ${variants[variant]}
+    ${sizes[size]}
+    ${heightStyle}
+    ${widthStyle}
+    ${disabledClass}
+    ${className}
+  `.trim();
+
+  return (
+    <button
+      className={buttonClasses}
+      onClick={onClick}
+      disabled={disabled}
+      style={width !== "auto" && !fullWidth ? { width } : {}}
+    >
+      {children}
+    </button>
   );
 };
 
@@ -60,42 +160,66 @@ const UserAccount = ({ userInfo }) => {
 
       <div className="space-y-4">
         {userInfo.entity ? (
-          <ProfileField label="Entity" value={userInfo.entity} readOnly />
-        ) : null}
+          <FormInput
+            label="Entity"
+            value={userInfo.entity}
+            disabled
+            rounded
+            className="p-5"
+          />
+        ) : (
+          ""
+        )}
 
-        <div className="flex sm:flex-col gap-4">
-          <ProfileField
+        <div className="flex-col sm:flex-row flex gap-4">
+          <FormInput
             label="First Name"
             value={userInfo.firstName}
             placeholder="First Name"
+            className="p-5"
+            disabled
+            rounded
           />
-          <ProfileField
+          <FormInput
             label="Last Name"
             value={userInfo.lastName}
             placeholder="Last Name"
+            className="p-5"
+            disabled
+            rounded
           />
         </div>
 
         {userInfo.location ? (
-          <ProfileField label="Location" value={userInfo.location} />
-        ) : null}
+          <FormInput
+            label="Location"
+            value={userInfo.location}
+            disabled
+            rounded
+            className="p-5"
+          />
+        ) : (
+          ""
+        )}
 
-        <ProfileField
+        <FormInput
           label="Email"
           value={userInfo.email}
           type="email"
-          readOnly
+          rounded
+          disabled
+          className="p-5"
         />
-        <ProfileField
+        <FormInput
           label="Password"
           value="••••••••••"
           type="password"
-          readOnly
+          className="p-5"
+          disabled
+          rounded
         />
 
-        <button className="mt-4 px-4 py-2 bg-sky-200 text-sky-800 rounded-[20px] hover:bg-sky-300 transition duration-300">
-          Reset Password
-        </button>
+        <ButtonComponent className="">Reset password</ButtonComponent>
       </div>
     </div>
   );
@@ -162,26 +286,33 @@ const UniversityListing = () => {
               <td className="py-4">{uni.id}</td>
               <td className="py-4">{uni.listedDate}</td>
               <td className="py-4">
-                <span
+                
+                  {uni.status === "Requested" ? 
+                  <span
                   className={`px-3 py-1 rounded-full text-sm ${
                     uni.status === "Approved"
                       ? "bg-blue-100 text-blue-800"
                       : "bg-gray-100 text-gray-800"
                   }`}
-                  onClick={uni.status = "Requested"}
+                >
+                Requested
+                </span> : 
+                <span
+                className={`px-3 py-1 rounded-full text-sm ${
+                  uni.status === "Approved"
+                    ? "bg-blue-100 text-blue-800"
+                    : "bg-gray-100 text-gray-800"
+                  }`}
                   >
-                  {uni.status}
-                </span>
+                Approved
+              </span>}
               </td>
               <td className="py-4">
-                <label class="inline-flex items-center cursor-pointer">
-                  <input type="checkbox" value="" class="sr-only peer" />
-                  <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
-                  </div>
-                  <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                    Edit
-                  </span>
-                </label>
+                <div class="inline-flex gap-1">
+                  <ButtonComponent variant="danger" ><Trash/></ButtonComponent>
+                  <ButtonComponent variant="success"><Pen/></ButtonComponent>
+                  <ButtonComponent variant="ghost">View</ButtonComponent>
+                </div>
               </td>
             </tr>
           ))}
@@ -219,33 +350,30 @@ const UniversityListing = () => {
 export const SidebarContentContext = createContext();
 
 const Profile = ({ userData }) => {
-  const [sidebarContent, setSidebarContent] = useState("account"); 
+  const [sidebarContent, setSidebarContent] = useState("account");
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
     <div className="relative">
-      {!sidebarOpen && (
-        <button
-          onClick={toggleSidebar}
-          className="relative top-4 left-4 z-20 p-2 text-black rounded-md"
-        >
-          <Menu className="mt-[64px]" size={24} />
-        </button>
-      )}
-
-      {/* Provide the context to Sidebar */}
-      <SidebarContentContext.Provider value={setSidebarContent}>
-        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      </SidebarContentContext.Provider>
-
-      <div className="p-4">
-        {/* Conditionally render components based on sidebarContent */}
-        {sidebarContent === "school" && <UniversityListing />}
-        {sidebarContent === "account" && <UserAccount userInfo={userData}/>}
-        {/* You can add more conditions for other sidebar items */}
-      </div>
+        {!sidebarOpen && (
+          <button
+            onClick={toggleSidebar}
+            className="relative top-4 left-4 z-20 p-2 text-black rounded-md"
+          >
+            <Menu className="mt-[64px]" size={24} />
+          </button>
+        )}
+        <SidebarContentContext.Provider value={setSidebarContent}>
+          <Sidebar className = "h-full" isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} userRole="developer" />
+        </SidebarContentContext.Provider>
+        {sidebarContent === "schoolList" && <UniversityListing />}
+        {sidebarContent === "account" && <UserAccount userInfo={userData} />}
+        {sidebarContent === "School" && ""}  {/* School collection book mark */}
+        {sidebarContent === "accomodation" && ""}  {/* Accomodation Collection from book mark*/}
+        {sidebarContent === "partTime" && ""}  {/* Part time job Collection from book mark*/}
+        {sidebarContent === "partTime" && ""}  {/* Part time job Collection from book mark*/}
     </div>
   );
 };

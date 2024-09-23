@@ -1,20 +1,90 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { X, User, Heart, ChevronDown, ChevronRight } from "lucide-react";
+import { 
+  ChartBarIcon, 
+  ShoppingBagIcon, 
+  DocumentDuplicateIcon,
+  UserCircleIcon,
+  Cog6ToothIcon,
+  PowerIcon,
+  BookOpenIcon,
+  BeakerIcon,
+} from '@heroicons/react/24/solid';
+import { X, User, Heart, ChevronDown, ChevronRight , BookKey, Users  , School , HouseIcon , Briefcase , BadgeDollarSignIcon, House} from "lucide-react";
 import { SidebarContentContext } from "./Profile";
 
-const Sidebar = ({ isOpen, onClose, userRole }) => {
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [isCollectionOpen, setIsCollectionOpen] = useState(false);
-  const sidebarRef = useRef(null);
-  const setSideBarContent = useContext(SidebarContentContext); // Get the setter function for the context
+const MenuItem = ({ item, depth = 0, onItemClick }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const hasChildren = item.children && item.children.length > 0;
 
-  const toggleCollection = () => {
-    setIsCollectionOpen(!isCollectionOpen);
+  const toggleOpen = (e) => {
+    if (hasChildren) {
+      e.preventDefault();
+      setIsOpen(!isOpen);
+    }
   };
+
+  const handleClick = () => {
+    if (item.onClick) {
+      item.onClick();
+    }
+    if (item.content) {
+      onItemClick(item.label, item.content);
+    }
+  };
+
+  return (
+    <>
+      <div
+        className={`flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all duration-300 ease-in-out transform hover:bg-gray-100 cursor-pointer ${
+          depth > 0 ? 'pl-' + (depth * 4 + 3) : ''
+        }`}
+        onClick={(e) => {
+          toggleOpen(e);
+          handleClick();
+        }}
+      >
+        {item.icon && <div className="mr-4">{item.icon}</div>}
+        <span className="flex-grow">{item.label}</span>
+        {item.badge && (
+          <div className="grid place-items-center ml-auto">
+            <div className="relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-blue-500/20 text-blue-900 py-1 px-2 text-xs rounded-full">
+              <span>{item.badge}</span>
+            </div>
+          </div>
+        )}
+        {hasChildren && (
+          <div className="ml-auto transition-transform duration-300">
+            {isOpen ? (
+              <ChevronDown className="h-4 w-4" />
+            ) : (
+              <ChevronRight className="h-4 w-4" />
+            )}
+          </div>
+        )}
+      </div>
+      {hasChildren && (
+        <div
+          className={`ml-4 overflow-hidden transition-all duration-300 ease-in-out transform ${
+            isOpen ? 'max-h-[1000px]' : 'max-h-0'
+          }`}
+        >
+          {item.children.map((child, index) => (
+            <MenuItem key={index} item={child} depth={depth + 1} onItemClick={onItemClick} />
+          ))}
+        </div>
+      )}
+    </>
+  );
+};
+
+const Sidebar = ({ isOpen, onClose, userRole, ...props }) => {
+  const [selectedItem, setSelectedItem] = useState(null);
+  const sidebarRef = useRef(null);
+  const setSideBarContent = useContext(SidebarContentContext);
 
   const handleItemClick = (item, content) => {
     setSelectedItem(item);
-    setSideBarContent(content); // Update the context value with the selected content
+    setSideBarContent(content);
   };
 
   useEffect(() => {
@@ -30,176 +100,65 @@ const Sidebar = ({ isOpen, onClose, userRole }) => {
     };
   }, [onClose]);
 
-  const userContent = {
-    user: {
-      content: (
-        <ul className="space-y-2">
-          <li
-            className={`flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-[20px] cursor-pointer ${
-              selectedItem === "account" ? "bg-gray-200" : ""
-            }`}
-            onClick={() => handleItemClick("account", "account")}
-          >
-            <User className="w-5 h-5" />
-            <span>Account</span>
-          </li>
-          <li className="space-y-2">
-            <div
-              className={`flex items-center justify-between hover:bg-gray-100 p-2 rounded-[20px] cursor-pointer ${
-                selectedItem === "collection" ? "bg-gray-200" : ""
-              }`}
-              onClick={() => {
-                toggleCollection();
-                handleItemClick("collection", "account");
-              }}
-            >
-              <div className="flex items-center space-x-2">
-                <Heart className="w-5 h-5" />
-                <span>Collection</span>
-              </div>
-              {isCollectionOpen ? (
-                <ChevronDown className="w-5 h-5" />
-              ) : (
-                <ChevronRight className="w-5 h-5" />
-              )}
-            </div>
-            {isCollectionOpen && (
-              <ul className="ml-6 space-y-2">
-                <li
-                  className="hover:bg-gray-100 p-2 rounded-[20px] cursor-pointer"
-                >
-                  School
-                </li>
-                <li
-                  className="hover:bg-gray-100 p-2 rounded-[20px] cursor-pointer"
-                >
-                  Accommodation
-                </li>
-                <li
-                  className="hover:bg-gray-100 p-2 rounded-[20px] cursor-pointer"
-                >
-                  Part-time Job
-                </li>
-              </ul>
-            )}
-          </li>
-        </ul>
-      ),
-    },
-    admin: {
-      content: (
-        <ul className="space-y-2">
-          <li
-            className={`flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-[20px] cursor-pointer ${
-              selectedItem === "account" ? "bg-gray-200" : ""
-            }`}
-            onClick={() => handleItemClick("account" , "account")}
-          >
-            <User className="w-5 h-5" />
-            <span>Account</span>
-          </li>
-          <li
-            
-            className="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-[20px] cursor-pointer"
-            onClick={() => handleItemClick("users" , "users")}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M18 21a8 8 0 0 0-16 0" />
-              <circle cx="10" cy="8" r="5" />
-              <path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" />
-            </svg>
-            <span>Users</span>
-          </li>
-          <li className="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-[20px] cursor-pointer"
-          onClick={() => handleItemClick("school" , "school")}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M14 22v-4a2 2 0 1 0-4 0v4" />
-              <path d="m18 10 4 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8l4-2" />
-              <path d="M18 5v17" />
-              <path d="m4 6 8-4 8 4" />
-              <path d="M6 5v17" />
-              <circle cx="12" cy="9" r="2" />
-            </svg>
-            <span>School</span>
-          </li>
-          <li className="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-[20px] cursor-pointer"
-          onClick={() => handleItemClick("accomodation" , "accomodation")}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
-              <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-            </svg>
-            <span>Accommodation</span>
-          </li>
-          <li className="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-[20px] cursor-pointer">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M12 12h.01" />
-              <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
-              <path d="M22 13a18.15 18.15 0 0 1-20 0" />
-              <rect width="20" height="14" x="2" y="6" rx="2" />
-            </svg>
-            <span>Part time job</span>
-          </li>
-          <li className="flex items-center space-x-2 hover:bg-gray-100 p-2 rounded-[20px] cursor-pointer">
-            <svg
-              className="w-5 h-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M11 7L9.6 8.4L12.2 11H2V13H12.2L9.6 15.6L11 17L16 12L11 7ZM20 19H12V21H20C21.1 21 22 20.1 22 19V5C22 3.9 21.1 3 20 3H12V5H20V19Z"
-                fill="currentColor"
-              />
-            </svg>
-            <span>Sign Out</span>
-          </li>
-        </ul>
-      ),
-    },
+  const menuItems = {
+    user: [
+      
+      {
+        label: 'Account',
+        icon: <User className="w-5 h-5" />,
+        onClick: () => handleItemClick("account", "account")
+      },
+      {
+        label: 'Collection',
+        icon: <Heart className="w-5 h-5" />,
+        children: [
+          { label: 'School', icon : <School/> , onClick: () => handleItemClick("school", "school")},
+          { label: 'Accommodation',icon: <House/> , onClick: () => handleItemClick("accommodation", "accommodation")},
+          { label: 'Part-time Job',icon : <Briefcase /> ,  onClick: () => handleItemClick("job", "job") },
+          { label: 'Financial', icon: <BadgeDollarSignIcon/> , onClick: () => handleItemClick("job", "job")}
+        ]
+      },
+      { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5" />},
+      { label: 'Log Out', icon: <PowerIcon className="h-5 w-5" />},
+    ],
+    admin: [
+      { label: 'Content', icon: <DocumentDuplicateIcon className="h-5 w-5" />, path: '/examples', badge: '14' },
+      { label: 'Profile', icon: <UserCircleIcon className="h-5 w-5" />},
+      { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5" />},
+      { label: 'Log Out', icon: <PowerIcon className="h-5 w-5" /> },
+    ],
+    developer: [
+      { label: 'Account', icon: <User className="w-5 h-5" />, onClick: () => handleItemClick("account", "account") },
+      { label: 'Users', icon: <Users className="w-5 h-5" />, onClick: () => handleItemClick("users", "usersList") },
+      { label: 'School', icon: <BookKey className="w-5 h-5" />, onClick: () => handleItemClick("school", "schoolList") },
+      { 
+        label: 'Accommodation', 
+        icon: <House/>,
+        onClick: () => handleItemClick("accommodation", "accommodationList")
+      },
+      { 
+        label: 'Part time job', 
+        icon:<Briefcase/>,
+        onClick: () => handleItemClick("job", "job")
+      },
+      { 
+        label: 'Sign Out', 
+        icon: (
+          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 7L9.6 8.4L12.2 11H2V13H12.2L9.6 15.6L11 17L16 12L11 7ZM20 19H12V21H20C21.1 21 22 20.1 22 19V5C22 3.9 21.1 3 20 3H12V5H20V19Z" fill="currentColor" />
+          </svg>
+        ),
+        onClick: () => handleItemClick("signout", "signout")
+      },
+    ]
   };
 
   return (
     <div
       ref={sidebarRef}
-      className={`rounded-tr-[20px] rounded-br-[20px] fixed top-[64px] left-0 h-full w-64 bg-gray-400 text-black p-4 transform ${
+      className={`rounded-tr-[20px] rounded-br-[20px] fixed top-[64px] h-full left-0 w-64 shadow-md border-[1px] bg-white text-black p-4 transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"
-      } transition-transform duration-300 ease-in-out z-10`}
+      } transition-transform duration-500 ease-in-out z-10`}
     >
       <div className="flex justify-between items-center mb-6">
         <span></span>
@@ -207,7 +166,11 @@ const Sidebar = ({ isOpen, onClose, userRole }) => {
           <X className="w-6 h-6" />
         </button>
       </div>
-      <nav>{userContent.user.content}</nav>
+      <nav>
+        {menuItems[userRole].map((item, index) => (
+          <MenuItem key={index} item={item} onItemClick={handleItemClick} />
+        ))}
+      </nav>
     </div>
   );
 };
