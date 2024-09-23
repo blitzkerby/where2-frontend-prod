@@ -129,7 +129,7 @@ const Sidebar = ({ isOpen, onClose, userRole, ...props }) => {
     ],
     developer: [
       { label: 'Account', icon: <User className="w-5 h-5" />, onClick: () => handleItemClick("account", "account") },
-      { label: 'Users', icon: <Users className="w-5 h-5" />, onClick: () => handleItemClick("users", "usersList") },
+      { label: 'Users', icon: <Users className="w-5 h-5" />, onClick: () => handleItemClick("users", "userList") },
       { label: 'School', icon: <BookKey className="w-5 h-5" />, onClick: () => handleItemClick("school", "schoolList") },
       { 
         label: 'Accommodation', 
@@ -139,7 +139,7 @@ const Sidebar = ({ isOpen, onClose, userRole, ...props }) => {
       { 
         label: 'Part time job', 
         icon:<Briefcase/>,
-        onClick: () => handleItemClick("job", "job")
+        onClick: () => handleItemClick("job", "jobList")
       },
       { 
         label: 'Sign Out', 
