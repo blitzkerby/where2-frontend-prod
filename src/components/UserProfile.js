@@ -4,11 +4,11 @@ import Profile from './reusable/Profile'
 import Footer from './reusable/Footer'
 const UserProfile = () => {
   const user = {
-    entity : "sisowath",
-    firstName : "Sisowath",
-    lastName : "Kumara",
-    location : "Colombo",
-    email : "sisowath@gmail.com",
+    entity : "University",
+    firstName : "Yun",
+    lastName : "Chankrisna",
+    location : "Cambodia",
+    email : "chankrisnayun@gmail.com",
     password : "password123"
   }
 
