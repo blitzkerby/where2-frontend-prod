@@ -47,6 +47,7 @@ const getEnvVariable = (key, defaultValue = "") => {
     // 3. Jobs
     job: {
       getAllJob: `${ API_URL }/api/jobs`,
+      getAssociatedCompany: (jobId) => `${ API_URL }/api/jobs/associatedCompany/${jobId}`
     }
     
   };

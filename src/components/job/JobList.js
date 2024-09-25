@@ -4,13 +4,13 @@ import { fetchJob } from "../../features/slices/jobSlice";
 import { useEffect } from "react";
 const JobList = () => {
     const dispatch = useDispatch();
-    const {data }= useSelector((state) => state.job);
+    const {jobs }= useSelector((state) => state.job);
 
     useEffect(() => {
      dispatch(fetchJob());
     }, []);
    
-    const renderJobCards = data.map(job => {
+    const renderJobCards = jobs.map(job => {
         return <Card
         key={job.id}
         id={job.id}
