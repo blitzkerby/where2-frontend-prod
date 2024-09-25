@@ -25,6 +25,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
 import VerificationPage from "./pages/VerificationPage";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import JobPage from "./pages/JobPage";
 import JobDetailPage from "./pages/JobDetailPage";
 =======
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
 >>>>>>> 54fa07c (MODIFIED : App.js)
 =======
 import ScholarshipListPage from "./pages/ScholarshipListPage";
+=======
+import ScholarshipListPage from "./pages/ScholarshipListPage";import JobPage from "./pages/JobPage";
+
+>>>>>>> 77c00a4 (ft#7.1-job: added JobList, JobPage and the path for job)
 
   const router = createBrowserRouter([
     {
@@ -100,8 +105,9 @@ import ScholarshipListPage from "./pages/ScholarshipListPage";
     { path: "/reset-password/:token", element: <ResetPasswordPage />},
     { path: "/terms-and-conditions", element: <TermsAndConditionsPage/>},
     { path: "/signup/verification", element: <VerificationPage/> },
-    { path: "/dashboard/:userName", element: <HomePage/> },
+    { path: "/dashboard/:userName", element: <HomePage /> },
     { path: "/scholarships", element: <ScholarshipListPage/>},
+    { path: "/job", element: <JobPage />},
   ])
   
 >>>>>>> 34efb6a (ft2.1-scholashippage: trying to rebase 5th time)

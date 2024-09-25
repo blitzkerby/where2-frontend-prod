@@ -7,7 +7,13 @@ import { Facebook, Instagram, Twitter, Youtube, Chrome } from 'lucide-react';
 import Map from '../../assets/svg/map.svg';
 import BookMark from '../../assets/svg/bookmark.svg';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Button from './Button';
+=======
+=======
+import Button from './Button';
+>>>>>>> 1d06656 (ft#7.1-job: added JobList, JobPage and the path for job)
+>>>>>>> 77c00a4 (ft#7.1-job: added JobList, JobPage and the path for job)
 import MiniMap from '../../assets/svg/miniMap.svg'
 import MiniClock from '../../assets/svg/miniClock.svg';
 import Calender from '../../assets/svg/calender.svg';
@@ -139,6 +145,7 @@ const Card = ({
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         <div className="lg:h-[348px] lg:w-[676px] mx-auto">
         <div className={`${cardBody} justify-center `}>
             <div className="h-[300px] rounded-xl">
@@ -171,6 +178,8 @@ const Card = ({
             <div className={`${cardBody} justify-center`}>
                 <div className={styles.imageContainer}>
 =======
+=======
+>>>>>>> 77c00a4 (ft#7.1-job: added JobList, JobPage and the path for job)
         <div className='flex justify-center'>
             <div className={`${styles.container.small} ${styles.container.large}`}>
                 <div className={`${styles.imageContainer.large} ${styles.imageContainer.small}`}>
@@ -225,6 +234,22 @@ const Card = ({
                                         ? <p className={`${styles.utilityItem} ${styles.utilityBorder}`}>{linkKey}</p>
                                         : <p className={`${styles.utilityItem}`}>{linkKey}</p>
                                     }
+=======
+        <div className="lg:h-[348px] lg:w-[676px] mx-auto">
+        <div className={`${cardBody} justify-center `}>
+            <div className="h-[300px] rounded-xl">
+                <img className="min-w-full max-h-full object-fit " src={image} alt={imageAlt || title} />
+            </div>
+            <div>
+                <div className="p-6 pb-0 w-[376px]">
+                    <h5 className={`${cardTitle}`}>{title}</h5>
+                    <div className='flex justify-between w-full'>
+                        <div className="flex items-center space-x-2">
+                            {workDetails.map(({ icon , linkKey }, index) => (
+                                <div key={index} className="flex items-center text-[12px]">
+                                    <img src={icon} alt={icon}/>
+                                    {index !== 2 ? <p className='border-r-gray-200 border-r-2 p-1 text-nowrap'>{linkKey}</p> : <p className='text-nowrap'>{linkKey}</p>}
+>>>>>>> 1d06656 (ft#7.1-job: added JobList, JobPage and the path for job)
                                 </div>
                             ))}
                         </div>
@@ -326,10 +351,14 @@ const Card = ({
                         </div>
 {/* // I comment this to avoid error, since We don't have the Link set in App.js file yet. */}
                         <Link to={`/company/companydetail/:company`} className="text-blue-500 hover:underline">
+<<<<<<< HEAD
                             {/* <Button className="font- text-1xl p-2 px-3" variant="primary" size="large">
 >>>>>>> 1b362f0 (ft#8-studentLoan: Added route for student loan and tested using reusable card component on StudentLoanPage)
+=======
+                            <Button className="font- text-1xl p-2 px-3" variant="primary" size="large">
+>>>>>>> 1d06656 (ft#7.1-job: added JobList, JobPage and the path for job)
                                 Read More
-                            </Button> */}
+                            </Button>
                         </Link>
 
 >>>>>>> 6459814 (commented on Link on card component)

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Card from "../reusable/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchJob } from "../../features/slices/jobSlice";
@@ -36,6 +37,14 @@ const JobList = () => {
     return (
         <div>
           {renderJobCards}
+=======
+import Card from "../reusable/Card"
+
+const JobList = () => {
+    return (
+        <div>
+            <Card />
+>>>>>>> 77c00a4 (ft#7.1-job: added JobList, JobPage and the path for job)
         </div>
     )
 };
