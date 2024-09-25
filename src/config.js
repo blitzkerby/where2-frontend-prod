@@ -95,7 +95,13 @@ export default config;
     // You can add more variables here
     user: {
       upload: `${API_URL}/api/upload`
+    },
+
+    // 3. Jobs
+    job: {
+      getAllJob: `${ API_URL }/api/jobs`,
     }
+    
   };
   
   export default config;
