@@ -42,7 +42,13 @@ const getEnvVariable = (key, defaultValue = "") => {
       upload: `${API_URL}/api/upload`,
       visitorTrack: `${API_URL}/api/visitors/track-visit`,
       visits: `${API_URL}/api/visitors/visits`
+    },
+
+    // 3. Jobs
+    job: {
+      getAllJob: `${ API_URL }/api/jobs`,
     }
+    
   };
   
   export default config;
