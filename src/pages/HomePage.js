@@ -9,11 +9,8 @@ const HomePage = () => {
 
   return (
     <div>
-<<<<<<< HEAD
-=======
       <Navbar/>
       <VisitTracker path={location.pathname}/>
->>>>>>> feature/ft#5.1-authentication
       <Footer/>
     </div>
   );
