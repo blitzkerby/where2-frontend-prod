@@ -44,11 +44,15 @@ const HomePage = () => {
 <<<<<<< HEAD
       <Navbar/>
       <VisitTracker path={location.pathname}/>
+<<<<<<< HEAD
 =======
 =======
       <Navbar/>
       <VisitTracker path={location.pathname}/>
 >>>>>>> 301cd8a (develop: made some adjustment to config file so develop)
+=======
+<<<<<<< HEAD
+>>>>>>> 357f21a (resolve conflict on develop branch)
       <Navbar />
 =======
       {/* <Navbar /> */}
@@ -85,6 +89,8 @@ const HomePage = () => {
 =======
       <Hero props={hero2} />
 
+=======
+>>>>>>> d2f0855 (resolve conflict on develop branch)
       <Footer/>
 >>>>>>> d5ce0e3 (REBASE : Navbar.js)
     </div>
