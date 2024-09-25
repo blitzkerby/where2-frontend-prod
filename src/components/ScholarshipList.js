@@ -28,7 +28,7 @@ export default function ScholarshipList() {
         {
             id: 'sadsd',
             label: 'Deadline',
-            content: ['Upcoming', 'Passed']
+            content: ['In 30days', 'Expired']
         }
     ];
     const [currentFilterUni, setCurrentFilterUni] = useState('');
