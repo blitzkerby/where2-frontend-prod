@@ -1,7 +1,19 @@
 import Footer from "../components/reusable/Footer";
+import Navbar from "../components/reusable/Navbar";
+import { useLocation } from "react-router-dom";
+import VisitTracker from "../components/reusable/VisitorTracker";
+
+
 const HomePage = () => {
+  const location = useLocation();
+
   return (
     <div>
+<<<<<<< HEAD
+=======
+      <Navbar/>
+      <VisitTracker path={location.pathname}/>
+>>>>>>> feature/ft#5.1-authentication
       <Footer/>
     </div>
   );

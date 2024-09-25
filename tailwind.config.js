@@ -8,6 +8,12 @@ module.exports = {
       fontFamily: {
         primary: ['Poppins']
       },
+      screens: {
+        'sm': {'max': '980px'},
+        'rd' : {'min' : '981px', 'max' : '1003px' },
+        'lg': { 'min' : '1004px' },
+        'custom-blue' : 'rbg(0, 122, 255)'
+      },
       colors: {
       "light-100": "#375761",
       "light-300": "#808A8D",
