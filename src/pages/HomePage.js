@@ -47,15 +47,20 @@ const HomePage = () => {
   return (
     <div>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <Navbar/>
       <VisitTracker path={location.pathname}/>
 =======
       <Navbar />
+=======
+      {/* <Navbar /> */}
+>>>>>>> ef33a06 (MODIFIED : card.js)
       
-      <Hero props={hero1}>
+      {/* <Hero props={hero1}>
         <Searchbar searchPlaceholder={hero1.searchPlaceholder} />
       </Hero>
       
+<<<<<<< HEAD
       <Hero props={hero2} />
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -63,11 +68,18 @@ const HomePage = () => {
 =======
       
 =======
+=======
+      <Hero props={hero2} /> */}
+>>>>>>> ef33a06 (MODIFIED : card.js)
 
 >>>>>>> 8cf1e62 (REBASE : HomePage.js)
       <Card />
+<<<<<<< HEAD
 >>>>>>> 54fa07c (MODIFIED : App.js)
       <Footer/>
+=======
+      {/* <Footer/> */}
+>>>>>>> ef33a06 (MODIFIED : card.js)
     </div>
   );
 };

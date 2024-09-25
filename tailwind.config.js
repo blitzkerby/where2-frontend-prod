@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     screens: {
       sm: { 'max': "980px" }, // Mobile-first approach for max-width
-      lg: { 'min': "1007px" }, // Desktop-first approach for min-width
+      lg: { 'min': "981px" }, // Desktop-first approach for min-width
     },
     extend: {
       spacing: {
@@ -70,8 +70,20 @@ module.exports = {
         "gray-primary":
           "linear-gradient(180deg, #E3E3E3 0%, #EEEEEE 19%, #FFFFFF 82%, #F6F6F6 100%)",
       },
+      clipPath: {
+        'border-box': 'border-box',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.clip-border-box': {
+          'clip-path': 'border-box',
+        },
+      };
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    },
+  ],
 };
 
