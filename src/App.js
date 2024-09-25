@@ -26,6 +26,7 @@ import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
 import VerificationPage from "./pages/VerificationPage";
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import JobPage from "./pages/JobPage";
 import JobDetailPage from "./pages/JobDetailPage";
 =======
@@ -90,7 +91,13 @@ const router = createBrowserRouter([
 =======
 import ScholarshipListPage from "./pages/ScholarshipListPage";
 =======
+=======
+>>>>>>> 692fc12 (ft#7.1-job: added the job detail component and job detail page)
 import ScholarshipListPage from "./pages/ScholarshipListPage";import JobPage from "./pages/JobPage";
+=======
+import JobPage from "./pages/JobPage";
+import JobDetailPage from "./pages/JobDetailPage";
+>>>>>>> 988fb8a (ft#7.1-job: added the job detail component and job detail page)
 
 >>>>>>> 77c00a4 (ft#7.1-job: added JobList, JobPage and the path for job)
 
@@ -106,8 +113,13 @@ import ScholarshipListPage from "./pages/ScholarshipListPage";import JobPage fro
     { path: "/terms-and-conditions", element: <TermsAndConditionsPage/>},
     { path: "/signup/verification", element: <VerificationPage/> },
     { path: "/dashboard/:userName", element: <HomePage /> },
+<<<<<<< HEAD
     { path: "/scholarships", element: <ScholarshipListPage/>},
     { path: "/job", element: <JobPage />},
+=======
+    { path: "/job", element: <JobPage /> },
+    { path: "/job-detail/:id", element: <JobDetailPage />},
+>>>>>>> 988fb8a (ft#7.1-job: added the job detail component and job detail page)
   ])
   
 >>>>>>> 34efb6a (ft2.1-scholashippage: trying to rebase 5th time)

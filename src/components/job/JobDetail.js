@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchCompany } from "../../features/slices/jobSlice";
@@ -26,6 +27,13 @@ const JobDetail = () => {
             <ContactCard title={"Contact1"} content={"Content hgere1"}/>
             <ContactCard title={"Contact"} content={"Content hgere"}/>
         </>
+=======
+const JobDetail = () => {
+    return (
+        <div>
+            this is detail page
+        </div>
+>>>>>>> 692fc12 (ft#7.1-job: added the job detail component and job detail page)
     )
 };
 
