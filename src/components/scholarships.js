@@ -9,7 +9,7 @@ export const scholarships = [
     instagramLink : "https://www.instagram.com/pineapplecompany/",
     websiteLink : "https://pineapplecompany.com/",
     location : "Phnom Penh",
-    deadLine : "19/10/2024",
+    deadLine : "2024-10-02",
     university:"Western",
     status:'Open'
 	},
@@ -23,7 +23,7 @@ export const scholarships = [
     instagramLink : "https://www.instagram.com/pineapplecompany/",
     websiteLink : "https://pineapplecompany.com/",
     location : "Phnom Penh",
-    deadLine : "10/10/2022",
+    deadLine : "2023-02-01",
     university:"TECHNO",
     status:'Open'
 	},
@@ -37,7 +37,7 @@ export const scholarships = [
     instagramLink : "https://www.instagram.com/pineapplecompany/",
     websiteLink : "https://pineapplecompany.com/",
     location : "Siem Reap",
-    deadLine : "10/10/2022",
+    deadLine : "2023-02-01",
     university:"RUPP",
 		status:'Open',
 	},
@@ -51,7 +51,7 @@ export const scholarships = [
     instagramLink : "https://www.instagram.com/pineapplecompany/",
     websiteLink : "https://pineapplecompany.com/",
     location : "Siem Reap",
-    deadLine : "10/10/2022",
+    deadLine : "2023-02-01",
     university:"RUFA",
 		status:'Open'
 	},
@@ -65,7 +65,7 @@ export const scholarships = [
     instagramLink : "https://www.instagram.com/pineapplecompany/",
     websiteLink : "https://pineapplecompany.com/",
     location : "Siem Reap",
-    deadLine : "19/10/2024",
+    deadLine : "2021-01-01",
     university:"Western",
     status:'Open'
 	},
@@ -79,7 +79,7 @@ export const scholarships = [
     instagramLink : "https://www.instagram.com/pineapplecompany/",
     websiteLink : "https://pineapplecompany.com/",
     location : "Phnom Penh",
-    deadLine : "10/10/2022",
+    deadLine : "2023-02-01",
     university:"TECHNO",
     status:'Closed'
 	},
@@ -93,7 +93,7 @@ export const scholarships = [
     instagramLink : "https://www.instagram.com/pineapplecompany/",
     websiteLink : "https://pineapplecompany.com/",
     location : "Phnom Penh",
-    deadLine : "10/10/2022",
+    deadLine : "2023-02-01",
     university:"RUPP",
 		status:'Open',
 	},
@@ -107,7 +107,7 @@ export const scholarships = [
     instagramLink : "https://www.instagram.com/pineapplecompany/",
     websiteLink : "https://pineapplecompany.com/",
     location : "Phnom Penh",
-    deadLine : "10/10/2022",
+    deadLine : "2023-02-01",
     university:"RUFA",
 		status:'Closed'
 	},
