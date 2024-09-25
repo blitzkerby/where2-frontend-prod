@@ -8,6 +8,7 @@ export const fetchJob = createAsyncThunk("jobs/getjob", async () => {
     return response.data;
 });
 
+<<<<<<< HEAD
 export const fetchCompany = createAsyncThunk("jobs/associatedCompany", async (id) => {
     const response = await axios.get(config.job.getAssociatedCompany(id));
 
@@ -20,10 +21,16 @@ const jobSlices = createSlice({
         jobs: [],
         company: []
     },
+=======
+const jobSlices = createSlice({
+    name: "job",
+    initialState: [],
+>>>>>>> dd2381c (ft#7.1-job: added job slices)
     extraReducers: (builder) => {
         builder
             .addCase(fetchJob.pending)
             .addCase(fetchJob.fulfilled, (state, action) => {
+<<<<<<< HEAD
                 state.jobs = action.payload.data.jobs
             })
             .addCase(fetchJob.rejected)
@@ -34,6 +41,11 @@ const jobSlices = createSlice({
 
             })
             .addCase(fetchCompany.rejected)
+=======
+                state.push(action.payload)
+            })
+            .addCase(fetchJob.rejected)
+>>>>>>> dd2381c (ft#7.1-job: added job slices)
     }
 });
 
