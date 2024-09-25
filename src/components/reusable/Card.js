@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Map from '../../assets/svg/map.svg';
 import BookMark from '../../assets/svg/bookmark.svg';
-// import Button from './ButtonComponent';
+import Button from './Button';
 import MiniMap from '../../assets/svg/miniMap.svg'
 import MiniClock from '../../assets/svg/miniClock.svg';
 import Calender from '../../assets/svg/calender.svg';
@@ -38,7 +38,7 @@ const Card = ({
         { icon: MiniMap, linkKey: location },
     ]
     return (
-        <div className="lg:h-[348px] lg:w-[676px] mx-auto mb-[64px]">
+        <div className="lg:h-[348px] lg:w-[676px] mx-auto">
         <div className={`${cardBody} justify-center `}>
             <div className="h-[300px] rounded-xl">
                 <img className="min-w-full max-h-full object-fit " src={image} alt={imageAlt || title} />
@@ -91,9 +91,9 @@ const Card = ({
                         </div>
 {/* // I comment this to avoid error, since We don't have the Link set in App.js file yet. */}
                         <Link to={`/company/companydetail/:company`} className="text-blue-500 hover:underline">
-                            {/* <Button className="font- text-1xl p-2 px-3" variant="primary" size="large">
+                            <Button className="font- text-1xl p-2 px-3" variant="primary" size="large">
                                 Read More
-                            </Button> */}
+                            </Button>
                         </Link>
 
                     </div>

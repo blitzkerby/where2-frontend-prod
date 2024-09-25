@@ -8,6 +8,7 @@ import ForgetPasswordPage from "./pages/ForgetPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
 import VerificationPage from "./pages/VerificationPage";
+import JobPage from "./pages/JobPage";
 
 
   const router = createBrowserRouter([
@@ -26,7 +27,8 @@ import VerificationPage from "./pages/VerificationPage";
     { path: "/reset-password/:token", element: <ResetPasswordPage />},
     { path: "/terms-and-conditions", element: <TermsAndConditionsPage/>},
     { path: "/signup/verification", element: <VerificationPage/> },
-    { path: "/dashboard/:userName", element: <HomePage/> },
+    { path: "/dashboard/:userName", element: <HomePage /> },
+    { path: "/job", element: <JobPage />},
   ])
   
 function App() {
