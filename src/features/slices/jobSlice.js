@@ -10,12 +10,12 @@ export const fetchJob = createAsyncThunk("jobs/getjob", async () => {
 
 const jobSlices = createSlice({
     name: "job",
-    initialState: [],
+    initialState:{data:[]},
     extraReducers: (builder) => {
         builder
             .addCase(fetchJob.pending)
             .addCase(fetchJob.fulfilled, (state, action) => {
-                state.push(action.payload)
+                state.data = action.payload.data.jobs
             })
             .addCase(fetchJob.rejected)
     }
