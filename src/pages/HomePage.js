@@ -46,16 +46,16 @@ const HomePage = () => {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       
-      <Hero props={hero1}>
+      {/* <Hero props={hero1}>
         <Searchbar searchPlaceholder={hero1.searchPlaceholder} />
       </Hero>
       
-      <Hero props={hero2} />
+      <Hero props={hero2} /> */}
 
       <Card />
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 };
