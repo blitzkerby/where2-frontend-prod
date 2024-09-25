@@ -9,7 +9,7 @@ const ButtonComponent = ({
   fullWidth = false,
   disabled = false,
   onClick,
-  className = "",
+  className,
 }) => {
   const baseStyles =
     "font-semibold rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200";
@@ -37,7 +37,7 @@ const ButtonComponent = ({
     ? ""
     : `w-[${width}]`;
 
-  const heightStyle = height === "auto"? "" : `h-[${height}]`;
+  const heightStyle = height === "auto" ? "" : `h-[${height}]`;
   const disabledClass = disabled ? "opacity-50 cursor-not-allowed" : "";
 
   const buttonClasses = `

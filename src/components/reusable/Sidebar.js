@@ -9,10 +9,10 @@ import {
   BookOpenIcon,
   BeakerIcon,
 } from '@heroicons/react/24/solid';
-import { X, User, Heart, ChevronDown, ChevronRight , BookKey, Users  , School , HouseIcon , Briefcase , BadgeDollarSignIcon, House} from "lucide-react";
+import { X, User, Heart, ChevronDown, ChevronRight, BookKey, Users, School, House, Briefcase, BadgeDollarSignIcon } from "lucide-react";
 import { SidebarContentContext } from "./Profile";
 
-const MenuItem = ({ item, depth = 0, onItemClick }) => {
+const MenuItem = ({ item, depth = 0, onItemClick, isSelected }) => {
   const [isOpen, setIsOpen] = useState(false);
   const hasChildren = item.children && item.children.length > 0;
 
@@ -37,7 +37,7 @@ const MenuItem = ({ item, depth = 0, onItemClick }) => {
       <div
         className={`flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all duration-300 ease-in-out transform hover:bg-gray-100 cursor-pointer ${
           depth > 0 ? 'pl-' + (depth * 4 + 3) : ''
-        }`}
+        } ${isSelected ? 'bg-gray-200' : ''}`}
         onClick={(e) => {
           toggleOpen(e);
           handleClick();
@@ -69,7 +69,13 @@ const MenuItem = ({ item, depth = 0, onItemClick }) => {
           }`}
         >
           {item.children.map((child, index) => (
-            <MenuItem key={index} item={child} depth={depth + 1} onItemClick={onItemClick} />
+            <MenuItem
+              key={index}
+              item={child}
+              depth={depth + 1}
+              onItemClick={onItemClick}
+              isSelected={isSelected}
+            />
           ))}
         </div>
       )}
@@ -77,13 +83,13 @@ const MenuItem = ({ item, depth = 0, onItemClick }) => {
   );
 };
 
-const Sidebar = ({ isOpen, onClose, userRole, ...props }) => {
+const Sidebar = ({ isOpen, onClose, userRole }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const sidebarRef = useRef(null);
   const setSideBarContent = useContext(SidebarContentContext);
 
   const handleItemClick = (item, content) => {
-    setSelectedItem(item);
+    setSelectedItem(item); // Set the clicked item as selected
     setSideBarContent(content);
   };
 
@@ -98,51 +104,42 @@ const Sidebar = ({ isOpen, onClose, userRole, ...props }) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [onClose]);
+  }, [onClose, isOpen]);
 
   const menuItems = {
     user: [
-      
       {
         label: 'Account',
         icon: <User className="w-5 h-5" />,
-        onClick: () => handleItemClick("account", "account")
+        onClick: () => handleItemClick("account", "account"),
       },
       {
         label: 'Collection',
         icon: <Heart className="w-5 h-5" />,
         children: [
-          { label: 'School', icon : <School/> , onClick: () => handleItemClick("school", "school")},
-          { label: 'Accommodation',icon: <House/> , onClick: () => handleItemClick("accommodation", "accommodation")},
-          { label: 'Part-time Job',icon : <Briefcase /> ,  onClick: () => handleItemClick("job", "job") },
-          { label: 'Financial', icon: <BadgeDollarSignIcon/> , onClick: () => handleItemClick("job", "job")}
+          { label: 'School', icon: <School />, onClick: () => handleItemClick("school", "school") },
+          { label: 'Accommodation', icon: <House />, onClick: () => handleItemClick("accommodation", "accommodation") },
+          { label: 'Part-time Job', icon: <Briefcase />, onClick: () => handleItemClick("job", "job") },
+          { label: 'Financial', icon: <BadgeDollarSignIcon />, onClick: () => handleItemClick("financial", "financial") }
         ]
       },
-      { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5" />},
-      { label: 'Log Out', icon: <PowerIcon className="h-5 w-5" />},
+      { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5" /> },
+      { label: 'Log Out', icon: <PowerIcon className="h-5 w-5" /> },
     ],
     admin: [
-      { label: 'Content', icon: <DocumentDuplicateIcon className="h-5 w-5" />, path: '/examples', badge: '14' },
-      { label: 'Profile', icon: <UserCircleIcon className="h-5 w-5" />},
-      { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5" />},
+      { label: 'Content', icon: <DocumentDuplicateIcon className="h-5 w-5" />, badge: '14' },
+      { label: 'Profile', icon: <UserCircleIcon className="h-5 w-5" /> },
+      { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5" /> },
       { label: 'Log Out', icon: <PowerIcon className="h-5 w-5" /> },
     ],
     developer: [
       { label: 'Account', icon: <User className="w-5 h-5" />, onClick: () => handleItemClick("account", "account") },
       { label: 'Users', icon: <Users className="w-5 h-5" />, onClick: () => handleItemClick("users", "userList") },
       { label: 'School', icon: <BookKey className="w-5 h-5" />, onClick: () => handleItemClick("school", "schoolList") },
-      { 
-        label: 'Accommodation', 
-        icon: <House/>,
-        onClick: () => handleItemClick("accommodation", "accommodationList")
-      },
-      { 
-        label: 'Part time job', 
-        icon:<Briefcase/>,
-        onClick: () => handleItemClick("job", "jobList")
-      },
-      { 
-        label: 'Sign Out', 
+      { label: 'Accommodation', icon: <House />, onClick: () => handleItemClick("accommodation", "accommodationList") },
+      { label: 'Part time job', icon: <Briefcase />, onClick: () => handleItemClick("job", "jobList") },
+      {
+        label: 'Sign Out',
         icon: (
           <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M11 7L9.6 8.4L12.2 11H2V13H12.2L9.6 15.6L11 17L16 12L11 7ZM20 19H12V21H20C21.1 21 22 20.1 22 19V5C22 3.9 21.1 3 20 3H12V5H20V19Z" fill="currentColor" />
@@ -156,7 +153,7 @@ const Sidebar = ({ isOpen, onClose, userRole, ...props }) => {
   return (
     <div
       ref={sidebarRef}
-      className={`rounded-tr-[20px] rounded-br-[20px] fixed top-[64px] h-full left-0 w-64 shadow-md border-[1px] bg-white text-black p-4 transform ${
+      className={`rounded-[20px] p-[16px] h-[100vh] left-0 w-64 shadow-md border-[1px] bg-white text-black transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       } transition-transform duration-500 ease-in-out z-10`}
     >
@@ -168,7 +165,12 @@ const Sidebar = ({ isOpen, onClose, userRole, ...props }) => {
       </div>
       <nav>
         {menuItems[userRole].map((item, index) => (
-          <MenuItem key={index} item={item} onItemClick={handleItemClick} />
+          <MenuItem
+            key={index}
+            item={item}
+            onItemClick={handleItemClick}
+            isSelected={selectedItem === item.label} // Highlight if selected
+          />
         ))}
       </nav>
     </div>

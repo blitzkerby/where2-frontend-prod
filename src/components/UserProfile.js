@@ -15,11 +15,13 @@ const UserProfile = () => {
   console.log(user)
   return (
     <>
-    <div>
-    {/* <Navbar /> */}
+        {/* <Navbar /> */}
+    <div className='w-full h-full'>
     <Profile userData={user}/>
+    <div className="w-full">
+    {/* <Footer /> */}
     </div>
-    <Footer />
+    </div>
     </>
   )
 }
