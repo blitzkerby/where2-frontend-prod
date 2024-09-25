@@ -4,6 +4,7 @@ import { useState } from "react";
 import { BsArrowDownUp } from "react-icons/bs";
 import { LuX } from "react-icons/lu";
 import Accordion from "./Accordion";
+import DateRange from "./DateRange";
 // import { items } from "./data";
 function FilterComponent ({items,onUniversityFilterChange}){
 	const  [openFilter,setOpenFilter] = useState(false)
@@ -29,7 +30,7 @@ function FilterComponent ({items,onUniversityFilterChange}){
 							<LuX onClick={handleModel} className="w-[24px] h-[24px] cursor-pointer"/>
 						</div>
 						<div className="flex justify-between items-center">
-							<h3 className="font-bold text-[#7cd1eb] text-[]">
+							<h3 className="font-bold text-[#7cd1eb] text-[20px]">
 								Filter By
 							</h3>
 						</div>
@@ -37,6 +38,9 @@ function FilterComponent ({items,onUniversityFilterChange}){
 						items={items} 
 						handlemodel={handleModel} 
 						onUniversityFilterChange={onUniversityFilterChange} />
+						<div>
+							{/* <DateRange/> */}
+						</div>	
 					</div>
 				</div>
 			</div>
