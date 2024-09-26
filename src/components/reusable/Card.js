@@ -9,6 +9,7 @@ import MiniMap from '../../assets/svg/miniMap.svg'
 import MiniClock from '../../assets/svg/miniClock.svg';
 import Calender from '../../assets/svg/calender.svg';
 import BookMark from "../../assets/svg/bookmark.svg";
+import Map from '../../assets/svg/map.svg'
 // constants
 import { NODE_ENV } from "../../Constants";
 import DefaultCardImage from "../../assets/images/card-image-default.png";
