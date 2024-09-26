@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import Card from "../reusable/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchJob } from "../../features/slices/jobSlice";
@@ -47,30 +47,8 @@ const JobList = () => {
     };
 
     return (
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <div>
-          {renderJobCards}
-=======
-import Card from "../reusable/Card"
-
-const JobList = () => {
-    return (
-        <div>
-            <Card />
->>>>>>> 77c00a4 (ft#7.1-job: added JobList, JobPage and the path for job)
-        </div>
-    )
-=======
-        <>
-        <ListContainer children={renderJobCards}></ListContainer>
-        <PaginationComponent renderCard={jobs} filteredScholarships={jobs} />
-        </>
-=======
         <PaginationComponent renderCard={renderJobCards} filteredScholarships={jobs} />
->>>>>>> 472c22a (ft#7.1-job: Refactor render JobList to match the Pagnition component)
     );
->>>>>>> d5fa2e6 (ft#7.1-job: destructure card props, created IconText and ListContainer component)
 };
 
 export default JobList;

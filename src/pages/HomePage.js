@@ -23,7 +23,6 @@ const hero1 = {
 };
 
 const hero2 = {
-<<<<<<< HEAD
   title: "PURSUE YOUR CAREER.",
   subtitle: "By supporting yourself.",
   searchPlaceholder: "Search University by name",
@@ -34,82 +33,6 @@ const hero2 = {
   mainImageAlt: "University building",
   onSearch: () => {},
 }
-
-const HomePage = () => {
-  const location = useLocation();
-
-  return (
-    <div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-      <Navbar/>
-      <VisitTracker path={location.pathname}/>
-<<<<<<< HEAD
-=======
-=======
-      <Navbar/>
-      <VisitTracker path={location.pathname}/>
->>>>>>> 301cd8a (develop: made some adjustment to config file so develop)
-=======
-<<<<<<< HEAD
->>>>>>> 357f21a (resolve conflict on develop branch)
-      <Navbar />
-=======
-      {/* <Navbar /> */}
->>>>>>> ef33a06 (MODIFIED : card.js)
-=======
-      <Navbar />
->>>>>>> d5ce0e3 (REBASE : Navbar.js)
-      
-      <Hero props={hero1}>
-        <Searchbar searchPlaceholder={hero1.searchPlaceholder} />
-      </Hero>
-      
-<<<<<<< HEAD
-<<<<<<< HEAD
-      <Hero props={hero2} />
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 22fb185 (REBASE : search.js)
-=======
-      
-=======
-=======
-      <Hero props={hero2} /> */}
->>>>>>> ef33a06 (MODIFIED : card.js)
-
->>>>>>> 8cf1e62 (REBASE : HomePage.js)
-      <Card />
-<<<<<<< HEAD
->>>>>>> 54fa07c (MODIFIED : App.js)
-      <Footer/>
-=======
-      {/* <Footer/> */}
->>>>>>> ef33a06 (MODIFIED : card.js)
-=======
-      <Hero props={hero2} />
-
-=======
->>>>>>> d2f0855 (resolve conflict on develop branch)
-      <Footer/>
->>>>>>> d5ce0e3 (REBASE : Navbar.js)
-    </div>
-  );
-=======
-	title: "PURSUE YOUR CAREER.",
-	subtitle: "By supporting yourself.",
-	searchPlaceholder: "Search University by name",
-	backgroundGradient: "from-blue-100",
-	titleColor: "text-blue-900",
-	subtitleColor: "text-blue-600",
-	mainImageSrc: SecondaryHero,
-	mainImageAlt: "University building",
-	onSearch: () => {},
->>>>>>> ebbe46e (ft#7.1-job: Resolve the error)
-};
-
 const HomePage = () => {
 	const location = useLocation();
 

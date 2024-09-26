@@ -9,29 +9,13 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     "axios": "^1.7.7",
-=======
     "cross-env": "^7.0.3",
->>>>>>> 22fb185 (REBASE : search.js)
-=======
-=======
->>>>>>> ce0eec1 (ft#7.1-job: resolve conflict on package.json)
     "cross-env": "^7.0.3",
     "axios": "^1.7.7",
-<<<<<<< HEAD
->>>>>>> 1d06656 (ft#7.1-job: added JobList, JobPage and the path for job)
->>>>>>> 77c00a4 (ft#7.1-job: added JobList, JobPage and the path for job)
-=======
->>>>>>> ce0eec1 (ft#7.1-job: resolve conflict on package.json)
-=======
     "axios": "^1.7.7",
     "cross-env": "^7.0.3",
     "heroicons": "^2.1.5",
->>>>>>> eebc717 (ft#7.1-job: Changed the path for UserProfile)
     "lucide-react": "^0.439.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

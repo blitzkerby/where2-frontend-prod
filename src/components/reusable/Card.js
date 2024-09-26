@@ -4,50 +4,16 @@ import { Link } from "react-router-dom";
 import { Facebook, Instagram, Twitter, Youtube, Chrome } from "lucide-react";
 
 // assets
-<<<<<<< HEAD
-import Map from '../../assets/svg/map.svg';
-import BookMark from '../../assets/svg/bookmark.svg';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import Button from './Button';
-=======
-=======
-import Button from './Button';
->>>>>>> 1d06656 (ft#7.1-job: added JobList, JobPage and the path for job)
->>>>>>> 77c00a4 (ft#7.1-job: added JobList, JobPage and the path for job)
 import MiniMap from '../../assets/svg/miniMap.svg'
 import MiniClock from '../../assets/svg/miniClock.svg';
 import Calender from '../../assets/svg/calender.svg';
-<<<<<<< HEAD
-import { cardBody, cardDescription, cardTitle } from './tailwindcardclass/cardClass';
-// import NODE_ENV (No .env file)
-=======
-import MiniMap from '../../assets/svg/miniMap.svg'
-import MiniClock from '../../assets/svg/miniClock.svg';
-import Calender from '../../assets/svg/calender.svg';
->>>>>>> ef4bf0d (REMOVED : test/ folder)
-=======
-<<<<<<< HEAD
-=======
-import { cardBody, cardDescription, cardTitle } from './tailwindcardclass/cardClass';
-// import NODE_ENV (No .env file)
->>>>>>> 134478d (added the comment on Button.js)
->>>>>>> ac86c7b (added the comment on Button.js)
-
-=======
-import Map from "../../assets/svg/map.svg";
 import BookMark from "../../assets/svg/bookmark.svg";
-import Button from "./Button";
-import MiniMap from "../../assets/svg/miniMap.svg";
-import MiniClock from "../../assets/svg/miniClock.svg";
-import Calender from "../../assets/svg/calender.svg";
->>>>>>> ebbe46e (ft#7.1-job: Resolve the error)
 // constants
 import { NODE_ENV } from "../../Constants";
 import DefaultCardImage from "../../assets/images/card-image-default.png";
 
 // styles
-
 const Card = ({
 		image, 
 		imageAlt,
@@ -78,33 +44,6 @@ const Card = ({
 		{ icon: Calender, linkKey: deadLine },
 		{ icon: MiniMap, linkKey: location },
 	];
-
-<<<<<<< HEAD
-    const socialMediaIcons = [
-        { icon: Facebook, linkKey: facebookLink },
-        { icon: Twitter, linkKey: twitterLink },
-        { icon: Instagram, linkKey: instagramLink },
-        { icon: Youtube, linkKey: youtubeLink },
-        { icon: Chrome, linkKey: websiteLink, isExternal: true },
-    ];
-<<<<<<< HEAD
-<<<<<<< HEAD
-    // const companyUrl = title.toLowerCase().replace(/\s+/g, '-');
-=======
-
->>>>>>> ef4bf0d (REMOVED : test/ folder)
-=======
-
-=======
-    // const companyUrl = title.toLowerCase().replace(/\s+/g, '-');
->>>>>>> 1b362f0 (ft#8-studentLoan: Added route for student loan and tested using reusable card component on StudentLoanPage)
->>>>>>> e47aa8b (ft#8-studentLoan: Added route for student loan and tested using reusable card component on StudentLoanPage)
-    const workDetails = [
-        { icon: MiniClock, linkKey: timeOut },
-        { icon: Calender, linkKey: deadLine },
-        { icon: MiniMap, linkKey: location },
-    ];
-=======
 	const companyUrl = title
 		? title
 				.toLowerCase()
@@ -118,7 +57,7 @@ const Card = ({
 		title: "text-h4p font-bold",
 		utility: "text-pp",
 		description: "text-p mb-8",
->>>>>>> ebbe46e (ft#7.1-job: Resolve the error)
+
 
 		/* image */
 		image: "min- max- object-cover",
@@ -155,185 +94,11 @@ const Card = ({
 		utilityItem: "px-4 mr-4 text-nowrap",
 		utilityBorder: "lg:border-r-gray-200 lg:border-r-2 ",
 
-<<<<<<< HEAD
+
         bookmarkContainer: "w-[100px] flex justify-around",
         readMoreLink: "text-blue-500 hover:underline",
         button: "text-1xl p-2 px-3",
     };
-    
-    return (
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <div className="lg:h-[348px] lg:w-[676px] mx-auto">
-        <div className={`${cardBody} justify-center `}>
-            <div className="h-[300px] rounded-xl">
-                <img className="min-w-full max-h-full object-fit " src={image} alt={imageAlt || title} />
-            </div>
-            <div>
-                <div className="p-6 pb-0 w-[376px]">
-                    <h5 className={`${cardTitle}`}>{title}</h5>
-                    <div className='flex justify-between w-full'>
-                        <div className="flex items-center space-x-2">
-                            {workDetails.map(({ icon , linkKey }, index) => (
-                                <div key={index} className="flex items-center text-[12px]">
-                                    <img src={icon} alt={icon}/>
-                                    {index !== 2 ? <p className='border-r-gray-200 border-r-2 p-1 text-nowrap'>{linkKey}</p> : <p className='text-nowrap'>{linkKey}</p>}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    <div className="text-clip overflow-hidden w-full h-[200px]">
-                        <p className={`${cardDescription} mt-3 text-justify`}>{description}</p>
-                    </div>
-=======
-        <div className="lg:h-[348px] lg:w-[890px] mx-auto mb-[64px]">
-            <div className={`${cardBody} justify-center `}>
-                <div className="h-[300px] rounded-xl">
-                    <img className="min-w-full max-h-full object-fit " src={image} alt={imageAlt || title} />
->>>>>>> ef4bf0d (REMOVED : test/ folder)
-=======
-        <div className={styles.container}>
-            <div className={`${cardBody} justify-center`}>
-                <div className={styles.imageContainer}>
-=======
-=======
->>>>>>> 77c00a4 (ft#7.1-job: added JobList, JobPage and the path for job)
-        <div className='flex justify-center'>
-            <div className={`${styles.container.small} ${styles.container.large}`}>
-                <div className={`${styles.imageContainer.large} ${styles.imageContainer.small}`}>
->>>>>>> ef33a06 (MODIFIED : card.js)
-                    <img className={styles.image} src={image} alt={imageAlt || title} />
->>>>>>> 8cf1e62 (REBASE : HomePage.js)
-                </div>
-<<<<<<< HEAD
-                <div>
-                    <div className={styles.contentContainer}>
-                        <h5 className={`${cardTitle}`}>{title}</h5>
-                        <div className={styles.workDetailsContainer}>
-                            <div className="flex items-center space-x-2">
-                                {workDetails.map(({ icon, linkKey }, index) => (
-                                    <div key={index} className={styles.workDetailItem}>
-                                        <img src={icon} alt={icon} />
-                                        {index !== 2 ? (
-                                            <p className={styles.workDetailText}>{linkKey}</p>
-                                        ) : (
-                                            <p className={styles.workDetailTextLast}>{linkKey}</p>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-<<<<<<< HEAD
-                            <Link to="">
-                                <img src={Map} alt="Map" />
-                            </Link>
-                        </div>
-{/* // I comment this to avoid error, since We don't have the Link set in App.js file yet. */}
-                        <Link to={`/company/companydetail/:company`} className="text-blue-500 hover:underline">
-                            <Button className="font- text-1xl p-2 px-3" variant="primary" size="large">
-                                Read More
-                            </Button>
-                        </Link>
-=======
-=======
-                <div className={`${styles.contentContainer.large} ${styles.contentContainer.small}`}>
-                    <div className={styles.headerContainer}>
-                        <div className={styles.titleContainer}>
-                            <h5 className={styles.title}>{title}</h5>
->>>>>>> ef33a06 (MODIFIED : card.js)
-                        </div>
-                        <div className={styles.utilityContainer}>
-                            {workDetails.map(({ icon, linkKey }, index) => (
-                                <div key={index} className={styles.workDetailItem}>
-                                    <div className={styles.iconContainer}>
-                                        <img src={icon} alt={icon} />
-                                    </div>
-=======
-		workDetailsContainer: "flex justify-between ",
-		workDetailItem: "flex items-center text-[12px]",
-		workDetailText: "border-r-gray-200 border-r-2 p-1 text-nowrap",
-		workDetailTextLast: "text-nowrap",
->>>>>>> ebbe46e (ft#7.1-job: Resolve the error)
-
-		bookmarkContainer: "w-[100px] flex justify-around",
-		readMoreLink: "text-blue-500 hover:underline",
-		button: "text-1xl p-2 px-3",
-	};
-
-<<<<<<< HEAD
-                                <Link to={`/company/companydetail/${companyUrl}`} className={styles.readMoreLink}>
-                                    <Button className={styles.button} variant="primary" size="large">
-                                        Read More
-                                    </Button>
-                                </Link>
-                                
-                            </div>
-<<<<<<< HEAD
-    
-                            <Link to={`/company/companydetail/${companyUrl}`} className={styles.readMoreLink}>
-                                <Button className={styles.button} variant="primary" size="large">
-                                    Read More
-                                </Button>
-                            </Link>
-<<<<<<< HEAD
->>>>>>> ef4bf0d (REMOVED : test/ folder)
-
-=======
->>>>>>> 8cf1e62 (REBASE : HomePage.js)
-=======
->>>>>>> ef33a06 (MODIFIED : card.js)
-                        </div>
-=======
-// I comment this to avoid error, since We don't have the Link set in App.js file yet.
-                        {/* <Link to={`/company/companydetail/:company`} className="text-blue-500 hover:underline">
-                            <Button className="font- text-1xl p-2 px-3" variant="primary" size="large">
-=======
-                    <div className="text-clip overflow-hidden w-full h-[200px]">
-                        <p className={`${cardDescription} mt-3 text-justify`}>{description}</p>
-                    </div>
-                </div>
-                <div className="p-6 pt-0">
-                    <div className="social flex py-6 justify-around max-w-[200px]">
-                        {socialMediaIcons.map(({ icon: Icon, linkKey, isExternal }, index) => {
-                            // if (NODE_ENV === 'development') {
-                            //     console.log(linkKey)
-                            // }
-                            return linkKey ? (
-                                isExternal ? (
-                                    <a href={linkKey} key={index} target="_blank" rel="noopener noreferrer">
-                                        <Icon />
-                                    </a>
-                                ) : (
-                                        "testing"
-                                    // <Link to={linkKey} key={index}>
-                                    //     <Icon />
-                                    // </Link>
-                                )
-                            ) : null;
-                        })}
-                    </div>
-                    <div className="flex justify-between">
-                        <div className="w-[100px] flex justify-around">
-                            <div>
-                                <img src={BookMark} alt="Bookmark" />
-                            </div>
-                            <Link to="">
-                                <img src={Map} alt="Map" />
-                            </Link>
-                        </div>
-{/* // I comment this to avoid error, since We don't have the Link set in App.js file yet. */}
-                        <Link to={`/company/companydetail/:company`} className="text-blue-500 hover:underline">
-<<<<<<< HEAD
-                            {/* <Button className="font- text-1xl p-2 px-3" variant="primary" size="large">
->>>>>>> 1b362f0 (ft#8-studentLoan: Added route for student loan and tested using reusable card component on StudentLoanPage)
-=======
-                            <Button className="font- text-1xl p-2 px-3" variant="primary" size="large">
->>>>>>> 1d06656 (ft#7.1-job: added JobList, JobPage and the path for job)
-                                Read More
-                            </Button>
-                        </Link>
-=======
 	return (
 		<div className="flex justify-center">
 			<div className={`${styles.container.small} ${styles.container.large}`}>
@@ -355,8 +120,6 @@ const Card = ({
 									<div className={styles.iconContainer}>
 										<img src={icon} alt={icon} />
 									</div>
->>>>>>> ebbe46e (ft#7.1-job: Resolve the error)
-
 									{index !== 2 ? (
 										<p
 											className={`${styles.utilityItem} ${styles.utilityBorder}`}
