@@ -34,7 +34,7 @@ const hero2 = {
 }
 
 const HomePage = () => {
-  const location = useLocation();
+	const location = useLocation();
 
   return (
     <div>

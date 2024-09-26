@@ -1,3 +1,4 @@
+
 const getEnvVariable = (key, defaultValue = "") => {
     if (typeof process !== "undefined" && process.env && process.env[key]) {
       return process.env[key];
@@ -38,8 +39,17 @@ const getEnvVariable = (key, defaultValue = "") => {
     },
     // You can add more variables here
     user: {
-      upload: `${API_URL}/api/upload`
+      upload: `${API_URL}/api/upload`,
+      visitorTrack: `${API_URL}/api/visitors/track-visit`,
+      visits: `${API_URL}/api/visitors/visits`
+    },
+
+    // 3. Jobs
+    job: {
+      getAllJob: `${ API_URL }/api/jobs`,
+      getAssociatedCompany: (jobId) => `${ API_URL }/api/jobs/associatedCompany/${jobId}`
     }
+    
   };
   
   export default config;
