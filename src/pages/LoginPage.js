@@ -5,9 +5,9 @@ import Navbar from "../components/reusable/Navbar";
 const LoginPage = () => {
     return (
         <div>
-            <Navbar/>
-            <LoginComponent/>
-            <Footer/>
+            <Navbar />
+            <LoginComponent />
+            <Footer />
         </div>
     )
 }
