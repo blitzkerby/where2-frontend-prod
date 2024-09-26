@@ -105,6 +105,7 @@ import ScholarshipListPage from "./pages/ScholarshipListPage";
 >>>>>>> ebbe46e (ft#7.1-job: Resolve the error)
 import JobPage from "./pages/JobPage";
 import JobDetailPage from "./pages/JobDetailPage";
+import UserProfile from "./components/UserProfile";
 
 >>>>>>> 77c00a4 (ft#7.1-job: added JobList, JobPage and the path for job)
 
@@ -119,7 +120,7 @@ import JobDetailPage from "./pages/JobDetailPage";
     { path: "/reset-password/:token", element: <ResetPasswordPage />},
     { path: "/terms-and-conditions", element: <TermsAndConditionsPage/>},
     { path: "/signup/verification", element: <VerificationPage/> },
-    { path: "/dashboard/:userName", element: <HomePage /> },
+    { path: "/dashboard/:userName", element: <UserProfile />},
     { path: "/scholarships", element: <ScholarshipListPage/>},
     { path: "/job", element: <JobPage />},
     { path: "/job-detail/:jobId", element: <JobDetailPage /> },
