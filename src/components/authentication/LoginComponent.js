@@ -17,7 +17,7 @@ const LoginComponent = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/home");
+      navigate("/homepage");
     }
   }, [isAuthenticated, navigate]);
 
@@ -30,7 +30,7 @@ const LoginComponent = () => {
     try {
       const resultAction = await dispatch(login({ email, password }));
       if (login.fulfilled.match(resultAction)) {
-        navigate("/home");
+        navigate("/homepage");
       }
     } catch (err) {
       console.error("Failed to log in. Please try again!");
@@ -81,7 +81,7 @@ const LoginComponent = () => {
         </Link>
         <p className="mt-6 text-sm text-gray-600 ">
           Don't have an Account?{" "}
-          <Link to="/signup" className="text-[rgb(0,122,255)] underline">
+          <Link to="/register" className="text-[rgb(0,122,255)] underline">
             Sign Up
           </Link>
         </p>

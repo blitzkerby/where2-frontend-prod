@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 34efb6a (ft2.1-scholashippage: trying to rebase 5th time)
 const getEnvVariable = (key, defaultValue = "") => {
     if (typeof process !== "undefined" && process.env && process.env[key]) {
       return process.env[key];
@@ -36,6 +39,7 @@ const getEnvVariable = (key, defaultValue = "") => {
       resetPasswordUrl: (token) => `${API_URL}/api/users/resetPassword/${token}`,
       refreshTokenUrl: `${API_URL}/api/users/refreshToken`,
       fetchProfileUrl: (username) => `${API_URL}/api/users/profile/${username}`,
+<<<<<<< HEAD
       getUserRole: `${API_URL}/api/users/login/getRole`,
     },
     // You can add more variables here
@@ -86,3 +90,13 @@ const config = {
 
 export default config;
 >>>>>>> 301cd8a (develop: made some adjustment to config file so develop)
+=======
+    },
+    // You can add more variables here
+    user: {
+      upload: `${API_URL}/api/upload`
+    }
+  };
+  
+  export default config;
+>>>>>>> 34efb6a (ft2.1-scholashippage: trying to rebase 5th time)
