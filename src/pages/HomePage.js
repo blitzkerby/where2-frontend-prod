@@ -4,8 +4,6 @@ import Footer from "../components/reusable/Footer";
 import Hero from "../layouts/Hero";
 import Searchbar from "../components/reusable/SearchBar";
 import Card from "../components/reusable/Card"
-import { useLocation } from "react-router-dom";
-import VisitTracker from "./../components/reusable/VisitorTracker";
 
 // assets
 import MainHero from '../assets/images/content-module-hero1-no-bg.png';
@@ -36,13 +34,10 @@ const hero2 = {
 }
 
 const HomePage = () => {
-  const location = useLocation();
 
   return (
     <div>
       <Navbar/>
-      <VisitTracker path={location.pathname}/>
-      <Navbar />
       
       <Hero props={hero1}>
         <Searchbar searchPlaceholder={hero1.searchPlaceholder} />

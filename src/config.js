@@ -27,6 +27,9 @@ const config = {
   },
   profile: {
     getMyProfile: (userId) => `${API_URL}/api/users/profile/${userId}`
+  },
+  analytics: {
+    getAllUsers : `${API_URL}/api/users/user-list`
   }
 };
 

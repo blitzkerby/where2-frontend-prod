@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Profile from './reusable/Profile';
 import config from './../config';
 import { LoadingOverlay } from './reusable/Loading';
+import Navbar from './reusable/Navbar';
 
 const getAuthData = () => {
   const authData = localStorage.getItem('authData');
@@ -72,9 +73,12 @@ const UserProfile = () => {
   }
 
   return (
-    <div className='w-full h-full'>
+    <>
+    <Navbar/>
+    <div className='w-full h-full mt-[70px]'>
       <Profile userData={userData} />
     </div>
+    </>
   );
 };
 
