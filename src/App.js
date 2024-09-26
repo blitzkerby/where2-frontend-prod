@@ -32,7 +32,7 @@ import ScholarshipListPage from "./pages/ScholarshipListPage";
     { path: "/signup/verification", element: <VerificationPage/> },
     { path: "/dashboard/:userName", element: <UserProfile /> },
     { path: "/job", element: <JobPage /> },
-    { path: "/job-detail/:id", element: <JobDetailPage />},
+    { path: "/job-detail/:jobId", element: <JobDetailPage />},
     { path: '/profile', element: <UserProfile /> },
     { path: '/scholarships', element: <ScholarshipListPage />},
   ])

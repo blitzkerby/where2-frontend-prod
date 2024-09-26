@@ -36,7 +36,7 @@ const JobList = () => {
                                 deadLine={job.deadline}
                                 timeOut={job.salary}
                                 type={"job"}
-                                route={`/job-detail/${ job.id }`}
+                                route={`/job-detail/${job.id}`}
                             />
                         )
                     })

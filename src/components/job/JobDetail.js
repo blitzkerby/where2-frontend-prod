@@ -24,7 +24,6 @@ const JobDetail = () => {
 
     useEffect(() => {
         dispatch(fetchCompany(params.jobId));
-      
     }, []);
     if (!company.isLoading) {
         contact = (<>
