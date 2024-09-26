@@ -1,11 +1,11 @@
 import ListingComponent from "./reusable/ListingComponent";
 import ButtonComponent from "./reusable/Button";
-import { Menu, Edit2, BusFront , Pen , Trash } from "lucide-react";
+import { Menu, Edit2, BusFront , Pen , Trash , User } from "lucide-react";
 import FormInput from "./reusable/InputField";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { LoadingOverlay } from "./reusable/Loading";
-import DefaultProfile from "../assets/svg/defaultProfile.svg"
+
   const UserAccount = ({ userInfo }) => {
     const navigate = useNavigate();
     const { role, loading } = useAuth();
@@ -19,13 +19,15 @@ import DefaultProfile from "../assets/svg/defaultProfile.svg"
       return null;
     }
 
+    const formattedDate = new Date(userInfo.createdAt).toLocaleDateString('en-CA');
+
     return (
       <section className="w-full lg:mx-[32px] lg:h-full sm:min-h-fit bg-white rounded-3xl shadow-md border">
         <div className="lg:w-[80%] lg:pl-[128px] lg:mx-[64px] h-full px-4 pb-6 pt-12 sm:px-6 lg:pb-0">
           <div className="flex items-center justify-center mb-6">
             <div className="relative">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 bg-blue-gray-50 rounded-full flex items-center justify-center">
-                <img src={DefaultProfile} alt="default profile" />
+              <div className={`w-24 h-24 bg-blue-gray-50 rounded-full flex items-center justify-center ${userInfo?.isActive ? "border-2 border-green-500" : ""}`}>
+                { userInfo?.photo === 'default.jpg' ? <User alt="default profile" className="w-full h-full lg:p-4 sm:w-12 sm:h-12 text-black"/> : <img src={userInfo.photo} alt="User profile"/>}
               </div>
               <button className="absolute bottom-0 right-0 bg-white rounded-full p-1 shadow-md">
                 <Edit2 size={16} />
@@ -37,8 +39,8 @@ import DefaultProfile from "../assets/svg/defaultProfile.svg"
 
           <FormInput
                 label="Bio"
-                value={userInfo.bio}
-                placeholder="Enter your Bio..."
+                value={userInfo?.bio}
+                placeholder="Tell everyone about your tell..."
                 className="p-3 sm:p-4 h-fit"
                 rounded
               />
@@ -92,15 +94,29 @@ import DefaultProfile from "../assets/svg/defaultProfile.svg"
             />  
             </div>
   
-            {userInfo.location && (
               <FormInput
                 label="Location"
+                placeholder="Enter Location"
                 value={userInfo.location}
                 disabled
                 rounded
                 className="p-3 sm:p-4"
               />
-            )}
+
+              <FormInput
+                label="Account Creation Date"
+                value={formattedDate}
+                disabled
+                rounded
+                className="p-3 sm:p-4"
+              />
+                <FormInput
+                  label="Account Status"
+                  value={userInfo.isActive === true ? "Active" : "Not Active"}
+                  disabled
+                  rounded
+                  className="p-3 sm:p-4"
+                />
           </div>
         </div>
       </section>
