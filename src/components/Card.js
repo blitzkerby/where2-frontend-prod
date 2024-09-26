@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { cardBody, cardGrid , cardTitle , cardButton , cardDescribtion} from './tailwindClassComponents/card'
+import { cardBody, cardGrid, cardTitle, cardButton, cardDescribtion } from './tailwindClassComponents/card'
+
 const Card = ({image , imageAlt , title , describtion }) => {
 const companyUrl = title.toLowerCase().replace(/\s+/g, '-'); 
   return (

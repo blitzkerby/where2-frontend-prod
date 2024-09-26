@@ -30,6 +30,7 @@ import VerificationPage from "./pages/VerificationPage";
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import JobPage from "./pages/JobPage";
 import JobDetailPage from "./pages/JobDetailPage";
 =======
@@ -99,6 +100,9 @@ import ScholarshipListPage from "./pages/ScholarshipListPage";
 =======
 >>>>>>> 441e621 (ft#7.1-job: REBASE: develop branch)
 import ScholarshipListPage from "./pages/ScholarshipListPage";import JobPage from "./pages/JobPage";
+=======
+import ScholarshipListPage from "./pages/ScholarshipListPage";
+>>>>>>> ebbe46e (ft#7.1-job: Resolve the error)
 import JobPage from "./pages/JobPage";
 import JobDetailPage from "./pages/JobDetailPage";
 
