@@ -5,7 +5,7 @@ import Hero from "../layouts/Hero";
 import Searchbar from "../components/reusable/SearchBar";
 
 // assets
-import MainHero from '../assets/images/';
+import MainHero from '../assets/images/noe-banner-reframed.png';
 
 const hero1 = {
   title: "DISCOVER YOUR FUTURE.",

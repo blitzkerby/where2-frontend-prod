@@ -6,8 +6,8 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     screens: {
-      sm: { max: "980px" }, // Mobile-first approach for max-width
-      lg: { min: "1004px" }, // Desktop-first approach for min-width
+      sm: { 'max': "980px" }, // Mobile-first approach for max-width
+      lg: { 'min': "1007px" }, // Desktop-first approach for min-width
     },
     extend: {
       spacing: {
@@ -17,7 +17,13 @@ module.exports = {
         40: "40px",
         80: "80px",
         100: "100px",
-        "sectional-top": "3.9375rem",
+
+        "section-top-margin": "3.9375rem",
+        "image-container-top-margin": "5rem",
+      },
+      padding: {
+        'sectional-top': '5rem',  // Custom padding value
+        '14': '3.5rem',  // Another custom padding value
       },
       maxWidth: {
         container: "886px",
