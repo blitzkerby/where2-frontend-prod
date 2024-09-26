@@ -17,7 +17,7 @@ const Hero = ({ props , children }) => {
     const styles = {
       /* containers */
       section: "relative w-full z-[0] gap-5",
-      container: "relative w-full h-full bg-white text-center",
+      container: "relative w-full h-full bg-white text-center flex justify-center",
 
       gradientOverlay: "inset-0 bg-gradient-to-b opacity-50",
       gradientClipPath: { clipPath: "polygon(0 0, 100% 0, 100% 70%, 0 100%)" },
@@ -25,7 +25,7 @@ const Hero = ({ props , children }) => {
       /* textbox */
       title: "text-h1 tracking-tight font-black",
       subtitle: "text-h2 tracking-tight mb-8",
-      contentWrapper: "absolute w-full z-10 mx-auto top-[7%] mt-section-top-margin",
+      contentWrapper: "absolute w-full z-10 mx-auto top-[7%] mt-section-top-margin max-w-[660px]",
 
       /* background image */
       imageContainer: `mt-image-container-top-margin flex justify-center w-full h-full`,
