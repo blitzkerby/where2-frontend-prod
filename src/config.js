@@ -24,6 +24,9 @@ const config = {
     upload: `${API_URL}/api/upload`,
     visitorTrack: `${API_URL}/api/visitors/track-visit`,
     visits: `${API_URL}/api/visitors/visits`
+  },
+  profile: {
+    getMyProfile: (userId) => `${API_URL}/api/users/profile/${userId}`
   }
 };
 

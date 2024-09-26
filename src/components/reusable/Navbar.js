@@ -11,6 +11,8 @@ import SideDashboard from "./../../assets/svg/dashboardSide.svg"
 import ProfileSide from "./../../assets/svg/profileSide.svg"
 import AboutUs from "./../../assets/svg/aboutus.svg"
 import Bookmarks from "./../../assets/svg/bookmarks.svg"
+import useAuth from "./../../hooks/useAuth";
+import DashboardComponent from "../Dashboard";
 
 import config from "../../config";
 
@@ -40,52 +42,7 @@ const BookmarksIcon = <img src={Bookmarks} alt="Bookmarks" />;
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showDashboard, setShowDashboard] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState("");
-  const [entity, setEntity] = useState("");
-
-  const fetchUserDataAndRole = useCallback(async () => {
-    try {
-      const authData = JSON.parse(localStorage.getItem('authData'));
-      if (authData) {
-        const { userName, entity, token } = authData;
-        
-        setUsername(userName || "");
-        setEntity(entity || "");
-        setIsLoggedIn(true);
-
-        if (token) {
-          const response = await fetch(config.auth.getUserRole, {
-            headers: { Authorization: `Bearer ${token}` }
-          });
-
-          if (response.ok) {
-            const data = await response.json();
-            setShowDashboard(data.role === 'admin' || data.role === 'developer');
-          } else {
-            setShowDashboard(false);
-          }
-        }
-      } else {
-        setUsername("");
-        setEntity("");
-        setIsLoggedIn(false);
-        setShowDashboard(false);
-      }
-    } catch (error) {
-      console.error('Error fetching user data and role:', error);
-      setIsLoggedIn(false);
-      setShowDashboard(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchUserDataAndRole();
-    const intervalId = setInterval(fetchUserDataAndRole, 600000);
-
-    return () => clearInterval(intervalId);
-  }, [fetchUserDataAndRole]);
+  const { isLoggedIn, username, entity, showDashboard } = useAuth();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);

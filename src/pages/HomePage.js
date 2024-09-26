@@ -5,6 +5,7 @@ import Hero from "../layouts/Hero";
 import Searchbar from "../components/reusable/SearchBar";
 import Card from "../components/reusable/Card"
 import { useLocation } from "react-router-dom";
+import VisitTracker from "./../components/reusable/VisitorTracker";
 
 // assets
 import MainHero from '../assets/images/content-module-hero1-no-bg.png';
