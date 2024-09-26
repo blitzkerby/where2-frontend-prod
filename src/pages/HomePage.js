@@ -38,6 +38,8 @@ const HomePage = () => {
 
   return (
     <div>
+      <Navbar/>
+      <VisitTracker path={location.pathname}/>
       <Navbar />
       
       <Hero props={hero1}>
