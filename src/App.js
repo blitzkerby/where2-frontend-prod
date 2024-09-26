@@ -6,23 +6,25 @@ import Profile from "./components/reusable/Profile";
 import UserProfile from "./components/UserProfile";
 
 
-  const router = createBrowserRouter([
-    {
-      path:'/',
-      index:true,
-      element:<HomePage/>
-    },
-    {
-      path:"/home",
-      element:<HomePage/>
-    },
-    {
-      path:'/profile',
-      element:<UserProfile/>
-    },
+const router = createBrowserRouter([
+  {
+    path:'/',
+    index:true,
+    element:<HomePage/>
+  },
+  {
+    path:"/home",
+    element:<HomePage/>
+  },
+  { path: "/login",element: <LoginPage />},
+  { path: "/signup",element: <RegisterPage />},
+  { path: "/forget-password", element: <ForgetPasswordPage />},
+  { path: "/reset-password/:token", element: <ResetPasswordPage />},
+  { path: "/terms-and-conditions", element: <TermsAndConditionsPage/>},
+  { path: "/signup/verification", element: <VerificationPage/> },
+  { path: "/dashboard/:userName", element: <HomePage/> },
+])
 
-  ])
-  
 function App() {
   return <RouterProvider router={router}></RouterProvider>;
 }
