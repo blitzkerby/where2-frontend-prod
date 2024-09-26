@@ -1,9 +1,10 @@
 import React from "react";
 import ScholarshipList from "../components/ScholarshipList";
+
 const ScholarshipListPage = () => {
 	return (
 		<div>
-			<ScholarshipList/>
+			<ScholarshipList />
 		</div>
 	);
 };

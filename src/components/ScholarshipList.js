@@ -1,4 +1,4 @@
-import Navbar from "./reusable/Navbar";
+
 import Footer from "./reusable/Footer";
 import PaginationComponent from './reusable/Pagination'
 import FilterComponent from "./reusable/Filter";
@@ -35,7 +35,7 @@ export default function ScholarshipList() {
 
  // convert both deadline and formattedDate ito date OBJ
     
-    const scholarshipDeadLine = new Date("2024-09-20"); // Example scholarship deadline
+    const scholarshipDeadLine = new Date("2024-09-20"); 
 
     // Calculate the difference in milliseconds
     const differenceInMs = scholarshipDeadLine - currentDate;
@@ -85,7 +85,7 @@ export default function ScholarshipList() {
 
     return (
         <>
-            <Navbar />
+            {/* <Navbar /> */}
             <div className="mt-[70px]">
                 <FilterComponent 
                     items={items} 
