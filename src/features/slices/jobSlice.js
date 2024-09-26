@@ -19,7 +19,10 @@ const jobSlices = createSlice({
     name: "job",
     initialState: {
         jobs: [],
-        company: []
+        company: {
+            isLoading: true,
+            data:{}
+        }
     },
 =======
 const jobSlices = createSlice({
@@ -35,9 +38,12 @@ const jobSlices = createSlice({
             })
             .addCase(fetchJob.rejected)
 
-            .addCase(fetchCompany.pending)
+            .addCase(fetchCompany.pending, (state, action) => {
+                state.company.isLoading = true
+            })
             .addCase(fetchCompany.fulfilled, (state, action) => {
-                state.company = action.payload.data.associatedCompany
+                state.company.isLoading = false
+                state.company.data = action.payload.data.associatedCompany[0]
 
             })
             .addCase(fetchCompany.rejected)

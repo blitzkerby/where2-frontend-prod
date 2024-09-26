@@ -49,23 +49,23 @@ import DefaultCardImage from "../../assets/images/card-image-default.png";
 // styles
 
 const Card = ({
-	props: {
-		image = DefaultCardImage,
-		imageAlt = "default alt text",
-		title = "Default Title",
-		description = "Default Description",
-		socialLinks: {
-			facebookLink = "#",
-			instagramLink = "#",
-			twitterLink = "#",
-			youtubeLink = "#",
-			websiteLink = "#",
-		} = {},
-		location = "Default Location",
-		deadLine = "Default Deadline",
-		timeOut = "Default Timeout",
-	} = {},
-}) => {
+		image, 
+		imageAlt,
+		title,
+		description, 
+        facebookLink = "#",
+        instagramLink = "#",
+        twitterLink = "#",
+        youtubeLink = "#",
+        websiteLink = "#",
+		location ,
+		deadLine,
+        timeOut,
+        route,
+        type,
+        id
+	} 
+) => {
 	const socialMediaIcons = [
 		{ icon: Facebook, linkKey: facebookLink },
 		{ icon: Twitter, linkKey: twitterLink },
@@ -413,7 +413,7 @@ const Card = ({
 								</div>
 
 								<Link
-									to={`/company/companydetail/${companyUrl}`}
+									to={route}
 									className={styles.readMoreLink}
 								>
 									<Button

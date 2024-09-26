@@ -3,6 +3,8 @@ import Card from "../reusable/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchJob } from "../../features/slices/jobSlice";
 import { useEffect } from "react";
+import ListContainer from "../reusable/ListContainer";
+import PaginationComponent from "../reusable/Pagination";
 const JobList = () => {
     const dispatch = useDispatch();
     const {jobs }= useSelector((state) => state.job);
@@ -28,13 +30,12 @@ const JobList = () => {
         deadLine={job.deadline}
         timeOut={job.salary}
         type={"job"}
+        route={`/job-detail/${job.id}`}
     />
     })
 
-  
-    
-
     return (
+<<<<<<< HEAD
         <div>
           {renderJobCards}
 =======
@@ -47,6 +48,13 @@ const JobList = () => {
 >>>>>>> 77c00a4 (ft#7.1-job: added JobList, JobPage and the path for job)
         </div>
     )
+=======
+        <>
+        <ListContainer children={renderJobCards}></ListContainer>
+        <PaginationComponent renderCard={jobs} filteredScholarships={jobs} />
+        </>
+    );
+>>>>>>> d5fa2e6 (ft#7.1-job: destructure card props, created IconText and ListContainer component)
 };
 
 export default JobList;

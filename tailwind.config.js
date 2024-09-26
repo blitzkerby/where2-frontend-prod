@@ -17,6 +17,7 @@ module.exports = {
         40: "40px",
         80: "80px",
         100: "100px",
+        160: "160px",
 
         "section-top-margin": "3.9375rem",
         "image-container-top-margin": "5rem",

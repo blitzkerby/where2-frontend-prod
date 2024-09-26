@@ -122,7 +122,7 @@ import JobDetailPage from "./pages/JobDetailPage";
     { path: "/dashboard/:userName", element: <HomePage /> },
     { path: "/scholarships", element: <ScholarshipListPage/>},
     { path: "/job", element: <JobPage />},
-    { path: "/job-detail/:id", element: <JobDetailPage />},
+    { path: "/job-detail/:jobId", element: <JobDetailPage /> },
   ])
   
 >>>>>>> 34efb6a (ft2.1-scholashippage: trying to rebase 5th time)
