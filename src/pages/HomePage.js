@@ -41,9 +41,14 @@ const HomePage = () => {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <Navbar/>
       <VisitTracker path={location.pathname}/>
 =======
+=======
+      <Navbar/>
+      <VisitTracker path={location.pathname}/>
+>>>>>>> 301cd8a (develop: made some adjustment to config file so develop)
       <Navbar />
 =======
       {/* <Navbar /> */}
