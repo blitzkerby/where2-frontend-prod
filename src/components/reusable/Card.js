@@ -11,7 +11,7 @@ import MiniClock from '../../assets/svg/miniClock.svg';
 import Calender from '../../assets/svg/calender.svg';
 
 // constants
-import { NODE_ENV } from '../../constants';
+// import { NODE_ENV } from '../../constants';
 import DefaultCardImage from "../../assets/images/card-image-default.png";
 
 // components
