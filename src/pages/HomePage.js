@@ -4,6 +4,8 @@ import Footer from "../components/reusable/Footer";
 import Hero from "../layouts/Hero";
 import Searchbar from "../components/reusable/SearchBar";
 import Card from "../components/reusable/Card"
+import VisitTracker from "../components/reusable/VisitorTracker";
+import { useLocation } from "react-router-dom";
 
 // assets
 import MainHero from '../assets/images/content-module-hero1-no-bg.png';

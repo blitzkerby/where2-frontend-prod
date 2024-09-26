@@ -4,6 +4,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Profile from "./components/reusable/Profile";
 import UserProfile from "./components/UserProfile";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import ForgetPasswordPage from "./pages/ForgetPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
+import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
+import VerificationPage from "./pages/VerificationPage";
 
 
 const router = createBrowserRouter([
@@ -23,6 +29,7 @@ const router = createBrowserRouter([
   { path: "/terms-and-conditions", element: <TermsAndConditionsPage/>},
   { path: "/signup/verification", element: <VerificationPage/> },
   { path: "/dashboard/:userName", element: <HomePage/> },
+  { path: "/profile", element: <UserProfile/> }
 ])
 
 function App() {
