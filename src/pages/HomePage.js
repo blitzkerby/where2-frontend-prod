@@ -18,7 +18,7 @@ const hero1 = {
   subtitleColor: "text-blue-600",
   mainImageSrc: MainHero,
   mainImageAlt: "University building",
-  onSearch: () => {},
+  onSearch: () => { },
 };
 
 // background: linear-gradient(180deg, #E3E3E3 0%, #EEEEEE 19%, #FFFFFF 82%, #F6F6F6 100%);
@@ -32,7 +32,7 @@ const hero2 = {
   subtitleColor: "text-blue-600",
   mainImageSrc: "",
   mainImageAlt: "University building",
-  onSearch: () => {},
+  onSearch: () => { },
 }
 
 
@@ -42,11 +42,16 @@ const HomePage = () => {
   return (
     <div>
       <Navbar />
-      <Hero props={hero1}>        
-        <Searchbar />
+      <VisitTracker path={location.pathname} />
+      <Navbar />
+
+      <Hero props={hero1}>
+        <Searchbar searchPlaceholder={hero1.searchPlaceholder} />
       </Hero>
+
       <Hero props={hero2} />
-      <Footer/>
+
+      <Footer />
     </div>
   );
 };
