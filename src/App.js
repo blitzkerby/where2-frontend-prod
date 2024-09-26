@@ -17,6 +17,7 @@ import Profile from "./components/reusable/Profile";
 import UserProfile from "./components/UserProfile";
 
 
+<<<<<<< HEAD
   const router = createBrowserRouter([
     {
       path:'/',
@@ -47,6 +48,27 @@ import UserProfile from "./components/UserProfile";
 >>>>>>> aafd85a (User Profile modification & Side bar)
   ])
   
+=======
+const router = createBrowserRouter([
+  {
+    path:'/',
+    index:true,
+    element:<HomePage/>
+  },
+  {
+    path:"/home",
+    element:<HomePage/>
+  },
+  { path: "/login",element: <LoginPage />},
+  { path: "/signup",element: <RegisterPage />},
+  { path: "/forget-password", element: <ForgetPasswordPage />},
+  { path: "/reset-password/:token", element: <ResetPasswordPage />},
+  { path: "/terms-and-conditions", element: <TermsAndConditionsPage/>},
+  { path: "/signup/verification", element: <VerificationPage/> },
+  { path: "/dashboard/:userName", element: <HomePage/> },
+])
+
+>>>>>>> 54fa07c (MODIFIED : App.js)
 function App() {
   return <RouterProvider router={router}></RouterProvider>;
 }
