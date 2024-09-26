@@ -12,16 +12,21 @@
     "@testing-library/user-event": "^13.5.0",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "axios": "^1.7.7",
 =======
     "cross-env": "^7.0.3",
 >>>>>>> 22fb185 (REBASE : search.js)
 =======
-    "cross-env": "^7.0.3",
 =======
+>>>>>>> ce0eec1 (ft#7.1-job: resolve conflict on package.json)
+    "cross-env": "^7.0.3",
     "axios": "^1.7.7",
+<<<<<<< HEAD
 >>>>>>> 1d06656 (ft#7.1-job: added JobList, JobPage and the path for job)
 >>>>>>> 77c00a4 (ft#7.1-job: added JobList, JobPage and the path for job)
+=======
+>>>>>>> ce0eec1 (ft#7.1-job: resolve conflict on package.json)
     "lucide-react": "^0.439.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
