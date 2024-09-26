@@ -21,24 +21,24 @@ import { cardBody, cardTitle, cardDescription } from "./tailwindcardclass/cardCl
 // styles
 
 
-const Card = ({ 
-        image,
-        imageAlt,
-        title,
-        description,
-        facebookLink = '#', 
-        instagramLink = '#', 
-        twitterLink = '#', 
-        youtubeLink = '#', 
-        websiteLink = '#', 
-        location , 
-        deadLine, 
-        timeOut,
-        id,
-        type,
-        route,
-    } 
-) => {
+const Card = ({
+    props: {
+        image = DefaultCardImage,
+        imageAlt = 'default alt text',
+        title = 'Default Title',
+        description = 'Default Description',
+        socialLinks: {
+            facebookLink = '#',
+            instagramLink = '#',
+            twitterLink = '#',
+            youtubeLink = '#',
+            websiteLink = '#'
+        } = {},
+        location = 'Default Location',
+        deadLine = 'Default Deadline',
+        timeOut = 'Default Timeout'
+    } = {}
+}) => {
 
     const socialMediaIcons = [
         { icon: Facebook, linkKey: facebookLink },
@@ -63,7 +63,7 @@ const Card = ({
 
         /* image */
         image: "min- max- object-cover",
-        
+
         /* container */
         container: {
             large: `relative clip-border-box rounded-xl border flex sm:flex-col md:flex-row shadow-md`,
@@ -77,15 +77,15 @@ const Card = ({
             large: "flex-1 lg:pl-9 lg:pr-5 lg:py-3",
             small: "sm:px-5 sm:py-5"
         },
-                
+
         headerContainer: "sm:mt-3",
         titleContainer: "sm:mb-2",
         utilityContainer: "flex sm:flex-col  h-auto sm:mb-3 lg:my-2",
         iconContainer: "flex justify-center sm:w-[5%]",
-        
+
         bodyContainer: {
-            large:"flex flex-col lg:h-[78%]",
-            small:"sm:h-[200px]"
+            large: "flex flex-col lg:h-[78%]",
+            small: "sm:h-[200px]"
         },
 
         descriptionContainer: "flex-1 text-clip overflow-hidden ",
@@ -93,7 +93,7 @@ const Card = ({
 
         socialContainer: "mb-4 flex justify-around max-w-[200px]",
 
-        utilityItem  : "px-4 mr-4 text-nowrap",
+        utilityItem: "px-4 mr-4 text-nowrap",
         utilityBorder: "lg:border-r-gray-200 lg:border-r-2 ",
 
         workDetailsContainer: "flex justify-between ",
@@ -105,7 +105,7 @@ const Card = ({
         readMoreLink: "text-blue-500 hover:underline",
         button: "text-1xl p-2 px-3",
     };
-    
+
     return (
         <div className='flex justify-center'>
             <div className={`${styles.container.small} ${styles.container.large}`}>
@@ -124,7 +124,7 @@ const Card = ({
                                         <img src={icon} alt={icon} />
                                     </div>
 
-                                    {index !== 2 
+                                    {index !== 2
                                         ? <p className={`${styles.utilityItem} ${styles.utilityBorder}`}>{linkKey}</p>
                                         : <p className={`${styles.utilityItem}`}>{linkKey}</p>
                                     }
@@ -167,7 +167,7 @@ const Card = ({
                                         Read More
                                     </Button>
                                 </Link>
-                                
+
                             </div>
                         </div>
                     </div>
