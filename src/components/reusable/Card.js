@@ -20,7 +20,7 @@ import Calender from '../../assets/svg/calender.svg';
 >>>>>>> ef4bf0d (REMOVED : test/ folder)
 
 // constants
-import { NODE_ENV } from '../../constants';
+// import { NODE_ENV } from '../../constants';
 import DefaultCardImage from "../../assets/images/card-image-default.png";
 
 // components
