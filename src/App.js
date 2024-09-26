@@ -29,7 +29,7 @@ const router = createBrowserRouter([
   { path: "/terms-and-conditions", element: <TermsAndConditionsPage/>},
   { path: "/signup/verification", element: <VerificationPage/> },
   { path: "/dashboard/:userName", element: <HomePage/> },
-  { path: "/profile", element: <UserProfile/> }
+  { path: "/profile/:userName", element: <UserProfile/> }
 ])
 
 function App() {
