@@ -20,7 +20,7 @@ import Calender from '../../assets/svg/calender.svg';
 >>>>>>> ef4bf0d (REMOVED : test/ folder)
 
 // constants
-import { NODE_ENV } from '../constants';
+import { NODE_ENV } from '../../constants';
 
 // components
 import Button from './ButtonComponent';
@@ -65,7 +65,24 @@ const Card = ({
 
     const companyUrl = title ? title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') : "";
 
+    const styles = {
+        container: "lg:h-[348px] lg:w-[890px] mx-auto mb-[64px]",
+        imageContainer: "h-[300px] rounded-xl",
+        image: "min-w-full max-h-full object-fit",
+        contentContainer: "p-6 pb-0 w-[376px]",
+        workDetailsContainer: "flex justify-between w-full",
+        workDetailItem: "flex items-center text-[12px]",
+        workDetailText: "border-r-gray-200 border-r-2 p-1 text-nowrap",
+        workDetailTextLast: "text-nowrap",
+        descriptionContainer: "text-clip overflow-hidden w-full h-[200px]",
+        socialContainer: "social flex py-6 justify-around max-w-[200px]",
+        bookmarkContainer: "w-[100px] flex justify-around",
+        readMoreLink: "text-blue-500 hover:underline",
+        button: "font- text-1xl p-2 px-3"
+    };
+    
     return (
+<<<<<<< HEAD
 <<<<<<< HEAD
         <div className="lg:h-[348px] lg:w-[676px] mx-auto">
         <div className={`${cardBody} justify-center `}>
@@ -94,19 +111,25 @@ const Card = ({
                 <div className="h-[300px] rounded-xl">
                     <img className="min-w-full max-h-full object-fit " src={image} alt={imageAlt || title} />
 >>>>>>> ef4bf0d (REMOVED : test/ folder)
+=======
+        <div className={styles.container}>
+            <div className={`${cardBody} justify-center`}>
+                <div className={styles.imageContainer}>
+                    <img className={styles.image} src={image} alt={imageAlt || title} />
+>>>>>>> 8cf1e62 (REBASE : HomePage.js)
                 </div>
                 <div>
-                    <div className="p-6 pb-0 w-[376px]">
+                    <div className={styles.contentContainer}>
                         <h5 className={`${cardTitle}`}>{title}</h5>
-                        <div className='flex justify-between w-full'>
+                        <div className={styles.workDetailsContainer}>
                             <div className="flex items-center space-x-2">
                                 {workDetails.map(({ icon, linkKey }, index) => (
-                                    <div key={index} className="flex items-center text-[12px]">
+                                    <div key={index} className={styles.workDetailItem}>
                                         <img src={icon} alt={icon} />
                                         {index !== 2 ? (
-                                            <p className='border-r-gray-200 border-r-2 p-1 text-nowrap'>{linkKey}</p>
+                                            <p className={styles.workDetailText}>{linkKey}</p>
                                         ) : (
-                                            <p className='text-nowrap'>{linkKey}</p>
+                                            <p className={styles.workDetailTextLast}>{linkKey}</p>
                                         )}
                                     </div>
                                 ))}
@@ -124,12 +147,12 @@ const Card = ({
                         </Link>
 =======
                         </div>
-                        <div className="text-clip overflow-hidden w-full h-[200px]">
+                        <div className={styles.descriptionContainer}>
                             <p className={`${cardDescription} mt-3 text-justify`}>{description}</p>
                         </div>
                     </div>
                     <div className="p-6 pt-0">
-                        <div className="social flex py-6 justify-around max-w-[200px]">
+                        <div className={styles.socialContainer}>
                             {socialMediaIcons.map(({ icon: Icon, linkKey, isExternal }, index) => {
                                 if (NODE_ENV === 'development') {
                                     console.log(linkKey);
@@ -148,7 +171,7 @@ const Card = ({
                             })}
                         </div>
                         <div className="flex justify-between">
-                            <div className="w-[100px] flex justify-around">
+                            <div className={styles.bookmarkContainer}>
                                 <div>
                                     <img src={BookMark} alt="Bookmark" />
                                 </div>
@@ -156,20 +179,24 @@ const Card = ({
                                     <img src={Map} alt="Map" />
                                 </Link>
                             </div>
-
-                            <Link to={`/company/companydetail/${companyUrl}`} className="text-blue-500 hover:underline">
-                                <Button className="font- text-1xl p-2 px-3" variant="primary" size="large">
+    
+                            <Link to={`/company/companydetail/${companyUrl}`} className={styles.readMoreLink}>
+                                <Button className={styles.button} variant="primary" size="large">
                                     Read More
                                 </Button>
                             </Link>
+<<<<<<< HEAD
 >>>>>>> ef4bf0d (REMOVED : test/ folder)
 
+=======
+>>>>>>> 8cf1e62 (REBASE : HomePage.js)
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     );
+    
 };
 
 export default Card;

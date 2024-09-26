@@ -3,12 +3,11 @@ import Navbar from "../components/reusable/Navbar";
 import Footer from "../components/reusable/Footer";
 import Hero from "../layouts/Hero";
 import Searchbar from "../components/reusable/SearchBar";
+import Card from "../components/reusable/Card"
 
 // assets
 import MainHero from '../assets/images/content-module-hero1-no-bg.png';
 import SecondaryHero from "../assets/images/content-module-hero2.png"
-import Carousel from "../../../temp/test/Carousel";
-import Card from "../../../temp/test/Card";
 
 const hero1 = {
   title: "DISCOVER YOUR FUTURE.",
@@ -59,9 +58,13 @@ const HomePage = () => {
       
       <Hero props={hero2} />
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 22fb185 (REBASE : search.js)
 =======
       
+=======
+
+>>>>>>> 8cf1e62 (REBASE : HomePage.js)
       <Card />
 >>>>>>> 54fa07c (MODIFIED : App.js)
       <Footer/>
