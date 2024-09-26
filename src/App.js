@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Card from "./components/reusable/Card";
 import SearchBar from "./components/reusable/SearchBar";
 import HomePage from "./pages/HomePage";
@@ -13,9 +14,10 @@ import HomePage from "./pages/HomePage";
 // import Card from "./components/reusable/Card";
 // import SearchBar from "./components/reusable/SearchBar";
 =======
+=======
+>>>>>>> 441e621 (ft#7.1-job: REBASE: develop branch)
 import Card from "./components/reusable/Card";
 import SearchBar from "./components/reusable/SearchBar";
->>>>>>> e1c602e (ft#8-studentLoan: added the route for studentLoan Page)
 import HomePage from "./pages/HomePage";
 >>>>>>> 34efb6a (ft2.1-scholashippage: trying to rebase 5th time)
 import LoginPage from "./pages/LoginPage";
@@ -24,6 +26,7 @@ import ForgetPasswordPage from "./pages/ForgetPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
 import VerificationPage from "./pages/VerificationPage";
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -93,11 +96,11 @@ import ScholarshipListPage from "./pages/ScholarshipListPage";
 =======
 =======
 >>>>>>> 692fc12 (ft#7.1-job: added the job detail component and job detail page)
-import ScholarshipListPage from "./pages/ScholarshipListPage";import JobPage from "./pages/JobPage";
 =======
+>>>>>>> 441e621 (ft#7.1-job: REBASE: develop branch)
+import ScholarshipListPage from "./pages/ScholarshipListPage";import JobPage from "./pages/JobPage";
 import JobPage from "./pages/JobPage";
 import JobDetailPage from "./pages/JobDetailPage";
->>>>>>> 988fb8a (ft#7.1-job: added the job detail component and job detail page)
 
 >>>>>>> 77c00a4 (ft#7.1-job: added JobList, JobPage and the path for job)
 
@@ -113,13 +116,9 @@ import JobDetailPage from "./pages/JobDetailPage";
     { path: "/terms-and-conditions", element: <TermsAndConditionsPage/>},
     { path: "/signup/verification", element: <VerificationPage/> },
     { path: "/dashboard/:userName", element: <HomePage /> },
-<<<<<<< HEAD
     { path: "/scholarships", element: <ScholarshipListPage/>},
     { path: "/job", element: <JobPage />},
-=======
-    { path: "/job", element: <JobPage /> },
     { path: "/job-detail/:id", element: <JobDetailPage />},
->>>>>>> 988fb8a (ft#7.1-job: added the job detail component and job detail page)
   ])
   
 >>>>>>> 34efb6a (ft2.1-scholashippage: trying to rebase 5th time)
