@@ -22,23 +22,23 @@ import { cardBody, cardTitle, cardDescription } from "./tailwindcardclass/cardCl
 
 
 const Card = ({ 
-    props: {
-        image = DefaultCardImage, 
-        imageAlt = 'default alt text', 
-        title = 'Default Title', 
-        description = 'Default Description', 
-        socialLinks: {
-            facebookLink = '#', 
-            instagramLink = '#', 
-            twitterLink = '#', 
-            youtubeLink = '#', 
-            websiteLink = '#'
-        } = {}, 
-        location = 'Default Location', 
-        deadLine = 'Default Deadline', 
-        timeOut = 'Default Timeout'
-    } = {} 
-}) => {
+        image,
+        imageAlt,
+        title,
+        description,
+        facebookLink = '#', 
+        instagramLink = '#', 
+        twitterLink = '#', 
+        youtubeLink = '#', 
+        websiteLink = '#', 
+        location , 
+        deadLine, 
+        timeOut,
+        id,
+        type,
+        route,
+    } 
+) => {
 
     const socialMediaIcons = [
         { icon: Facebook, linkKey: facebookLink },
