@@ -81,7 +81,7 @@ function PaginationComponent({ renderCard, filteredScholarships }) {
   return (
     <div>
       {/* Display paginated items */}
-      {renderCard[currentItems]}
+      {renderCard(currentItems)}
       {/* Pagination controls */}
       <div className='flex items-center justify-center my-16 px-1 gap-[18px]'>
         <button
