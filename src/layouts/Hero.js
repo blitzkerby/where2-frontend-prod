@@ -22,18 +22,21 @@ const Hero = ({ props , children }) => {
       gradientOverlay: "inset-0 bg-gradient-to-b opacity-50",
       gradientClipPath: { clipPath: "polygon(0 0, 100% 0, 100% 70%, 0 100%)" },
       
-      /* text */
+      /* textbox */
       title: "text-h1 tracking-tight font-black",
       subtitle: "text-h2 tracking-tight mb-8",
-      contentWrapper: "absolute sm:w-full z-10 mx-auto lg:left-[calc(50%-263px)] top-[7%] mt-sectional-top",
+      contentWrapper: "absolute sm:w-full z-10 mx-auto lg:left-[calc(50%-263px)] top-[7%] mt-section-top-margin",
 
+      /* background image */
+      imageContainer: `mt-image-container-top-margin flex justify-center w-full h-full`,
+      image: "object-contain sm:object-cover",
+
+      /* components */
       form: "relative mx-[20px]",
       input:
         "w-full py-3 px-4 pr-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white bg-opacity-80",
       searchButton: "absolute right-3 top-1/2 transform -translate-y-1/2",
       searchIcon: "h-5 w-5 text-gray-400 z-[0]",
-      imageContainer: "mt-12 flex justify-center items-end w-full h-full",
-      image: "object-contain sm:object-cover w-full h-full",
     };
 
     return (
