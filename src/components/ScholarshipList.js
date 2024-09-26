@@ -4,6 +4,7 @@ import PaginationComponent from './reusable/Pagination'
 import FilterComponent from "./reusable/Filter";
 import Card from "./reusable/Card";
 import React, { useState } from 'react';
+import Navbar from "./reusable/Navbar";
 import { scholarships } from "./scholarships";
 
 export default function ScholarshipList() {
@@ -85,7 +86,7 @@ export default function ScholarshipList() {
 
     return (
         <>
-            {/* <Navbar /> */}
+            <Navbar/>
             <div className="mt-[70px]">
                 <FilterComponent 
                     items={items} 
