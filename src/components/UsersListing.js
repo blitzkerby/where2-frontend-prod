@@ -33,7 +33,7 @@ const UserListing = () => {
   }
 
   if (loading) {
-    return <LoadingOverlay message="...Fetching users data"/>
+    return (<LoadingOverlay message="Fetching users data..."/>)
   }
 
   return (

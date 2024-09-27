@@ -1,6 +1,4 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// import Card from "./components/reusable/Card";
-// import SearchBar from "./components/reusable/SearchBar";
 import HomePage from "./pages/HomePage";
 import UserProfile from "./components/UserProfile";
 import LoginPage from "./pages/LoginPage";
@@ -13,7 +11,6 @@ import DashboardComponent from "./components/Dashboard";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
-
 
 const router = createBrowserRouter([
   {
@@ -33,12 +30,15 @@ const router = createBrowserRouter([
   { path: "/signup/verification", element: <VerificationPage/> },
   { path: "/dashboard/:userName", element: <DashboardComponent/> },
   { path: "/profile/:userName", element: <UserProfile/> }
-])
+]);
 
 function App() {
-  return <RouterProvider router={router}>
-    <QueryClientProvider client={queryClient}></QueryClientProvider>
-  </RouterProvider>;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
+  );
 }
 
 export default App;
+
