@@ -41,7 +41,7 @@ const UserListing = () => {
       columns={["ID", "Email", "Role"]}
       totalItems={users.data.length}
       additionalStats={[
-        { label: "Total Admins", value: users.data.filter(user => user.role === "admin").length }
+        { label: "Total Admins", value: users.data.filter(user => user.role === "Admin").length }
       ]}
     />
   );

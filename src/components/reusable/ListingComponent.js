@@ -10,7 +10,32 @@ import SearchBar from "./SearchBar";
 const ListingComponent = ({ title, data, columns, totalItems, additionalStats }) => {
     const [showModal, setShowModal] = useState(false);
   
-    const handleDeleteClick = () => setShowModal(true);
+  const handleDeleteClick = async () => {
+    setShowModal(true); 
+  
+    const userId = 123;
+  
+    try {
+      const response = await fetch('/delete-user', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: userId }),
+      });
+  
+      const result = await response.json();
+  
+      if (response.ok) {
+        console.log('User deactivated:', result);
+      } else {
+        console.error('Error deactivating user:', result.error);
+      }
+    } catch (error) {
+      console.error('Network or server error:', error);
+    }
+  };
+  
     const handleCloseModal = () => setShowModal(false);
     const handleConfirmDelete = () => {
       console.log('Item deleted');
