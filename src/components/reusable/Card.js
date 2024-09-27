@@ -139,9 +139,6 @@ const Card = ({
                         <div className={styles.footerContainer}>
                             <div className={styles.socialContainer}>
                                 {socialMediaIcons.map(({ icon: Icon, linkKey, isExternal }, index) => {
-                                    if (NODE_ENV === 'development') {
-                                        console.log(linkKey);
-                                    }
                                     return linkKey ? (
                                         isExternal ? (
                                             <a href={linkKey} key={index} target="_blank" rel="noopener noreferrer">
