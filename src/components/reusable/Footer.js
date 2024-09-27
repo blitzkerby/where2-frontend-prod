@@ -21,7 +21,7 @@ function Footer () {
   return (
     <footer className="bg-[#E6F3F9] text-gray-700 py-8 px-4 w-full bottom-0 mt-[64px] ">
       <div className="container mx-auto max-w-[1440px]">
-        <div className="md:flex md:justify-between flex justify-between flex-wrap md:mr-6">
+        <div className="md:flex md:justify-between flex justify-between sm:flex-wrap md:mr-6">
           {/* Desktop: Left column, Mobile: Top section */}
           <div className="mb-8 md:mb-0 w-1/2 md:w-1/4 p-2">
             <h2 className="font-bold mb-2  underline decoration-[3px] underline-offset-8"><FooterLink href="/universities">Universities</FooterLink></h2>
