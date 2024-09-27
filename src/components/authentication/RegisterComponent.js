@@ -5,7 +5,7 @@ import FormInput from "../reusable/InputField";
 import ButtonComponent from "../reusable/Button";
 import ContainerComponent from "../reusable/ContainerComponent";
 import { clearAuthState } from "../../features/slices/authSlice";
-import { LoadingSpinner } from "../reusable/Loading";
+import { LoadingSpinner, LoadingOverlay } from "../reusable/Loading";
 
 const RegisterComponent = () => {
   const [accountType, setAccountType] = useState("personal");
@@ -61,6 +61,10 @@ const RegisterComponent = () => {
   
     return true;
   };
+
+  if (status === "loading") {
+    return <LoadingOverlay message="We are creating your account..."/>
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();

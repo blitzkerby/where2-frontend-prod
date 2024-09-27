@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ButtonComponent from "./../reusable/Button";
 import ContainerComponent from "../reusable/ContainerComponent";
 import { register } from "../../features/slices/authSlice";
-import { LoadingSpinner } from "../reusable/Loading";
+import { LoadingSpinner, LoadingOverlay } from "../reusable/Loading";
 
 const TermsAndConditionsComponent = () => {
   const [agreed, setAgreed] = useState(false);
@@ -28,6 +28,10 @@ const TermsAndConditionsComponent = () => {
       }
     }
   };
+
+  if (status === 'loading') {
+    return <LoadingOverlay message="We are processing your request..."/>
+  }
 
   const handleBack = () => {
     navigate(-1);

@@ -5,8 +5,7 @@ import FormInput from "../reusable/InputField";
 import ButtonComponent from "../reusable/Button";
 import ContainerComponent from "../reusable/ContainerComponent";
 import { login, clearAuthState } from "../../features/slices/authSlice";
-import { LoadingSpinner } from "../reusable/Loading.js";
-// import ProtectedLoginRoute from "../reusable/ProtectedRoute";
+import { LoadingSpinner, LoadingOverlay } from "../reusable/Loading.js";
 
 const LoginComponent = () => {
   const [email, setEmail] = useState("");
@@ -36,6 +35,10 @@ const LoginComponent = () => {
       console.error("Failed to log in. Please try again!");
     }
   };
+
+  if (status === 'loading') {
+    return <LoadingOverlay message="Logging in..."/>
+  }
 
   return (
           <ContainerComponent title="LOG IN" className="lg:h-[718px]">

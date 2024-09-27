@@ -5,7 +5,7 @@ import FormInput from "../reusable/InputField";
 import ButtonComponent from "../reusable/Button";
 import ContainerComponent from "../reusable/ContainerComponent";
 import { resetPassword, clearAuthState } from "../../features/slices/authSlice";
-import { LoadingSpinner } from "../reusable/Loading";
+import { LoadingSpinner, LoadingOverlay } from "../reusable/Loading";
 
 const ResetPasswordComponent = () => {
   const [password, setPassword] = useState("");
@@ -30,6 +30,10 @@ const ResetPasswordComponent = () => {
       return () => clearTimeout(timer);
     }
   }, [status, resetAttempted, navigate]);
+
+  if (status === 'loading') {
+    return <LoadingOverlay message="We are resetting your password..."/>
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -104,7 +108,7 @@ const ResetPasswordComponent = () => {
         )}
         {resetAttempted && status === "succeeded" && (
           <p className="text-green-500 text-sm text-center">
-            Password reset successfully. Redirecting to login in 3 seconds...
+            Password reset successfully. Redirecting to login...
           </p>
         )}
         <div className="flex justify-center items-center">
