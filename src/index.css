@@ -3,7 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* 
+
 html, body, #root, .app {
     height: 100%;
     width: 100%;
@@ -116,4 +116,4 @@ html, body, #root, .app {
     font-family: "Poppins", sans-serif;
     font-weight: 900;
     font-style: italic;
-  } */
+  }

@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Card from "./components/reusable/Card";
-import SearchBar from "./components/reusable/SearchBar";
+// import Card from "./components/reusable/Card";
+// import SearchBar from "./components/reusable/SearchBar";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
