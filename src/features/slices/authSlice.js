@@ -174,6 +174,8 @@ import config from "../../config"
           userName,
           entity,
         };
+
+        console.log(token, id, userName, entity)
         localStorage.setItem("authData", JSON.stringify(authData));
         
         if (config.isDevelopment) {

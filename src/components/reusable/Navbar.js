@@ -11,6 +11,8 @@ import SideDashboard from "./../../assets/svg/dashboardSide.svg"
 import ProfileSide from "./../../assets/svg/profileSide.svg"
 import AboutUs from "./../../assets/svg/aboutus.svg"
 import Bookmarks from "./../../assets/svg/bookmarks.svg"
+import useAuth from "./../../hooks/useAuth";
+import DashboardComponent from "../Dashboard";
 
 import config from "../../config";
 
@@ -37,68 +39,23 @@ const SideDashboardIcon = <img src={SideDashboard} alt="Dashboard" />;
 const ProfileSideIcon = <img src={ProfileSide} alt="Profile" />;
 const AboutUsIcon = <img src={AboutUs} alt="About Us" />;
 const BookmarksIcon = <img src={Bookmarks} alt="Bookmarks" />;
-
+import { School , BookOpenTextIcon , LucideBriefcaseBusiness, BookMarked , ChartColumnIcon , User2 , LucideMessageCircleQuestion } from "lucide-react";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showDashboard, setShowDashboard] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState("");
-  const [entity, setEntity] = useState("");
-
-  const fetchUserDataAndRole = useCallback(async () => {
-    try {
-      const authData = JSON.parse(localStorage.getItem('authData'));
-      if (authData) {
-        const { userName, entity, token } = authData;
-        
-        setUsername(userName || "");
-        setEntity(entity || "");
-        setIsLoggedIn(true);
-
-        if (token) {
-          const response = await fetch(config.auth.getUserRole, {
-            headers: { Authorization: `Bearer ${token}` }
-          });
-
-          if (response.ok) {
-            const data = await response.json();
-            setShowDashboard(data.role === 'admin' || data.role === 'developer');
-          } else {
-            setShowDashboard(false);
-          }
-        }
-      } else {
-        setUsername("");
-        setEntity("");
-        setIsLoggedIn(false);
-        setShowDashboard(false);
-      }
-    } catch (error) {
-      console.error('Error fetching user data and role:', error);
-      setIsLoggedIn(false);
-      setShowDashboard(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchUserDataAndRole();
-    const intervalId = setInterval(fetchUserDataAndRole, 600000);
-
-    return () => clearInterval(intervalId);
-  }, [fetchUserDataAndRole]);
+  const { isLoggedIn, username, entity, showDashboard } = useAuth();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   const menuItems = [
-    { logo: UniversitiesIconSide, name: "Universities", to: "/universities" },
-    { logo: ScholarshipsIcon, name: "Scholarships", to: "/scholarships" },
-    { logo: LivelihoodIcon, name: "Livelihood", to: "/livelihood" },
-    { logo: BookmarksIcon, name: "Bookmarks", to: "/bookmarks" },
-    { logo: SideDashboardIcon, name: "Dashboard", to: `/dashboard/${encodeURIComponent(username || entity)}` },
-    { logo: ProfileSideIcon, name: "Profile", to: `/profile/${encodeURIComponent(username || entity)}` },
-    { logo: AboutUsIcon, name: "About Us", to: "/about-us" },
+    { logo: <School/>, name: "Universities", to: "/universities" },
+    { logo: <BookOpenTextIcon/>, name: "Scholarships", to: "/scholarships" },
+    { logo: <LucideBriefcaseBusiness/>, name: "Livelihood", to: "/livelihood" },
+    { logo: <BookMarked/>, name: "Bookmarks", to: "/bookmarks" },
+    { logo: <ChartColumnIcon/>, name: "Dashboard", to: `/dashboard/${encodeURIComponent(username || entity)}` },
+    { logo: <User2/>, name: "Profile", to: `/profile/${encodeURIComponent(username || entity)}` },
+    { logo: <LucideMessageCircleQuestion/>, name: "About Us", to: "/about-us" },
   ];
 
   const identifier = username || entity;
@@ -152,16 +109,6 @@ const Navbar = () => {
                   <span className="ml-2">{item.name}</span>
                 </Link>
               ))}
-              {showDashboard && (
-                <Link
-                  to={`/dashboard/${encodedIdentifier}`}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center"
-                  onClick={toggleMenu}
-                >
-                  {SideDashboardIcon}
-                  <span className="ml-2">Dashboard</span>
-                </Link>
-              )}
             </div>
           </div>
         </div>

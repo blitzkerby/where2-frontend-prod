@@ -52,19 +52,18 @@ const VisitTracker = ({ path }) => {
     }
 
     return (
-        <div className="p-6 bg-gray-100 rounded-lg shadow-md">
-            <h2 className="text-xl font-bold mb-4">Visit Tracker for {path}</h2>
-            <ul className="space-y-2">
+        <div className="py-6">
+            <div className="w-full h-full">
                 {visits.length === 0 ? (
-                    <li className="text-gray-500">No visits recorded yet.</li>
+                    <span className="text-gray-500">No visits recorded yet.</span>
                 ) : (
                     visits.map((visit) => (
-                        <li key={visit.id} className="p-4 bg-white rounded border border-gray-300 shadow-sm">
-                            {visit.date}: {visit.count} visits
-                        </li>
+                        <p key={visit.id} className="w-full h-full text-right p-4 bg-white">
+                            Total visits today: {visit.count} visit(s)
+                        </p>
                     ))
                 )}
-            </ul>
+            </div>
         </div>
     );
 };

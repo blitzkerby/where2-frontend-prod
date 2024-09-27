@@ -32,7 +32,12 @@ import ScholarshipListPage from "./pages/ScholarshipListPage";
     { path: '/scholarships', element: <ScholarshipListPage />},
   ])
 function App() {
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
+  );
 }
 
 export default App;
+
