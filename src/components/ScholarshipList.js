@@ -34,9 +34,9 @@ export default function ScholarshipList() {
     ];
     const [currentFilterUni, setCurrentFilterUni] = useState('');
 
- // convert both deadline and formattedDate ito date OBJ
-    
-    const scholarshipDeadLine = new Date("2024-09-20"); 
+    // convert both deadline and formattedDate ito date OBJ
+
+    const scholarshipDeadLine = new Date("2024-09-20");
 
     // Calculate the difference in milliseconds
     const differenceInMs = scholarshipDeadLine - currentDate;
@@ -49,23 +49,39 @@ export default function ScholarshipList() {
         // Your logic here
         console.log("Condition met!");
     }
-    const filteredScholarships = scholarships.filter(scholarship => 
-        ((scholarship.deadLine - formattedDate)>=30 || currentFilterUni ==='') ||
-        (scholarship.status === currentFilterUni || currentFilterUni ==='') ||
-        (scholarship.location === currentFilterUni || currentFilterUni ==='') ||
+    const filteredScholarships = scholarships.filter(scholarship =>
+        ((scholarship.deadLine - formattedDate) >= 30 || currentFilterUni === '') ||
+        (scholarship.status === currentFilterUni || currentFilterUni === '') ||
+        (scholarship.location === currentFilterUni || currentFilterUni === '') ||
         (scholarship.university === currentFilterUni || currentFilterUni === '')
     );
 
     const handleUniversityFilterChange = (university) => {
         setCurrentFilterUni(university);
     };
- 
+
+    
+    const Prop = {
+        // image: ,
+        imageAlt: 'default alt text',
+        title: 'Goofy Ahh doggo',
+        description: '',
+        socialLinks: {
+            facebookLink: '#',
+            instagramLink: '#',
+            twitterLink: '#',
+            youtubeLink: '#',
+            websiteLink: '#',
+        },
+        location: 'Default Location',
+        deadLine: 'Default Deadline',
+        timeOut: 'Default Timeout'
+    }
     const renderCard = (currentItems) => {
         return (
             <div className="flex flex-col items-center justify-center gap-6 mt-10 h-max">
                 {currentItems.map((scholarship, index) => (
                     <Card
-                        key={index}
                         image={scholarship.image}
                         imageAlt={scholarship.imageAlt}
                         title={scholarship.title}
@@ -78,6 +94,8 @@ export default function ScholarshipList() {
                         location={scholarship.location}
                         deadLine={scholarship.deadLine}
                         timeOut={scholarship.timeOut}
+                        university={scholarship.university}
+                        status={scholarship.status}
                     />
                 ))}
             </div>
@@ -86,13 +104,13 @@ export default function ScholarshipList() {
 
     return (
         <>
-            <Navbar/>
+            <Navbar />
             <div className="mt-[70px]">
-                <FilterComponent 
-                    items={items} 
+                <FilterComponent
+                    items={items}
                     onUniversityFilterChange={handleUniversityFilterChange}
                 />
-                <PaginationComponent 
+                <PaginationComponent
                     renderCard={renderCard}
                     filteredScholarships={filteredScholarships}
                 />

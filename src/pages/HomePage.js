@@ -37,12 +37,12 @@ const hero2 = {
 
 
 const HomePage = () => {
-	// const location = useLocation();
+  // const location = useLocation();
 
   return (
     <div>
       <Navbar />
-      <VisitTracker path={location.pathname} />
+      {/* <VisitTracker path={location.pathname} /> */}
       <Navbar />
 
       <Hero props={hero1}>

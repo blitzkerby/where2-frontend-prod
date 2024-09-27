@@ -11,7 +11,7 @@ import MiniClock from './../../assets/svg/miniClock.svg';
 import Calender from './../../assets/svg/calender.svg';
 
 // constants
-// import { NODE_ENV } from '../../constants';
+import { NODE_ENV } from '../../Constants';
 import DefaultCardImage from "../../assets/images/card-image-default.png";
 
 // components
@@ -19,25 +19,70 @@ import Button from './ButtonComponent';
 import { cardBody, cardTitle, cardDescription } from "./tailwindcardclass/cardClass"
 
 // styles
+const styles = {
+    /* text */
+    title: "text-h4p font-bold",
+    utility: "text-pp",
+    description: "text-p mb-8",
 
+    /* image */
+    image: "lg:max-w-[398px] object-cover",
+
+    /* container */
+    container: {
+        large: `lg:max-w-[890px] relative clip-border-box rounded-xl border flex sm:flex-col md:flex-row shadow-md`,
+        small: `sm:mx-[30px]`
+    },
+    imageContainer: {
+        large: "lg:h-auto rounded-xl",
+        small: "",
+    },
+    contentContainer: {
+        large: "flex-1 lg:pl-9 lg:pr-5 lg:py-3",
+        small: "sm:px-5 sm:py-5"
+    },
+
+    headerContainer: "sm:mt-3",
+    titleContainer: "sm:mb-2",
+    utilityContainer: "flex sm:flex-col  h-auto sm:mb-3 lg:my-2",
+    iconContainer: "flex justify-center sm:w-[5%]",
+
+    bodyContainer: {
+        large: "flex flex-col lg:h-[78%]",
+        small: "sm:h-[200px]"
+    },
+
+    descriptionContainer: "flex-1 text-clip overflow-hidden ",
+    footerContainer: "mt-auto text-center",
+
+    socialContainer: "mb-4 flex justify-around max-w-[200px]",
+
+    utilityItem: "px-4 mr-4 text-nowrap",
+    utilityBorder: "lg:border-r-gray-200 lg:border-r-2 ",
+
+    workDetailsContainer: "flex justify-between ",
+    workDetailItem: "flex items-center text-[12px]",
+    workDetailText: "border-r-gray-200 border-r-2 p-1 text-nowrap",
+    workDetailTextLast: "text-nowrap",
+
+    bookmarkContainer: "w-[100px] flex justify-around",
+    readMoreLink: "text-blue-500 hover:underline",
+    button: "text-1xl p-2 px-3",
+};
 
 const Card = ({
-    props: {
-        image = DefaultCardImage,
-        imageAlt = 'default alt text',
-        title = 'Default Title',
-        description = 'Default Description',
-        socialLinks: {
-            facebookLink = '#',
-            instagramLink = '#',
-            twitterLink = '#',
-            youtubeLink = '#',
-            websiteLink = '#'
-        } = {},
-        location = 'Default Location',
-        deadLine = 'Default Deadline',
-        timeOut = 'Default Timeout'
-    } = {}
+    image,
+    imageAlt,
+    title,
+    description,
+    facebookLink,
+    instagramLink,
+    twitterLink,
+    youtubeLink,
+    websiteLink,
+    location,
+    deadLine,
+    timeOut,
 }) => {
 
     const socialMediaIcons = [
@@ -55,56 +100,7 @@ const Card = ({
 
     const companyUrl = title ? title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') : "";
 
-    const styles = {
-        /* text */
-        title: "text-h4p font-bold",
-        utility: "text-pp",
-        description: "text-p mb-8",
 
-        /* image */
-        image: "min- max- object-cover",
-
-        /* container */
-        container: {
-            large: `relative clip-border-box rounded-xl border flex sm:flex-col md:flex-row shadow-md`,
-            small: ``
-        },
-        imageContainer: {
-            large: "lg:h-auto rounded-xl",
-            small: "",
-        },
-        contentContainer: {
-            large: "flex-1 lg:pl-9 lg:pr-5 lg:py-3",
-            small: "sm:px-5 sm:py-5"
-        },
-
-        headerContainer: "sm:mt-3",
-        titleContainer: "sm:mb-2",
-        utilityContainer: "flex sm:flex-col  h-auto sm:mb-3 lg:my-2",
-        iconContainer: "flex justify-center sm:w-[5%]",
-
-        bodyContainer: {
-            large: "flex flex-col lg:h-[78%]",
-            small: "sm:h-[200px]"
-        },
-
-        descriptionContainer: "flex-1 text-clip overflow-hidden ",
-        footerContainer: "mt-auto text-center",
-
-        socialContainer: "mb-4 flex justify-around max-w-[200px]",
-
-        utilityItem: "px-4 mr-4 text-nowrap",
-        utilityBorder: "lg:border-r-gray-200 lg:border-r-2 ",
-
-        workDetailsContainer: "flex justify-between ",
-        workDetailItem: "flex items-center text-[12px]",
-        workDetailText: "border-r-gray-200 border-r-2 p-1 text-nowrap",
-        workDetailTextLast: "text-nowrap",
-
-        bookmarkContainer: "w-[100px] flex justify-around",
-        readMoreLink: "text-blue-500 hover:underline",
-        button: "text-1xl p-2 px-3",
-    };
 
     return (
         <div className='flex justify-center'>
