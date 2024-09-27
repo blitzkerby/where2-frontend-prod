@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Twitter, Youtube, Chrome } from 'lucide-react';
 
 // assets
-import Map from './../../assets/svg/map.svg';
-import BookMark from './../../assets/svg/bookmark.svg';
-import MiniMap from './../../assets/svg/miniMap.svg'
-import MiniClock from './../../assets/svg/miniClock.svg';
-import Calender from './../../assets/svg/calender.svg';
+import Map from '../../assets/svg/map.svg';
+import BookMark from '../../assets/svg/bookmark.svg';
+import MiniMap from '../../assets/svg/miniMap.svg'
+import MiniClock from '../../assets/svg/miniClock.svg';
+import Calender from '../../assets/svg/calender.svg';
 
 // constants
-// import { NODE_ENV } from '../../constants';
+import { NODE_ENV } from '../../constants';
 import DefaultCardImage from "../../assets/images/card-image-default.png";
 
 // components
@@ -22,23 +22,23 @@ import { cardBody, cardTitle, cardDescription } from "./tailwindcardclass/cardCl
 
 
 const Card = ({ 
-        image,
-        imageAlt,
-        title,
-        description,
-        facebookLink = '#', 
-        instagramLink = '#', 
-        twitterLink = '#', 
-        youtubeLink = '#', 
-        websiteLink = '#', 
-        location , 
-        deadLine, 
-        timeOut,
-        id,
-        type,
-        route,
-    } 
-) => {
+    props: {
+        image = DefaultCardImage, 
+        imageAlt = 'default alt text', 
+        title = 'Default Title', 
+        description = 'Default Description', 
+        socialLinks: {
+            facebookLink = '#', 
+            instagramLink = '#', 
+            twitterLink = '#', 
+            youtubeLink = '#', 
+            websiteLink = '#'
+        } = {}, 
+        location = 'Default Location', 
+        deadLine = 'Default Deadline', 
+        timeOut = 'Default Timeout'
+    } = {} 
+}) => {
 
     const socialMediaIcons = [
         { icon: Facebook, linkKey: facebookLink },
@@ -47,6 +47,7 @@ const Card = ({
         { icon: Youtube, linkKey: youtubeLink },
         { icon: Chrome, linkKey: websiteLink, isExternal: true },
     ];
+
     const workDetails = [
         { icon: MiniClock, linkKey: timeOut },
         { icon: Calender, linkKey: deadLine },
@@ -139,6 +140,9 @@ const Card = ({
                         <div className={styles.footerContainer}>
                             <div className={styles.socialContainer}>
                                 {socialMediaIcons.map(({ icon: Icon, linkKey, isExternal }, index) => {
+                                    if (NODE_ENV === 'development') {
+                                        console.log(linkKey);
+                                    }
                                     return linkKey ? (
                                         isExternal ? (
                                             <a href={linkKey} key={index} target="_blank" rel="noopener noreferrer">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { X } from "lucide-react";
-import Dashboard from "../../assets/svg/dashboard.svg";
+import Dashboard from "./../../assets/svg/dashboard.svg";
 import Menu from "./../../assets/svg/menu.svg";
 import User from "./../../assets/svg/user.svg";
 import Universities from "./../../assets/svg/universities.svg"
