@@ -34,20 +34,17 @@ const hero2 = {
 }
 
 const HomePage = () => {
-	const location = useLocation();
+	// const location = useLocation();
 
   return (
     <div>
       <Navbar/>
-      <VisitTracker path={location.pathname}/>
+        {/* <VisitTracker path={location.pathname}/> */}
       <Navbar />
-      
       <Hero props={hero1}>
         <Searchbar searchPlaceholder={hero1.searchPlaceholder} />
       </Hero>
-      
       <Hero props={hero2} />
-
       <Footer/>
     </div>
   );
