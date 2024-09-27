@@ -13,6 +13,9 @@ import JobDetailPage from "./pages/JobDetailPage";
 import Profile from "./components/reusable/Profile";
 import UserProfile from "./components/UserProfile";
 import ScholarshipListPage from "./pages/ScholarshipListPage";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
   const router = createBrowserRouter([
     {
