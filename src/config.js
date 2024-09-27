@@ -29,8 +29,8 @@ const config = {
     getMyProfile: (userId) => `${API_URL}/api/users/profile/${userId}`
   },
   analytics: {
-    getAllUsers : `${API_URL}/api/users/user-list`
+    getAllUsers : `${API_URL}/api/users/user-list`,
+    deleteUserById : (userId) =>`${API_URL}/api/users/delete-user/${userId}`
   }
 };
-
-export default config;
+export default config; 

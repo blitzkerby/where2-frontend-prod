@@ -1,6 +1,7 @@
 import ListingComponent from "./reusable/ListingComponent";
 import config from "./../config";
 import React, { useEffect, useState } from 'react';
+import { LoadingOverlay } from "./reusable/Loading";
 
 const UserListing = () => {
   const [users, setUsers] = useState([]);
@@ -15,6 +16,7 @@ const UserListing = () => {
       }
       const data = await response.json();
       setUsers(data);
+      console.log(data)
     } catch (err) {
       setError(err.message);
     } finally {
@@ -31,17 +33,18 @@ const UserListing = () => {
   }
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingOverlay message="...Fetching users data"/>
   }
 
   return (
     <ListingComponent
       title="USER LISTING"
       data={users.data}
-      columns={["ID", "Email", "Role"]}
+      columns={["id", "email", "role"]}
       totalItems={users.data.length}
       additionalStats={[
-        { label: "Total Admins", value: users.data.filter(user => user.role === "Admin").length }
+        { label: "Total Admins", value: users.data.filter(user => user.role === "Admin").length },
+        { label: "Total inActive", value: users.data.filter(user => user.isActive === false).length }
       ]}
     />
   );

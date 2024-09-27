@@ -7,10 +7,10 @@ const CardSlider = ({ cards }) => {
   
     useEffect(() => {
       const handleResize = () => {
-        setIsMobile(window.innerWidth < 768); // Adjust this breakpoint as needed
+        setIsMobile(window.innerWidth < 768); 
       };
       
-      handleResize(); // Initial check
+      handleResize(); 
       window.addEventListener('resize', handleResize);
       return () => window.removeEventListener('resize', handleResize);
     }, []);
