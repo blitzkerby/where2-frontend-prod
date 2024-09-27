@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Twitter, Youtube, Chrome } from 'lucide-react';
 
 // assets
-import Map from '../../assets/svg/map.svg';
-import BookMark from '../../assets/svg/bookmark.svg';
-import MiniMap from '../../assets/svg/miniMap.svg'
-import MiniClock from '../../assets/svg/miniClock.svg';
-import Calender from '../../assets/svg/calender.svg';
+import Map from './../../assets/svg/map.svg';
+import BookMark from './../../assets/svg/bookmark.svg';
+import MiniMap from './../../assets/svg/miniMap.svg'
+import MiniClock from './../../assets/svg/miniClock.svg';
+import Calender from './../../assets/svg/calender.svg';
 
 // constants
 // import { NODE_ENV } from '../../constants';
