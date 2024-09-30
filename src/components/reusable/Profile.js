@@ -1,15 +1,11 @@
 import React, { useState, createContext } from "react";
-import { useParams } from "react-router-dom";
 import Sidebar from "./Sidebar.js";
 import { useEffect } from "react";
-import ContainerComponent from "./ContainerComponent.js";
-import ListingComponent from "./ListingComponent.js";
 import UniversityListing from "../UniversityListing.js";
 import AccommodationListing from "../AccommodationListing.js";
 import UserListing from "../UsersListing.js";
 import PartTimeJobListing from "../PartTimeJobListing.js";
 import UserAccount from "../UserAccount.js";
-import SearchBar from "./SearchBar.js";
 import useAuth from "../../hooks/useAuth";
 import { LoadingOverlay } from "./Loading.js";
 import { ChevronRight } from "lucide-react";

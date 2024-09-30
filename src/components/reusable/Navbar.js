@@ -12,6 +12,8 @@ import ProfileSide from "./../../assets/svg/profileSide.svg";
 import AboutUs from "./../../assets/svg/aboutus.svg";
 import Bookmarks from "./../../assets/svg/bookmarks.svg";
 import useAuth from "./../../hooks/useAuth";
+import ProfilePictureUpload from "./ProfilePhotoUpload";
+import ProfilePicture from "./ProfilePicture";
 // import DashboardComponent from "../Dashboard";
 import {
   School,
@@ -49,7 +51,7 @@ const UserIcon = <img src={User} alt="User" />;
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isLoggedIn, username, entity, showDashboard } = useAuth();
+  const { isLoggedIn, username, entity, showDashboard, userId } = useAuth();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -106,16 +108,15 @@ const Navbar = () => {
             {showDashboard && (
               <DashboardIcon username={username} entity={entity} />
             )}
-            <button
-              className="p-2 rounded-full hover:bg-gray-300"
-              aria-label="Profile"
-            >
-              {isLoggedIn ? (
-                <Link to={`/profile/${encodedIdentifier}`}>{UserIcon}</Link>
-              ) : (
-                <Link to="/login">{UserIcon}</Link>
-              )}
-            </button>
+            {isLoggedIn ? (
+              <Link to={`/profile/${encodedIdentifier}`}>
+                <ProfilePicture userId={userId} />
+              </Link>
+            ) : (
+              <Link to="/login" className="w-8 h-8">
+                <img src={User} alt="User" className="w-full h-full" />
+              </Link>
+            )}
           </div>
         </div>
 

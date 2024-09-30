@@ -1,5 +1,5 @@
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
-const ENV = process.env.NODE_ENV || "development";
+const ENV = process.env.REACT_APP_NODE_ENV || "development";
 
 const config = {
   apiUrl: API_URL,
@@ -31,7 +31,11 @@ const config = {
   analytics: {
     getAllUsers: `${API_URL}/api/users/user-list`,
     deleteUserById: (userId) => `${API_URL}/api/users/delete-user/${userId}`,
-    getRecommendation: `${API_URL}/api/recommend-degree"`,
   },
+  photo: {
+    getS3Url: `${API_URL}/api/user/s3Url`,
+    uploadProfilePicture: `${API_URL}/api/user/profile-picture`,
+    fetchProfilePicture: (userId) => `${API_URL}/api/user/${userId}/profile-picture`,
+  }
 };
 export default config;
