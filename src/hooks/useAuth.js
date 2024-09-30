@@ -41,13 +41,13 @@ const useAuth = () => {
         setRole("");
         setIsLoggedIn(false);
         setShowDashboard(false);
-        setUserId(null); // Add this line
+        setUserId(null);
       }
     } catch (error) {
       console.error('Error fetching user data and role:', error);
       setIsLoggedIn(false);
       setShowDashboard(false);
-      setUserId(null); // Add this line
+      setUserId(null);
     } finally {
         setLoading(false);
     }
@@ -55,11 +55,11 @@ const useAuth = () => {
 
   useEffect(() => {
     fetchUserDataAndRole();
-    const intervalId = setInterval(fetchUserDataAndRole, 600000); // Refresh every 10 mins
+    const intervalId = setInterval(fetchUserDataAndRole, 600000);
     return () => clearInterval(intervalId);
   }, [fetchUserDataAndRole]);
 
-  return { isLoggedIn, username, entity, role, loading, showDashboard, userId }; // Include userId here
+  return { isLoggedIn, username, entity, role, loading, showDashboard, userId };
 };
 
 export default useAuth;

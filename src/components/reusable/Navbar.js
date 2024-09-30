@@ -4,17 +4,8 @@ import { X } from "lucide-react";
 import Dashboard from "./../../assets/svg/dashboard.svg";
 import Menu from "./../../assets/svg/menu.svg";
 import User from "./../../assets/svg/user.svg";
-import Universities from "./../../assets/svg/universities.svg";
-import Scholarships from "./../../assets/svg/scholarships.svg";
-import Livelidhoods from "./../../assets/svg/livelihoods.svg";
-import SideDashboard from "./../../assets/svg/dashboardSide.svg";
-import ProfileSide from "./../../assets/svg/profileSide.svg";
-import AboutUs from "./../../assets/svg/aboutus.svg";
-import Bookmarks from "./../../assets/svg/bookmarks.svg";
 import useAuth from "./../../hooks/useAuth";
-import ProfilePictureUpload from "./ProfilePhotoUpload";
 import ProfilePicture from "./ProfilePicture";
-// import DashboardComponent from "../Dashboard";
 import {
   School,
   BookOpenTextIcon,
@@ -37,17 +28,6 @@ const DashboardIcon = ({ username, entity }) => {
     </Link>
   );
 };
-
-const UserIcon = <img src={User} alt="User" />;
-
-// const MenuIconSide = <img src={Menu} alt="Menu" />;
-// const UniversitiesIconSide = <img src={Universities} alt="Universities" />;
-// const ScholarshipsIcon = <img src={Scholarships} alt="Scholarships" />;
-// const LivelihoodIcon = <img src={Livelidhoods} alt="Livelihoods" />;
-// const SideDashboardIcon = <img src={SideDashboard} alt="Dashboard" />;
-// const ProfileSideIcon = <img src={ProfileSide} alt="Profile" />;
-// const AboutUsIcon = <img src={AboutUs} alt="About Us" />;
-// const BookmarksIcon = <img src={Bookmarks} alt="Bookmarks" />;
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
