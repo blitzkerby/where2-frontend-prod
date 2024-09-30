@@ -3,8 +3,7 @@ import Navbar from "../components/reusable/Navbar";
 import Footer from "../components/reusable/Footer";
 import Hero from "../layouts/Hero";
 import Searchbar from "../components/reusable/SearchBar";
-import Card from "../components/reusable/Card";
-import DegreeRecommendationForm from "../components/reusable/RecommendationForm";
+// import Card from "../components/reusable/Card";
 
 // assets
 import MainHero from "../assets/images/content-module-hero1-no-bg.png";
@@ -82,7 +81,6 @@ const HomePage = () => {
       </Hero>
       <CardSlider cards={cards} />
       <Hero props={hero2} />
-      <DegreeRecommendationForm />
       <Footer />
     </div>
   );

@@ -17,7 +17,6 @@ import { ChevronRight } from "lucide-react";
 export const SidebarContentContext = createContext();
 
 
-
 const contentComponents = {
   schoolList: UniversityListing,
   account: UserAccount,

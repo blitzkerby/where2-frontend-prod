@@ -24,7 +24,7 @@ import VisitorTracker from "./reusable/VisitorTracker"
 
     return (<>
        <section className="w-full lg:mx-[32px] lg:h-full sm:min-h-fit bg-white rounded-3xl shadow-md border">
-        <div className="lg:w-[70%] lg:pl-[128px] lg:pr-[384px] lg:mx-auto h-full px-4 pb-6 pt-12 sm:px-6 lg:pb-0">
+        <div className="lg:w-full lg:pl-[128px] lg:pr-[384px] lg:mx-auto h-full px-4 pb-6 pt-12 sm:px-6 lg:pb-0">
           <div className="flex items-center justify-center mb-6">
             <div className="relative">
               <div className={`w-24 h-24 bg-blue-gray-50 rounded-full flex items-center justify-center ${userInfo?.isActive ? "border-2 border-green-500" : ""}`}>

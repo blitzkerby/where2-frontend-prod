@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { X } from "lucide-react";
 import Dashboard from "./../../assets/svg/dashboard.svg";
@@ -12,7 +12,7 @@ import ProfileSide from "./../../assets/svg/profileSide.svg";
 import AboutUs from "./../../assets/svg/aboutus.svg";
 import Bookmarks from "./../../assets/svg/bookmarks.svg";
 import useAuth from "./../../hooks/useAuth";
-import DashboardComponent from "../Dashboard";
+// import DashboardComponent from "../Dashboard";
 import {
   School,
   BookOpenTextIcon,
@@ -22,8 +22,6 @@ import {
   User2,
   LucideMessageCircleQuestion,
 } from "lucide-react";
-
-import config from "../../config";
 
 const MenuIcon = <img src={Menu} alt="Menu" />;
 const DashboardIcon = ({ username, entity }) => {
@@ -41,13 +39,13 @@ const DashboardIcon = ({ username, entity }) => {
 const UserIcon = <img src={User} alt="User" />;
 
 // const MenuIconSide = <img src={Menu} alt="Menu" />;
-const UniversitiesIconSide = <img src={Universities} alt="Universities" />;
-const ScholarshipsIcon = <img src={Scholarships} alt="Scholarships" />;
-const LivelihoodIcon = <img src={Livelidhoods} alt="Livelihoods" />;
-const SideDashboardIcon = <img src={SideDashboard} alt="Dashboard" />;
-const ProfileSideIcon = <img src={ProfileSide} alt="Profile" />;
-const AboutUsIcon = <img src={AboutUs} alt="About Us" />;
-const BookmarksIcon = <img src={Bookmarks} alt="Bookmarks" />;
+// const UniversitiesIconSide = <img src={Universities} alt="Universities" />;
+// const ScholarshipsIcon = <img src={Scholarships} alt="Scholarships" />;
+// const LivelihoodIcon = <img src={Livelidhoods} alt="Livelihoods" />;
+// const SideDashboardIcon = <img src={SideDashboard} alt="Dashboard" />;
+// const ProfileSideIcon = <img src={ProfileSide} alt="Profile" />;
+// const AboutUsIcon = <img src={AboutUs} alt="About Us" />;
+// const BookmarksIcon = <img src={Bookmarks} alt="Bookmarks" />;
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
