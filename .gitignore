@@ -6,6 +6,7 @@ test/
 # temporary
 /temp
 
+.env
 
 # dependencies
 /node_modules
