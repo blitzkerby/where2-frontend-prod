@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { X } from "lucide-react";
 import Dashboard from "./../../assets/svg/dashboard.svg";
 import Menu from "./../../assets/svg/menu.svg";
-import User from "./../../assets/svg/user.svg";
 import useAuth from "./../../hooks/useAuth";
 import ProfilePicture from "./ProfilePicture";
 import {
@@ -38,28 +37,29 @@ const Navbar = () => {
   };
 
   const menuItems = [
-    { logo: <School />, name: "Universities", to: "/universities" },
-    { logo: <BookOpenTextIcon />, name: "Scholarships", to: "/scholarships" },
-    {
-      logo: <LucideBriefcaseBusiness />,
-      name: "Livelihood",
-      to: "/livelihood",
-    },
-    { logo: <BookMarked />, name: "Bookmarks", to: "/bookmarks" },
+    { logo: <School />, name: "Universities", to: "/universities", showMobile: true },
+    { logo: <BookOpenTextIcon />, name: "Scholarships", to: "/scholarships", showMobile: true },
+    { logo: <LucideBriefcaseBusiness />, name: "Livelihood", to: "/livelihood", showMobile: true },
+    { logo: <BookMarked />, name: "Bookmarks", to: "/bookmarks", showMobile: true },
     {
       logo: <ChartColumnIcon />,
       name: "Dashboard",
       to: `/dashboard/${encodeURIComponent(username || entity)}`,
+      showMobile: true,
+      showDesktop: showDashboard
     },
     {
       logo: <User2 />,
       name: "Profile",
       to: `/profile/${encodeURIComponent(username || entity)}`,
+      showMobile: true,
+      showDesktop: false
     },
     {
       logo: <LucideMessageCircleQuestion />,
       name: "About Us",
       to: "/about-us",
+      showMobile: true
     },
   ];
 
@@ -74,7 +74,7 @@ const Navbar = () => {
             WHERE2
           </Link>
           <div className="flex align-center justify-between h-full lg:w-9/12">
-            {menuItems.map((item) => (
+            {menuItems.filter(item => item.showDesktop !== false).map((item) => (
               <Link
                 key={item.name}
                 to={item.to}
@@ -94,7 +94,7 @@ const Navbar = () => {
               </Link>
             ) : (
               <Link to="/login" className="w-8 h-8">
-                <img src={User} alt="User" className="w-full h-full" />
+                <div className="w-full h-full"><User2 size={22} className="flex justify-center align-center"/></div>
               </Link>
             )}
           </div>
@@ -126,7 +126,7 @@ const Navbar = () => {
               </button>
             </div>
             <div className="flex-grow overflow-y-auto">
-              {menuItems.map((item) => (
+              {menuItems.filter(item => item.showMobile).map((item) => (
                 <Link
                   key={item.name}
                   to={item.to}
