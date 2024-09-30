@@ -6,6 +6,8 @@ import ButtonComponent from "../reusable/Button";
 import ContainerComponent from "../reusable/ContainerComponent";
 import { clearAuthState } from "../../features/slices/authSlice";
 import { LoadingSpinner } from "../reusable/Loading";
+import { MapPin } from "lucide-react";
+import axios from "axios";
 
 const RegisterComponent = () => {
   const [accountType, setAccountType] = useState("personal");
@@ -22,10 +24,51 @@ const RegisterComponent = () => {
     passwordConfirm: "",
   });
   const [error, setError] = useState("");
+  const [isGettingLocation, setIsGettingLocation] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { status, message } = useSelector((state) => state.auth);
+
+  // Moved inside the handler
+  const handleGetLocation = () => {
+    setIsGettingLocation(true);
+    setError("");
+
+    if (!navigator.geolocation) {
+      setError("Geolocation is not supported by your browser");
+      setIsGettingLocation(false);
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        try {
+          const { latitude, longitude } = position.coords;
+          const response = await axios.get(
+            `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
+          );
+
+          if (response.data && response.data.display_name) {
+            setFormData((prevData) => ({
+              ...prevData,
+              location: response.data.display_name,
+            }));
+          } else {
+            setError("Failed to get location");
+          }
+        } catch (error) {
+          setError("Failed to get location");
+        } finally {
+          setIsGettingLocation(false);
+        }
+      },
+      () => {
+        setError("Failed to get location");
+        setIsGettingLocation(false);
+      }
+    );
+  };
 
   useEffect(() => {
     dispatch(clearAuthState());
@@ -37,7 +80,7 @@ const RegisterComponent = () => {
   };
 
   const validateForm = () => {
-    const personalFields = ['firstName', 'lastName', 'userName', 'email', 'password', 'passwordConfirm'];
+    const personalFields = ['firstName', 'lastName', 'userName', 'email', 'password', 'passwordConfirm', 'location'];
     const businessFields = ['entity', 'firstName', 'lastName', 'location', 'phoneNumber', 'email', 'password', 'passwordConfirm', 'dateOfBirth'];
     
     const requiredFields = accountType === "business" ? businessFields : personalFields;
@@ -171,44 +214,51 @@ const RegisterComponent = () => {
             autoCorrect="off"
             autoCapitalize="off"
           />
+          <FormInput
+            name="phoneNumber"
+            label="Phone Number"
+            type="tel"
+            value={formData.phoneNumber}
+            onChange={handleInputChange}
+            required
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+          />
+          <div className="relative">
+            <FormInput
+              name="location"
+              label="Location"
+              type="text"
+              value={formData.location}
+              onChange={handleInputChange}
+              required
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+            />
+            <button
+              type="button"
+              onClick={handleGetLocation}
+              disabled={isGettingLocation}
+              className="absolute right-2 bottom-2 transform -translate-y-1/2"
+              title="Get current location"
+            >
+              <MapPin size={20} />
+            </button>
+          </div>
           {accountType === "business" && (
-            <>
-              <div className="grid grid-cols-2 gap-4">
-                <FormInput
-                  name="dateOfBirth"
-                  label="Date of Birth"
-                  type="date"
-                  value={formData.dateOfBirth}
-                  onChange={handleInputChange}
-                  required
-                  autoComplete="off"
-                  autoCorrect="off"
-                  autoCapitalize="off"
-                />
-                <FormInput
-                  name="location"
-                  label="Location"
-                  type="text"
-                  value={formData.location}
-                  onChange={handleInputChange}
-                  required
-                  autoComplete="off"
-                  autoCorrect="off"
-                  autoCapitalize="off"
-                />
-              </div>
-              <FormInput
-                name="phoneNumber"
-                label="Phone Number"
-                type="tel"
-                value={formData.phoneNumber}
-                onChange={handleInputChange}
-                required
-                autoComplete="off"
-                autoCorrect="off"
-                autoCapitalize="off"
-              />
-            </>
+            <FormInput
+              name="dateOfBirth"
+              label="Date of Birth"
+              type="date"
+              value={formData.dateOfBirth}
+              onChange={handleInputChange}
+              required
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+            />
           )}
           <div className="grid grid-cols-2 gap-4">
             <FormInput
@@ -249,7 +299,7 @@ const RegisterComponent = () => {
             </ButtonComponent>
           </div>
         </form>
-  
+    
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             Already have an account?{" "}

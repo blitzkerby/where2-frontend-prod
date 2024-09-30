@@ -15,6 +15,7 @@ import config from "../../config"
     "auth/register",
     async (userData, thunkAPI) => {
       try {
+        // Ensure profilePhotoUrl is included
         const formattedUserData = {
           ...userData,
           dateOfBirth: userData.dateOfBirth
@@ -22,6 +23,7 @@ import config from "../../config"
             : null,
         };
   
+        // Log the data being sent
         if (config.isDevelopment) {
           console.log("Registering user with data:", formattedUserData);
         }
@@ -29,6 +31,7 @@ import config from "../../config"
         const response = await axios.post(config.auth.registerUrl, formattedUserData);
         return response.data;
       } catch (error) {
+        // Detailed error logging
         if (config.isDevelopment) {
           if (error.response) {
             console.error("Registration error details:", {
