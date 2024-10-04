@@ -34,6 +34,12 @@ const config = {
   },
   universities: {
     getAllUniversities : `${API_URL}/api/universities/`
+  },
+   // Jobs
+  job: {
+    getAllJob: `${ API_URL }/api/jobs`,
+    getAssociatedCompany: (jobId) => `${ API_URL }/api/jobs/associatedCompany/${jobId}`
   }
+
 };
 export default config; 

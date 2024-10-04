@@ -5,9 +5,9 @@ const UniversityListing = () => {
       return (
         <ListingComponent
           title="UNIVERSITIES"
-          data={universities}
+          // data={universities}
           columns={["Name", "ID", "Listed Date", "Status"]}
-          totalItems={universities.length}
+          // totalItems={universities.length}
         />
       );
   };

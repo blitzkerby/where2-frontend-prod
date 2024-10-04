@@ -13,7 +13,7 @@ import AboutUs from "./../../assets/svg/aboutus.svg"
 import Bookmarks from "./../../assets/svg/bookmarks.svg"
 import useAuth from "./../../hooks/useAuth";
 import DashboardComponent from "../Dashboard";
-
+import { School , BookOpenTextIcon , LucideBriefcaseBusiness, BookMarked , ChartColumnIcon , User2 , LucideMessageCircleQuestion } from "lucide-react";
 import config from "../../config";
 
 const MenuIcon = <img src={Menu} alt="Menu" />
@@ -39,7 +39,7 @@ const SideDashboardIcon = <img src={SideDashboard} alt="Dashboard" />;
 const ProfileSideIcon = <img src={ProfileSide} alt="Profile" />;
 const AboutUsIcon = <img src={AboutUs} alt="About Us" />;
 const BookmarksIcon = <img src={Bookmarks} alt="Bookmarks" />;
-import { School , BookOpenTextIcon , LucideBriefcaseBusiness, BookMarked , ChartColumnIcon , User2 , LucideMessageCircleQuestion } from "lucide-react";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { isLoggedIn, username, entity, showDashboard } = useAuth();
