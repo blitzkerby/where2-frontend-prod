@@ -9,8 +9,9 @@ import {
   BookOpenIcon,
   BeakerIcon,
 } from '@heroicons/react/24/solid';
-import { X, User, Heart, ChevronDown, ChevronRight, BookKey, Users, School, House, Briefcase, BadgeDollarSignIcon } from "lucide-react";
-import { SidebarContentContext } from "./Profile";
+import { X, User, Heart, ChevronDown, ChevronRight, BookKey, Users, School, House, Briefcase, BadgeDollarSignIcon, ChartNoAxesColumnIncreasingIcon } from "lucide-react";
+import { SidebarContentContext } from "../reusable/Profile";
+import { Navigate } from "react-router-dom";
 
 const MenuItem = ({ item, depth = 0, onItemClick, isSelected }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -127,10 +128,11 @@ const Sidebar = ({ isOpen, onClose, userRole }) => {
       { label: 'Log Out', icon: <PowerIcon className="h-5 w-5" /> },
     ],
     admin: [
-      { label: 'Content', icon: <DocumentDuplicateIcon className="h-5 w-5" />, badge: '14' },
-      { label: 'Profile', icon: <UserCircleIcon className="h-5 w-5" /> },
-      { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5" /> },
-      { label: 'Log Out', icon: <PowerIcon className="h-5 w-5" /> },
+      { label: 'Content', icon: <DocumentDuplicateIcon className="h-5 w-5" />, badge: '14', onClick: () => handleItemClick("AdminContent", "adminContent") },
+      { label: 'Profile', icon: <UserCircleIcon className="h-5 w-5" /> , onClick: () => handleItemClick("account", "account") },
+      { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5"/> , onClick: () => handleItemClick("setting", "setting")  },
+      { label: 'Log Out', icon: <PowerIcon className="h-5 w-5" />},
+      { label: 'Dashboard', icon: <ChartNoAxesColumnIncreasingIcon className="h-5 w-5" /> , onClick: () => handleItemClick("adminDashboard", "adminDashboard") },
     ],
     developer: [
       { label: 'Account', icon: <User className="w-5 h-5" />, onClick: () => handleItemClick("account", "account") },
@@ -147,6 +149,7 @@ const Sidebar = ({ isOpen, onClose, userRole }) => {
         ),
         onClick: () => handleItemClick("signout", "signout")
       },
+      { label: 'Dashboard', icon: <ChartNoAxesColumnIncreasingIcon className="h-5 w-5" /> , onClick: () => handleItemClick("developerDashboard", "adminDashboard") },
     ]
   };
 

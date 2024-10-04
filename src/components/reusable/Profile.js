@@ -1,15 +1,16 @@
 import React, { useState, createContext } from "react";
-import Sidebar from "./Sidebar.js";
+import Sidebar from "../accountUtilities/Sidebar.js";
 import { useEffect } from "react";
-import UniversityListing from "../UniversityListing.js";
-import AccommodationListing from "../AccommodationListing.js";
-import UserListing from "../UsersListing.js";
-import PartTimeJobListing from "../PartTimeJobListing.js";
-import UserAccount from "../UserAccount.js";
+import UniversityListing from "../accountUtilities/sidebarComponents/Developer/UniversityListing.js";
+import AccommodationListing from "../accountUtilities/sidebarComponents/Developer/AccommodationListing.js";
+import UserListing from "../accountUtilities/sidebarComponents/Developer/UsersListing.js";
+import PartTimeJobListing from "../accountUtilities/sidebarComponents/Developer/PartTimeJobListing.js";
+import UserAccount from "../../pages/UserAccount.js";
 import useAuth from "../../hooks/useAuth";
 import { LoadingOverlay } from "./Loading.js";
 import { ChevronRight } from "lucide-react";
-
+import AdminDashboard from "../accountUtilities/sidebarComponents/Admin/Dashboard.js";
+import AdminContent from "../accountUtilities/sidebarComponents/Admin/AdminContent.js";
 export const SidebarContentContext = createContext();
 
 
@@ -19,6 +20,8 @@ const contentComponents = {
   userList: UserListing,
   jobList: PartTimeJobListing,
   accommodationList: AccommodationListing,
+  adminDashboard : AdminDashboard,
+  adminContent : AdminContent,
 };
 
 const Profile = ({ userData }) => {

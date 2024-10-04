@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Profile from './reusable/Profile';
-import config from './../config';
-import { LoadingOverlay } from './reusable/Loading';
-import Navbar from './reusable/Navbar';
+import Profile from '../reusable/Profile';
+import config from '../../config';
+import { LoadingOverlay } from '../reusable/Loading';
+import { useNavigate } from 'react-router-dom'; // Use useNavigate instead of useNavigation
+import Navbar from '../reusable/Navbar';
 
 const getAuthData = () => {
   const authData = localStorage.getItem('authData');
@@ -50,6 +51,7 @@ const fetchProfile = async () => {
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate(); // Use useNavigate hook at the top level
 
   useEffect(() => {
     const loadProfile = async () => {
@@ -64,20 +66,24 @@ const UserProfile = () => {
     loadProfile();
   }, []);
 
+  // If there's an error (like JWT expired), navigate to login
   if (error) {
-    return <div>Error: {error}</div>;
+    console.error('Redirecting due to error:', error);
+    navigate("/login");
+    return null; // Ensure the component doesn't try to render anything else
   }
 
+  // Show loading spinner if user data is not yet available
   if (!userData) {
-    return <LoadingOverlay/>;
+    return <LoadingOverlay />;
   }
 
   return (
     <>
-    <Navbar/>
-    <div className='w-full h-full mt-[70px]'>
-      <Profile userData={userData} />
-    </div>
+      <Navbar />
+      <div className='w-full h-full mt-[70px]'>
+        <Profile userData={userData} />
+      </div>
     </>
   );
 };

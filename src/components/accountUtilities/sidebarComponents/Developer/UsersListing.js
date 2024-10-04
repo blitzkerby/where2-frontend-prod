@@ -1,7 +1,7 @@
-import ListingComponent from "./reusable/ListingComponent";
-import config from "./../config";
+import ListingComponent from "../../../reusable/ListingComponent";
+import config from "../../../../config";
 import React, { useEffect, useState } from 'react';
-import { LoadingOverlay } from "./reusable/Loading";
+import { LoadingOverlay } from "../../../reusable/Loading";
 
 const UserListing = () => {
   const [users, setUsers] = useState([]);

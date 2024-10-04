@@ -1,4 +1,4 @@
-import ListingComponent from "./reusable/ListingComponent";
+import ListingComponent from "../../../reusable/ListingComponent";
 
 const UniversityListing = ({ universities }) => {
   return (
