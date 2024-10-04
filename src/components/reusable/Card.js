@@ -21,22 +21,21 @@ import { cardBody, cardTitle, cardDescription } from "./tailwindcardclass/cardCl
 
 
 const Card = ({ 
-    props: {
-        image = DefaultCardImage, 
-        imageAlt = 'default alt text', 
-        title = 'Default Title', 
-        description = 'Default Description', 
-        socialLinks: {
-            facebookLink = '#', 
-            instagramLink = '#', 
-            twitterLink = '#', 
-            youtubeLink = '#', 
-            websiteLink = '#'
-        } = {}, 
-        location = 'Default Location', 
-        deadLine = 'Default Deadline', 
-        timeOut = 'Default Timeout'
-    } = {} 
+    image,
+    imageAlt,
+    title,
+    description,
+    facebookLink = '#', 
+    instagramLink = '#', 
+    twitterLink = '#', 
+    youtubeLink = '#', 
+    websiteLink = '#', 
+    location , 
+    deadLine, 
+    timeOut,
+    id,
+    type,
+    route,
 }) => {
 
     const socialMediaIcons = [
@@ -139,9 +138,9 @@ const Card = ({
                         <div className={styles.footerContainer}>
                             <div className={styles.socialContainer}>
                                 {socialMediaIcons.map(({ icon: Icon, linkKey, isExternal }, index) => {
-                                    if (NODE_ENV === 'development') {
-                                        console.log(linkKey);
-                                    }
+                                    // if (NODE_ENV === 'development') {
+                                    //     console.log(linkKey);
+                                    // }
                                     return linkKey ? (
                                         isExternal ? (
                                             <a href={linkKey} key={index} target="_blank" rel="noopener noreferrer">
@@ -165,7 +164,7 @@ const Card = ({
                                     </Link>
                                 </div>
 
-                                <Link to={`/company/companydetail/${companyUrl}`} className={styles.readMoreLink}>
+                                <Link to={route} className={styles.readMoreLink}>
                                     <Button className={styles.button} variant="primary" size="large">
                                         Read More
                                     </Button>

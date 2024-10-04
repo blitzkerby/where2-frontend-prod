@@ -31,6 +31,12 @@ const config = {
   analytics: {
     getAllUsers : `${API_URL}/api/users/user-list`,
     deleteUserById : (userId) =>`${API_URL}/api/users/delete-user/${userId}`
+  },
+   // Jobs
+   job: {
+    getAllJob: `${ API_URL }/api/jobs`,
+    getAssociatedCompany: (jobId) => `${ API_URL }/api/jobs/associatedCompany/${jobId}`
   }
+
 };
 export default config; 
