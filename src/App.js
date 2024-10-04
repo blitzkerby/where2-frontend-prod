@@ -1,12 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import HomePage from "./pages/HomePage";
-import UserProfile from "./components/UserProfile";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import ForgetPasswordPage from "./pages/ForgetPasswordPage";
-import ResetPasswordPage from "./pages/ResetPasswordPage";
-import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
+import UniversityPage from "./pages/UniversityPage";
 import VerificationPage from "./pages/VerificationPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
+import ForgetPasswordPage from "./pages/ForgetPasswordPage";
+import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
+
+import UserProfile from "./components/UserProfile";
 import DashboardComponent from "./components/Dashboard";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import JobPage from "./pages/JobPage";
@@ -25,6 +29,7 @@ const router = createBrowserRouter([
     path: "/home",
     element: <HomePage />
   },
+  { path: "/universities", element: <UniversityPage />},
   { path: "/login",element: <LoginPage />},
   { path: "/signup",element: <RegisterPage />},
   { path: "/forget-password", element: <ForgetPasswordPage />},
