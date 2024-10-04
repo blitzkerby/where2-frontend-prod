@@ -15,7 +15,6 @@ import DefaultCardImage from "../../assets/images/card-image-default.png";
 
 // components
 import Button from './ButtonComponent';
-import { cardBody, cardTitle, cardDescription } from "./tailwindcardclass/cardClass"
 
 // styles
 
@@ -64,8 +63,8 @@ const Card = ({
         
         /* container */
         container: {
-            large: `relative clip-border-box rounded-xl border flex sm:flex-col md:flex-row shadow-md`,
-            small: ``
+            large: `relative clip-border-box rounded-xl border flex sm:flex-col md:flex-row shadow-md lg:h-[348px] w-[100%]`,
+            small: `sm:h-[341px] w-[100%]`,
         },
         imageContainer: {
             large: "lg:h-auto rounded-xl",
@@ -105,71 +104,69 @@ const Card = ({
     };
     
     return (
-        <div className='flex justify-center'>
-            <div className={`${styles.container.small} ${styles.container.large}`}>
-                <div className={`${styles.imageContainer.large} ${styles.imageContainer.small}`}>
-                    <img className={styles.image} src={image} alt={imageAlt || title} />
-                </div>
-                <div className={`${styles.contentContainer.large} ${styles.contentContainer.small}`}>
-                    <div className={styles.headerContainer}>
-                        <div className={styles.titleContainer}>
-                            <h5 className={styles.title}>{title}</h5>
-                        </div>
-                        <div className={styles.utilityContainer}>
-                            {workDetails.map(({ icon, linkKey }, index) => (
-                                <div key={index} className={styles.workDetailItem}>
-                                    <div className={styles.iconContainer}>
-                                        <img src={icon} alt={icon} />
-                                    </div>
-
-                                    {index !== 2 
-                                        ? <p className={`${styles.utilityItem} ${styles.utilityBorder}`}>{linkKey}</p>
-                                        : <p className={`${styles.utilityItem}`}>{linkKey}</p>
-                                    }
-                                </div>
-                            ))}
-                        </div>
+        <div className={`${styles.container.small} ${styles.container.large}`}>
+            <div className={`${styles.imageContainer.large} ${styles.imageContainer.small}`}>
+                <img className={styles.image} src={image} alt={imageAlt || title} />
+            </div>
+            <div className={`${styles.contentContainer.large} ${styles.contentContainer.small}`}>
+                <div className={styles.headerContainer}>
+                    <div className={styles.titleContainer}>
+                        <h5 className={styles.title}>{title}</h5>
                     </div>
-                    <div className={`${styles.bodyContainer.large} ${styles.bodyContainer.small}`}>
-                        <div className={styles.descriptionContainer}>
-                            <p className={`text-justify`}>{description}</p>
-                        </div>
-                        <div className={styles.footerContainer}>
-                            <div className={styles.socialContainer}>
-                                {socialMediaIcons.map(({ icon: Icon, linkKey, isExternal }, index) => {
-                                    if (NODE_ENV === 'development') {
-                                        console.log(linkKey);
-                                    }
-                                    return linkKey ? (
-                                        isExternal ? (
-                                            <a href={linkKey} key={index} target="_blank" rel="noopener noreferrer">
-                                                <Icon />
-                                            </a>
-                                        ) : (
-                                            <Link to={linkKey} key={index}>
-                                                <Icon />
-                                            </Link>
-                                        )
-                                    ) : null;
-                                })}
-                            </div>
-                            <div className="flex justify-between">
-                                <div className={styles.bookmarkContainer}>
-                                    <div>
-                                        <img src={BookMark} alt="Bookmark" />
-                                    </div>
-                                    <Link to="">
-                                        <img src={Map} alt="Map" />
-                                    </Link>
+                    <div className={styles.utilityContainer}>
+                        {workDetails.map(({ icon, linkKey }, index) => (
+                            <div key={index} className={styles.workDetailItem}>
+                                <div className={styles.iconContainer}>
+                                    <img src={icon} alt={icon} />
                                 </div>
 
-                                <Link to={`/company/companydetail/${companyUrl}`} className={styles.readMoreLink}>
-                                    <Button className={styles.button} variant="primary" size="large">
-                                        Read More
-                                    </Button>
-                                </Link>
-                                
+                                {index !== 2 
+                                    ? <p className={`${styles.utilityItem} ${styles.utilityBorder}`}>{linkKey}</p>
+                                    : <p className={`${styles.utilityItem}`}>{linkKey}</p>
+                                }
                             </div>
+                        ))}
+                    </div>
+                </div>
+                <div className={`${styles.bodyContainer.large} ${styles.bodyContainer.small}`}>
+                    <div className={styles.descriptionContainer}>
+                        <p className={`text-justify`}>{description}</p>
+                    </div>
+                    <div className={styles.footerContainer}>
+                        <div className={styles.socialContainer}>
+                            {socialMediaIcons.map(({ icon: Icon, linkKey, isExternal }, index) => {
+                                // if (NODE_ENV === 'development') {
+                                //     console.log(linkKey);
+                                // }
+                                return linkKey ? (
+                                    isExternal ? (
+                                        <a href={linkKey} key={index} target="_blank" rel="noopener noreferrer">
+                                            <Icon />
+                                        </a>
+                                    ) : (
+                                        <Link to={linkKey} key={index}>
+                                            <Icon />
+                                        </Link>
+                                    )
+                                ) : null;
+                            })}
+                        </div>
+                        <div className="flex justify-between">
+                            <div className={styles.bookmarkContainer}>
+                                <div>
+                                    <img src={BookMark} alt="Bookmark" />
+                                </div>
+                                <Link to="">
+                                    <img src={Map} alt="Map" />
+                                </Link>
+                            </div>
+
+                            <Link to={`/company/companydetail/${companyUrl}`} className={styles.readMoreLink}>
+                                <Button className={styles.button} variant="primary" size="large">
+                                    Read More
+                                </Button>
+                            </Link>
+                            
                         </div>
                     </div>
                 </div>
