@@ -9,6 +9,8 @@ import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
 import VerificationPage from "./pages/VerificationPage";
 import DashboardComponent from "./components/Dashboard";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import JobPage from "./pages/JobPage";
+import JobDetailPage from "./pages/JobDetailPage";
 
 const queryClient = new QueryClient();
 
@@ -29,7 +31,9 @@ const router = createBrowserRouter([
   { path: "/terms-and-conditions", element: <TermsAndConditionsPage/>},
   { path: "/signup/verification", element: <VerificationPage/> },
   { path: "/dashboard/:userName", element: <DashboardComponent/> },
-  { path: "/profile/:userName", element: <UserProfile/> }
+  { path: "/profile/:userName", element: <UserProfile /> },
+  { path: "/jobs", element: <JobPage /> },
+  { path: "/job-detail/:jobId", element: <JobDetailPage/> },
 ]);
 
 function App() {
