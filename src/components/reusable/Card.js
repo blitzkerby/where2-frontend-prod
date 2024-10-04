@@ -68,8 +68,8 @@ const Card = ({
         
         /* container */
         container: {
-            large: `relative clip-border-box rounded-xl border flex sm:flex-col md:flex-row shadow-md`,
-            small: ``
+            large: `relative clip-border-box rounded-xl border flex sm:flex-col md:flex-row shadow-md lg:h-[348px] w-[100%]`,
+            small: `sm:h-[341px] w-[100%]`,
         },
         imageContainer: {
             large: "lg:h-auto rounded-xl",
@@ -109,22 +109,21 @@ const Card = ({
     };
     
     return (
-        <div className='flex justify-center'>
-            <div className={`${styles.container.small} ${styles.container.large}`}>
-                <div className={`${styles.imageContainer.large} ${styles.imageContainer.small}`}>
-                    <img className={styles.image} src={image} alt={imageAlt || title} />
-                </div>
-                <div className={`${styles.contentContainer.large} ${styles.contentContainer.small}`}>
-                    <div className={styles.headerContainer}>
-                        <div className={styles.titleContainer}>
-                            <h5 className={styles.title}>{title}</h5>
-                        </div>
-                        <div className={styles.utilityContainer}>
-                            {workDetails.map(({ icon, linkKey }, index) => (
-                                <div key={index} className={styles.workDetailItem}>
-                                    <div className={styles.iconContainer}>
-                                        <img src={icon} alt={icon} />
-                                    </div>
+        <div className={`${styles.container.small} ${styles.container.large}`}>
+            <div className={`${styles.imageContainer.large} ${styles.imageContainer.small}`}>
+                <img className={styles.image} src={image} alt={imageAlt || title} />
+            </div>
+            <div className={`${styles.contentContainer.large} ${styles.contentContainer.small}`}>
+                <div className={styles.headerContainer}>
+                    <div className={styles.titleContainer}>
+                        <h5 className={styles.title}>{title}</h5>
+                    </div>
+                    <div className={styles.utilityContainer}>
+                        {workDetails.map(({ icon, linkKey }, index) => (
+                            <div key={index} className={styles.workDetailItem}>
+                                <div className={styles.iconContainer}>
+                                    <img src={icon} alt={icon} />
+                                </div>
 
                                     {index !== 2 
                                         ? <p className={`${styles.utilityItem} ${styles.utilityBorder}`}>{linkKey}</p>

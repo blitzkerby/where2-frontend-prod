@@ -3,6 +3,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUniversities } from '../features/slices/universitySlice';
 import Card from '../components/reusable/Card'; // Make sure you have this import
+import Navbar from '../components/reusable/Navbar';
+import Footer from '../components/reusable/Footer';
 
 const UniversityPage = () => {
     const dispatch = useDispatch();
@@ -14,10 +16,10 @@ const UniversityPage = () => {
 
     return (
         <div>
-            <h1>University Page</h1>
+            <Navbar />
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
-            <ul>
+            <div className="max-w-full lg:max-w-[980px] sm:w-[100%] mx-auto gap-[30px] lg:gap-[40px] mt-[248px] lg:mt-[276px] grid sm:px-[35px]">
                 {universities.map((university, index) => (
                     <Card
                         key={index}
@@ -32,7 +34,8 @@ const UniversityPage = () => {
                         location={university.location}
                     />
                 ))}
-            </ul>
+            </div>
+            <Footer />
         </div>
     );
 };
