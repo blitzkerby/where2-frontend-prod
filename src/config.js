@@ -40,7 +40,7 @@ const config = {
    // Favorites
   favorite: {
     addFavorite: `${ API_URL }/api/favorites/addFavorite`,
-    getFavorite:(cardId,category) => `${ API_URL }/api/favorites/${cardId}/${category}`,
+    getFavorite:(userId,category) => `${ API_URL }/api/favorites/${userId}/${category}`,
     
   }
 

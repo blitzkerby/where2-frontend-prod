@@ -117,7 +117,7 @@ const Sidebar = ({ isOpen, onClose, userRole }) => {
         label: 'Collection',
         icon: <Heart className="w-5 h-5" />,
         children: [
-          { label: 'School', icon: <School />, onClick: () => handleItemClick("school", "school") },
+          { label: 'School', icon: <School />, onClick: () => handleItemClick("loan", "loan") },
           { label: 'Accommodation', icon: <House />, onClick: () => handleItemClick("accommodation", "accommodation") },
           { label: 'Part-time Job', icon: <Briefcase />, onClick: () => handleItemClick("job", "job") },
           { label: 'Financial', icon: <BadgeDollarSignIcon />, onClick: () => handleItemClick("financial", "financial") }

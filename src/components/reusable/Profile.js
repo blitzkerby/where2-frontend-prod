@@ -25,7 +25,7 @@ const contentComponents = {
   userList: UserListing,
   jobList: PartTimeJobListing,
   accommodationList: AccommodationListing,
-  job: CollectionPanel,
+  // job: CollectionPanel,
 };
 
 const Profile = ({ userData }) => {
@@ -58,10 +58,9 @@ const Profile = ({ userData }) => {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   const ContentComponent = contentComponents[sidebarContent] || (() => null);
-
+console.log('Type sidbarcontent', sidebarContent)
   return (
     <div className="flex relative w-full h-full">
-
       <SidebarContentContext.Provider value={setSidebarContent}>
         <Sidebar 
           className={`h-full ${sidebarOpen ? 'w-64' : 'w-0'} transition-all duration-300 ease-in-out`} 
@@ -79,7 +78,9 @@ const Profile = ({ userData }) => {
           <ChevronRight size={24} />
         </button>
       )}
-        <ContentComponent userInfo={userData} />
+        
+        {sidebarContent !="account"? <CollectionPanel category={sidebarContent}/>:<ContentComponent userInfo={userData} />}
+        
       </div>
     </div>
   );

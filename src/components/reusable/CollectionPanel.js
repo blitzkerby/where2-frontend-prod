@@ -7,18 +7,38 @@ import Sidebar from "./Sidebar";
 // import Card from "./CompanyCard";
 import { companies } from "./../db";
 import FavoriteCard from "./FavoriteCard";
+import { useDispatch,useSelector } from "react-redux";
+import { getFavorite } from "../../features/slices/favoriteSlice";
 
 
-const CollectionPanel = () => {
-//   const [fav, setFav] = useState([]);
-//   useEffect(() => {
-//       (async () => {
-//           const res = await fetchData('http://localhost:4000/api/favorites/1/job');
-//         setFav(res.data.data.allFavorite)
-      
-//       })()
-//   }, []);
-//   fav.map(x=> console.log(x.job.salary))
+const CollectionPanel = ({category}) => {
+    const dispatch = useDispatch();
+    let { isLoading, favorites } = useSelector(state => state.favorites);
+    let renderFavorite;
+    useEffect(() => {
+        dispatch(getFavorite(category))
+    }, [favorites]);
+    if (!isLoading) {
+        favorites = favorites.map(fav => fav.job)
+        console.log('new favorite',favorites);
+         renderFavorite = favorites.map((job) => (
+            <FavoriteCard
+                key={job.id}
+                title={job.title}
+                description={job.job_desc}
+                //   facebookLink={job.facebookLink}
+                //   instagramLink={job.instagramLink}
+                //   twitterLink={job.twitterLink}
+                //   youtubeLink={job.youtubeLink}
+                //   websiteLink={job.websiteLink}
+                location={job.location}
+                deadLine={job.deadLine}
+                timeOut={job.salary}
+            />
+        ));
+    } else {
+        console.log("Favorite is loading")
+    }
  
 
     return (
@@ -27,36 +47,7 @@ const CollectionPanel = () => {
           <h1 className="text-3xl font-bold mb-6">Collections</h1>
           
           <div className="max-w-7xl mx-auto flex-col gap-y-8 justify-between flex p-6 bg-white rounded-3xl shadow-inner border-2  w-full overflow-hidden max-h-[1000px] overflow-y-scroll">
-          {companies.map((company, index) => (
-        <FavoriteCard
-          key={index}
-          title={company.title}
-          description={company.description}
-          facebookLink={company.facebookLink}
-          instagramLink={company.instagramLink}
-          twitterLink={company.twitterLink}
-          youtubeLink={company.youtubeLink}
-          websiteLink={company.websiteLink}
-          location={company.location}
-          deadLine={company.deadLine}
-          timeOut={company.timeOut}
-        />
-                ))}
-                             {companies.map((company, index) => (
-        <FavoriteCard
-          key={index}
-          title={company.title}
-          description={company.description}
-          facebookLink={company.facebookLink}
-          instagramLink={company.instagramLink}
-          twitterLink={company.twitterLink}
-          youtubeLink={company.youtubeLink}
-          websiteLink={company.websiteLink}
-          location={company.location}
-          deadLine={company.deadLine}
-          timeOut={company.timeOut}
-        />
-      ))}
+          {renderFavorite}
             </div>
 
             </div>
