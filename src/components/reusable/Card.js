@@ -17,6 +17,9 @@ import DefaultCardImage from "../../assets/images/card-image-default.png";
 import Button from './ButtonComponent';
 import { cardBody, cardTitle, cardDescription } from "./tailwindcardclass/cardClass"
 
+//function
+import { addFavorite } from '../../features/slices/favoriteSlice';
+
 // styles
 
 
@@ -154,10 +157,10 @@ const Card = ({
                                     ) : null;
                                 })}
                             </div>
-                            <div className="flex justify-between">
+                            <div className="flex justify-between cursor-pointer">
                                 <div className={styles.bookmarkContainer}>
                                     <div>
-                                        <img src={BookMark} alt="Bookmark" />
+                                        <img src={BookMark} alt="Bookmark" onClick={()=> addFavorite(id,type)} />
                                     </div>
                                     <Link to="">
                                         <img src={Map} alt="Map" />

@@ -13,6 +13,7 @@ import SearchBar from "./SearchBar.js";
 import useAuth from "../../hooks/useAuth";
 import { LoadingOverlay } from "./Loading.js";
 import { ChevronRight } from "lucide-react";
+import CollectionPanel from "./CollectionPanel.js";
 
 export const SidebarContentContext = createContext();
 
@@ -24,6 +25,7 @@ const contentComponents = {
   userList: UserListing,
   jobList: PartTimeJobListing,
   accommodationList: AccommodationListing,
+  job: CollectionPanel,
 };
 
 const Profile = ({ userData }) => {
