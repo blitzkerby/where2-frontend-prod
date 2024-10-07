@@ -32,8 +32,11 @@ const config = {
     getAllUsers : `${API_URL}/api/users/user-list`,
     deleteUserById : (userId) =>`${API_URL}/api/users/delete-user/${userId}`
   },
+  universities: {
+    getAllUniversities : `${API_URL}/api/university/`
+  },
    // Jobs
-   job: {
+  job: {
     getAllJob: `${ API_URL }/api/jobs`,
      getAssociatedCompany: (jobId) => `${ API_URL }/api/jobs/associatedCompany/${ jobId }`,
   },

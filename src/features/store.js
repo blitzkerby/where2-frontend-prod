@@ -6,9 +6,9 @@ import favoriteReducer from './slices/favoriteSlice';
 export const store = configureStore({
   reducer: {
     auth: authReducer,
+    universities: universityReducer,
     job: jobReducer,
     pagination: pagReducer,
     favorites: favoriteReducer,
-
   },
 });

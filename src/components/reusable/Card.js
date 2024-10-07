@@ -24,21 +24,20 @@ import { addFavorite } from '../../features/slices/favoriteSlice';
 
 
 const Card = ({ 
-    image,
-    imageAlt,
-    title,
-    description,
-    facebookLink = '#', 
-    instagramLink = '#', 
-    twitterLink = '#', 
-    youtubeLink = '#', 
-    websiteLink = '#', 
-    location , 
-    deadLine, 
-    timeOut,
-    id,
-    type,
-    route,
+    image = DefaultCardImage, 
+    imageAlt = 'default alt text', 
+    title = 'Default Title', 
+    description = 'Default Description', 
+    socialLinks: {
+        facebookLink = '#', 
+        instagramLink = '#', 
+        twitterLink = '#', 
+        youtubeLink = '#', 
+        websiteLink = '#'
+    } = {}, 
+    location = 'Default Location', 
+    deadLine = 'Default Deadline', 
+    timeOut = 'Default Timeout'
 }) => {
 
     const socialMediaIcons = [
@@ -68,8 +67,8 @@ const Card = ({
         
         /* container */
         container: {
-            large: `relative clip-border-box rounded-xl border flex sm:flex-col md:flex-row shadow-md`,
-            small: ``
+            large: `relative clip-border-box rounded-xl border flex sm:flex-col md:flex-row shadow-md lg:h-[348px] w-[100%]`,
+            small: `sm:h-[341px] w-[100%]`,
         },
         imageContainer: {
             large: "lg:h-auto rounded-xl",
@@ -109,22 +108,21 @@ const Card = ({
     };
     
     return (
-        <div className='flex justify-center'>
-            <div className={`${styles.container.small} ${styles.container.large}`}>
-                <div className={`${styles.imageContainer.large} ${styles.imageContainer.small}`}>
-                    <img className={styles.image} src={image} alt={imageAlt || title} />
-                </div>
-                <div className={`${styles.contentContainer.large} ${styles.contentContainer.small}`}>
-                    <div className={styles.headerContainer}>
-                        <div className={styles.titleContainer}>
-                            <h5 className={styles.title}>{title}</h5>
-                        </div>
-                        <div className={styles.utilityContainer}>
-                            {workDetails.map(({ icon, linkKey }, index) => (
-                                <div key={index} className={styles.workDetailItem}>
-                                    <div className={styles.iconContainer}>
-                                        <img src={icon} alt={icon} />
-                                    </div>
+        <div className={`${styles.container.small} ${styles.container.large}`}>
+            <div className={`${styles.imageContainer.large} ${styles.imageContainer.small}`}>
+                <img className={styles.image} src={image} alt={imageAlt || title} />
+            </div>
+            <div className={`${styles.contentContainer.large} ${styles.contentContainer.small}`}>
+                <div className={styles.headerContainer}>
+                    <div className={styles.titleContainer}>
+                        <h5 className={styles.title}>{title}</h5>
+                    </div>
+                    <div className={styles.utilityContainer}>
+                        {workDetails.map(({ icon, linkKey }, index) => (
+                            <div key={index} className={styles.workDetailItem}>
+                                <div className={styles.iconContainer}>
+                                    <img src={icon} alt={icon} />
+                                </div>
 
                                     {index !== 2 
                                         ? <p className={`${styles.utilityItem} ${styles.utilityBorder}`}>{linkKey}</p>
@@ -167,13 +165,12 @@ const Card = ({
                                     </Link>
                                 </div>
 
-                                <Link to={route} className={styles.readMoreLink}>
-                                    <Button className={styles.button} variant="primary" size="large">
-                                        Read More
-                                    </Button>
-                                </Link>
-                                
-                            </div>
+                            <Link to={`/company/companydetail/${companyUrl}`} className={styles.readMoreLink}>
+                                <Button className={styles.button} variant="primary" size="large">
+                                    Read More
+                                </Button>
+                            </Link>
+                            
                         </div>
                     </div>
                 </div>
