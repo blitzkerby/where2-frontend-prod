@@ -1,21 +1,62 @@
+import CardSlider from "./reusable/CardsSlider";
 import ListContainer from "./reusable/ListContainer";
-
+import PartTimeJob from '../assets/images/part-time-job.jpg';
+import StudentLoan from '../assets/images/student-loan.jpeg';
+import Accommodation from '../assets/images/accommodation.jpg';
+import JobFinder from '../assets/images/job-finder.jpg';
+import LiveliHood from '../assets/images/livelihood.png'
+import LivelihoodBox from "./reusable/LivelihoodBox";
+import { useState, useEffect } from "react";
 const Livelihood = () => {
+    const [isMobile, setIsMobile] = useState(false);
+  
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+      
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
     const cards = [
         {
-            title: "Scholarships",
-            image: "https://pppenglish.sgp1.digitaloceanspaces.com/image/main/field/image/the_royal_university_of_phnom_penh.jpg"
-          },
-    ]
-    return (    <section>
-        <ListContainer>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTr3rF_2fMwZNM6DFMWp6GfCteEycpDvnZkZiVlByu9KCFbc4BDonNptYx29oihe4YqJFk&usqp=CAU" />
-            <h1><b>Finish Graduation?</b></h1>
-
-                
-        </ListContainer>
-    </section>
-    )
-}
+            title: "Part-time Job",
+            image: PartTimeJob,
+            path: "/jobs"
+        },
+        {
+            title: "Student Loan",
+            image: StudentLoan,
+            path: "/student-loans"
+        },
+        {
+            title: "Accommodation",
+            image: Accommodation,
+            path: "/accommodations"
+        },
+    ];
+    return (
+        <section className="bg-[#F4F8FA]">
+            <ListContainer>
+                <img src={LiveliHood} />
+                <CardSlider cards={cards} header={"Finish Graduation?"} />
+                <section className="flex gap-x-12 px-12 mx-auto mb-[64px]">
+                    {isMobile ? null : <div className="flex-1 content-center">
+                        <h1 className="text-[#367588] pb-[54px]"><b>Still Studying?</b></h1>
+                        <img src={JobFinder} className="rounded-full w-96 h-96" />
+                    </div>}
+                    <div className="flex-1 content-center">
+                        <div>
+                            <LivelihoodBox title={"Part Time Job"} content={"Invest in your future. Discover part-time jobs that help fund your education goals."} />
+                            <LivelihoodBox title={"Student Loan"} content={"Simplify your student loan journey. Explore refinancing options and get personalized advice."} />
+                            <LivelihoodBox title={"Accommodation"} content={"Enhance your learning experience with the perfect living space. Find accommodations that inspire and support your academic journey."} />
+                        </div>
+                    </div>
+                </section>
+            </ListContainer>
+        </section>
+    );
+};
 
 export default Livelihood;

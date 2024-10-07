@@ -1,7 +1,8 @@
 import React, { useState , useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-const CardSlider = ({ cards }) => {
+const CardSlider = ({ cards,header }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
   
@@ -25,6 +26,7 @@ const CardSlider = ({ cards }) => {
   
     return (
       <div className="relative w-full max-w-6xl mx-auto">
+        <div className="p-5 text-[#367588]"><b>{header}</b></div>
         <div className="overflow-hidden">
           <div
             className="flex transition-transform duration-300 ease-in-out"
@@ -37,8 +39,10 @@ const CardSlider = ({ cards }) => {
                 key={index} 
                 className={`flex-shrink-0 p-2 ${isMobile ? 'w-full' : 'w-1/3'}`}
               >
-                <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                  <img src={card.image} alt={card.title} className="w-full h-48 object-cover" />
+                <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer">
+                  <Link to={card.path}>
+                    <img src={card.image} alt={card.title} className="w-full h-48 object-cover" />
+                  </Link>
                   <div className="p-4">
                     <h3 className="text-lg font-semibold mb-2">{card.title}</h3>
                     <p className="text-sm text-gray-600">{card.description}</p>
