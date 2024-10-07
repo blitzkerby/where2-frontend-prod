@@ -9,7 +9,7 @@ import UniversityList from '../components/UniversityList';
 
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
-import Pagination from '../temp/Pagination';
+import Pagination from '../components/PaginationRefactor';
 import ListContainer from '../components/reusable/ListContainer';
 
 
