@@ -2,17 +2,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const apiClient = axios.create({
-    baseURL: "http://127.0.0.1:4000/api/university/",
-    // headers: {
-    //     'Authorization': `Bearer ${localStorage.getItem("token")}`,
-    // }
-});
+import config from "../../config"
 
 export const fetchUniversities = createAsyncThunk(
     'universities/fetchUniversities',
     async () => {
-        const response = await apiClient.get('/');
+        const response = await axios.get(config.universities.getAllUniversities);
         return response.data.universities;
     }
 );
