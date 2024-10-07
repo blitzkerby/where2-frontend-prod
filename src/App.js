@@ -11,6 +11,7 @@ import DashboardComponent from "./components/Dashboard";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import JobPage from "./pages/JobPage";
 import JobDetailPage from "./pages/JobDetailPage";
+import LivelihoodPage from "./pages/LivelihoodPage";
 
 const queryClient = new QueryClient();
 
@@ -33,7 +34,8 @@ const router = createBrowserRouter([
   { path: "/dashboard/:userName", element: <DashboardComponent/> },
   { path: "/profile/:userName", element: <UserProfile /> },
   { path: "/jobs", element: <JobPage /> },
-  { path: "/job-detail/:jobId", element: <JobDetailPage/> },
+  { path: "/job-detail/:jobId", element: <JobDetailPage /> },
+  {path:"/livelihood", element: <LivelihoodPage />},
 ]);
 
 function App() {
