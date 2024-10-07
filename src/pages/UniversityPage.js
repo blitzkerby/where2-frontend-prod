@@ -5,6 +5,7 @@ import { fetchUniversities } from '../features/slices/universitySlice';
 import Card from '../components/reusable/Card'; // Make sure you have this import
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
+import { LoadingOverlay } from '../components/reusable/Loading';
 
 const UniversityPage = () => {
     const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const UniversityPage = () => {
     return (
         <div>
             <Navbar />
-            {loading && <p>Loading...</p>}
+            {loading && <LoadingOverlay />}
             {error && <p>{error}</p>}
             <div className="max-w-full lg:max-w-[980px] sm:w-[100%] mx-auto gap-[30px] lg:gap-[40px] mt-[248px] lg:mt-[276px] grid sm:px-[35px]">
                 {universities.map((university, index) => (
