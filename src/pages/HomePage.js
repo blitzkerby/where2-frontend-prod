@@ -1,5 +1,4 @@
-// components
-import Navbar from "../components/reusable/Navbar";
+
 // components
 import Navbar from "../components/reusable/Navbar";
 import Footer from "../components/reusable/Footer";
