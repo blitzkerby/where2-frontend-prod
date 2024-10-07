@@ -15,7 +15,6 @@ import config from "../../config"
     "auth/register",
     async (userData, thunkAPI) => {
       try {
-        // Ensure profilePhotoUrl is included
         const formattedUserData = {
           ...userData,
           dateOfBirth: userData.dateOfBirth
@@ -23,7 +22,6 @@ import config from "../../config"
             : null,
         };
   
-        // Log the data being sent
         if (config.isDevelopment) {
           console.log("Registering user with data:", formattedUserData);
         }
@@ -31,7 +29,6 @@ import config from "../../config"
         const response = await axios.post(config.auth.registerUrl, formattedUserData);
         return response.data;
       } catch (error) {
-        // Detailed error logging
         if (config.isDevelopment) {
           if (error.response) {
             console.error("Registration error details:", {
@@ -82,11 +79,9 @@ import config from "../../config"
           return "Verification code sent successfully.";
         }
       } catch (error) {
-        // Log the error in both development and production
         console.error("Error sending verification code:", error);
   
         if (axios.isAxiosError(error) && !error.response) {
-          // Network error
           return thunkAPI.rejectWithValue("Network error. Please check your internet connection.");
         }
   

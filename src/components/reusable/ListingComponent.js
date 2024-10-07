@@ -4,7 +4,7 @@ import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import ButtonComponent from "./Button";
 import SearchBar from "./SearchBar";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import config from "../../config";
+import config from "./../../config";
 
 const ListingComponent = ({ title, data, columns, totalItems, additionalStats }) => {
   const [showModal, setShowModal] = useState(false);

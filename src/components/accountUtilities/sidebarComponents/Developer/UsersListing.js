@@ -50,6 +50,5 @@ const UserListing = () => {
   );
 };
 
-//make changesß
 
 export default UserListing;
