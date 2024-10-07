@@ -15,6 +15,10 @@ import DefaultCardImage from "../../assets/images/card-image-default.png";
 
 // components
 import Button from './ButtonComponent';
+import { cardBody, cardTitle, cardDescription } from "./tailwindcardclass/cardClass"
+
+//function
+import { addFavorite } from '../../features/slices/favoriteSlice';
 
 // styles
 
@@ -34,7 +38,10 @@ const Card = ({
     } = {}, 
     location = 'Default Location', 
     deadLine = 'Default Deadline', 
-    timeOut = 'Default Timeout'
+    timeOut = 'Default Timeout',
+    id,
+    type,
+    route
 }) => {
 
 
@@ -127,48 +134,48 @@ const Card = ({
                                     <img src={icon} alt={icon} />
                                 </div>
 
-                                {index !== 2 
-                                    ? <p className={`${styles.utilityItem} ${styles.utilityBorder}`}>{linkKey}</p>
-                                    : <p className={`${styles.utilityItem}`}>{linkKey}</p>
-                                }
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                <div className={`${styles.bodyContainer.large} ${styles.bodyContainer.small}`}>
-                    <div className={styles.descriptionContainer}>
-                        <p className={`text-justify`}>{description}</p>
-                    </div>
-                    <div className={styles.footerContainer}>
-                        <div className={styles.socialContainer}>
-                            {socialMediaIcons.map(({ icon: Icon, linkKey, isExternal }, index) => {
-                                // if (NODE_ENV === 'development') {
-                                //     console.log(linkKey);
-                                // }
-                                return linkKey ? (
-                                    isExternal ? (
-                                        <a href={linkKey} key={index} target="_blank" rel="noopener noreferrer">
-                                            <Icon />
-                                        </a>
-                                    ) : (
-                                        <Link to={linkKey} key={index}>
-                                            <Icon />
-                                        </Link>
-                                    )
-                                ) : null;
-                            })}
-                        </div>
-                        <div className="flex justify-between">
-                            <div className={styles.bookmarkContainer}>
-                                <div>
-                                    <img src={BookMark} alt="Bookmark" />
+                                    {index !== 2 
+                                        ? <p className={`${styles.utilityItem} ${styles.utilityBorder}`}>{linkKey}</p>
+                                        : <p className={`${styles.utilityItem}`}>{linkKey}</p>
+                                    }
                                 </div>
-                                <Link to="">
-                                    <img src={Map} alt="Map" />
-                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                    <div className={`${styles.bodyContainer.large} ${styles.bodyContainer.small}`}>
+                        <div className={styles.descriptionContainer}>
+                            <p className={`text-justify`}>{description}</p>
+                        </div>
+                        <div className={styles.footerContainer}>
+                            <div className={styles.socialContainer}>
+                                {socialMediaIcons.map(({ icon: Icon, linkKey, isExternal }, index) => {
+                                    // if (NODE_ENV === 'development') {
+                                    //     console.log(linkKey);
+                                    // }
+                                    return linkKey ? (
+                                        isExternal ? (
+                                            <a href={linkKey} key={index} target="_blank" rel="noopener noreferrer">
+                                                <Icon />
+                                            </a>
+                                        ) : (
+                                            <Link to={linkKey} key={index}>
+                                                <Icon />
+                                            </Link>
+                                        )
+                                    ) : null;
+                                })}
                             </div>
+                            <div className="flex justify-between cursor-pointer">
+                                <div className={styles.bookmarkContainer}>
+                                    <div>
+                                        <img src={BookMark} alt="Bookmark" onClick={()=> addFavorite(id,type)} />
+                                    </div>
+                                    <Link to="">
+                                        <img src={Map} alt="Map" />
+                                    </Link>
+                                </div>
 
-                            <Link to={`/company/companydetail/${companyUrl}`} className={styles.readMoreLink}>
+                            <Link to={route} className={styles.readMoreLink}>
                                 <Button className={styles.button} variant="primary" size="large">
                                     Read More
                                 </Button>

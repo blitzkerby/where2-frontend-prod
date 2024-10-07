@@ -2,9 +2,11 @@
 
 # test
 test/
+/test
 
 # temporary
 /temp
+temp/
 
 
 # dependencies
@@ -31,8 +33,3 @@ yarn-error.log*
 
 .env
 pnpm-lock.yaml
-
-temp/
-
-/temp
-/test
