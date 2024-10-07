@@ -35,7 +35,13 @@ const config = {
    // Jobs
    job: {
     getAllJob: `${ API_URL }/api/jobs`,
-    getAssociatedCompany: (jobId) => `${ API_URL }/api/jobs/associatedCompany/${jobId}`
+     getAssociatedCompany: (jobId) => `${ API_URL }/api/jobs/associatedCompany/${ jobId }`,
+  },
+   // Favorites
+  favorite: {
+    addFavorite: `${ API_URL }/api/favorites/addFavorite`,
+    getFavorite:(userId,category) => `${ API_URL }/api/favorites/${userId}/${category}`,
+    
   }
 
 };

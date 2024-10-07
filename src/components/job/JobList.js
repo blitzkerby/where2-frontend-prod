@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import ListContainer from "../reusable/ListContainer";
 import { setCurrentPage, selectCurrentPage, selectItemsPerPage, selectTotalItems } from '../../features/slices/paginationSlice';
 import PaginationComponent from "../reusable/Pagination";
+import { addFavorite } from "../../features/slices/favoriteSlice";
 const JobList = () => {
     const dispatch = useDispatch();
     const { jobs } = useSelector((state) => state.job);
@@ -36,7 +37,7 @@ const JobList = () => {
                                 deadLine={job.deadline}
                                 timeOut={job.salary}
                                 type={"job"}
-                                route={`/job-detail/${job.id}`}
+                                route={`/job-detail/${ job.id }`}
                             />
                         )
                     })
