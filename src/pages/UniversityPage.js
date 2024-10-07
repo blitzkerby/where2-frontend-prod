@@ -8,7 +8,7 @@ import UniversityList from '../components/UniversityList';
 
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
-import Pagination from '../temp/Pagination';
+// import Pagination from '../temp/Pagination';
 import ListContainer from '../components/reusable/ListContainer';
 
 
@@ -28,7 +28,7 @@ const UniversityPage = () => {
             {error && <p>{error}</p>}
             <ListContainer>
                 <UniversityList universities={universities} />
-                <Pagination />
+                {/* <Pagination /> */}
             </ListContainer>
             <Footer />
         </div>
