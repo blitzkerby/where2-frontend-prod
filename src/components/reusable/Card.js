@@ -37,7 +37,10 @@ const Card = ({
     } = {}, 
     location = 'Default Location', 
     deadLine = 'Default Deadline', 
-    timeOut = 'Default Timeout'
+    timeOut = 'Default Timeout',
+    id,
+    type,
+    route
 }) => {
 
     const socialMediaIcons = [
@@ -165,7 +168,7 @@ const Card = ({
                                     </Link>
                                 </div>
 
-                            <Link to={`/company/companydetail/${companyUrl}`} className={styles.readMoreLink}>
+                            <Link to={route} className={styles.readMoreLink}>
                                 <Button className={styles.button} variant="primary" size="large">
                                     Read More
                                 </Button>
