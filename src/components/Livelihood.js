@@ -1,5 +1,4 @@
 import CardSlider from "./reusable/CardsSlider";
-import ListContainer from "./reusable/ListContainer";
 import PartTimeJob from '../assets/images/part-time-job.jpg';
 import StudentLoan from '../assets/images/student-loan.jpeg';
 import Accommodation from '../assets/images/accommodation.jpg';
@@ -9,7 +8,6 @@ import LivelihoodBox from "./reusable/LivelihoodBox";
 import { useState, useEffect } from "react";
 const Livelihood = () => {
     const [isMobile, setIsMobile] = useState(false);
-  
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth < 768);
@@ -38,7 +36,7 @@ const Livelihood = () => {
     ];
     return (
         <section className="bg-[#F4F8FA]">
-            <ListContainer>
+            <div className="flex flex-col align-middle justify-center gap-6 p-6 mt-[64px] h-max">
                 <img src={LiveliHood} />
                 <CardSlider cards={cards} header={"Finish Graduation?"} />
                 <section className="flex gap-x-12 px-12 mx-auto mb-[64px]">
@@ -54,7 +52,7 @@ const Livelihood = () => {
                         </div>
                     </div>
                 </section>
-            </ListContainer>
+            </div>
         </section>
     );
 };
