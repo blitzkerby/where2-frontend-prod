@@ -17,7 +17,7 @@ const CollectionPanel = ({category}) => {
     let renderFavorite;
     useEffect(() => {
         dispatch(getFavorite(category))
-    }, [favorites]);
+    }, [category]);
     if (!isLoading) {
         favorites = favorites.map(fav => fav.job)
         console.log('new favorite',favorites);
