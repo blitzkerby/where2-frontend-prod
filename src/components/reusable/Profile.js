@@ -25,7 +25,6 @@ const contentComponents = {
   userList: UserListing,
   jobList: PartTimeJobListing,
   accommodationList: AccommodationListing,
-  // job: CollectionPanel,
 };
 
 const Profile = ({ userData }) => {
