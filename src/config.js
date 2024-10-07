@@ -1,3 +1,4 @@
+import { scholarships } from "./components/scholarships";
 
 const getEnvVariable = (key, defaultValue = "") => {
     if (typeof process !== "undefined" && process.env && process.env[key]) {
@@ -48,8 +49,14 @@ const getEnvVariable = (key, defaultValue = "") => {
     job: {
       getAllJob: `${ API_URL }/api/jobs`,
       getAssociatedCompany: (jobId) => `${ API_URL }/api/jobs/associatedCompany/${jobId}`
+    },
+
+    scholarships: {
+      getAllScholarships: `${API_URL}/api/scholarships`,
+      
     }
+
     
   };
-  
+  console.log(config);
   export default config;
