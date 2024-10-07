@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Facebook, Instagram, Twitter, Youtube, Chrome } from "lucide-react";
 
 // assets
-import Map from "../../assets/svg/map.svg";
+import Map from "./../../assets/svg/map.svg";
 import BookMark from "../../assets/svg/bookmark.svg";
 import MiniMap from "../../assets/svg/miniMap.svg";
 import MiniClock from "../../assets/svg/miniClock.svg";
