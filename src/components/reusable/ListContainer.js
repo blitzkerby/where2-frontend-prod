@@ -1,7 +1,7 @@
 
 const ListContainer = ({children}) => {
     return (
-        <div className="flex flex-col align-middle justify-center gap-6 p-6 mt-[64px] h-max">
+        <div className="max-w-full lg:max-w-[980px] sm:w-[100%] mx-auto gap-[30px] lg:gap-[40px] mt-[248px] lg:mt-[276px] grid sm:px-[35px]">
            {children}
         </div>
     );

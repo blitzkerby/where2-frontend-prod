@@ -73,7 +73,7 @@ function PaginationComponent({ renderCard, filteredScholarships }) {
     return pageNumbers;
   };
 
-  const pageNumbers = generatePageNumbers();
+  const pageNumbers = generatePagaeNumbers();
 
   const [isHoveredLeft, setIsHoveredLeft] = useState(false);
   const [isHoveredRight, setIsHoveredRight] = useState(false);
