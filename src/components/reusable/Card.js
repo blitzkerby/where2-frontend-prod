@@ -19,6 +19,7 @@ import Button from './ButtonComponent';
 // styles
 
 
+
 const Card = ({ 
     image = DefaultCardImage, 
     imageAlt = 'default alt text', 
@@ -35,6 +36,7 @@ const Card = ({
     deadLine = 'Default Deadline', 
     timeOut = 'Default Timeout'
 }) => {
+
 
     const socialMediaIcons = [
         { icon: Facebook, linkKey: facebookLink },
@@ -59,16 +61,17 @@ const Card = ({
         description: "text-p mb-8",
 
         /* image */
-        image: "min- max- object-cover",
-        
+        image: "top-0 left-0 w-full h-full object-cover -z-10",
+                
         /* container */
         container: {
-            large: `relative clip-border-box rounded-xl border flex sm:flex-col md:flex-row shadow-md lg:h-[348px] w-[100%]`,
-            small: `sm:h-[341px] w-[100%]`,
+            large: `relative clip-border-box rounded-xl border flex md:flex-row shadow-md lg:h-[348px]`,
+            small: `sm:max-w-[600px] sm:flex-col`,
         },
         imageContainer: {
-            large: "lg:h-auto rounded-xl",
-            small: "",
+            backgroundStyles: `bg-cover bg-center`,
+            large:"lg:w-[398px] lg:w-[398px]",
+            small:"sm:w-[100%] sm:max-h-[348px]"
         },
         contentContainer: {
             large: "flex-1 lg:pl-9 lg:pr-5 lg:py-3",
@@ -102,11 +105,15 @@ const Card = ({
         readMoreLink: "text-blue-500 hover:underline",
         button: "text-1xl p-2 px-3",
     };
-    
     return (
         <div className={`${styles.container.small} ${styles.container.large}`}>
-            <div className={`${styles.imageContainer.large} ${styles.imageContainer.small}`}>
-                <img className={styles.image} src={image} alt={imageAlt || title} />
+            <div className={`
+                    ${styles.imageContainer.small}
+                    ${styles.imageContainer.large} 
+                    ${styles.imageContainer.backgroundStyles}
+                `}>
+                {/* <img className={`${styles.image}`} src={image} alt={imageAlt} /> */}
+                <img className={`${styles.image}`} src={"https://i.pinimg.com/564x/1b/b6/95/1bb69534ae81c183c82154062df5d94f.jpg"} alt={imageAlt} />
             </div>
             <div className={`${styles.contentContainer.large} ${styles.contentContainer.small}`}>
                 <div className={styles.headerContainer}>
