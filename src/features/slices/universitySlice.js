@@ -8,8 +8,7 @@ export const fetchUniversities = createAsyncThunk(
     'universities/fetchUniversities',
     async ({ page , limit }) => {
         const response = await axios.get(`${config.universities.getAllUniversities}?page=${page}&limit=${limit}`);
-
-        return response.data.universities;
+        return response.data;
     }
 );
 
@@ -38,7 +37,11 @@ const universitySlice = createSlice({
             })
             .addCase(fetchUniversities.fulfilled, (state, action) => {
                 state.loading = false;
-                state.universities = action.payload;
+                state.universities = action.payload.universities;
+                state.totalItems = action.payload.pagination.totalItems;
+                state.totalPage = action.payload.pagination.totalPages;
+                state.currentPage = action.payload.pagination.currentPage;
+                state.pageSize = action.payload.pagination.pageSize;
             })
             .addCase(fetchUniversities.rejected, (state, action) => {
                 state.loading = false;
@@ -46,7 +49,6 @@ const universitySlice = createSlice({
             });
     },
 });
-
 
 export const { setCurrentPage, setTotalPage } = universitySlice.actions;
 export default universitySlice.reducer;
