@@ -7,11 +7,11 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import UniversityPage from "./pages/UniversityPage";
+import ScholarshipPage from "./pages/ScholarshipPage";
 import VerificationPage from "./pages/VerificationPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ForgetPasswordPage from "./pages/ForgetPasswordPage";
 import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
-import ScholarshipList from "./components/ScholarshipList";
 
 import UserProfile from "./components/UserProfile";
 import DashboardComponent from "./components/Dashboard";
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     element: <HomePage />
   },
   { path: "/universities", element: <UniversityPage />},
-  { path: "/scholarships", element: <ScholarshipList/>},
+  { path: "/scholarships", element: <ScholarshipPage/>},
   { path: "/login",element: <LoginPage />},
   { path: "/signup",element: <RegisterPage />},
   { path: "/forget-password", element: <ForgetPasswordPage />},
