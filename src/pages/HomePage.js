@@ -6,7 +6,9 @@ import Hero from "../layouts/Hero";
 import Searchbar from "../components/reusable/SearchBar";
 
 // assets
-import MainHero from '../assets/images/home-banner-neo.png';
+import MainHero from '../assets/images/content-module-hero1-no-bg.png';
+import SecondaryHero from "../assets/images/content-module-hero2.png"
+import CardSlider from "../components/reusable/CardsSlider";
 
 const hero1 = {
   title: "DISCOVER YOUR FUTURE.",
@@ -33,24 +35,47 @@ const hero2 = {
   mainImageAlt: "University building",
   onSearch: () => { },
 }
-
-
+const cards = [
+  {
+    title: "Scholarships",
+    description: "Find out available scholarships.",
+    image: "https://pppenglish.sgp1.digitaloceanspaces.com/image/main/field/image/the_royal_university_of_phnom_penh.jpg"
+  },
+  {
+    title: "Universities",
+    description: "Find a university based on your needs.",
+    image: "https://pppenglish.sgp1.digitaloceanspaces.com/image/main/field/image/the_royal_university_of_phnom_penh.jpg"
+  },
+  {
+    title: "Universities",
+    description: "Find a university based on your needs.",
+    image: "https://pppenglish.sgp1.digitaloceanspaces.com/image/main/field/image/the_royal_university_of_phnom_penh.jpg"
+  },{
+    title: "Universities",
+    description: "Find a university based on your needs.",
+    image: "https://pppenglish.sgp1.digitaloceanspaces.com/image/main/field/image/the_royal_university_of_phnom_penh.jpg"
+  },{
+    title: "Universities",
+    description: "Find a university based on your needs.",
+    image: "https://pppenglish.sgp1.digitaloceanspaces.com/image/main/field/image/the_royal_university_of_phnom_penh.jpg"
+  },{
+    title: "Universities",
+    description: "Find a university based on your needs.",
+    image: "https://pppenglish.sgp1.digitaloceanspaces.com/image/main/field/image/the_royal_university_of_phnom_penh.jpg"
+  }]
 const HomePage = () => {
-  // const location = useLocation();
 
   return (
     <div>
-      <Navbar />
-      {/* <VisitTracker path={location.pathname} /> */}
-      <Navbar />
-
+      <Navbar/>
+      
       <Hero props={hero1}>
         <Searchbar searchPlaceholder={hero1.searchPlaceholder} />
       </Hero>
-
+      <CardSlider cards={cards}/>
       <Hero props={hero2} />
-
-      <Footer />
+      <Footer/>
+      
     </div>
   );
 };

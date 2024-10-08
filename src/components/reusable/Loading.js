@@ -1,5 +1,5 @@
 import React from "react";
-import { Loader2 } from "lucide-react";
+import { Loader2 , Ellipsis } from "lucide-react";
 
 const LoadingSpinner = ({
   size = 24,
@@ -8,7 +8,15 @@ const LoadingSpinner = ({
 }) => {
   return (
     <div className={`flex items-center justify-center ${className}`}>
-      <Loader2 size={size} color={color} className="animate-spin" />
+      <div class="flex flex-row gap-2">
+  <div class="w-4 h-4 rounded-full bg-black animate-bounce"></div>
+  <div
+    class="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:-.3s]"
+  ></div>
+  <div
+    class="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:-.5s]"
+  ></div>
+</div>
     </div>
   );
 };
