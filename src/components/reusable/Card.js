@@ -73,7 +73,7 @@ const Card = ({
         /* container */
         container: {
             large: `relative clip-border-box rounded-xl border flex md:flex-row shadow-md lg:h-[348px]`,
-            small: `sm:max-w-[600px] sm:flex-col`,
+            small: `sm:max-w-[600px] sm:w-[100%] sm:flex-col`,
         },
         imageContainer: {
             backgroundStyles: `bg-cover bg-center`,

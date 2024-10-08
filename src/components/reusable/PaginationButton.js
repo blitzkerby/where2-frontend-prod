@@ -21,7 +21,7 @@ const commonStyle = {
  * <PaginationButton type="next" />
  */
 
-const PaginationButton = ({ type, onClick, isActive }) => {
+const PaginationButton = ({ key, currentNumber, type, onClick, isActive }) => {
     const renderButtonContent = () => {
         switch (type) {
             case 'prev':
@@ -29,7 +29,7 @@ const PaginationButton = ({ type, onClick, isActive }) => {
             case 'next':
                 return <MdOutlineKeyboardArrowRight />;
             case 'number':
-                return <>{isActive}</>;
+                return <>{currentNumber}</>;
             default:
                 return null;
         }
@@ -44,6 +44,7 @@ const PaginationButton = ({ type, onClick, isActive }) => {
 
     return (
         <button
+            key={key}
             className={commonClass}
             style={PaginationStyle}
             onClick={onClick}
