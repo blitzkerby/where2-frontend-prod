@@ -3,9 +3,11 @@
 # test
 test/
 /test
+/test
 
 # temporary
 /temp
+temp/
 temp/
 
 
@@ -33,3 +35,5 @@ yarn-error.log*
 
 .env
 pnpm-lock.yaml
+
+temp/
