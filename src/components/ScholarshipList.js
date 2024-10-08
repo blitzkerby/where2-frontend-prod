@@ -29,11 +29,6 @@ export default function ScholarshipList() {
             id: 'sadsd',
             label: 'Status',
             content: ['Open', 'Closed']
-        },
-        {
-            id: 'sadsd',
-            label: 'Deadline',
-            content: ['In 30days', 'Expired']
         }
     ];
 

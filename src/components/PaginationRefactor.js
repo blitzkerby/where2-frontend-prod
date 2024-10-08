@@ -1,13 +1,13 @@
 import PaginationButton from "./reusable/PaginationButton"
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPage } from "../features/slices/universitySlice";
+import { setCurrentPage, setTotalPage } from "../features/slices/universitySlice";
 
 const Pagination = () => {
     const dispatch = useDispatch();
 
     const currentPage = useSelector((state) => state.universities.currentPage);
     const totalPage = useSelector((state) => state.universities.totalPage);
-    
+
     const handlePageChange = (newPage) => {
         dispatch(setCurrentPage(newPage));
     }
@@ -19,8 +19,8 @@ const Pagination = () => {
     return (
         <div className='flex items-center justify-center my-16 px-1 gap-[18px]'>
 
-            <PaginationButton 
-                type={'prev'} 
+            <PaginationButton
+                type={'prev'}
                 // onClick={handlePrevClick} 
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
@@ -38,7 +38,7 @@ const Pagination = () => {
 
             <span>{currentPage} of {totalPage}</span>
 
-            <PaginationButton 
+            <PaginationButton
                 type={'next'}
                 // onClick={handleNextClick}
                 onClick={() => handlePageChange(currentPage + 1)}

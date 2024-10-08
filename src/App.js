@@ -11,6 +11,7 @@ import VerificationPage from "./pages/VerificationPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ForgetPasswordPage from "./pages/ForgetPasswordPage";
 import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
+import ScholarshipList from "./components/ScholarshipList";
 
 import UserProfile from "./components/UserProfile";
 import DashboardComponent from "./components/Dashboard";
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
     element: <HomePage />
   },
   { path: "/universities", element: <UniversityPage />},
+  { path: "/scholarships", element: <ScholarshipList/>},
   { path: "/login",element: <LoginPage />},
   { path: "/signup",element: <RegisterPage />},
   { path: "/forget-password", element: <ForgetPasswordPage />},
@@ -41,6 +43,7 @@ const router = createBrowserRouter([
   { path: "/profile/:userName", element: <UserProfile /> },
   { path: "/jobs", element: <JobPage /> },
   { path: "/job-detail/:jobId", element: <JobDetailPage/> },
+
 ]);
 
 function App() {
