@@ -42,7 +42,6 @@ export default function ScholarshipList() {
     };
 
     const filteredScholarships = scholarships.filter(scholarship => 
-        (scholarship.deadLine && (new Date(scholarship.deadLine) - new Date()) >= 30) ||
         currentFilterUni === '' ||
         (scholarship.university === currentFilterUni) ||
         (scholarship.location === currentFilterUni) ||
