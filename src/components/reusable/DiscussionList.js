@@ -34,7 +34,7 @@ const DiscussionList = () => {
     <div className="max-w-4xl mx-auto p-6">
       <div className="flex justify-between h-full items-center">
         <h2 className="text-xl sm:hidden">Community Discussions</h2>
-        { showDashboard &&          <Button
+        { showDashboard &&  <Button
           variant="primary"
           className="mt-2 w-[197px] sm:w-full h-[38px] sm:w-[343px] sm:h-[50px]"
           onClick={() => {/* Navigate to create discussion */}}
