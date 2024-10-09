@@ -3,10 +3,12 @@ import axios from 'axios';
 import Button from './ButtonComponent';
 import config from './../../config';
 import { LoadingOverlay } from './Loading';
+import useAuth from './../../hooks/useAuth';
 
 const DiscussionList = () => {
   const [discussions, setDiscussions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { showDashboard } = useAuth();
 
   const fetchDiscussions = async () => {
     try {
@@ -32,13 +34,13 @@ const DiscussionList = () => {
     <div className="max-w-4xl mx-auto p-6">
       <div className="flex justify-between h-full items-center">
         <h2 className="text-xl sm:hidden">Community Discussions</h2>
-        <Button
+        { showDashboard &&          <Button
           variant="primary"
           className="mt-2 w-[197px] sm:w-full h-[38px] sm:w-[343px] sm:h-[50px]"
           onClick={() => {/* Navigate to create discussion */}}
         >
           New Discussion
-        </Button>
+        </Button>}
       </div>
 
       <div className="space-y-4">
