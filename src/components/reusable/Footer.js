@@ -59,7 +59,7 @@ function Footer () {
               <li className="flex items-center mb-1">
                 <span className="mr-2"><CiMail />
 								</span>
-                <a href="mailto:where2@gmail.com" className="hover:underline">developers@w2hub.org</a>
+                <a href="mailto:developers@w2hub.org" className="hover:underline">developers@w2hub.org</a>
               </li>
               <li className="flex items-center">
                 <span className="mr-2"><CiLocationOn /></span>

@@ -1,5 +1,6 @@
 import React from 'react';
 import HealthArticleCard from './reusable/HealthArticleCard';
+import WrapperComponent from './reusable/WrapperComponent';
 
 const articles = [
     {
@@ -33,7 +34,9 @@ const articles = [
 const Health = () => {
   return (
     <div className="w-full h-full mt-16 bg-slate-950 font-light tracking-[-0.08em]">
-      <div className="lg:w-[750px] sm:w-full mx-auto h-auto lg:h-[341px] sm:h-[242px] flex flex-col justify-center items-center">
+        <WrapperComponent  
+        >
+                  <div className="lg:w-[750px] sm:w-full mx-auto h-auto lg:h-[341px] sm:h-[242px] flex flex-col justify-center items-center">
         <h1 className="lg:w-full sm:w-[90%] lg:h-[198px] sm:h-[128px] mx-[10px] lg:text-[48px] sm:text-[31px] lg:font-bold sm:font-semibold flex align-center justify-center text-center text-white my-[10px] py-[16px]">
             Mental Health and Health Services and Product Reviews
         </h1>
@@ -43,12 +46,14 @@ const Health = () => {
             </p>
         </div>
       </div>
+        </WrapperComponent>
       <div className="w-full h-full py-8 px-4">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-white text-[22px] font-bold text-center lg:mb-12 sm:py-6 underline">
               Health Article
             </h1>
             
+            <WrapperComponent>
             <div className="grid lg:grid-cols-2 gap-6">
               {articles.map((article, index) => (
                 <HealthArticleCard
@@ -60,6 +65,7 @@ const Health = () => {
                 />
               ))}
             </div>
+            </WrapperComponent>
           </div>
         </div>
     </div>
