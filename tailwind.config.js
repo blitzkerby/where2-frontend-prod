@@ -9,11 +9,12 @@ module.exports = {
   ],
   theme: {
     screens: {
-      'sm': {'max': '980px'},
-      'lg': { 'min': '1004px' },
+      sm: { 'max': "980px" },
+      lg: { 'min': "981px" },
     },
     extend: {
       spacing: {
+        
         10: "10px",
         20: "20px",
         30: "30px",
@@ -25,6 +26,8 @@ module.exports = {
         "image-container-top-margin": "5rem",
       },
       padding: {
+        'sectional-top': '5rem',
+        '14': '3.5rem',
         'sectional-top': '5rem',
         '14': '3.5rem',
       },

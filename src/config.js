@@ -36,6 +36,10 @@ const config = {
     getS3Url: `${API_URL}/api/user/s3Url`,
     uploadProfilePicture: `${API_URL}/api/user/profile-picture`,
     fetchProfilePicture: (userId) => `${API_URL}/api/user/${userId}/profile-picture`,
+  },
+  community: {
+    postDiscussion: `${API_URL}/api/discussion`,
+    getDiscussions: `${API_URL}/api/discussions`,
   }
 };
 export default config;

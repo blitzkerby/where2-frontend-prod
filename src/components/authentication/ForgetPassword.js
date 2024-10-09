@@ -67,7 +67,7 @@ const ForgetPasswordComponent = () => {
         <div className="flex justify-center items-center">
           <ButtonComponent
             variant="primary"
-            className="mt-2 w-[197px] h-[32px] sm:w-[343px] sm:h-[50px]"
+            className="mt-2 w-[197px] sm:w-full h-[38px] sm:w-[343px] sm:h-[50px]"
             type="submit"
             disabled={status === "loading"}
           >

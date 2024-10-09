@@ -8,6 +8,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
 import VerificationPage from "./pages/VerificationPage";
 import DashboardComponent from "./components/accountUtilities/sidebarComponents/Admin/Dashboard";
+import DiscussionsPage from "./pages/DiscussionPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
@@ -29,7 +30,8 @@ const router = createBrowserRouter([
   { path: "/terms-and-conditions", element: <TermsAndConditionsPage/>},
   { path: "/signup/verification", element: <VerificationPage/> },
   { path: "/dashboard/:userName", element: <DashboardComponent/> },
-  { path: "/profile/:userName", element: <UserProfile/> }
+  { path: "/profile/:userName", element: <UserProfile/> },
+  { path: "/community", element: <DiscussionsPage/> },
 ]);
 
 function App() {

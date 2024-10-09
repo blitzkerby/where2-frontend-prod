@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { X } from "lucide-react";
+import { MessageCircleMore } from "lucide-react";
 import Dashboard from "./../../assets/svg/dashboard.svg";
 import Menu from "./../../assets/svg/menu.svg";
 import useAuth from "./../../hooks/useAuth";
@@ -54,6 +55,12 @@ const Navbar = () => {
       to: `/profile/${encodeURIComponent(username || entity)}`,
       showMobile: true,
       showDesktop: false
+    },
+    {
+      logo: <MessageCircleMore/>,
+      name: "Community",
+      to: "/community",
+      showMobile: true,
     },
     {
       logo: <LucideMessageCircleQuestion />,
