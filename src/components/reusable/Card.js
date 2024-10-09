@@ -91,9 +91,8 @@ const Card = ({
     route
 }) => {
     const navigate = useNavigate()
-
+    
     const handleReadMoreClick = () => {
-        console.log("ID:" ,id)
         navigate(`${route}/${id}`)
     }
 
