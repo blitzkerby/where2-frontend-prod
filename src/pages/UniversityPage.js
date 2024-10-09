@@ -8,7 +8,7 @@ import UniversityList from '../components/UniversityList';
 
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
-import Pagination from '../components/PaginationRefactor';
+import Pagination from '../components/reusable/Pagination';
 import ListContainer from '../components/reusable/ListContainer';
 
 const UniversityPage = () => {

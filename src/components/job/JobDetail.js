@@ -1,18 +1,21 @@
+import { useEffect , useState } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import jobSlice, { fetchCompany } from "../../features/slices/jobSlice";
+
+import { useParams } from "react-router-dom";
 
 import Gmail from "./../../assets/svg/gmail.svg";
 import Website from "./../../assets/svg/website.svg";
 import Telephone from "./../../assets/svg/telephone.svg";
 import Location from "./../../assets/svg/location.svg";
 
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import jobSlice, { fetchCompany } from "../../features/slices/jobSlice";
-import ContactCard from "../reusable/ContactCard";
-import DetailText from "../reusable/DetailText";
-import { useParams } from "react-router-dom";
-import { useState } from "react";
 import { Cpu } from "lucide-react";
 import IconText from "../reusable/IconText";
+
+import DetailText from "../reusable/DetailText";
+import ContactCard from "../reusable/ContactCard";
+
 const JobDetail = () => {
     const dispatch = useDispatch();
     const { company } = useSelector(state => state.job);

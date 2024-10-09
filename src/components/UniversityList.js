@@ -1,5 +1,7 @@
 import Card from "./reusable/Card";
 
+import config from "../config";
+
 const UniversityList = ({ universities }) => {
     return (
         <>
@@ -15,6 +17,8 @@ const UniversityList = ({ universities }) => {
                     telegramLink={university.telegram_url}
                     websiteLink={university.website}
                     location={university.location}
+                    id={university.id}
+                    route={"universities"}
                 />
             ))}
         </>

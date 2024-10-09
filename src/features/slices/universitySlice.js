@@ -7,15 +7,25 @@ import config from "../../config"
 export const fetchUniversities = createAsyncThunk(
     'universities/fetchUniversities',
     async ({ page , limit }) => {
-        const response = await axios.get(`${config.universities.getAllUniversities}?page=${page}&limit=${limit}`);
+        const response = await axios.get(`${config.universities.getAllUniversity}?page=${page}&limit=${limit}`);
         return response.data;
     }
 );
+
+export const fetchUniversity = createAsyncThunk(
+    'universities/fetchUniversity',
+    async (id) => {
+        // const response = await axios.get(`${config.universities.getAllUniversity}/${id}`);
+        const response = await axios.get(`http://127.0.0.1:4000/api/university/1`);
+        return response.data;
+    }
+)
 
 const universitySlice = createSlice({
     name: 'universities',
     initialState: {
         universities: [],
+        university: [],
         loading: false,
         error: null,
         currentPage: 1,
@@ -35,6 +45,10 @@ const universitySlice = createSlice({
                 state.loading = true;
                 state.error = null;
             })
+            .addCase(fetchUniversity.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
             .addCase(fetchUniversities.fulfilled, (state, action) => {
                 state.loading = false;
                 state.universities = action.payload.universities;
@@ -43,10 +57,18 @@ const universitySlice = createSlice({
                 state.currentPage = action.payload.pagination.currentPage;
                 state.pageSize = action.payload.pagination.pageSize;
             })
+            .addCase(fetchUniversity.fulfilled, (state, action) => {
+                state.loading = false;
+                state.university = action.payload.university;
+            })
             .addCase(fetchUniversities.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
-            });
+            })
+            .addCase(fetchUniversity.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+            })
     },
 });
 
