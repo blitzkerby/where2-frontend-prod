@@ -1,4 +1,30 @@
 import React from 'react';
+import HealthArticleCard from './reusable/HealthArticleCard';
+
+const articles = [
+    {
+      image: "/api/placeholder/400/300",
+      title: "Reizmagen: Symptome erkennen und behandeln",
+      description: "Schmerzen und Unwohlsein nach dem Essen können Symptome eines Reizmagens sein. Welche Rolle spielen Ernährung und Stress?"
+    },
+    {
+      image: "/api/placeholder/400/300",
+      title: "Sport trotz Infekt: So riskieren Zverev und Co. ihre Gesundheit",
+      description: "Husten, Schnupfen, Herzprobleme - auch leichte Infekte können für Athleten gefährlich werden. Mediziner warnen Sportler davor, ihre Gesundheit aufs Spiel zu setzen."
+    },
+    {
+      image: "/api/placeholder/400/300",
+      title: "Ozempic: Für wen eignet sich die Abnehmspritze?",
+      description: "Ozempic wurde als Diabetes-Medikament entwickelt, wird aber auch zum Abnehmen genutzt. Was sollten Sie wissen?"
+    },
+    {
+      image: "/api/placeholder/400/300",
+      title: "Reha beantragen: Was sollten Patienten beachten?",
+      description: "Eine Reha kann nach Krankheit oder OP den Heilungsprozess unterstützen. Wie Sie die Rehabilitation beantragen."
+    }
+  ];
+
+
 
 const Health = () => {
   return (
@@ -13,6 +39,24 @@ const Health = () => {
             </p>
         </div>
       </div>
+      <div className="w-full min-h-screen py-8 px-4">
+          <div className="max-w-7xl mx-auto">
+            <h1 className="text-white text-4xl font-bold text-center mb-12">
+              Gesundheit
+            </h1>
+            
+            <div className="grid lg:grid-cols-2 gap-6">
+              {articles.map((article, index) => (
+                <HealthArticleCard
+                  key={index}
+                  image={article.image}
+                  title={article.title}
+                  description={article.description}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
     </div>
   );
 };
