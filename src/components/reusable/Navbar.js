@@ -80,7 +80,7 @@ const Navbar = () => {
           <Link to="/" className="text-xl font-bold">
             WHERE2
           </Link>
-          <div className="flex align-center justify-between h-full lg:w-9/12">
+          <div className="flex align-center justify-between h-full mx-auto lg:w-[800px] tracking-tighter">
             {menuItems.filter(item => item.showDesktop !== false).map((item) => (
               <Link
                 key={item.name}
