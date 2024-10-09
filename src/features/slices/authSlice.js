@@ -1,9 +1,9 @@
 import {
-    createSlice,
-    createAsyncThunk,
-    createEntityAdapter,
-  } from "@reduxjs/toolkit";
-  import axios from "axios";
+  createSlice,
+  createAsyncThunk,
+  createEntityAdapter,
+} from "@reduxjs/toolkit";
+import axios from "axios";
 import config from "../../config"
   
   const handleAsyncError = (error, defaultMessage) => {

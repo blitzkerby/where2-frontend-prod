@@ -1,13 +1,17 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+// import Card from "./components/reusable/Card";
+// import SearchBar from "./components/reusable/SearchBar";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import UniversityPage from "./pages/UniversityPage";
+import ScholarshipPage from "./pages/ScholarshipPage";
 import VerificationPage from "./pages/VerificationPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ForgetPasswordPage from "./pages/ForgetPasswordPage";
+import ScholarshipDetailPage from "./pages/ScholarshipDetailPage";
 import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
 
 import UserProfile from "./components/UserProfile";
@@ -31,17 +35,22 @@ const router = createBrowserRouter([
   },
   { path: "/universities", element: <UniversityPage />},
   { path: "/universities/:id", element: <UniversityDetail /> },
+  { path: "/jobs", element: <JobPage /> },
   { path: "/login",element: <LoginPage />},
   { path: "/signup",element: <RegisterPage />},
+  { path: "/universities", element: <UniversityPage />},
+  { path: "/scholarships", element: <ScholarshipPage/>},
+  { path: "/profile/:userName", element: <UserProfile /> },
+  { path: "/job-detail/:jobId", element: <JobDetailPage/> },
   { path: "/forget-password", element: <ForgetPasswordPage />},
-  { path: "/reset-password/:token", element: <ResetPasswordPage />},
-  { path: "/terms-and-conditions", element: <TermsAndConditionsPage/>},
   { path: "/signup/verification", element: <VerificationPage/> },
   { path: "/dashboard/:userName", element: <DashboardComponent/> },
   { path: "/profile/:userName", element: <UserProfile /> },
-  { path: "/jobs", element: <JobPage /> },
-  { path: "/job-detail/:jobId", element: <JobDetailPage /> },
   { path:"/livelihood", element: <LivelihoodPage />},
+  { path: "/reset-password/:token", element: <ResetPasswordPage />},
+  { path: "/terms-and-conditions", element: <TermsAndConditionsPage/>},
+  { path: "/scholarship/:id", element: <ScholarshipDetailPage/>},
+
 ]);
 
 function App() {

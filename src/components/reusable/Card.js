@@ -91,7 +91,7 @@ const Card = ({
     route
 }) => {
     const navigate = useNavigate()
-    
+
     const handleReadMoreClick = () => {
         navigate(`${route}/${id}`)
     }
@@ -145,7 +145,7 @@ const Card = ({
                                     <img src={icon} alt={icon} />
                                 </div>
 
-                                    {index !== 2 
+                                    {index !== 2
                                         ? <p className={`${styles.utilityItem} ${styles.utilityBorder}`}>{linkKey}</p>
                                         : <p className={`${styles.utilityItem}`}>{linkKey}</p>
                                     }
@@ -196,7 +196,6 @@ const Card = ({
                                     Read More
                                 </Button>
                             </Link>
-                            
                         </div>
                     </div>
                 </div>

@@ -45,15 +45,20 @@ module.exports = {
         pp: "0.75rem",
       },
       screens: {
-        'sm': {'max': '980px'},
-        'rd' : {'min' : '981px', 'max' : '1003px' },
-        'lg': { 'min' : '1004px' },
-        'custom-blue' : 'rbg(0, 122, 255)'
+        'sm': { 'max': '980px' },
+        'rd': { 'min': '981px', 'max': '1003px' },
+        'lg': { 'min': '1004px' },
+        'custom-blue': 'rbg(0, 122, 255)'
       },
       screens: {
-        'sm': {'max': '980px'},
-        'lg': { 'min' : '1004px' },
-        'custom-blue' : 'rbg(0, 122, 255)'
+        'sm': { 'max': '980px' },
+        'lg': { 'min': '1004px' },
+        'custom-blue': 'rbg(0, 122, 255)'
+      },
+      screens: {
+        'sm': { 'max': '980px' },
+        'lg': { 'min': '1004px' },
+        'custom-blue': 'rbg(0, 122, 255)'
       },
       colors: {
         "light-100": "#375761",

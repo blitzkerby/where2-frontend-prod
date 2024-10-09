@@ -45,6 +45,10 @@ const config = {
     addFavorite: `${ API_URL }/api/favorites/addFavorite`,
     getFavorite:(userId,category) => `${ API_URL }/api/favorites/${userId}/${category}`,
     
+  },
+  scholarships: {
+    getAllScholarships: `${API_URL}/api/scholarships`,
+    
   }
 
 };
