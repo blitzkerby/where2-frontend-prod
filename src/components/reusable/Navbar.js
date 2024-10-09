@@ -14,6 +14,7 @@ import {
   ChartColumnIcon,
   User2,
   LucideMessageCircleQuestion,
+  Activity
 } from "lucide-react";
 
 const MenuIcon = <img src={Menu} alt="Menu" />;
@@ -41,7 +42,7 @@ const Navbar = () => {
     { logo: <School />, name: "Universities", to: "/universities", showMobile: true },
     { logo: <BookOpenTextIcon />, name: "Scholarships", to: "/scholarships", showMobile: true },
     { logo: <LucideBriefcaseBusiness />, name: "Livelihood", to: "/livelihood", showMobile: true },
-    { logo: <BookMarked />, name: "Bookmarks", to: "/bookmarks", showMobile: true },
+    { logo: <Activity />, name: "Health", to: "/health", showMobile: true },
     {
       logo: <ChartColumnIcon />,
       name: "Dashboard",

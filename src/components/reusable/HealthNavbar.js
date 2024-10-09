@@ -85,7 +85,7 @@ const HealthNavbar = () => {
 
         <div className="lg:hidden sm:flex justify-between items-center px-4 py-3 h-full w-full">
           <Link to="/" className="text-xl font-bold">
-            WHERE2
+            W2HEALTH
           </Link>
           <button
             onClick={toggleMenu}
