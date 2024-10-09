@@ -19,7 +19,7 @@ const SocialIcon = ({ Icon }) => (
 
 function Footer () {
   return (
-    <footer className="bg-[#E6F3F9] text-gray-700 py-8 px-4 w-full bottom-0 mt-[64px] ">
+    <footer className="bg-[#E6F3F9] text-gray-700 py-8 px-4 w-full bottom-0">
       <div className="container mx-auto max-w-[1440px]">
         <div className="md:flex md:justify-between flex justify-between flex-wrap md:mr-6">
           {/* Desktop: Left column, Mobile: Top section */}
