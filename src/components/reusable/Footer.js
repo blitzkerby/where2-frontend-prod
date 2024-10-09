@@ -32,6 +32,7 @@ function Footer () {
                 <li><FooterLink href="/part-time-job">Part Time Job</FooterLink></li>
                 <li><FooterLink href="/student-loan">Student Loan</FooterLink></li>
                 <li><FooterLink href="/accommodation">Accommodation</FooterLink></li>
+                <li><FooterLink href="/healthcare">W2Health</FooterLink></li>
               </ul>
             </div>
           </div>
@@ -58,7 +59,7 @@ function Footer () {
               <li className="flex items-center mb-1">
                 <span className="mr-2"><CiMail />
 								</span>
-                <a href="mailto:where2@gmail.com" className="hover:underline">where2@gmail.com</a>
+                <a href="mailto:where2@gmail.com" className="hover:underline">developers@w2hub.org</a>
               </li>
               <li className="flex items-center">
                 <span className="mr-2"><CiLocationOn /></span>
