@@ -180,7 +180,6 @@ const Card = ({
                                     Read More
                                 </Button>
                             </Link>
-                            
                         </div>
                     </div>
                 </div>

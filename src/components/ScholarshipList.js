@@ -53,15 +53,17 @@ export default function ScholarshipList() {
             <div className="flex flex-col items-center justify-center gap-6 mt-10 h-max">
                 {currentItems.map((scholarship, index) => (
                     <Card
-                        key={index}  // Add a unique key for each card
-                        image={scholarship.image_url}  // Adjust according to your data structure
-                        imageAlt={scholarship.image_alt}
-                        title={scholarship.name}
-                        description={scholarship.description}
-                        location={scholarship.location}
-                        deadLine={scholarship.deadLine}  // Adjust according to your data structure
-                        // Map other fields as necessary
-                    />
+                    key={scholarship.id}
+                    image={scholarship.image_url}
+                    imageAlt={scholarship.image_alt}
+                    title={scholarship.name}
+                    description={scholarship.description}
+                    location={scholarship.location}
+                    deadLine={scholarship.deadLine}
+                    id={scholarship.id}
+                    route={`/scholarship/${scholarship.id}`}
+                />
+                
                 ))}
             </div>
         );
