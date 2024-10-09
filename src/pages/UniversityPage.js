@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUniversities } from '../features/slices/universitySlice';
+import { fetchUniversities, setCurrentPage } from '../features/slices/universitySlice';
 import { LoadingOverlay } from '../components/reusable/Loading';
 import UniversityList from '../components/UniversityList';
 
@@ -13,7 +13,7 @@ import ListContainer from '../components/reusable/ListContainer';
 
 const UniversityPage = () => {
     const dispatch = useDispatch();
-    const { universities, loading, error, currentPage } = useSelector((state) => state.universities);
+    const { universities, loading, error, currentPage, totalPage } = useSelector((state) => state.universities);
 
     useEffect(() => {
         dispatch(fetchUniversities({ page: currentPage || 1, limit: 10 }));
@@ -26,7 +26,7 @@ const UniversityPage = () => {
                 {loading && <LoadingOverlay />}
                 {error && <p>{error}</p>}
                 <UniversityList universities={universities} />
-                <Pagination />
+                <Pagination totalPage={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
             </ListContainer>
             <Footer />
         </div>

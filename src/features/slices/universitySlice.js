@@ -15,8 +15,7 @@ export const fetchUniversities = createAsyncThunk(
 export const fetchUniversity = createAsyncThunk(
     'universities/fetchUniversity',
     async (id) => {
-        // const response = await axios.get(`${config.universities.getAllUniversity}/${id}`);
-        const response = await axios.get(`http://127.0.0.1:4000/api/university/1`);
+        const response = await axios.get(`${config.universities.getAllUniversity}/${id}`);
         return response.data;
     }
 )
@@ -25,6 +24,7 @@ const universitySlice = createSlice({
     name: 'universities',
     initialState: {
         universities: [],
+        universityId: 0,
         university: [],
         loading: false,
         error: null,

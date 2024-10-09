@@ -2,28 +2,31 @@
 import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUniversities, fetchUniversity } from '../features/slices/universitySlice';
+import { fetchUniversity } from '../features/slices/universitySlice';
 import { LoadingOverlay } from '../components/reusable/Loading';
-import UniversityList from '../components/UniversityList';
 
 import Navbar from '../components/reusable/Navbar';
-import Footer from '../components/reusable/Footer';
-import Pagination from '../components/reusable/Pagination';
+import Footer from '../components/reusable/Footer';;
 import ListContainer from '../components/reusable/ListContainer';
 import Card from '../components/reusable/Card';
+import { useParams } from 'react-router-dom';
 
 const UniversityPage = () => {
     const dispatch = useDispatch();
-    const { university, loading, error, currentPage } = useSelector((state) => state.universities);
+    const { university, universityId, loading, error, currentPage } = useSelector((state) => state.universities);
+
+    const { id } = useParams()
 
     useEffect(() => {
-        dispatch(fetchUniversity(1))
-        console.log(university)
+        console.log(id)
+        dispatch(fetchUniversity(id))
+        // console.log(university)
     }, [dispatch]);
 
     return (
         <div>
             <Navbar />
+            <h1>{id}</h1>
             <ListContainer>
                 {loading && <LoadingOverlay />}
                 {error && <p>{error}</p>}
@@ -40,10 +43,8 @@ const UniversityPage = () => {
                         websiteLink={university.website}
                         location={university.location}
                         id={university.id}
-                        route={"universities"}
+                        route={university.id}
                     />
-
-                <Pagination />
             </ListContainer>
             <Footer />
         </div>

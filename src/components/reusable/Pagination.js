@@ -16,11 +16,9 @@ function debounce(func, delay) {
     };
 }
 
-const Pagination = () => {
+const Pagination = ({ totalPage, currentPage, setCurrentPage }) => {
     const dispatch = useDispatch();
-    const [isButtonDisabled, setIsButtonDisabled] = useState(false)
-    const totalPage = useSelector((state) => state.universities.totalPage);
-    const currentPage = useSelector((state) => state.universities.currentPage);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
     const handlePageChange = (newPage) => {
       window.scrollTo(0,0)

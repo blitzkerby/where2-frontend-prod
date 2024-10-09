@@ -30,7 +30,7 @@ const styles = {
             
     /* container */
     container: {
-        large: `relative clip-border-box rounded-xl border flex md:flex-row shadow-md lg:h-[348px]`,
+        large: `relative clip-border-box rounded-xl border flex md:flex-row shadow-md lg:h-[348px] lg:w-[100%]`,
         small: `sm:max-w-[600px] sm:w-[100%] sm:flex-col`,
     },
     imageContainer: {
@@ -72,36 +72,37 @@ const styles = {
 };
 
 const Card = ({ 
-    image, 
-    imageAlt = 'default alt text', 
-    title = 'Default Title', 
-    description = 'Default Description', 
+    image = '', 
+    imageAlt = '', 
+    title = '', 
+    description = '', 
     socialLinks: {
-        facebookLink = '#', 
-        instagramLink = '#', 
-        twitterLink = '#', 
-        youtubeLink = '#', 
-        websiteLink = '#'
+        facebookLink = '', 
+        instagramLink = '', 
+        twitterLink = '', 
+        youtubeLink = '', 
+        websiteLink = ''
     } = {}, 
-    location = 'Default Location', 
-    deadLine = 'Default Deadline', 
-    timeOut = 'Default Timeout',
+    location = '', 
+    deadLine = '', 
+    timeOut = '',
     id,
     type,
     route
 }) => {
+    console.log((id))
+
     const navigate = useNavigate()
 
     const handleReadMoreClick = () => {
-        navigate(`${route}/${id}`)
+        console.log("REDIRECTING!")
+        navigate(route)
     }
 
     // handling images that do not load properly
     const handleError = (event) => {
         event.target.src = "https://i.pinimg.com/564x/1b/b6/95/1bb69534ae81c183c82154062df5d94f.jpg";
     };
-
-
 
     const socialMediaIcons = [
         { icon: Facebook, linkKey: facebookLink },
@@ -124,14 +125,13 @@ const Card = ({
             <div className={`
                     ${styles.imageContainer.small}
                     ${styles.imageContainer.large} 
-                    ${styles.imageContainer.backgroundStyles}
-                `}>
-            <img 
-                className={`${styles.image}`} 
-                src={image} 
-                alt={imageAlt} 
-                onError={handleError}
-            />
+                    ${styles.imageContainer.backgroundStyles}`
+            }>
+                {
+                    (image)
+                    ? <img className={`${styles.image}`} src={image} alt={imageAlt} onError={handleError}/>
+                    : <></>
+                }
             </div>
             <div className={`${styles.contentContainer.large} ${styles.contentContainer.small}`}>
                 <div className={styles.headerContainer}>
@@ -140,62 +140,60 @@ const Card = ({
                     </div>
                     <div className={styles.utilityContainer}>
                         {workDetails.map(({ icon, linkKey }, index) => (
-                            <div key={index} className={styles.workDetailItem}>
-                                <div className={styles.iconContainer}>
-                                    <img src={icon} alt={icon} />
-                                </div>
-
-                                    {index !== 2
+                            linkKey && (
+                                <div key={index} className={styles.workDetailItem}>
+                                    <div className={styles.iconContainer}>
+                                        <img src={icon} alt={icon} />
+                                    </div>
+                                    {index !== 2 
                                         ? <p className={`${styles.utilityItem} ${styles.utilityBorder}`}>{linkKey}</p>
                                         : <p className={`${styles.utilityItem}`}>{linkKey}</p>
                                     }
                                 </div>
-                            ))}
-                        </div>
+                            )
+                        ))}
                     </div>
-                    <div className={`${styles.bodyContainer.large} ${styles.bodyContainer.small}`}>
-                        <div className={styles.descriptionContainer}>
-                            <p className={`text-justify`}>{description}</p>
+                </div>
+                <div className={`${styles.bodyContainer.large} ${styles.bodyContainer.small}`}>
+                    <div className={styles.descriptionContainer}>
+                        <p className={`text-justify`}>{description}</p>
+                    </div>
+                    <div className={styles.footerContainer}>
+                        <div className={styles.socialContainer}>
+                            {socialMediaIcons.map(({ icon: Icon, linkKey, isExternal }, index) => {
+                                // if (NODE_ENV === 'development') {
+                                //     console.log(linkKey);
+                                // }
+                                return linkKey ? (
+                                    isExternal ? (
+                                        <a href={linkKey} key={index} target="_blank" rel="noopener noreferrer">
+                                            <Icon />
+                                        </a>
+                                    ) : (
+                                        <Link to={linkKey} key={index}>
+                                            <Icon />
+                                        </Link>
+                                    )
+                                ) : null;
+                            })}
                         </div>
-                        <div className={styles.footerContainer}>
-                            <div className={styles.socialContainer}>
-                                {socialMediaIcons.map(({ icon: Icon, linkKey, isExternal }, index) => {
-                                    // if (NODE_ENV === 'development') {
-                                    //     console.log(linkKey);
-                                    // }
-                                    return linkKey ? (
-                                        isExternal ? (
-                                            <a href={linkKey} key={index} target="_blank" rel="noopener noreferrer">
-                                                <Icon />
-                                            </a>
-                                        ) : (
-                                            <Link to={linkKey} key={index}>
-                                                <Icon />
-                                            </Link>
-                                        )
-                                    ) : null;
-                                })}
-                            </div>
-                            <div className="flex justify-between cursor-pointer">
-                                <div className={styles.bookmarkContainer}>
-                                    <div>
-                                        <img src={BookMark} alt="Bookmark" onClick={()=> addFavorite(id,type)} />
-                                    </div>
-                                    <Link to="">
-                                        <img src={Map} alt="Map" />
-                                    </Link>
+                        <div className="flex justify-between cursor-pointer">
+                            <div className={styles.bookmarkContainer}>
+                                <div>
+                                    <img src={BookMark} alt="Bookmark" onClick={()=> addFavorite(id,type)} />
                                 </div>
-
-                            <Link to={route} className={styles.readMoreLink}>
-                                <Button 
-                                        className={styles.button} 
-                                        variant="primary" 
-                                        size="large"
-                                        onClick={() => handleReadMoreClick}
-                                    >
-                                    Read More
-                                </Button>
-                            </Link>
+                                <Link to="">
+                                    <img src={Map} alt="Map" />
+                                </Link>
+                            </div>
+                            <Button 
+                                    className={styles.button} 
+                                    variant="primary" 
+                                    size="large"
+                                    onClick={handleReadMoreClick}
+                                >
+                                Read More
+                            </Button>
                         </div>
                     </div>
                 </div>
