@@ -76,7 +76,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="bg-gray-100 h-[64px] w-full fixed top-0 left-0 right-0 z-[1002]">
-        <div className="flex justify-between gap-x-10 items-center px-4 py-3 h-full sm:hidden m-auto lg:w-9/12">
+        <div className="sm:hidden flex justify-between gap-x-10 items-center px-4 py-3 h-full m-auto lg:w-9/12">
           <Link to="/" className="text-xl font-bold">
             WHERE2
           </Link>
@@ -107,7 +107,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="sm:flex lg:hidden justify-between items-center px-4 py-3 h-full w-full">
+        <div className="lg:hidden sm:flex justify-between items-center px-4 py-3 h-full w-full">
           <Link to="/" className="text-xl font-bold">
             WHERE2
           </Link>
