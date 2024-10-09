@@ -1,5 +1,5 @@
 const HealthArticleCard = ({ image, title, description }) => (
-    <div className="bg-zinc-900 rounded-lg overflow-hidden cursor-pointer group h-[443px] mb-[30.72px]">
+    <div className="bg-zinc-900 rounded-lg overflow-hidden cursor-pointer group h-[443px] mb-[30.72px] shadow-lg">
       <div className="relative">
         <img src={image} alt={title} className="w-full h-[271px] object-cover" />
       </div>

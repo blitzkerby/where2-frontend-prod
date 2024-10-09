@@ -32,7 +32,7 @@ function Footer () {
                 <li><FooterLink href="/part-time-job">Part Time Job</FooterLink></li>
                 <li><FooterLink href="/student-loan">Student Loan</FooterLink></li>
                 <li><FooterLink href="/accommodation">Accommodation</FooterLink></li>
-                <li><FooterLink href="/healthcare">W2Health</FooterLink></li>
+                <li><FooterLink href="/health">W2Health</FooterLink></li>
               </ul>
             </div>
           </div>

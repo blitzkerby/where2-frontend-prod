@@ -32,20 +32,20 @@ const articles = [
 
 const Health = () => {
   return (
-    <div className="w-full h-full mt-16 bg-black font-light">
+    <div className="w-full h-full mt-16 bg-slate-950 font-light tracking-[-0.08em]">
       <div className="lg:w-[750px] sm:w-full mx-auto h-auto lg:h-[341px] sm:h-[242px] flex flex-col justify-center items-center">
-        <h1 className="w-full lg:h-[198px] sm:h-[96px] mx-[10px] lg:text-[48px] sm:text-[28px] lg:font-bold sm:font-semibold flex align-center justify-center text-center text-white my-[10px] py-[16px]">
+        <h1 className="lg:w-full sm:w-[90%] lg:h-[198px] sm:h-[128px] mx-[10px] lg:text-[48px] sm:text-[31px] lg:font-bold sm:font-semibold flex align-center justify-center text-center text-white my-[10px] py-[16px]">
             Mental Health and Health Services and Product Reviews
         </h1>
         <div className='lg:h-[132px] sm:h-[100px] w-full px-4'>
-            <p className="text-center text-black h-[72px] my-auto sm:my-[20px] text-white sm:text-[16px]">
-            Our mission is to provide exceptional health and wellness services to our community.
+            <p className="text-center text-black lg:h-[56px] sm:min-h-fit my-auto sm:my-[20px] text-white sm:text-[16px]">
+            Our mission is to provide exceptional health and wellness services to our user, community and nation. We only publish truthworthy articles and publications, translated from realiable well-known research centre and institutions.
             </p>
         </div>
       </div>
       <div className="w-full h-full py-8 px-4">
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-white text-3xl font-bold text-center mb-12 underline">
+            <h1 className="text-white text-[22px] font-bold text-center lg:mb-12 sm:py-6 underline">
               Health Article
             </h1>
             
