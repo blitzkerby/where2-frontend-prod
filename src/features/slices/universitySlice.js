@@ -3,14 +3,21 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 import config from "../../config"
+import { setCurrentPage, setTotalPage } from './paginationSlice';
 
 export const fetchUniversities = createAsyncThunk(
     'universities/fetchUniversities',
-    async ({ page , limit }) => {
+    async ({ page , limit }, { dispatch }) => {
         const response = await axios.get(`${config.universities.getAllUniversity}?page=${page}&limit=${limit}`);
+        
+        // Dispatch actions to update pagination state
+        dispatch(setTotalPage(response.data.pagination.totalPages));
+        dispatch(setCurrentPage(response.data.pagination.currentPage));
+        
         return response.data;
     }
 );
+
 
 export const fetchUniversity = createAsyncThunk(
     'universities/fetchUniversity',
@@ -28,17 +35,8 @@ const universitySlice = createSlice({
         university: [],
         loading: false,
         error: null,
-        currentPage: 1,
-        totalPage: 10,
     },
-    reducers: {
-        setCurrentPage: (state, action) => {
-            state.currentPage = action.payload;
-        },
-        setTotalPage: (state, action) => {
-            state.totalPage = action.payload;
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(fetchUniversities.pending, (state) => {
@@ -52,10 +50,6 @@ const universitySlice = createSlice({
             .addCase(fetchUniversities.fulfilled, (state, action) => {
                 state.loading = false;
                 state.universities = action.payload.universities;
-                state.totalItems = action.payload.pagination.totalItems;
-                state.totalPage = action.payload.pagination.totalPages;
-                state.currentPage = action.payload.pagination.currentPage;
-                state.pageSize = action.payload.pagination.pageSize;
             })
             .addCase(fetchUniversity.fulfilled, (state, action) => {
                 state.loading = false;
@@ -72,5 +66,4 @@ const universitySlice = createSlice({
     },
 });
 
-export const { setCurrentPage, setTotalPage } = universitySlice.actions;
 export default universitySlice.reducer;
