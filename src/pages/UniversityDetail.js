@@ -18,7 +18,7 @@ const UniversityPage = () => {
     const { id } = useParams()
 
     useEffect(() => {
-        console.log(id)
+        // console.log(id)
         dispatch(fetchUniversity(id))
         // console.log(university)
     }, [dispatch]);

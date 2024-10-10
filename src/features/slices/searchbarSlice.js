@@ -15,7 +15,8 @@ import axios from 'axios';
 const searchUniversities = async (query , page) => {
     try {
         const response = await axios.get(`http://127.0.0.1:4000/api/${page}/search?query=${query}`)
-        return response.data
+        console.log(response.data.universities)
+        return response.data.universities
     } catch (error) {
         console.error('Error fetching data:', error);
         return ["No results found"]

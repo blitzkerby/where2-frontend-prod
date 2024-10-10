@@ -1,47 +1,28 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import { setCurrentPage } from "../../features/slices/universitySlice";
 import PaginationButton from "./PaginationButton";
+import { useNavigate } from "react-router-dom";
 
-function debounce(func, delay) {
-    let timeoutId;
-    return function(...args) {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => {
-            func.apply(this, args);
-        }, delay);
-    };
-}
+const Pagination = ({ totalPage, currentPage }) => {
+    const navigate = useNavigate()
 
-const Pagination = ({ totalPage, currentPage, setCurrentPage }) => {
-    console.log(totalPage, currentPage)
-
-    const dispatch = useDispatch();
-    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+    console.log("total page",totalPage)
+    console.log("current page",currentPage)
 
     const handlePageChange = (newPage) => {
-      window.scrollTo(0,0)
-      setIsButtonDisabled(true);
-      debouncedAction(dispatch, setCurrentPage(newPage));
+        window.scrollTo(0,0)
+        navigate(`/universities?page=${newPage}&limit=10`)
     };
 
     const handleNextClick = () => {
         if (currentPage < totalPage) {
-            handlePageChange(currentPage + 1);
+            navigate(`/universities?page=${currentPage + 1}&limit=10`)
         }
     };
 
     const handlePrevClick = () => {
         if (currentPage > 1) {
-            handlePageChange(currentPage - 1);
+            navigate(`/universities?page=${currentPage - 1}&limit=10`)
         }
     };
-
-    const debouncedAction = debounce((dispatch, action) => {
-      dispatch(action);
-      setIsButtonDisabled(false);
-    }, 300);
 
     return (
         <div className='flex items-center justify-center my-16 px-1 gap-[18px]'>
@@ -49,7 +30,7 @@ const Pagination = ({ totalPage, currentPage, setCurrentPage }) => {
             <PaginationButton 
                 type={'prev'} 
                 onClick={() => handlePrevClick(currentPage - 1)}
-                disabled={currentPage === 1 || isButtonDisabled}
+                disabled={currentPage === 1}
                 isActive={currentPage}
             />
 
@@ -72,7 +53,7 @@ const Pagination = ({ totalPage, currentPage, setCurrentPage }) => {
                                 type={'number'}
                                 onClick={() => handlePageChange(i)}
                                 currentNumber={Number(i)}
-                                isActive={i === currentPage || isButtonDisabled}
+                                isActive={i === currentPage}
                             />
                         );
                     }
@@ -84,7 +65,7 @@ const Pagination = ({ totalPage, currentPage, setCurrentPage }) => {
             <PaginationButton 
                 type={'next'}
                 onClick={() => handleNextClick(currentPage + 1)}
-                disabled={currentPage === totalPage || isButtonDisabled}
+                disabled={currentPage === totalPage}
                 isActive={currentPage}
             />
         </div>

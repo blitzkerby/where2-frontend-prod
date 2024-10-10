@@ -12,24 +12,36 @@ import ListContainer from '../components/reusable/ListContainer';
 import Pagination from '../components/reusable/Pagination';
 import SearchBar from '../components/reusable/SearchBar';
 
-import { setCurrentPage } from '../features/slices/paginationSlice';
 import { searchUniversities } from '../features/slices/searchbarSlice';
 import { fetchUniversities, setUniversities } from '../features/slices/universitySlice';
+import { useLocation } from 'react-router-dom';
+
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}  
 
 const UniversityPage = () => {
+    const query = useQuery()
+    const page = parseInt(query.get('page')) || 1
+    const limit = parseInt(query.get('limit')) || 10
+
+    console.log("page", page)
+    console.log("limit", limit)
+
     const dispatch = useDispatch();
     const { universities, loading, error } = useSelector((state) => state.universities);
-    const { currentPage, totalPage } = useSelector((state) => state.pagination);
+    const { totalPage } = useSelector((state) => state.pagination);
 
     useEffect(() => {
-        dispatch(fetchUniversities({ page: currentPage || 1, limit: 10 }));
-    }, [dispatch, currentPage]);    
+        dispatch(fetchUniversities({ page: page || 1, limit: 10 }));
+
+        console.log(page)
+    }, [dispatch, page]);    
 
     async function handleSearch(query) {
         try {
             const data = await searchUniversities(query, "university");
-            dispatch(setUniversities([data])); // Directly updating the slice data
-            console.log('Fetched Data:', data);
+            dispatch(setUniversities(data)); 
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -43,7 +55,7 @@ const UniversityPage = () => {
                 {error && <p>{error}</p>}
                 <SearchBar handleSearch={handleSearch} dispatchFunction={(data) => dispatch(fetchUniversities(data))} searchPlaceholder="Search universities..." />
                 <UniversityList universities={universities} />
-                <Pagination totalPage={totalPage} currentPage={currentPage} setCurrentPage={(page) => dispatch(setCurrentPage(page))}/>
+                <Pagination totalPage={totalPage} currentPage={page}/>
             </ListContainer>
             <Footer />
         </div>

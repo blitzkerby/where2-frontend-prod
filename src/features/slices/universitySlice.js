@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 import config from "../../config"
-import { setCurrentPage, setTotalPage } from './paginationSlice';
+import { setTotalPage } from './paginationSlice';
 
 /**
  * Fetch all universities with pagination.
@@ -19,9 +19,7 @@ export const fetchUniversities = createAsyncThunk(
         const response = await axios.get(`${config.universities.getAllUniversity}?page=${page}&limit=${limit}`);
         
         // Dispatch actions to update pagination state
-        dispatch(setTotalPage(response.data.pagination.totalPages));
-        dispatch(setCurrentPage(response.data.pagination.currentPage));
-        
+        dispatch(setTotalPage(response.data.pagination.totalPages));       
         return response.data;
     }
 );
