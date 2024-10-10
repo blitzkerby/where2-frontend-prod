@@ -8,7 +8,6 @@ import { clearAuthState } from "./../../features/slices/authSlice";
 import { LoadingOverlay, LoadingSpinner } from "./../reusable/Loading";
 import { MapPin } from "lucide-react";
 import  useGeolocation  from "./../../hooks/useGeolocation";
-import axios from "axios";
 
 const RegisterComponent = () => {
   const [accountType, setAccountType] = useState("personal");
@@ -214,7 +213,7 @@ const RegisterComponent = () => {
           />
           <button
             type="button"
-            onClick={getLocation} // Use the hook's method
+            onClick={getLocation}
             disabled={isGettingLocation}
             className="absolute right-2 bottom-2 transform -translate-y-1/2"
             title="Get current location"

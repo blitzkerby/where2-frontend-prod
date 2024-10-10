@@ -6,16 +6,21 @@ import ContainerComponent from "./ContainerComponent";
 import useAuth from "./../../hooks/useAuth";
 import config from "./../../config";
 import axios from "axios";
+import { MapPin } from "lucide-react";
+import useGeolocation from "./../../hooks/useGeolocation";
 import { v4 as uuidv4 } from 'uuid';
+import { LoadingOverlay } from "./Loading";
 
 const CreateDiscussion = () => {
     const navigate = useNavigate();
     const { username, entity, userId } = useAuth();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState('');
+    const { isGettingLocation, getLocation, error: locationError } = useGeolocation();
     const [formData, setFormData] = useState({
         title: '',
-        content: ''
+        content: '',
+        location: ''
     });
 
     const handleChange = (e) => {
@@ -23,6 +28,13 @@ const CreateDiscussion = () => {
         setFormData(prev => ({
             ...prev,
             [name]: value
+        }));
+    };
+
+    const handleLocationChange = (location) => {
+        setFormData(prev => ({
+            ...prev,
+            location
         }));
     };
 
@@ -59,6 +71,10 @@ const CreateDiscussion = () => {
         }
     };
 
+    if (isGettingLocation) {
+        return <LoadingOverlay/>
+    }
+
     return (
         <ContainerComponent title="Create New Discussion">
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -77,6 +93,31 @@ const CreateDiscussion = () => {
               placeholder="Enter discussion title"
               required
             />
+
+            <div className="relative">
+                <FormInput
+                    name="location"
+                    label="Location"
+                    type="text"
+                    value={formData.location}
+                    onChange={handleChange}
+                    required
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                />
+                <button
+                    type="button"
+                    onClick={() => {
+                        getLocation().then(location => handleLocationChange(location));
+                    }}
+                    disabled={isGettingLocation}
+                    className="absolute right-2 bottom-2 transform -translate-y-1/2"
+                    title="Get current location"
+                >
+                    <MapPin size={20} />
+                </button>
+            </div>
     
             <div className="flex-1">
               <label 
@@ -106,7 +147,7 @@ const CreateDiscussion = () => {
               </ButtonComponent>
               <ButtonComponent
                 variant="primary"
-                type="submit" // Changed to submit to work correctly with the form
+                type="submit"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? 'Creating...' : 'Create Discussion'}
@@ -114,7 +155,7 @@ const CreateDiscussion = () => {
             </div>
           </form>
         </ContainerComponent>
-      );
+    );
 };
 
 export default CreateDiscussion;
