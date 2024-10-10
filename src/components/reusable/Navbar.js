@@ -6,11 +6,11 @@ import Dashboard from "./../../assets/svg/dashboard.svg";
 import Menu from "./../../assets/svg/menu.svg";
 import useAuth from "./../../hooks/useAuth";
 import ProfilePicture from "./ProfilePicture";
+import WrapperComponent from "./WrapperComponent";
 import {
   School,
   BookOpenTextIcon,
   LucideBriefcaseBusiness,
-  BookMarked,
   ChartColumnIcon,
   User2,
   LucideMessageCircleQuestion,
@@ -133,6 +133,7 @@ const Navbar = () => {
                 <X size={20} />
               </button>
             </div>
+            <WrapperComponent>
             <div className="flex-grow overflow-y-auto">
               {menuItems.filter(item => item.showMobile).map((item) => (
                 <Link
@@ -146,6 +147,7 @@ const Navbar = () => {
                 </Link>
               ))}
             </div>
+            </WrapperComponent>
           </div>
         </div>
       )}

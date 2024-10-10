@@ -37,7 +37,7 @@ const CreateDiscussion = ({ onDiscussionCreated }) => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow">
+    <div className="max-w-2xl my-auto p-6 bg-white rounded-lg shadow">
       <h2 className="text-2xl font-bold mb-6">Create New Discussion</h2>
       <form onSubmit={handleSubmit}>
         <FormInput

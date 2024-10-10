@@ -2,7 +2,7 @@ import React from 'react';
 
 const ContainerComponent = ({ children, title, className = "" }) => {
   return (
-    <div className="flex justify-center items-center font-poppins top-[64px] relative">
+    <div className="flex justify-center items-center font-poppins mt-[128px] mb-[64px] relative">
       <div className={`flex flex-col justify-evenly w-[895px] sm:w-[356px] min-h-[63vh] sm:h-auto mx-auto mt-10 p-6 bg-white rounded-2xl shadow-lg border-2 sm:border-none border-black ${className}`}>
         {title && (
           <div className="mb-6">

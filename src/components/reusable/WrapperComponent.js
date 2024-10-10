@@ -3,7 +3,7 @@ import useOnScreen from "../../hooks/useOnScreen";
 
 const WrapperComponent = ({ children }) => {
     const ref = useRef();
-    const isVisible = useOnScreen(ref, '-50px'); // Adjusted rootMargin for earlier trigger
+    const isVisible = useOnScreen(ref, '-50px');
   
     return (
       <div

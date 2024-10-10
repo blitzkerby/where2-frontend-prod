@@ -10,6 +10,7 @@ import VerificationPage from "./pages/VerificationPage";
 import DashboardComponent from "./components/accountUtilities/sidebarComponents/Admin/Dashboard";
 import DiscussionsPage from "./pages/DiscussionPage";
 import HealthPage from "./pages/HealthPage";
+import PublicOnlyROute from "./components/reusable/PublicOnlyRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
@@ -24,12 +25,12 @@ const router = createBrowserRouter([
     path: "/home",
     element: <HomePage />
   },
-  { path: "/login",element: <LoginPage />},
-  { path: "/signup",element: <RegisterPage />},
-  { path: "/forget-password", element: <ForgetPasswordPage />},
+  { path: "/login",element: <PublicOnlyROute><LoginPage /></PublicOnlyROute>},
+  { path: "/signup",element: <PublicOnlyROute><RegisterPage /></PublicOnlyROute>},
+  { path: "/forget-password", element: <PublicOnlyROute><ForgetPasswordPage /></PublicOnlyROute>},
   { path: "/reset-password/:token", element: <ResetPasswordPage />},
-  { path: "/terms-and-conditions", element: <TermsAndConditionsPage/>},
-  { path: "/signup/verification", element: <VerificationPage/> },
+  { path: "/terms-and-conditions", element: <PublicOnlyROute><TermsAndConditionsPage/></PublicOnlyROute>},
+  { path: "/signup/verification", element: <PublicOnlyROute><VerificationPage/></PublicOnlyROute> },
   { path: "/dashboard/:userName", element: <DashboardComponent/> },
   { path: "/profile/:userName", element: <UserProfile/> },
   { path: "/community", element: <DiscussionsPage/> },

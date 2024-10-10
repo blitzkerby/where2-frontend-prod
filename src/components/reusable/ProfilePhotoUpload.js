@@ -56,7 +56,6 @@ const ProfilePictureUpload = () => {
     setError(null);
 
     try {
-      // Get the pre-signed URL
       const { data: s3Data } = await axios.get(config.photo.getS3Url);
       console.log('Received S3 pre-signed URL:', s3Data);
       
@@ -64,7 +63,6 @@ const ProfilePictureUpload = () => {
         throw new Error('Invalid S3 pre-signed URL received');
       }
 
-      // Upload to S3
       await axios.put(s3Data.url, selectedFile, {
         headers: {
           'Content-Type': selectedFile.type
@@ -72,13 +70,10 @@ const ProfilePictureUpload = () => {
       });
       console.log('File uploaded to S3 successfully');
 
-      // Update user's profile picture in your database
       let imageUrl;
       if (s3Data.bucket && s3Data.key) {
-        // If we have bucket and key information, construct the URL
         imageUrl = `https://${s3Data.bucket}.s3.${s3Data.region || 'amazonaws.com'}/${s3Data.key}`;
       } else {
-        // If not, try to extract it from the pre-signed URL
         const urlParts = new URL(s3Data.url);
         imageUrl = `${urlParts.protocol}//${urlParts.host}${urlParts.pathname}`;
       }
