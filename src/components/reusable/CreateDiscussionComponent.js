@@ -75,6 +75,10 @@ const CreateDiscussion = () => {
         return <LoadingOverlay/>
     }
 
+    if (locationError) {
+        return <div>{locationError}</div>;
+    }
+
     return (
         <ContainerComponent title="Create New Discussion">
           <form onSubmit={handleSubmit} className="space-y-6">

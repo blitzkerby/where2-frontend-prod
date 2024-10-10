@@ -5,6 +5,7 @@ import Button from './ButtonComponent';
 import config from './../../config';
 import { LoadingOverlay } from './Loading';
 import useAuth from './../../hooks/useAuth';
+import DiscussionCard from './DiscussionCard';
 import CreateDiscussionComponent from './CreateDiscussionComponent';
 
 const DiscussionList = () => {
@@ -59,17 +60,10 @@ const DiscussionList = () => {
 
       <div className="space-y-4">
         {discussions.map(discussion => (
-          <div 
-            key={discussion.id} 
-            className="p-6 bg-white rounded-lg shadow hover:shadow-md transition-shadow"
-          >
-            <h3 className="text-xl font-semibold mb-2">{discussion.title}</h3>
-            <p className="text-gray-600 mb-4">{discussion.content}</p>
-            <div className="flex justify-between items-center text-sm text-gray-500">
-              <span>Posted by {discussion.user.email}</span>
-              <span>{discussion.comments.length} comments</span>
-            </div>
-          </div>
+          <DiscussionCard 
+            key={discussion.id}
+            discussion={discussion}
+          />
         ))}
       </div>
     </div>

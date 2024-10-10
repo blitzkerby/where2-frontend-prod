@@ -8,18 +8,18 @@ const useAuth = () => {
   const [role, setRole] = useState("");
   const [showDashboard, setShowDashboard] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [userId, setUserId] = useState(null); // Add this line
+  const [userId, setUserId] = useState(null);
 
   const fetchUserDataAndRole = useCallback(async () => {
     try {
       const authData = JSON.parse(localStorage.getItem('authData'));
       if (authData) {
-        const { userName, entity, token, id } = authData; // Add id here
+        const { userName, entity, token, id } = authData;
         
         setUsername(userName || "");
         setEntity(entity || "");
         setIsLoggedIn(true);
-        setUserId(id || null); // Add this line
+        setUserId(id || null);
 
         if (token) {
           const response = await fetch(config.auth.getUserRole, {
@@ -49,17 +49,15 @@ const useAuth = () => {
       setShowDashboard(false);
       setUserId(null);
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   }, []);
 
   useEffect(() => {
     fetchUserDataAndRole();
-    const intervalId = setInterval(fetchUserDataAndRole, 600000);
-    return () => clearInterval(intervalId);
   }, [fetchUserDataAndRole]);
 
-  return { isLoggedIn, username, entity, role, loading, showDashboard, userId };
+  return { isLoggedIn, username, entity, role, loading, showDashboard, userId, refreshAuth: fetchUserDataAndRole };
 };
 
 export default useAuth;
