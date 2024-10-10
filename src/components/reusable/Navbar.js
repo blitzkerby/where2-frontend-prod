@@ -44,13 +44,6 @@ const Navbar = () => {
     { logo: <LucideBriefcaseBusiness />, name: "Livelihood", to: "/livelihood", showMobile: true },
     { logo: <Activity />, name: "Health", to: "/health", showMobile: true },
     {
-      logo: <ChartColumnIcon />,
-      name: "Dashboard",
-      to: `/dashboard/${encodeURIComponent(username || entity)}`,
-      showMobile: true,
-      showDesktop: showDashboard
-    },
-    {
       logo: <User2 />,
       name: "Profile",
       to: `/profile/${encodeURIComponent(username || entity)}`,
@@ -60,14 +53,8 @@ const Navbar = () => {
     {
       logo: <MessageCircleMore/>,
       name: "Community",
-      to: "/community",
+      to: "/discussions",
       showMobile: true,
-    },
-    {
-      logo: <LucideMessageCircleQuestion />,
-      name: "About Us",
-      to: "/about-us",
-      showMobile: true
     },
   ];
 

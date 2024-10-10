@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CreateDiscussion from './../components/reusable/CreateDiscussion';
+import CreateDiscussionComponent from './../components/reusable/CreateDiscussionComponent';
 import DiscussionList from './../components/reusable/DiscussionList';
 
 const DiscussionsComponent = () => {
@@ -12,7 +12,7 @@ const DiscussionsComponent = () => {
   return (
     <div className="container mt-[64px] min-h-screen mx-auto py-8">
       {showCreateForm ? (
-        <CreateDiscussion 
+        <CreateDiscussionComponent 
           onDiscussionCreated={handleDiscussionCreated} 
         />
       ) : (

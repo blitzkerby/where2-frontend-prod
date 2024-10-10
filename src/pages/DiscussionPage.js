@@ -2,7 +2,7 @@ import DiscussionsComponent from "./../components/DiscussionsComponent";
 import Footer from "./../components/reusable/Footer";
 import Navbar from "./../components/reusable/Navbar";
 
-const ForgetPasswordPage = () => {
+const DiscussionPage = () => {
     return (
         <div>
             <Navbar/>
@@ -12,4 +12,4 @@ const ForgetPasswordPage = () => {
     )
 }
 
-export default ForgetPasswordPage;
+export default DiscussionPage;

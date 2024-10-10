@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import FormInput from "../reusable/InputField";
+import FormInput from "./../reusable/InputField";
 import ButtonComponent from "../reusable/Button";
-import ContainerComponent from "../reusable/ContainerComponent";
-import { clearAuthState } from "../../features/slices/authSlice";
-import { LoadingSpinner } from "../reusable/Loading";
+import ContainerComponent from "./../reusable/ContainerComponent";
+import { clearAuthState } from "./../../features/slices/authSlice";
+import { LoadingOverlay, LoadingSpinner } from "./../reusable/Loading";
 import { MapPin } from "lucide-react";
+import  useGeolocation  from "./../../hooks/useGeolocation";
 import axios from "axios";
 
 const RegisterComponent = () => {
@@ -24,60 +25,34 @@ const RegisterComponent = () => {
     passwordConfirm: "",
   });
   const [error, setError] = useState("");
-  const [isGettingLocation, setIsGettingLocation] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { status, message } = useSelector((state) => state.auth);
 
-  // Moved inside the handler
-  const handleGetLocation = () => {
-    setIsGettingLocation(true);
-    setError("");
-
-    if (!navigator.geolocation) {
-      setError("Geolocation is not supported by your browser");
-      setIsGettingLocation(false);
-      return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        try {
-          const { latitude, longitude } = position.coords;
-          const response = await axios.get(
-            `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
-          );
-
-          if (response.data && response.data.display_name) {
-            setFormData((prevData) => ({
-              ...prevData,
-              location: response.data.display_name,
-            }));
-          } else {
-            setError("Failed to get location");
-          }
-        } catch (error) {
-          setError("Failed to get location");
-        } finally {
-          setIsGettingLocation(false);
-        }
-      },
-      () => {
-        setError("Failed to get location");
-        setIsGettingLocation(false);
-      }
-    );
-  };
+  const { location, getLocation, isGettingLocation, error: locationError } = useGeolocation();
 
   useEffect(() => {
     dispatch(clearAuthState());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (location) {
+      setFormData((prevData) => ({
+        ...prevData,
+        location,
+      }));
+    }
+  }, [location]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
+
+  useEffect(() => {
+    dispatch(clearAuthState());
+  }, [dispatch]);
 
   const validateForm = () => {
     const personalFields = ['firstName', 'lastName', 'userName', 'email', 'password', 'passwordConfirm', 'location'];
@@ -226,27 +201,29 @@ const RegisterComponent = () => {
             autoCapitalize="off"
           />
           <div className="relative">
-            <FormInput
-              name="location"
-              label="Location"
-              type="text"
-              value={formData.location}
-              onChange={handleInputChange}
-              required
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="off"
-            />
-            <button
-              type="button"
-              onClick={handleGetLocation}
-              disabled={isGettingLocation}
-              className="absolute right-2 bottom-2 transform -translate-y-1/2"
-              title="Get current location"
-            >
-              <MapPin size={20} />
-            </button>
-          </div>
+          <FormInput
+            name="location"
+            label="Location"
+            type="text"
+            value={formData.location}
+            onChange={handleInputChange}
+            required
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+          />
+          <button
+            type="button"
+            onClick={getLocation} // Use the hook's method
+            disabled={isGettingLocation}
+            className="absolute right-2 bottom-2 transform -translate-y-1/2"
+            title="Get current location"
+          >
+            <MapPin size={20} />
+          </button>
+        </div>
+        { isGettingLocation && <LoadingOverlay/> }
+        {locationError && <p className="text-red-500 text-sm">{locationError}</p>}
           {accountType === "business" && (
             <FormInput
               name="dateOfBirth"
