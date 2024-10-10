@@ -90,12 +90,12 @@ const Card = ({
     type,
     route
 }) => {
-    console.log((id))
+    // console.log((id))
 
     const navigate = useNavigate()
 
     const handleReadMoreClick = () => {
-        console.log("REDIRECTING!")
+        // console.log("REDIRECTING!")
         navigate(route)
     }
 

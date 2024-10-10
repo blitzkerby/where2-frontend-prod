@@ -21,7 +21,7 @@ const commonStyle = {
  * <PaginationButton type="next" />
  */
 
-const PaginationButton = ({ key, currentNumber, type, onClick, isActive }) => {
+const PaginationButton = ({ currentNumber, type, onClick, isActive }) => {
     const renderButtonContent = () => {
         switch (type) {
             case 'prev':
@@ -44,7 +44,6 @@ const PaginationButton = ({ key, currentNumber, type, onClick, isActive }) => {
 
     return (
         <button
-            key={key}
             className={commonClass}
             style={PaginationStyle}
             onClick={onClick}

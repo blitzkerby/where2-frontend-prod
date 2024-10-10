@@ -1,9 +1,7 @@
 import { useState } from "react";
-
 import { useDispatch, useSelector } from "react-redux";
 
 import { setCurrentPage } from "../../features/slices/universitySlice";
-
 import PaginationButton from "./PaginationButton";
 
 function debounce(func, delay) {
@@ -17,6 +15,8 @@ function debounce(func, delay) {
 }
 
 const Pagination = ({ totalPage, currentPage, setCurrentPage }) => {
+    console.log(totalPage, currentPage)
+
     const dispatch = useDispatch();
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 

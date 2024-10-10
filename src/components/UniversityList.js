@@ -1,8 +1,13 @@
 import Card from "./reusable/Card";
 
-import config from "../config";
-
 const UniversityList = ({ universities }) => {
+    
+    if (universities[0] == "No results found") {
+        return null;
+    }
+    console.log(universities)
+
+
     return (
         <>
             {universities.map((university, index) => (

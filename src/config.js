@@ -49,7 +49,9 @@ const config = {
   scholarships: {
     getAllScholarships: `${API_URL}/api/scholarships`,
     
+  },
+  search: {
+    searchAny: `${ API_URL }/api/`
   }
-
 };
 export default config; 
