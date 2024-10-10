@@ -11,7 +11,8 @@ import {
 } from '@heroicons/react/24/solid';
 import { X, User, Heart, ChevronDown, ChevronRight, BookKey, Users, School, House, Briefcase, BadgeDollarSignIcon, ChartNoAxesColumnIncreasingIcon } from "lucide-react";
 import { SidebarContentContext } from "../reusable/Profile";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 const MenuItem = ({ item, depth = 0, onItemClick, isSelected }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -111,7 +112,7 @@ const Sidebar = ({ isOpen, onClose, userRole }) => {
     user: [
       {
         label: 'Account',
-        icon: <User className="w-5 h-5" />,
+        icon: <User className="w-5 h-5" />, 
         onClick: () => handleItemClick("account", "account"),
       },
       {
@@ -125,13 +126,13 @@ const Sidebar = ({ isOpen, onClose, userRole }) => {
         ]
       },
       { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5" /> },
-      { label: 'Log Out', icon: <PowerIcon className="h-5 w-5" /> },
+      { label: 'Log Out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut") },
     ],
     admin: [
       { label: 'Content', icon: <DocumentDuplicateIcon className="h-5 w-5" />, badge: '14', onClick: () => handleItemClick("AdminContent", "adminContent") },
       { label: 'Profile', icon: <UserCircleIcon className="h-5 w-5" /> , onClick: () => handleItemClick("account", "account") },
       { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5"/> , onClick: () => handleItemClick("setting", "setting")  },
-      { label: 'Log Out', icon: <PowerIcon className="h-5 w-5" />},
+      { label: 'Log Out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut")  },
       { label: 'Dashboard', icon: <ChartNoAxesColumnIncreasingIcon className="h-5 w-5" /> , onClick: () => handleItemClick("adminDashboard", "adminDashboard") },
     ],
     developer: [
@@ -140,15 +141,7 @@ const Sidebar = ({ isOpen, onClose, userRole }) => {
       { label: 'School', icon: <BookKey className="w-5 h-5" />, onClick: () => handleItemClick("school", "schoolList") },
       { label: 'Accommodation', icon: <House />, onClick: () => handleItemClick("accommodation", "accommodationList") },
       { label: 'Part time job', icon: <Briefcase />, onClick: () => handleItemClick("job", "jobList") },
-      {
-        label: 'Sign Out',
-        icon: (
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M11 7L9.6 8.4L12.2 11H2V13H12.2L9.6 15.6L11 17L16 12L11 7ZM20 19H12V21H20C21.1 21 22 20.1 22 19V5C22 3.9 21.1 3 20 3H12V5H20V19Z" fill="currentColor" />
-          </svg>
-        ),
-        onClick: () => handleItemClick("signout", "signout")
-      },
+      { label: 'Log out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut")},
       { label: 'Dashboard', icon: <ChartNoAxesColumnIncreasingIcon className="h-5 w-5" /> , onClick: () => handleItemClick("developerDashboard", "adminDashboard") },
     ]
   };
