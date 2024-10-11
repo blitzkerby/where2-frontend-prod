@@ -1,10 +1,11 @@
 import React, { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { Trash, Pen } from "lucide-react";
-import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import DeleteConfirmationModal from "./functions/DeleteConfirmationModal";
 import ButtonComponent from "./Button";
 import SearchBar from "./SearchBar";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import config from "../../config";
+import deleteUser from "./functions/DeleteUser";
 
 const ListingComponent = ({ title, data, columns, totalItems, additionalStats }) => {
   const [showModal, setShowModal] = useState(false);
@@ -12,26 +13,15 @@ const ListingComponent = ({ title, data, columns, totalItems, additionalStats })
   const [searchTerm, setSearchTerm] = useState("");
   const [localData, setLocalData] = useState(data); // Use local state to handle immediate updates
 
-  const handleDeleteClick = (id) => { setSelectedUserId(id); setShowModal(true); };
+  const handleDelete = (id) => { setSelectedUserId(id); setShowModal(true); };
+
+  const navigate = useNavigate();
+  const handleViewProfile = (id) => {
+    navigate(`/user/${id}`)
+  }
 
   const queryClient = useQueryClient();
 
-  // Function to handle the deletion API call
-  const deleteUser = async (userId) => {
-    const response = await fetch(config.analytics.deleteUserById(userId), {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-  
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || 'Error deactivating user');
-    }
-  
-    return response;
-  };
 
   // Mutation setup for deleting users with optimistic updates
   const mutation = useMutation({
@@ -66,6 +56,8 @@ const ListingComponent = ({ title, data, columns, totalItems, additionalStats })
     mutation.mutate(selectedUserId);
     setShowModal(false);
     setSelectedUserId(null);
+    window.location.reload();
+
   };
 
   // Handles closing of the modal
@@ -87,14 +79,10 @@ const ListingComponent = ({ title, data, columns, totalItems, additionalStats })
   }, [localData, columns, searchTerm]);
 
   return (
-    <section className="w-[90%] mx-[32px] bg-white rounded-lg shadow-lg h-full">
-      <div className="w-full flex justify-between items-center px-[128px] py-[64px]">
+    <section className="lg:w-[90%] sm:w-[100%] sm:mr-[32px] lg:ml-[64px] bg-white rounded-lg shadow-lg h-full">
+      <div className="flex justify-between items-center py-5 w-[80%] mx-auto">
         <h1 className="text-3xl text-blue-600 font-bold">{title}</h1>
-        <div className="flex gap-2">
-          <SearchBar 
-            searchPlaceholder={`Search ${title}`} 
-            onSearchChange={setSearchTerm}
-          />
+        <div className="flex gap-2 sm:hidden">
           <div className="bg-gray-600 text-white p-4 rounded-lg w-[160px]">
             <p className="text-sm">Total {title}</p>
             <p className="text-4xl font-bold">{filteredData.length}</p>
@@ -107,8 +95,7 @@ const ListingComponent = ({ title, data, columns, totalItems, additionalStats })
           ))}
         </div>
       </div>
-
-      <table className="w-[90%] mx-auto">
+<table className="w-[90%] mx-auto">
         <thead>
           <tr className="text-center h-full">
             {columns.map((column, index) => (
@@ -120,21 +107,24 @@ const ListingComponent = ({ title, data, columns, totalItems, additionalStats })
         <tbody className="w-full h-full">
           {filteredData.map((item) => (
             <tr key={item.id} className="border-t h-full">
-              {columns.map((column, index) => (
-                <td key={index} className="py-4 text-center h-full">{item[column]}</td>
-              ))}
-              <td className="py-4">
-                <div className="flex gap-4 justify-center">
-                  <ButtonComponent variant="danger" onClick={() => handleDeleteClick(item.id)}>
-                    <Trash />
-                  </ButtonComponent>
-                  <ButtonComponent variant="success">
-                    <Pen />
-                  </ButtonComponent>
-                  <ButtonComponent variant="ghost">View</ButtonComponent>
-                </div>
-              </td>
-            </tr>
+  {columns.map((column, index) => (
+    <td key={index} className="py-4 text-center h-full truncate max-w-[150px]">
+      {item[column]}
+    </td>
+  ))}
+  <td className="py-4">
+    <div className="flex gap-4 sm:gap-1 justify-center">
+      <ButtonComponent variant="danger" onClick={() => handleDelete(item.id)}>
+        <Trash />
+      </ButtonComponent>
+      <ButtonComponent variant="success">
+        <Pen />
+      </ButtonComponent>
+      <ButtonComponent variant="ghost" onClick={() => handleViewProfile(item.id)} >View</ButtonComponent>
+    </div>
+  </td>
+</tr>
+
           ))}
         </tbody>
       </table>
@@ -143,10 +133,11 @@ const ListingComponent = ({ title, data, columns, totalItems, additionalStats })
         show={showModal}
         onClose={handleCloseModal}
         onConfirm={handleConfirmDelete}
+        warningMsg={"Are you sure you want to delete this item?"}
+        type={'Delete'}
       />
     </section>
   );
 };
 
 export default ListingComponent;
-

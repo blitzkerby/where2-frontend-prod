@@ -1,5 +1,5 @@
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
-const ENV = process.env.NODE_ENV || "development";
+const ENV = process.env.REACT_APP_NODE_ENV || "development";
 
 const config = {
   apiUrl: API_URL,
@@ -23,37 +23,26 @@ const config = {
   user: {
     upload: `${API_URL}/api/upload`,
     visitorTrack: `${API_URL}/api/visitors/track-visit`,
-    visits: `${API_URL}/api/visitors/visits`
+    visits: `${API_URL}/api/visitors/visits`,
   },
   profile: {
-    getMyProfile: (userId) => `${API_URL}/api/users/profile/${userId}`
+    getMyProfile: (userId) => `${API_URL}/api/users/profile/${userId}`,
+    getPublicProfile: (userId) => `${API_URL}/api/users/profile/public/${userId}`
   },
   analytics: {
-    getAllUsers : `${API_URL}/api/users/user-list`,
-    deleteUserById : (userId) =>`${API_URL}/api/users/delete-user/${userId}`
+    getAllUsers: `${API_URL}/api/users/user-list`,
+    deleteUserById: (userId) => `${API_URL}/api/users/delete-user/${userId}`,
   },
-  universities: {
-    getAllUniversity : `${API_URL}/api/list/university/all`,
-    getUniversityBySearch : `${API_URL}/api/list/search/university/`,
-    getUniversityById : `${API_URL}/api/detail/university/`,
+  photo: {
+    getS3Url: `${API_URL}/api/user/s3Url`,
+    uploadProfilePicture: `${API_URL}/api/user/profile-picture`,
+    fetchProfilePicture: (userId) => `${API_URL}/api/user/${userId}/profile-picture`,
   },
-   // Jobs
-  job: {
-    getAllJob: `${ API_URL }/api/jobs`,
-     getAssociatedCompany: (jobId) => `${ API_URL }/api/jobs/associatedCompany/${ jobId }`,
-  },
-   // Favorites
-  favorite: {
-    addFavorite: `${ API_URL }/api/favorites/addFavorite`,
-    getFavorite:(userId,category) => `${ API_URL }/api/favorites/${userId}/${category}`,
-    
-  },
-  scholarships: {
-    getAllScholarships: `${API_URL}/api/scholarships`,
-    
-  },
-  search: {
-    searchAny: `${ API_URL }/api/`
+  community: {
+    createDiscussion: `${API_URL}/api/discussion`,
+    getDiscussions: `${API_URL}/api/discussions`,
+    addComment: (discussionId, commentId) => `${API_URL}/api/discussions/${discussionId}/comment/${commentId}`,
+    getAllComments: (discussionId) => `${API_URL}/api/discussions/${discussionId}/comments`
   }
 };
-export default config; 
+export default config;

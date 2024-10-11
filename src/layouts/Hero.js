@@ -1,8 +1,7 @@
 import React from 'react';
 import { Search } from 'lucide-react';
 
-const Hero = ({ props, children }) => {
-
+const Hero = ({ props , children }) => {
     const {
         title,
         subtitle,

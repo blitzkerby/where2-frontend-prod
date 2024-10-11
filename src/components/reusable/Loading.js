@@ -8,13 +8,13 @@ const LoadingSpinner = ({
 }) => {
   return (
     <div className={`flex items-center justify-center ${className}`}>
-      <div class="flex flex-row gap-2">
-  <div class="w-4 h-4 rounded-full bg-black animate-bounce"></div>
+      <div className="flex flex-row gap-2">
+  <div className="w-4 h-4 rounded-full bg-black animate-bounce"></div>
   <div
-    class="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:-.3s]"
+    className="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:-.3s]"
   ></div>
   <div
-    class="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:-.5s]"
+    className="w-4 h-4 rounded-full bg-black animate-bounce [animation-delay:-.5s]"
   ></div>
 </div>
     </div>

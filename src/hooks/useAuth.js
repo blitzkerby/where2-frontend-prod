@@ -7,17 +7,19 @@ const useAuth = () => {
   const [entity, setEntity] = useState("");
   const [role, setRole] = useState("");
   const [showDashboard, setShowDashboard] = useState(false);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState(null);
 
   const fetchUserDataAndRole = useCallback(async () => {
     try {
       const authData = JSON.parse(localStorage.getItem('authData'));
       if (authData) {
-        const { userName, entity, token } = authData;
+        const { userName, entity, token, id } = authData;
         
         setUsername(userName || "");
         setEntity(entity || "");
         setIsLoggedIn(true);
+        setUserId(id || null);
 
         if (token) {
           const response = await fetch(config.auth.getUserRole, {
@@ -39,23 +41,23 @@ const useAuth = () => {
         setRole("");
         setIsLoggedIn(false);
         setShowDashboard(false);
+        setUserId(null);
       }
     } catch (error) {
       console.error('Error fetching user data and role:', error);
       setIsLoggedIn(false);
       setShowDashboard(false);
+      setUserId(null);
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   }, []);
 
   useEffect(() => {
     fetchUserDataAndRole();
-    const intervalId = setInterval(fetchUserDataAndRole, 600000); // Refresh every 10 mins
-    return () => clearInterval(intervalId);
   }, [fetchUserDataAndRole]);
 
-  return { isLoggedIn, username, entity, role, loading, showDashboard };
+  return { isLoggedIn, username, entity, role, loading, showDashboard, userId, refreshAuth: fetchUserDataAndRole };
 };
 
 export default useAuth;

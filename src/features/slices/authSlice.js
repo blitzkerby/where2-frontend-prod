@@ -79,11 +79,9 @@ import config from "../../config"
           return "Verification code sent successfully.";
         }
       } catch (error) {
-        // Log the error in both development and production
         console.error("Error sending verification code:", error);
   
         if (axios.isAxiosError(error) && !error.response) {
-          // Network error
           return thunkAPI.rejectWithValue("Network error. Please check your internet connection.");
         }
   

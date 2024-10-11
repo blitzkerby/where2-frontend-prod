@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import Profile from './reusable/Profile';
-import config from './../config';
-import { LoadingOverlay } from './reusable/Loading';
-import Navbar from './reusable/Navbar';
+import Profile from '../reusable/Profile';
+import config from '../../config';
+import { LoadingOverlay } from '../reusable/Loading';
 
 const getAuthData = () => {
   const authData = localStorage.getItem('authData');
@@ -27,6 +26,7 @@ const getAuthData = () => {
 const fetchProfile = async () => {
   try {
     const { token, userId } = getAuthData();
+    console.log(userId)
     const res = await fetch(config.profile.getMyProfile(userId), {
       headers: {
         'Content-Type': 'application/json',
@@ -73,12 +73,12 @@ const UserProfile = () => {
   }
 
   return (
-    <>
-    <Navbar/>
-    <div className='w-full h-full mt-[70px]'>
-      <Profile userData={userData} />
-    </div>
-    </>
+
+<>
+      <div className='w-full max-h-full mt-[70px] lg:mb-[32px] relative'>
+        <Profile userData={userData}/>
+      </div>
+</>
   );
 };
 

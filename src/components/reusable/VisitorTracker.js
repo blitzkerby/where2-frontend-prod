@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import config from "../../config";
+import config from "./../../config";
 
 const VisitTracker = ({ path }) => {
     const [visits, setVisits] = useState([]);
