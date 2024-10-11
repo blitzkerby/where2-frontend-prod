@@ -2,7 +2,7 @@ import PaginationButton from "./PaginationButton";
 import { useNavigate } from "react-router-dom";
 
 /** Enable for debugging */
-const isDebug = true;
+const isDebug = false;
 
 /**
  * Pagination Component
@@ -16,8 +16,8 @@ const isDebug = true;
 const Pagination = ({ totalPage, currentPage }) => {
     const navigate = useNavigate();
 
-    isDebug ? console.log("total page", totalPage) : null;
-    isDebug ? console.log("current page", currentPage) : null;
+    isDebug ? console.log("Pagination says: total page", totalPage) : null;
+    isDebug ? console.log("Pagination says: current page", currentPage) : null;
 
     /**
      * handlePageChange

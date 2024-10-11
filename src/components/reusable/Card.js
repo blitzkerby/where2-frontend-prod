@@ -95,7 +95,8 @@ const Card = ({
     const navigate = useNavigate()
 
     const handleReadMoreClick = () => {
-        // console.log("REDIRECTING!")
+        route = "/detail/universities/1"
+        console.log("REDIRECTING!", route)
         navigate(route)
     }
 

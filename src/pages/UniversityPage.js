@@ -4,15 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { LoadingOverlay } from '../components/reusable/Loading';
 import UniversityList from '../components/UniversityList';
-
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
 import ListContainer from '../components/reusable/ListContainer';
-
 import Pagination from '../components/reusable/Pagination';
 import SearchBar from '../components/reusable/SearchBar';
-
-import { searchUniversities } from '../features/slices/searchbarSlice';
+import { search } from '../features/slices/searchbarSlice';
 import { fetchUniversities, setUniversities } from '../features/slices/universitySlice';
 import { useLocation } from 'react-router-dom';
 
@@ -21,7 +18,7 @@ const isDebug = true;
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
-}  
+}
 
 const UniversityPage = () => {
     const urlParams = useQuery();
@@ -56,6 +53,10 @@ const UniversityPage = () => {
             dispatch(fetchUniversities({ page, limit }));
         } else {
             handleSearch(searchQuery);
+            if (isDebug) {
+                console.log("UniversityPage says: total page is ", totalPage);
+                console.log("UniversityPage says: search results are ", universities);
+            }
         }
     }, [dispatch, page, searchQuery, limit]);
 
@@ -70,12 +71,13 @@ const UniversityPage = () => {
      */
     const handleSearch = async (query) => {
         try {
-            const data = await searchUniversities({ query, page });
-            dispatch(setUniversities(data));
-            return data;
+            const data = await dispatch(search({ query, page, category: "university" })).unwrap();
+            dispatch(setUniversities(data.universities || []));
         } catch (error) {
-            if (isDebug) console.error('Error fetching data:', error);
-            throw error; 
+            if (isDebug) {
+                console.error('Error fetching data:', error);
+            }
+            throw error;
         }
     };
 

@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const paginationSlice = createSlice({
     name: 'pagination',
     initialState: {
-        totalPage: 10,
+        totalPage: 1,
     },
     reducers: {
         setTotalPage: (state, action) => {
