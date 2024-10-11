@@ -3,7 +3,7 @@ import axios from 'axios';
 import config from '../../config';
 import { Edit2 } from 'lucide-react';
 
-const ProfilePictureUpload = () => {
+const ProfilePictureUpload = ({ }) => {
   const [profilePictureUrl, setProfilePictureUrl] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState(null);

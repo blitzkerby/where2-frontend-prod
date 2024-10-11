@@ -5,10 +5,15 @@ import useAuth from "../../hooks/useAuth";
 import { LoadingOverlay } from "../../components/reusable/Loading";
 import VisitorTracker from "../../components/reusable/VisitorTracker";
 import ProfilePictureUpload from "../../components/reusable/ProfilePhotoUpload";
-
+import ContainerComponent from './ContainerComponent';
+import ProfilePicture from './ProfilePicture';
+import { useParams } from 'react-router-dom';
+import Navbar from './../../components/reusable/Navbar';
+import Footer from './Footer';
 const PublicProfile = ({ userInfo }) => {
     console.log(userInfo.id  , userInfo)
-  const {loading } = useAuth();
+    const {userId} = useParams()
+  const {loading} = useAuth();
 
   if (loading) {
     return <LoadingOverlay />;
@@ -17,10 +22,12 @@ const PublicProfile = ({ userInfo }) => {
   const formattedDate = new Date(userInfo.createdAt).toLocaleDateString('en-CA');
 
   return (
-    <section className="w-full bg-white rounded-3xl shadow-md border">
+    <>
+    <ContainerComponent>
+    <section className="w-full rounded-3xl pb-[64px] ">
       <div className="lg:w-full lg:pl-[128px] lg:pr-[128px] lg:mx-auto h-full px-4 pb-6 pt-12 sm:px-6 lg:pb-0">
         <div className="flex items-center justify-center mb-6">
-          <ProfilePictureUpload userId={userInfo.id} />
+          <ProfilePicture big={true} userId={userId}/>
         </div>
   
         <p className="text-center mb-6">{userInfo.lastName}</p>
@@ -109,6 +116,9 @@ const PublicProfile = ({ userInfo }) => {
         </div>
       </div>
     </section>
+    </ContainerComponent>
+    <Footer/>
+    </>
   );
 };
 

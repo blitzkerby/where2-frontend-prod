@@ -14,7 +14,7 @@ const DiscussionCard = ({ discussion }) => {
   };
 
   const handleUserClick = () => {
-    navigate(`/public-profile/${discussion.user.id}`);
+    navigate(`/user/${discussion.user.id}`);
   };
 
   return (
@@ -24,9 +24,8 @@ const DiscussionCard = ({ discussion }) => {
       <div className="flex justify-between items-center text-sm text-gray-500">
         <div 
           className="flex items-center gap-2 cursor-pointer hover:text-gray-700"
-          onClick={handleUserClick}
         >
-          <ProfilePicture userId={discussion.user.id} size={6} />
+          <ProfilePicture userId={discussion.user.id} size={6} onClick={handleUserClick}/>
           <span>Posted by {discussion.user.email}</span>
         </div>
         <Button

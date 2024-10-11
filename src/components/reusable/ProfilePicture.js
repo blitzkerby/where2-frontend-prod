@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import config from "./../../config";
 import { User } from "lucide-react";
 
-const ProfilePicture = ({ userId, size = 8 }) => {
+const ProfilePicture = ({ userId, big, size = 8  , onClick}) => {
+  const navigate = useNavigate();
   const [profilePictureUrl, setProfilePictureUrl] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -47,16 +49,19 @@ const ProfilePicture = ({ userId, size = 8 }) => {
     );
   }
 
+
+
   return (
-    <div className={`w-${size} h-${size} rounded-full overflow-hidden bg-gray-100 flex items-center justify-center`}>
+    <div className={`${big ? "w-full h-full object-cover" :`w-${size} h-${size}`} rounded-full overflow-hidden  flex items-center justify-center`}>
       {profilePictureUrl ? (
         <img 
           src={profilePictureUrl} 
           alt="Profile" 
-          className="w-full h-full object-cover"
+          className={big ? "w-24 h-24 rounded-full object-cover" : "w-full h-full object-cover"}
+          onClick={onClick}
         />
       ) : (
-        <User size={size * 2.5} className="text-gray-500" />
+        <User size={size * 0.6} className="text-gray-500" />
       )}
     </div>
   );
