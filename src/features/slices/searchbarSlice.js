@@ -1,26 +1,37 @@
+import axios from 'axios';
+
+/** Enable for debugging */
+const isDebug = false;
+
 /**
  * searchUniversities - Fetches university data based on the query and page parameters.
  *
  * @param {string} query - The search query string used to filter universities.
- * @param {string} page - The page type to search within the API endpoint.
+ * @param {number} page - The page number to fetch from the API endpoint.
  * @returns {Promise<Array>} - A promise that resolves to an array of search results.
- *                            - If the response contains multiple results, they are returned as-is.
- *                            - If there is a single result, it is returned wrapped in an array.
- *                            - If no results are found, returns an array with a "No results found" string.
+ *                            - If no results are found, returns an empty array.
  * @throws {Error} - Throws an error if the request fails.
  */
-
-import axios from 'axios';
-
-const searchUniversities = async (query , page) => {
+const searchUniversities = async ({ query, page }) => {
     try {
-        const response = await axios.get(`http://127.0.0.1:4000/api/${page}/search?page=${1}&q=${query}`)
-        // const response = await axios.get(`http://127.0.0.1:4000/api/university/search?page=1&q=stanford`)
-        console.log(response.data.universities)
-        return response.data.universities
+        const url = `http://127.0.0.1:4000/api/list/university/search?q=${query}&page=${page}`;
+        
+        isDebug ? console.log(`searchbarSlice/searchUniversities: Attempting to GET ${url}`) : null;
+        
+        const response = await axios.get(url);
+
+        isDebug ? console.log("searchbarSlice/searchUniversities: Received response", response) : null;
+
+        if (response.data.universities && response.data.universities.length > 0) {
+            isDebug ? console.log("searchbarSlice/searchUniversities: Data successfully retrieved", response.data.universities) : null;
+            return response.data.universities;
+        } else {
+            isDebug ? console.log("searchbarSlice/searchUniversities: No data found") : null;
+            return [];
+        }
     } catch (error) {
-        console.error('Error fetching data:', error);
-        return ["No results found"]
+        isDebug ? console.error('searchbarSlice/searchUniversities: Error fetching data:', error) : null;
+        return [];
     }
 };
 

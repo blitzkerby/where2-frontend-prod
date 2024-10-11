@@ -1,26 +1,55 @@
 import PaginationButton from "./PaginationButton";
 import { useNavigate } from "react-router-dom";
 
+/** Enable for debugging */
+const isDebug = true;
+
+/**
+ * Pagination Component
+ * 
+ * This component handles pagination logic and navigation for the university list.
+ * 
+ * @param {number} totalPage - The total number of pages available
+ * @param {number} currentPage - The current page being viewed
+ * @returns {JSX.Element} - Renders the pagination buttons
+ */
 const Pagination = ({ totalPage, currentPage }) => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    console.log("total page",totalPage)
-    console.log("current page",currentPage)
+    isDebug ? console.log("total page", totalPage) : null;
+    isDebug ? console.log("current page", currentPage) : null;
 
+    /**
+     * handlePageChange
+     * 
+     * Navigates to the specified page and scrolls to the top of the window.
+     * 
+     * @param {number} newPage - The new page number to navigate to
+     */
     const handlePageChange = (newPage) => {
-        window.scrollTo(0,0)
-        navigate(`/universities?page=${newPage}&limit=10`)
+        window.scrollTo(0, 0);
+        navigate(`/universities?page=${newPage}&limit=10`);
     };
 
+    /**
+     * handleNextClick
+     * 
+     * Navigates to the next page if the current page is less than the total number of pages.
+     */
     const handleNextClick = () => {
         if (currentPage < totalPage) {
-            navigate(`/universities?page=${currentPage + 1}&limit=10`)
+            navigate(`/universities?page=${currentPage + 1}&limit=10`);
         }
     };
 
+    /**
+     * handlePrevClick
+     * 
+     * Navigates to the previous page if the current page is greater than 1.
+     */
     const handlePrevClick = () => {
         if (currentPage > 1) {
-            navigate(`/universities?page=${currentPage - 1}&limit=10`)
+            navigate(`/universities?page=${currentPage - 1}&limit=10`);
         }
     };
 
@@ -29,7 +58,7 @@ const Pagination = ({ totalPage, currentPage }) => {
 
             <PaginationButton 
                 type={'prev'} 
-                onClick={() => handlePrevClick(currentPage - 1)}
+                onClick={handlePrevClick}
                 disabled={currentPage === 1}
                 isActive={currentPage}
             />
@@ -64,7 +93,7 @@ const Pagination = ({ totalPage, currentPage }) => {
 
             <PaginationButton 
                 type={'next'}
-                onClick={() => handleNextClick(currentPage + 1)}
+                onClick={handleNextClick}
                 disabled={currentPage === totalPage}
                 isActive={currentPage}
             />

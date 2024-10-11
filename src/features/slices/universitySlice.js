@@ -33,7 +33,7 @@ export const fetchUniversities = createAsyncThunk(
 export const fetchUniversity = createAsyncThunk(
     'universities/fetchUniversity',
     async (id) => {
-        const response = await axios.get(`${config.universities.getAllUniversity}/${id}`);
+        const response = await axios.get(`${config.universities.getUniversityById}`);
         return response.data;
     }
 )

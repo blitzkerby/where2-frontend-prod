@@ -33,7 +33,9 @@ const config = {
     deleteUserById : (userId) =>`${API_URL}/api/users/delete-user/${userId}`
   },
   universities: {
-    getAllUniversity : `${API_URL}/api/university/`,
+    getAllUniversity : `${API_URL}/api/list/university/all`,
+    getUniversityBySearch : `${API_URL}/api/list/search/university/`,
+    getUniversityById : `${API_URL}/api/detail/university/`,
   },
    // Jobs
   job: {
