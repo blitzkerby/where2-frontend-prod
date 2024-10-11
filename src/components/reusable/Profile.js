@@ -26,7 +26,7 @@ const contentComponents = {
   logOut: Logout
 };
 
-const Profile = ({ userData }) => {
+const Profile = ({ userData, isPublic }) => {
   const [sidebarContent, setSidebarContent] = useState("account");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -49,7 +49,7 @@ const Profile = ({ userData }) => {
     return <LoadingOverlay />;
   }
 
-  if (!role) {
+  if (!role && !isPublic) {
     return <div>Error: Could not fetch user role</div>;
   }
 

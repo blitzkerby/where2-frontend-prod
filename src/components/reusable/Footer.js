@@ -7,7 +7,7 @@ import { BiTargetLock } from "react-icons/bi";
 import { PiPersonSimpleHike } from "react-icons/pi";
 
 const FooterLink = ({ href, children }) => (
-  <Link to={href} className="hover:underline">
+  <Link to={href} className="mb-2 hover:underline">
     {children}
   </Link>
 );
@@ -19,16 +19,16 @@ const SocialIcon = ({ Icon }) => (
 
 function Footer () {
   return (
-    <footer className="bg-[#E6F3F9] text-gray-700 py-8 px-4 w-full bottom-0">
-      <div className="container mx-auto max-w-[1440px]">
-        <div className="md:flex md:justify-between flex justify-between flex-wrap md:mr-6">
+    <footer className="bg-[#E6F3F9] text-gray-700 py-8 px-4 w-full bottom-0 b-0">
+      <div className="container mx-auto max-w-[1440px] flex flex-col sm:flex-col">
+        <div className="flex align-center justify-between sm:flex-wrap flex-row md:mr-6">
           {/* Desktop: Left column, Mobile: Top section */}
-          <div className="mb-8 md:mb-0 w-1/2 md:w-1/4 p-2">
-            <h2 className="font-bold mb-2  underline decoration-[3px] underline-offset-8"><FooterLink href="/universities">Universities</FooterLink></h2>
-            <h2 className="font-bold mb-2  underline decoration-[3px] underline-offset-8"><FooterLink href="/scholarships">Scholarships</FooterLink></h2>
+          <div className="mb-8 sm:w-1/2 justify-center lg:mb-0 md:w-1/4 p-2">
+            <h2 className="font-bold mb-6  underline decoration-[3px] underline-offset-8"><FooterLink href="/universities">Universities</FooterLink></h2>
+            <h2 className="font-bold mb-6  underline decoration-[3px] underline-offset-8"><FooterLink href="/scholarships">Scholarships</FooterLink></h2>
             <div className="mb-4">
-              <h2 className="font-bold mb-2  underline decoration-[3px] underline-offset-8"><FooterLink href="/livelihood">Livelihood</FooterLink></h2>
-              <ul className=" text-sm" style={{color:'rgba(157, 160, 161, 1)'}}>
+              <h2 className="font-bold mb-4  underline decoration-[3px] underline-offset-8"><FooterLink href="/livelihood">Livelihood</FooterLink></h2>
+              <ul className="text-sm" style={{color:'rgba(157, 160, 161, 1)'}}>
                 <li><FooterLink href="/part-time-job">Part Time Job</FooterLink></li>
                 <li><FooterLink href="/student-loan">Student Loan</FooterLink></li>
                 <li><FooterLink href="/accommodation">Accommodation</FooterLink></li>
@@ -37,7 +37,7 @@ function Footer () {
             </div>
           </div>
           {/* Desktop: Middle columns, Mobile: Middle section */}
-          <div className="mb-8 md:mb-0 w-1/2 md:w-1/4 p-2">
+          <div className="mb-8 md:mb-0 md:w-1/4 p-2">
             <h2 className="font-bold mb-2  underline decoration-[3px] underline-offset-8"><FooterLink href="/about-us">About Us</FooterLink></h2>
             <ul className=" text-sm" style={{color:'rgba(157, 160, 161, 1)'}}>
               <li className="flex items-center">
@@ -52,7 +52,7 @@ function Footer () {
           </div>
 
           {/* Desktop: Right column, Mobile: Bottom section */}
-          <div className='w-1/2 md:w-1/4'>
+          <div className='md:w-1/4'>
             <h2 className="font-bold   underline decoration-[3px] underline-offset-8 md:hidden mb-6"><FooterLink href="/contact-us">Contact Us</FooterLink></h2>
             <h2 className="font-bold   underline decoration-[3px] underline-offset-8 hidden md:block mb-6">Contact Us</h2>
             <ul className="text-sm mb-4" style={{color:'rgba(157, 160, 161, 1)'}}>

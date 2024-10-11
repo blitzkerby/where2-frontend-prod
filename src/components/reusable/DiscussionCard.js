@@ -1,38 +1,51 @@
 import React, { useState } from 'react';
 import Button from './ButtonComponent';
-import CommentSection from './CommentSectionComponent';
+import { useNavigate } from'react-router-dom';
+import CommentSectionComponent from './CommentSectionComponent';
+import ProfilePicture from './ProfilePicture';
 
 const DiscussionCard = ({ discussion }) => {
-    const [isExpanded, setIsExpanded] = useState(false);
-    const [localComments, setLocalComments] = useState(discussion.comments);
-  
-    const handleCommentAdded = (newComment) => {
-      setLocalComments(prevComments => [...prevComments, newComment]);
-    };
-  
-    return (
-      <div className="p-6 bg-white rounded-lg shadow hover:shadow-md transition-shadow">
-        <h3 className="text-xl font-semibold mb-2">{discussion.title}</h3>
-        <p className="text-gray-600 mb-4">{discussion.content}</p>
-        <div className="flex justify-between items-center text-sm text-gray-500">
-          <span>Posted by {discussion.user.email}</span>
-          <Button
-            variant="ghost"
-            onClick={() => setIsExpanded(!isExpanded)}
-          >
-            {localComments.length} comments
-          </Button>
-        </div>
-        
-        {isExpanded && (
-          <CommentSection
-            discussionId={discussion.id}
-            comments={localComments}
-            onCommentAdded={handleCommentAdded}
-          />
-        )}
-      </div>
-    );
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [localComments, setLocalComments] = useState(discussion.comments);
+  const navigate = useNavigate();
+
+  const handleCommentAdded = (newComment) => {
+    setLocalComments(prevComments => [...prevComments, newComment]);
   };
+
+  const handleUserClick = () => {
+    navigate(`/public-profile/${discussion.user.id}`);
+  };
+
+  return (
+    <div className="p-6 bg-white rounded-lg shadow hover:shadow-md transition-shadow">
+      <h3 className="text-xl font-semibold mb-2">{discussion.title}</h3>
+      <p className="text-gray-600 mb-4">{discussion.content}</p>
+      <div className="flex justify-between items-center text-sm text-gray-500">
+        <div 
+          className="flex items-center gap-2 cursor-pointer hover:text-gray-700"
+          onClick={handleUserClick}
+        >
+          <ProfilePicture userId={discussion.user.id} size={6} />
+          <span>Posted by {discussion.user.email}</span>
+        </div>
+        <Button
+          variant="ghost"
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          {localComments.length} comments
+        </Button>
+      </div>
+      
+      {isExpanded && (
+        <CommentSectionComponent
+          discussionId={discussion.id}
+          comments={localComments}
+          onCommentAdded={handleCommentAdded}
+        />
+      )}
+    </div>
+  );
+};
 
 export default DiscussionCard;

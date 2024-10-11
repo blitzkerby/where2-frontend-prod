@@ -27,6 +27,7 @@ const config = {
   },
   profile: {
     getMyProfile: (userId) => `${API_URL}/api/users/profile/${userId}`,
+    getPublicProfile: (userId) => `${API_URL}/api/users/profile/public/${userId}`
   },
   analytics: {
     getAllUsers: `${API_URL}/api/users/user-list`,
@@ -40,6 +41,8 @@ const config = {
   community: {
     createDiscussion: `${API_URL}/api/discussion`,
     getDiscussions: `${API_URL}/api/discussions`,
+    addComment: (discussionId, commentId) => `${API_URL}/api/discussions/${discussionId}/comment/${commentId}`,
+    getAllComments: (discussionId) => `${API_URL}/api/discussions/${discussionId}/comments`
   }
 };
 export default config;

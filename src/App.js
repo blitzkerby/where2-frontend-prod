@@ -13,6 +13,7 @@ import HealthPage from "./pages/HealthPage";
 import PublicOnlyROute from "./components/reusable/PublicOnlyRoute";
 import CreateDiscussionPage from "./pages/CreateDiscussionPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import PublicProfile from "./components/profile/PublicProfile";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
     path: "/home",
     element: <HomePage />
   },
+  {
+    path: "/homepage",
+    element: <HomePage />
+  },
   { path: "/login",element: <PublicOnlyROute><LoginPage /></PublicOnlyROute>},
   { path: "/signup",element: <PublicOnlyROute><RegisterPage /></PublicOnlyROute>},
   { path: "/forget-password", element: <PublicOnlyROute><ForgetPasswordPage /></PublicOnlyROute>},
@@ -34,9 +39,10 @@ const router = createBrowserRouter([
   { path: "/signup/verification", element: <PublicOnlyROute><VerificationPage/></PublicOnlyROute> },
   { path: "/dashboard/:userName", element: <DashboardComponent/> },
   { path: "/profile/:userName", element: <UserProfile/> },
+  { path: "/public-profile/:userId", element: <PublicProfile/> },
   { path: "/discussions", element: <DiscussionsPage/> },
   { path: "/discussions/create", element: <CreateDiscussionPage/> },
-  { path: "/health", element: <HealthPage/> }
+  { path: "/health", element: <HealthPage/> },
 ]);
 
 function App() {

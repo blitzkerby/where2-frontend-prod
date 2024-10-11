@@ -1,70 +1,63 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from "react";
 import ButtonComponent from "./Button";
-import FormInput from "./InputField";
 import useAuth from "./../../hooks/useAuth";
-import config from "./../../config";
-import { LoadingOverlay } from "./Loading";
+import ProfilePicture from "./ProfilePicture";
+import ReplyForm from "./ReplyForm";
 
 const CommentSectionComponent = ({ discussionId, comments, onCommentAdded }) => {
-    const [newComment, setNewComment] = useState('');
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [error, setError] = useState('');
-    const { username, userId } = useAuth();
-    const navigate = useNavigate();
+  const { isLoggedIn } = useAuth();
+  const [showReplyForm, setShowReplyForm] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-    const handleSubmitComment = async (e) => {
-        e.preventDefault();
-        if (!newComment.trim()) return;
-    
-        setIsSubmitting(true);
-        try {
-          const response = await axios.post(`${config.community.addComment}`, {
-            discussionId,
-            content: newComment
-          });
-          
-          onCommentAdded(response.data.data.comment);
-          setNewComment('');
-        } catch (error) {
-          console.error('Error posting comment:', error);
-        } finally {
-          setIsSubmitting(false);
-        }
-      };
+  const handleReplySubmitted = (newComment) => {
+    onCommentAdded(newComment);
+    setShowReplyForm(false);
+    setLoading(false);
+  };
 
-      <div className="mt-4 space-y-4">
+  const handleError = (errorMessage) => {
+    setError(errorMessage);
+    setLoading(false); 
+  };
+
+  return (
+    <div className="mt-6 space-y-4">
+      <h2 className="text-lg font-semibold">Comments ({comments.length})</h2>
+
+      {isLoggedIn && !showReplyForm && (
+        <ButtonComponent
+          variant="ghost"
+          className="text-blue-600 hover:text-blue-700"
+          onClick={() => setShowReplyForm(true)}
+        >
+          Add a reply
+        </ButtonComponent>
+      )}
+
+      {showReplyForm && (
+        <ReplyForm
+          discussionId={discussionId}
+          onReplySubmitted={handleReplySubmitted}
+          onCancel={() => setShowReplyForm(false)}
+          onError={handleError} 
+        />
+      )}
+
+      {error && <div className="text-red-500 text-sm">{error}</div>}
+
       <div className="space-y-4">
-        {comments.map(comment => (
-          <div key={comment.id} className="pl-4 border-l-2 border-gray-200">
-            <p className="text-gray-700">{comment.content}</p>
-            <div className="text-sm text-gray-500 mt-1">
-              <span>{comment.user.email}</span> • 
-              <span>{new Date(comment.createdAt).toLocaleDateString()}</span>
+        {comments.map((comment) => (
+          <div key={comment.id} className="bg-gray-50 p-4 rounded-lg">
+            <div className="flex items-center gap-2 mb-2">
+              <ProfilePicture userId={comment.user.id} size={6} />
+              <span className="text-sm text-gray-600">{comment.user.email}</span>
             </div>
+            <p className="text-gray-700">{comment.content}</p>
           </div>
         ))}
       </div>
-      
-      {userId && (
-        <form onSubmit={handleSubmitComment} className="mt-4">
-          <FormInput
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            placeholder="Add a comment..."
-            className="w-full min-h-[100px]"
-          />
-          <ButtonComponent
-            type="submit"
-            disabled={isSubmitting || !newComment.trim()}
-            className="mt-2"
-          >
-            {isSubmitting ? 'Posting...' : 'Post Comment'}
-          </ButtonComponent>
-        </form>
-      )}
     </div>
-}
+  )};
 
-export default CommentSectionComponent;
+  export default CommentSectionComponent;

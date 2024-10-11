@@ -56,7 +56,12 @@ const UserProfile = () => {
   useEffect(() => {
     const loadProfile = async () => {
       try {
-        const data = await fetchProfile();
+        let data;
+        if (userId) {
+          data = await fetchPublicProfile(userId);
+        } else {
+          data = await fetchProfile();
+        }
         setUserData(data);
       } catch (err) {
         setError(err.message);
@@ -64,7 +69,7 @@ const UserProfile = () => {
     };
 
     loadProfile();
-  }, []);
+  }, [userId]);
 
   // If there's an error (like JWT expired), navigate to login
   if (error) {
