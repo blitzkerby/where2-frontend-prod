@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // import Card from "./components/reusable/Card";
 // import SearchBar from "./components/reusable/SearchBar";
@@ -14,7 +13,6 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ForgetPasswordPage from "./pages/ForgetPasswordPage";
 import ScholarshipDetailPage from "./pages/ScholarshipDetailPage";
 import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
-import VerificationPage from "./pages/VerificationPage";
 import DashboardComponent from "./components/accountUtilities/sidebarComponents/Admin/Dashboard";
 import DiscussionsPage from "./pages/DiscussionPage";
 import HealthPage from "./pages/HealthPage";
