@@ -149,7 +149,7 @@ const Sidebar = ({ isOpen, onClose, userRole }) => {
   return (
     <div
       ref={sidebarRef}
-      className={`rounded-[20px] p-[16px] h-[100vh] left-0 w-64 shadow-md border-[1px] bg-white text-black transform ${
+      className={`rounded-r-[20px] p-[16px] h-[100vh] left-0 w-64 shadow-md border-[1px] bg-white text-black transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       } transition-transform duration-500 ease-in-out z-10`}
     >

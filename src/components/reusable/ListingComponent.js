@@ -1,10 +1,11 @@
 import React, { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { Trash, Pen } from "lucide-react";
-import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import DeleteConfirmationModal from "./functions/DeleteConfirmationModal";
 import ButtonComponent from "./Button";
 import SearchBar from "./SearchBar";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import config from "./../../config";
+import deleteUser from "./functions/DeleteUser";
 
 const ListingComponent = ({ title, data, columns, totalItems, additionalStats }) => {
   const [showModal, setShowModal] = useState(false);
@@ -12,26 +13,15 @@ const ListingComponent = ({ title, data, columns, totalItems, additionalStats })
   const [searchTerm, setSearchTerm] = useState("");
   const [localData, setLocalData] = useState(data); // Use local state to handle immediate updates
 
-  const handleDeleteClick = (id) => { setSelectedUserId(id); setShowModal(true); };
+  const handleDelete = (id) => { setSelectedUserId(id); setShowModal(true); };
+
+  const navigate = useNavigate();
+  const handleViewProfile = (id) => {
+    navigate(`/user/${id}`)
+  }
 
   const queryClient = useQueryClient();
 
-  // Function to handle the deletion API call
-  const deleteUser = async (userId) => {
-    const response = await fetch(config.analytics.deleteUserById(userId), {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-  
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || 'Error deactivating user');
-    }
-  
-    return response;
-  };
 
   // Mutation setup for deleting users with optimistic updates
   const mutation = useMutation({
@@ -124,13 +114,13 @@ const ListingComponent = ({ title, data, columns, totalItems, additionalStats })
   ))}
   <td className="py-4">
     <div className="flex gap-4 sm:gap-1 justify-center">
-      <ButtonComponent variant="danger" onClick={() => handleDeleteClick(item.id)}>
+      <ButtonComponent variant="danger" onClick={() => handleDelete(item.id)}>
         <Trash />
       </ButtonComponent>
       <ButtonComponent variant="success">
         <Pen />
       </ButtonComponent>
-      <ButtonComponent variant="ghost">View</ButtonComponent>
+      <ButtonComponent variant="ghost" onClick={() => handleViewProfile(item.id)} >View</ButtonComponent>
     </div>
   </td>
 </tr>

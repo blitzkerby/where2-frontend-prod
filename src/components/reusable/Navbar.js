@@ -14,7 +14,8 @@ import {
   ChartColumnIcon,
   User2,
   LucideMessageCircleQuestion,
-  Activity
+  Activity,
+  ChartNoAxesCombinedIcon
 } from "lucide-react";
 
 const MenuIcon = <img src={Menu} alt="Menu" />;
@@ -25,7 +26,7 @@ const DashboardIcon = ({ username, entity }) => {
 
   return (
     <Link to={dynamicDashboardUrl}>
-      <img src={Dashboard} alt="Dashboard" />
+      <ChartNoAxesCombinedIcon/>
     </Link>
   );
 };
@@ -126,7 +127,7 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.to}
-                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center"
+                  className="px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center"
                   onClick={toggleMenu}
                 >
                   {item.logo}

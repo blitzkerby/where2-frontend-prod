@@ -7,6 +7,7 @@ import { LoadingOverlay } from './Loading';
 import useAuth from './../../hooks/useAuth';
 import DiscussionCard from './DiscussionCard';
 import CreateDiscussionComponent from './CreateDiscussionComponent';
+import WrapperComponent from './WrapperComponent';
 
 const DiscussionList = () => {
   const [discussions, setDiscussions] = useState([]);
@@ -50,7 +51,7 @@ const DiscussionList = () => {
         {showDashboard && (
           <Button
             variant="primary"
-            className="mt-2 w-[197px] sm:w-full h-[38px] sm:w-[343px] sm:h-[50px]"
+            className="mt-2 w-[197px] sm:w-full h-[38px] lg:w-[343px] sm:h-[50px]"
             onClick={() => navigate('/discussions/create')}
           >
             New Discussion
@@ -58,7 +59,8 @@ const DiscussionList = () => {
         )}
       </div>
 
-      <div className="space-y-4">
+        <WrapperComponent>
+        <div className="space-y-4">
         {discussions.map(discussion => (
           <DiscussionCard 
             key={discussion.id}
@@ -66,6 +68,7 @@ const DiscussionList = () => {
           />
         ))}
       </div>
+        </WrapperComponent>
     </div>
   );
 };

@@ -14,6 +14,7 @@ import PublicOnlyROute from "./components/reusable/PublicOnlyRoute";
 import CreateDiscussionPage from "./pages/CreateDiscussionPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import PublicProfile from "./components/profile/PublicProfile";
+import VisitProfile from "./components/accountUtilities/sidebarComponents/User/VisitProfile";
 
 const queryClient = new QueryClient();
 
@@ -42,7 +43,8 @@ const router = createBrowserRouter([
   { path: "/public-profile/:userId", element: <PublicProfile/> },
   { path: "/discussions", element: <DiscussionsPage/> },
   { path: "/discussions/create", element: <CreateDiscussionPage/> },
-  { path: "/health", element: <HealthPage/> },
+  { path: "/health", element: <HealthPage/>},
+  {path: "/user/:userId", element: <VisitProfile/>}
 ]);
 
 function App() {
