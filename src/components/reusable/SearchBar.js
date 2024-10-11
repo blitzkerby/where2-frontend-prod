@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Search } from "lucide-react";
-import { searchUniversities } from '../../features/slices/searchbarSlice';
+import { useNavigate } from 'react-router-dom';
 
 const styles = {
     form: "relative mx-[20px]",
@@ -11,6 +11,7 @@ const styles = {
 
 function SearchBar({ handleSearch, searchPlaceholder }) {
     const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();  // Assuming useNavigate hook is used for navigation in your app. Adjust as needed.
 
     const onChange = (e) => {
         setSearchQuery(e.target.value);
@@ -18,6 +19,7 @@ function SearchBar({ handleSearch, searchPlaceholder }) {
 
     const onSubmit = (e) => {
         e.preventDefault();
+        navigate("/universities/search?page=1&q=University")
         handleSearch(searchQuery);
     };
 

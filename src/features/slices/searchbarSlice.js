@@ -14,7 +14,8 @@ import axios from 'axios';
 
 const searchUniversities = async (query , page) => {
     try {
-        const response = await axios.get(`http://127.0.0.1:4000/api/${page}/search?query=${query}`)
+        const response = await axios.get(`http://127.0.0.1:4000/api/${page}/search?page=${1}&q=${query}`)
+        // const response = await axios.get(`http://127.0.0.1:4000/api/university/search?page=1&q=stanford`)
         console.log(response.data.universities)
         return response.data.universities
     } catch (error) {

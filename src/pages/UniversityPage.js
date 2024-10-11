@@ -21,12 +21,16 @@ function useQuery() {
 }  
 
 const UniversityPage = () => {
-    const query = useQuery()
-    const page = parseInt(query.get('page')) || 1
-    const limit = parseInt(query.get('limit')) || 10
+    const urlParams = useQuery()
+    const page = parseInt(urlParams.get('page')) || 1
+    const searchQuery = (urlParams.get('q')) || ''
+    const limit = parseInt(urlParams.get('limit')) || 10
+
 
     console.log("page", page)
+    console.log("query", searchQuery)
     console.log("limit", limit)
+
 
     const dispatch = useDispatch();
     const { universities, loading, error } = useSelector((state) => state.universities);
@@ -40,6 +44,7 @@ const UniversityPage = () => {
 
     async function handleSearch(query) {
         try {
+            // const data = await searchUniversities(query, "university");
             const data = await searchUniversities(query, "university");
             dispatch(setUniversities(data)); 
         } catch (error) {
