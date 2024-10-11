@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Profile from '../reusable/Profile';
 import config from '../../config';
 import { LoadingOverlay } from '../reusable/Loading';
-import { useNavigate } from 'react-router-dom'; // Use useNavigate instead of useNavigation
-import Navbar from '../reusable/Navbar';
 
 const getAuthData = () => {
   const authData = localStorage.getItem('authData');
@@ -28,6 +26,7 @@ const getAuthData = () => {
 const fetchProfile = async () => {
   try {
     const { token, userId } = getAuthData();
+    console.log(userId)
     const res = await fetch(config.profile.getMyProfile(userId), {
       headers: {
         'Content-Type': 'application/json',
@@ -51,17 +50,11 @@ const fetchProfile = async () => {
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Use useNavigate hook at the top level
 
   useEffect(() => {
     const loadProfile = async () => {
       try {
-        let data;
-        if (userId) {
-          data = await fetchPublicProfile(userId);
-        } else {
-          data = await fetchProfile();
-        }
+        const data = await fetchProfile();
         setUserData(data);
       } catch (err) {
         setError(err.message);
@@ -69,27 +62,23 @@ const UserProfile = () => {
     };
 
     loadProfile();
-  }, [userId]);
+  }, []);
 
-  // If there's an error (like JWT expired), navigate to login
   if (error) {
-    console.error('Redirecting due to error:', error);
-    navigate("/login");
-    return null; // Ensure the component doesn't try to render anything else
+    return <div>Error: {error}</div>;
   }
 
-  // Show loading spinner if user data is not yet available
   if (!userData) {
-    return <LoadingOverlay />;
+    return <LoadingOverlay/>;
   }
 
   return (
-    <>
-      <Navbar />
-      <div className='w-full h-full mt-[70px]'>
-        <Profile userData={userData} />
+
+<>
+      <div className='w-full max-h-full mt-[70px] lg:mb-[32px] relative'>
+        <Profile userData={userData}/>
       </div>
-    </>
+</>
   );
 };
 
