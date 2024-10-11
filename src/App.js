@@ -20,6 +20,7 @@ import JobPage from "./pages/JobPage";
 import JobDetailPage from "./pages/JobDetailPage";
 import LivelihoodPage from "./pages/LivelihoodPage";
 import UniversityDetail from "./pages/UniversityDetail";
+import ErrorPage from "./pages/ErrorPage";
 
 const queryClient = new QueryClient();
 
@@ -27,18 +28,32 @@ const router = createBrowserRouter([
   {
     path: '/',
     index: true,
-    element: <HomePage />
+    element: <HomePage />,
+    errorElement: <ErrorPage />
   },
   {
     path: "/home",
-    element: <HomePage />
+    element: <HomePage />,
   },
   {
-    path: "/detail",
-    element: <UniversityPage />,
+    path: "/list",
     children: [
-      { path: "university/search", element: <UniversityPage /> },
-      { path: "university/:id", element: <UniversityDetail /> }
+      {
+        path: "university",
+        children: [
+          { path: "", element: <UniversityPage /> },
+          { path: "search", element: <UniversityPage /> },
+          { path: ":id", element: <UniversityDetail /> }
+        ]
+      },
+      // {
+      //   path: "/scholarship",
+      //   children: [
+      //     { path: "", element: <ScholarshipPage /> },
+      //     { path: "search", element: <ScholarshipPage /> },
+      //     { path: ":id", element: <ScholarshipDetail /> }
+      //   ]
+      // }
     ]
   },  
   { path: "/jobs", element: <JobPage /> },

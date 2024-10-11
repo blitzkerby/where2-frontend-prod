@@ -50,7 +50,7 @@ const UniversityPage = () => {
      */
     useEffect(() => {
         if (!searchQuery) {
-            dispatch(fetchUniversities({ page, limit }));
+            dispatch(fetchUniversities({ page }));
         } else {
             handleSearch(searchQuery);
             if (isDebug) {
@@ -87,7 +87,7 @@ const UniversityPage = () => {
             <ListContainer>
                 {loading && <LoadingOverlay />}
                 {error && <p>{error}</p>}
-                <SearchBar handleSearch={handleSearch} searchPlaceholder="Search universities..." />
+                <SearchBar handleSearch={handleSearch} searchPlaceholder="Search universities..." category="university"/>
                 <UniversityList universities={universities} />
                 <Pagination totalPage={totalPage} currentPage={page} />
             </ListContainer>
