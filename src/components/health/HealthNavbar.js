@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { X } from "lucide-react";
 import Dashboard from "./../../assets/svg/dashboard.svg";
 import Menu from "./../../assets/svg/menu.svg";
-import useAuth from "./../../hooks/useAuth";
-import ProfilePicture from "./ProfilePicture";
+import useAuth from "../../hooks/useAuth";
+import ProfilePicture from "../reusable/ProfilePicture";
 import { User2 } from "lucide-react";
 
 const MenuIcon = <img src={Menu} alt="Menu" />;

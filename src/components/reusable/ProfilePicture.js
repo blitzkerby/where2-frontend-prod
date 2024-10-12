@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import config from "./../../config";
+import { LoadingSpinner } from "./Loading";
 import { User } from "lucide-react";
 
 const ProfilePicture = ({ userId, big, size = 8, onClick }) => {
@@ -37,11 +38,10 @@ const ProfilePicture = ({ userId, big, size = 8, onClick }) => {
 
   if (isLoading) {
     return (
-      <div
-        className={`w-${size} h-${size} rounded-full bg-gray-200 flex items-center justify-center`}
-      >
-        <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-      </div>
+      <LoadingSpinner
+        size={size}
+        className="flex items-center justify-center"
+      />
     );
   }
 

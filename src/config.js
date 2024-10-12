@@ -27,7 +27,8 @@ const config = {
   },
   profile: {
     getMyProfile: (userId) => `${API_URL}/api/users/profile/${userId}`,
-    getPublicProfile: (userId) => `${API_URL}/api/users/profile/public/${userId}`
+    getPublicProfile: (userId) =>
+      `${API_URL}/api/users/profile/public/${userId}`,
   },
   analytics: {
     getAllUsers: `${API_URL}/api/users/user-list`,
@@ -36,13 +37,19 @@ const config = {
   photo: {
     getS3Url: `${API_URL}/api/user/s3Url`,
     uploadProfilePicture: `${API_URL}/api/user/profile-picture`,
-    fetchProfilePicture: (userId) => `${API_URL}/api/user/${userId}/profile-picture`,
+    fetchProfilePicture: (userId) =>
+      `${API_URL}/api/user/${userId}/profile-picture`,
   },
   community: {
     createDiscussion: `${API_URL}/api/discussion`,
     getDiscussions: `${API_URL}/api/discussions`,
-    addComment: (discussionId, commentId) => `${API_URL}/api/discussions/${discussionId}/comment/${commentId}`,
-    getAllComments: (discussionId) => `${API_URL}/api/discussions/${discussionId}/comments`
-  }
+    addComment: (discussionId, commentId) =>
+      `${API_URL}/api/discussions/${discussionId}/comment/${commentId}`,
+    getAllComments: (discussionId) =>
+      `${API_URL}/api/discussions/${discussionId}/comments`,
+  },
+  chatbot: {
+    sendMessage: `${API_URL}/api/ai/summary`,
+  },
 };
 export default config;
