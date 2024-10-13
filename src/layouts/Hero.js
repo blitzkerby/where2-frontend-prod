@@ -30,7 +30,8 @@ const Hero = ({ props, children }) => {
 
     /* background image */
     imageContainer: `flex justify-center w-full h-full`,
-    image: "object-contain min-w-full min-h-full sm:object-cover",
+    image:
+      "object-contain min-w-full min-h-full sm:object-cover transition-transform duration-500 ease-in-out transform hover:scale-110",
 
     /* components */
     form: "relative mx-[20px]",

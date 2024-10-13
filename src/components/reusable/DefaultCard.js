@@ -7,7 +7,7 @@ const DefaultCard = ({ card }) => {
         <img
           src={card.image}
           alt={card.title}
-          className="w-full h-48 object-fill"
+          className="w-full h-48 object-fill transition-transform duration-500 ease-in-out transform hover:scale-110"
         />
       </Link>
       <div className="p-4">
