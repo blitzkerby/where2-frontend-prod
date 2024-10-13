@@ -50,11 +50,11 @@ const Health = () => {
   return (
     <div className="w-full pt-[64px] min-h-screen bg-slate-950 font-light tracking-[-0.08em] text-white">
       <WrapperComponent>
-        <header className="w-[90%] mx-auto py-16 text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+        <header className="lg:w-[70%] sm:w-[80%] mx-auto py-16 text-center">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold mb-6 text-">
             Mental Health and Health Services and Product Reviews
           </h1>
-          <p className="text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto text-balance">
             Our mission is to provide exceptional health and wellness services
             to our user, community and nation. We only publish trustworthy
             articles and publications, translated from reliable well-known
@@ -74,12 +74,12 @@ const Health = () => {
           />
         ) : (
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12 underline">
+            <h2 className="text-xl font-bold text-center mb-12 underline">
               Health Articles
             </h2>
 
             <WrapperComponent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {articles.map((article) => (
                   <HealthArticleCard
                     key={article.id}
