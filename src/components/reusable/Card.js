@@ -1,5 +1,6 @@
 // dependencies
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Twitter, Youtube, Chrome } from "lucide-react";
 
@@ -9,7 +10,7 @@ import BookMark from "../../assets/svg/bookmark.svg";
 import MiniMap from "../../assets/svg/miniMap.svg";
 import MiniClock from "../../assets/svg/miniClock.svg";
 import Calender from "../../assets/svg/calender.svg";
-
+import FilledHeart from "../../assets/svg/filled-heard.svg"
 // constants
 import DefaultCardImage from "../../assets/images/card-image-default.png";
 
@@ -40,8 +41,20 @@ const Card = ({
   timeOut = '',
   id,
   type,
-  route
+  route,
+  isHeartClicked = false, 
+
 }) => {
+  const dispatch = useDispatch();
+    const handleHeartClick = async () => {
+         await removeFavorite(id, type);
+        dispatch(setIsClicked({ id: id }))
+    };
+    const handleRemoveHeartClick = async () => {
+          await addFavorite(id, type)
+        dispatch(setIsClicked({ id: id }))
+    }
+
   const socialMediaIcons = [
     { icon: Facebook, linkKey: facebookLink },
     { icon: Twitter, linkKey: twitterLink },
@@ -182,7 +195,11 @@ const Card = ({
               <div className="flex justify-between">
                 <div className={styles.bookmarkContainer}>
                   <div>
-                    <img src={BookMark} alt="Bookmark" />
+                  {isHeartClicked?<div>
+                                <img className="w-9" src={FilledHeart} alt="Bookmark" onClick={handleHeartClick} />
+                                </div> : <div>
+                                <img src={BookMark} alt="Bookmark" onClick={handleRemoveHeartClick} />
+                                </div> }
                   </div>
                   <Link to="">
                     <img src={Map} alt="Map" />
