@@ -25,7 +25,7 @@ const StudentLoanPage = () => {
         dispatch(fetchAllList({page,limit,model: 'StudentLoan'}))
     },[dispatch, page])
     return (
-        <div>
+        <>
             <Navbar />
             <ListContainer>
             {loading && <LoadingOverlay/>}
@@ -34,7 +34,7 @@ const StudentLoanPage = () => {
             </ListContainer>
             <Pagination totalPage={totalPage} currentPage={page} route={'studen-loans'}/>
             <Footer />
-        </div>
+        </>
     )
 };
 

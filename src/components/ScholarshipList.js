@@ -7,7 +7,7 @@ import Navbar from "./reusable/Navbar";
 import { useDispatch, useSelector } from 'react-redux';  // Import hooks from react-redux
 import { fetchScholarships } from "../features/slices/scholarshipsSlice";
 
-export default function ScholarshipList({scholarship}) {
+const ScholarshipList = ({scholarship})=> {
     // const dispatch = useDispatch();  // Create a dispatch function
     // const { scholarships, loading, error } = useSelector((state) => state.scholarships);  // Access scholarships data from the store
 
@@ -104,3 +104,4 @@ export default function ScholarshipList({scholarship}) {
         // </>
     );
 }
+export default ScholarshipList;
