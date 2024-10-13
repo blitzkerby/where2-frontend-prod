@@ -39,6 +39,7 @@ const config = {
     uploadProfilePicture: `${API_URL}/api/user/profile-picture`,
     fetchProfilePicture: (userId) =>
       `${API_URL}/api/user/${userId}/profile-picture`,
+    fetchBatchProfilePictures: `${API_URL}/api/user/users/batch-profile-pictures`,
   },
   community: {
     createDiscussion: `${API_URL}/api/discussion`,

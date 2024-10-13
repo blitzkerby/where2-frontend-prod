@@ -11,8 +11,8 @@ import { useParams } from 'react-router-dom';
 import Navbar from './../../components/reusable/Navbar';
 import Footer from './Footer';
 const PublicProfile = ({ userInfo }) => {
-    console.log(userInfo.id  , userInfo)
-    const {userId} = useParams()
+  console.log(userInfo.id  , userInfo)
+  const {userId} = useParams()
   const {loading} = useAuth();
 
   if (loading) {

@@ -6,7 +6,6 @@ import config from "../../config";
 import { LoadingOverlay } from "../reusable/Loading";
 import useAuth from "../../hooks/useAuth";
 import DiscussionCard from "../reusable/DiscussionCard";
-import CreateDiscussionComponent from "./CreateDiscussionComponent";
 import WrapperComponent from "../reusable/WrapperComponent";
 
 const DiscussionList = () => {

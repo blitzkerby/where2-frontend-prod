@@ -1,79 +1,41 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import config from "./../../config";
+import { useFetchPhoto } from "./../../hooks/useFetchPhoto";
 import { LoadingSpinner } from "./Loading";
 import { User } from "lucide-react";
 
-const ProfilePicture = ({ userId, big, size = 8, onClick }) => {
-  const navigate = useNavigate();
-  const [profilePictureUrl, setProfilePictureUrl] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+const ProfilePicture = ({ userId, big = false, size = 8, onClick }) => {
+  const { photoUrl, isLoading, error } = useFetchPhoto(userId);
 
-  useEffect(() => {
-    const fetchProfilePicture = async () => {
-      if (!userId) {
-        setIsLoading(false);
-        return;
-      }
-
-      setIsLoading(true);
-      setError(null);
-      try {
-        const { data } = await axios.get(
-          config.photo.fetchProfilePicture(userId)
-        );
-        setProfilePictureUrl(data.profilePictureUrl);
-      } catch (error) {
-        console.error("Error fetching profile picture:", error);
-        setError("Failed to load profile picture");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchProfilePicture();
-  }, [userId]);
+  const containerClasses = `rounded-full overflow-hidden flex items-center justify-center ${
+    big ? "w-24 h-24" : `w-${size} h-${size}`
+  }`;
 
   if (isLoading) {
     return (
-      <LoadingSpinner
-        size={size}
-        className="flex items-center justify-center"
-      />
+      <div className={containerClasses}>
+        <LoadingSpinner size={size} />
+      </div>
     );
   }
 
   if (error) {
     return (
-      <div
-        className={`w-${size} h-${size} rounded-full bg-red-100 flex items-center justify-center`}
-      >
-        <User size={size * 2.5} className="text-red-500" />
+      <div className={`${containerClasses} bg-red-100`}>
+        <User size={big ? 48 : size * 2.5} className="text-red-500" />
       </div>
     );
   }
 
   return (
-    <div
-      className={`${
-        big ? "w-full h-full object-cover" : `w-${size} h-${size}`
-      } rounded-full overflow-hidden  flex items-center justify-center`}
-    >
-      {profilePictureUrl ? (
+    <div className={containerClasses} onClick={onClick}>
+      {photoUrl ? (
         <img
-          src={profilePictureUrl}
+          src={photoUrl}
           alt="Profile"
-          className={
-            big
-              ? "w-24 h-24 rounded-full object-cover"
-              : "w-full h-full object-cover"
-          }
-          onClick={onClick}
+          className="w-full h-full object-cover"
         />
       ) : (
-        <User size={size * 0.6} className="text-gray-500" />
+        <User size={big ? 48 : size * 2.5} className="text-gray-500" />
       )}
     </div>
   );

@@ -11,17 +11,23 @@ const useAuth = () => {
   const [userId, setUserId] = useState(null);
 
   const fetchUserDataAndRole = useCallback(async () => {
+    setLoading(true);
     try {
       const authData = JSON.parse(localStorage.getItem("authData"));
       if (authData) {
-        const { userName, entity, token, id } = authData;
+        const { userName, entity, token, id, role } = authData;
 
         setUsername(userName || "");
         setEntity(entity || "");
         setIsLoggedIn(true);
         setUserId(id || null);
 
-        if (token) {
+        if (role) {
+          // Use the role from localStorage if available
+          setRole(role);
+          setShowDashboard(role === "admin" || role === "developer");
+        } else if (token) {
+          // Fetch role only if not available in localStorage
           const response = await fetch(config.auth.getUserRole, {
             headers: { Authorization: `Bearer ${token}` },
           });
@@ -32,12 +38,19 @@ const useAuth = () => {
             setShowDashboard(
               data.role === "admin" || data.role === "developer"
             );
+
+            // Store the role in localStorage for future use
+            localStorage.setItem(
+              "authData",
+              JSON.stringify({ ...authData, role: data.role })
+            );
           } else {
             setRole("");
             setShowDashboard(false);
           }
         }
       } else {
+        // Clear all auth-related state if no authData in localStorage
         setUsername("");
         setEntity("");
         setRole("");
@@ -59,6 +72,25 @@ const useAuth = () => {
     fetchUserDataAndRole();
   }, [fetchUserDataAndRole]);
 
+  const login = useCallback(
+    async (loginData) => {
+      // Implement your login logic here
+      // After successful login, call fetchUserDataAndRole
+      await fetchUserDataAndRole();
+    },
+    [fetchUserDataAndRole]
+  );
+
+  const logout = useCallback(() => {
+    localStorage.removeItem("authData");
+    setIsLoggedIn(false);
+    setUsername("");
+    setEntity("");
+    setRole("");
+    setShowDashboard(false);
+    setUserId(null);
+  }, []);
+
   return {
     isLoggedIn,
     username,
@@ -67,6 +99,8 @@ const useAuth = () => {
     loading,
     showDashboard,
     userId,
+    login,
+    logout,
     refreshAuth: fetchUserDataAndRole,
   };
 };
