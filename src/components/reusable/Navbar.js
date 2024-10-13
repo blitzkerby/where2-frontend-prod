@@ -49,7 +49,7 @@ const Navbar = () => {
   };
 
   const menuItems = [
-    { logo: <School/>, name: "Universities", to: "/universities" },
+    { logo: <School/>, name: "Universities", to: "/list/university" },
     { logo: <BookOpenTextIcon/>, name: "Scholarships", to: "/scholarships" },
     { logo: <LucideBriefcaseBusiness/>, name: "Livelihood", to: "/livelihood" },
     { logo: <BookMarked/>, name: "Bookmarks", to: "/bookmarks" },
