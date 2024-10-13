@@ -14,6 +14,9 @@ import FilledHeart from "../../assets/svg/filled-heard.svg"
 // constants
 import DefaultCardImage from "../../assets/images/card-image-default.png";
 
+//function
+import { addFavorite,removeFavorite,setIsClicked } from "../../features/slices/favoriteSlice";
+
 // components
 import Button from "./ButtonComponent";
 import {
@@ -195,11 +198,12 @@ const Card = ({
               <div className="flex justify-between">
                 <div className={styles.bookmarkContainer}>
                   <div>
-                  {isHeartClicked?<div>
-                                <img className="w-9" src={FilledHeart} alt="Bookmark" onClick={handleHeartClick} />
-                                </div> : <div>
-                                <img src={BookMark} alt="Bookmark" onClick={handleRemoveHeartClick} />
-                                </div> }
+                    {isHeartClicked ?
+                      <div>      
+                        <img className="w-9" src={FilledHeart} alt="Bookmark" onClick={handleHeartClick} />
+                        </div> : <div>
+                      <img src={BookMark} alt="Bookmark" onClick={handleRemoveHeartClick} />
+                  </div> }
                   </div>
                   <Link to="">
                     <img src={Map} alt="Map" />

@@ -84,6 +84,7 @@ const ScholarshipList = ({scholarship})=> {
                 location={scholarship.location}
                 deadLine={scholarship.deadLine}
                 id={scholarship.id}
+                type={'scholarship'}
                 route={`/scholarship/${scholarship.id}`}
             />))
             }

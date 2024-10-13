@@ -23,6 +23,7 @@ const UniversityList = ({ universities }) => {
                     websiteLink={university.website}
                     location={university.location}
                     id={university.id}
+                    type={'university'}
                     route={`${university.id}`}
                 />
             ))}
