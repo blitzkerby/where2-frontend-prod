@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 
 const DefaultCard = ({ card }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition-transform duration-500 ease-in-out transform hover:scale-110">
       <Link to={card.path}>
         <img
           src={card.image}
           alt={card.title}
-          className="w-full h-48 object-fill transition-transform duration-500 ease-in-out transform hover:scale-110"
+          className="w-full h-48 object-fill"
         />
       </Link>
       <div className="p-4">

@@ -59,7 +59,7 @@ const DiscussionList = () => {
       </div>
 
       <WrapperComponent>
-        <div className="space-y-4 mt-[64px]">
+        <div className="space-y-8 mt-[64px]">
           {discussions.map((discussion) => (
             <DiscussionCard key={discussion.id} discussion={discussion} />
           ))}
