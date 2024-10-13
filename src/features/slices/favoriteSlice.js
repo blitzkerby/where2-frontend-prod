@@ -22,7 +22,8 @@ export const getFavorite = createAsyncThunk("getFavorite", async (category) => {
 });
 
 export const removeFavorite = async (cardId,category) => {
-    const removed = await axios.delete(config.favorite.removeFavorite(cardId, category));
+    const removed = await axios.delete(config.favorite.removedFavorite(cardId, category));
+    return removed;
 }
 
 const FavoriteSlices = createSlice({

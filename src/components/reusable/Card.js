@@ -49,12 +49,12 @@ const Card = ({
 
 }) => {
   const dispatch = useDispatch();
-    const handleHeartClick = async () => {
+  const handleHeartClick = async () => {
          await removeFavorite(id, type);
         dispatch(setIsClicked({ id: id }))
     };
-    const handleRemoveHeartClick = async () => {
-          await addFavorite(id, type)
+  const handleRemoveHeartClick = async () => {
+    await addFavorite(id, type)
         dispatch(setIsClicked({ id: id }))
     }
 
@@ -195,7 +195,7 @@ const Card = ({
                   }
                 )}
               </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between cursor-pointer">
                 <div className={styles.bookmarkContainer}>
                   <div>
                     {isHeartClicked ?
@@ -211,7 +211,7 @@ const Card = ({
                 </div>
 
                 <Link
-                  to={`/company/companydetail/${companyUrl}`}
+                  to={route}
                   className={styles.readMoreLink}
                 >
                   <Button

@@ -1,7 +1,8 @@
+import { useSelector } from "react-redux";
 import Card from "./reusable/Card";
 
 const UniversityList = ({ universities }) => {
-    
+    const { isClicked } = useSelector(state =>  state.favorites );
     if (universities[0] == "No results found") {
         return null;
     }
@@ -24,7 +25,8 @@ const UniversityList = ({ universities }) => {
                     location={university.location}
                     id={university.id}
                     type={'university'}
-                    route={`${university.id}`}
+                    route={`${ university.id }`}
+                    isHeartClicked = {isClicked[university.id]}
                 />
             ))}
         </>

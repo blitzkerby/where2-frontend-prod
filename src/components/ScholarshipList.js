@@ -7,7 +7,8 @@ import Navbar from "./reusable/Navbar";
 import { useDispatch, useSelector } from 'react-redux';  // Import hooks from react-redux
 import { fetchScholarships } from "../features/slices/scholarshipsSlice";
 
-const ScholarshipList = ({scholarship})=> {
+const ScholarshipList = ({ scholarship }) => {
+    const { isClicked } = useSelector(state => state.favorites );
     // const dispatch = useDispatch();  // Create a dispatch function
     // const { scholarships, loading, error } = useSelector((state) => state.scholarships);  // Access scholarships data from the store
 
@@ -85,7 +86,8 @@ const ScholarshipList = ({scholarship})=> {
                 deadLine={scholarship.deadLine}
                 id={scholarship.id}
                 type={'scholarship'}
-                route={`/scholarship/${scholarship.id}`}
+                route={`/scholarship/${ scholarship.id }`}
+                isHeartClicked={isClicked[scholarship.id]}
             />))
             }
             </>

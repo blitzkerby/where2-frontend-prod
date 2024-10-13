@@ -6,7 +6,8 @@ import { useEffect } from "react";
 // import { setCurrentPage, selectCurrentPage, selectItemsPerPage, selectTotalItems } from '../../features/slices/paginationSlice';
 // import PaginationComponent from "../reusable/Pagination";
 // import { addFavorite } from "../../features/slices/favoriteSlice";
-const StudentLoanList = ({studentLoans}) => {
+const StudentLoanList = ({ studentLoans }) => {
+    const { isClicked } = useSelector(state => { state.favorites });
     return (
     <>
     {studentLoans.map(loan => {
@@ -28,6 +29,8 @@ const StudentLoanList = ({studentLoans}) => {
                 // timeOut={loan.salary}
                 type={"loan"}
                 route={`/loan-detail`}
+                isHeartClicked={isClicked[loan.loan_id]}
+                
             />)
         
     })}

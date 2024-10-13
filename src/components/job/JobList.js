@@ -7,7 +7,9 @@ import ListContainer from "../reusable/ListContainer";
 import { setCurrentPage, selectCurrentPage, selectItemsPerPage, selectTotalItems } from '../../features/slices/paginationSlice';
 import PaginationComponent from "../reusable/Pagination";
 import { addFavorite } from "../../features/slices/favoriteSlice";
-const JobList = ({jobs}) => {
+
+const JobList = ({ jobs }) => {
+    const { isClicked } = useSelector((state) => state.favorites);
     return (
     <>
     {jobs.map(job => {
@@ -28,6 +30,7 @@ const JobList = ({jobs}) => {
                 deadLine={job.deadline}
                 timeOut={job.salary}
                 type={"job"}
+                isHeartClicked = {isClicked[job.id]}
                 route={`/job-detail/${ job.id }`}
             />)
         
