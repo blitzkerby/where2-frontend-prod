@@ -1,5 +1,6 @@
 import React from "react";
 import { Search } from "lucide-react";
+import useAuth from "./../hooks/useAuth";
 
 const Hero = ({ props, children }) => {
   const {
@@ -13,6 +14,8 @@ const Hero = ({ props, children }) => {
     mainImageAlt,
     onSearch,
   } = { ...props };
+
+  const { username, entity } = useAuth(); // Use the custom hook to get the user
 
   const styles = {
     /* containers */
