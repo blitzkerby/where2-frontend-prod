@@ -6,10 +6,16 @@ import { useEffect } from "react";
 import ListContainer from "../reusable/ListContainer";
 import { setCurrentPage, selectCurrentPage, selectItemsPerPage, selectTotalItems } from '../../features/slices/paginationSlice';
 import PaginationComponent from "../reusable/Pagination";
-import { addFavorite } from "../../features/slices/favoriteSlice";
+import { addFavorite,getFavorite } from "../../features/slices/favoriteSlice";
+
 
 const JobList = ({ jobs }) => {
+    const dispatch = useDispatch();
     const { isClicked } = useSelector((state) => state.favorites);
+    useEffect(() => {
+        dispatch(getFavorite("job"))
+    }, []);
+    
     return (
     <>
     {jobs.map(job => {

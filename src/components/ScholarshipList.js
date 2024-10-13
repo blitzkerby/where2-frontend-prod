@@ -6,9 +6,13 @@ import React, { useEffect, useState } from 'react';
 import Navbar from "./reusable/Navbar";
 import { useDispatch, useSelector } from 'react-redux';  // Import hooks from react-redux
 import { fetchScholarships } from "../features/slices/scholarshipsSlice";
-
+import { getFavorite } from "../features/slices/favoriteSlice";
 const ScholarshipList = ({ scholarship }) => {
-    const { isClicked } = useSelector(state => state.favorites );
+    const dispatch = useDispatch();
+    const { isClicked } = useSelector((state) => state.favorites);
+    useEffect(() => {
+        dispatch(getFavorite("scholarship"));
+    }, []);
     // const dispatch = useDispatch();  // Create a dispatch function
     // const { scholarships, loading, error } = useSelector((state) => state.scholarships);  // Access scholarships data from the store
 
