@@ -88,7 +88,7 @@ const UniversityPage = () => {
                 {error && <p>{error}</p>}
                 <SearchBar handleSearch={handleSearch} searchPlaceholder="Search universities..." />
                 <UniversityList universities={data} />
-                <Pagination totalPage={totalPage} currentPage={page} />
+                <Pagination totalPage={totalPage} currentPage={page} route={'universities'} />
             </ListContainer>
             <Footer />
         </div>

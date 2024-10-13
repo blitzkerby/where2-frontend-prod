@@ -13,7 +13,7 @@ const isDebug = true;
  * @param {number} currentPage - The current page being viewed
  * @returns {JSX.Element} - Renders the pagination buttons
  */
-const Pagination = ({ totalPage, currentPage }) => {
+const Pagination = ({ totalPage, currentPage, route }) => {
     const navigate = useNavigate();
 
     isDebug ? console.log("total page", totalPage) : null;
@@ -28,7 +28,7 @@ const Pagination = ({ totalPage, currentPage }) => {
      */
     const handlePageChange = (newPage) => {
         window.scrollTo(0, 0);
-        navigate(`/universities?page=${newPage}&limit=10`);
+        navigate(`/${route}?page=${newPage}&limit=10`);
     };
 
     /**
@@ -38,7 +38,7 @@ const Pagination = ({ totalPage, currentPage }) => {
      */
     const handleNextClick = () => {
         if (currentPage < totalPage) {
-            navigate(`/universities?page=${currentPage + 1}&limit=10`);
+            navigate(`/${route}?page=${currentPage + 1}&limit=10`);
         }
     };
 
@@ -49,7 +49,7 @@ const Pagination = ({ totalPage, currentPage }) => {
      */
     const handlePrevClick = () => {
         if (currentPage > 1) {
-            navigate(`/universities?page=${currentPage - 1}&limit=10`);
+            navigate(`/${route}?page=${currentPage - 1}&limit=10`);
         }
     };
 
