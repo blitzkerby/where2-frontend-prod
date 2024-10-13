@@ -16,9 +16,8 @@ const Hero = ({ props, children }) => {
 
   const styles = {
     /* containers */
-    section: "relative w-full lg:h-[80vh] sm:h-[500px] z-[0] gap-5",
-    container:
-      "relative w-full h-full bg-white text-center flex justify-center",
+    section: "relative w-full lg:h-[90vh] sm:h-[500px] z-[0] gap-10 mb-[16px]",
+    container: "w-full h-full bg-white text-center flex justify-center",
 
     gradientOverlay: "inset-0 bg-gradient-to-b opacity-50",
     gradientClipPath: { clipPath: "polygon(0 0, 100% 0, 100% 70%, 0 100%)" },
@@ -30,8 +29,8 @@ const Hero = ({ props, children }) => {
       "absolute w-full z-10 mx-auto top-[7%] mt-section-top-margin max-w-[660px]",
 
     /* background image */
-    imageContainer: `mt-image-container-top-margin flex justify-center w-full h-full`,
-    image: "object-contain w-full h-full sm:object-cover",
+    imageContainer: `flex justify-center w-full h-full`,
+    image: "object-contain min-w-full min-h-full sm:object-cover",
 
     /* components */
     form: "relative mx-[20px]",

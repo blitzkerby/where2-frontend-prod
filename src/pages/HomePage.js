@@ -104,11 +104,13 @@ const HomePage = () => {
   return (
     <>
       <Navbar />
-      <WrapperComponent>
-        <Hero props={hero1}>
-          <Searchbar searchPlaceholder={hero1.searchPlaceholder} />
-        </Hero>
-      </WrapperComponent>
+      <div className="mt-[64px]">
+        <WrapperComponent>
+          <Hero props={hero1}>
+            <Searchbar searchPlaceholder={hero1.searchPlaceholder} />
+          </Hero>
+        </WrapperComponent>
+      </div>
 
       <WrapperComponent>
         <CardSlider cards={cards} />
