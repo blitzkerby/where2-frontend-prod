@@ -1,5 +1,6 @@
 // dependencies
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Twitter, Youtube, Chrome } from "lucide-react";
 
@@ -9,9 +10,12 @@ import BookMark from "../../assets/svg/bookmark.svg";
 import MiniMap from "../../assets/svg/miniMap.svg";
 import MiniClock from "../../assets/svg/miniClock.svg";
 import Calender from "../../assets/svg/calender.svg";
-
+import FilledHeart from "../../assets/svg/filled-heard.svg"
 // constants
 import DefaultCardImage from "../../assets/images/card-image-default.png";
+
+//function
+import { addFavorite,removeFavorite,setIsClicked } from "../../features/slices/favoriteSlice";
 
 // components
 import Button from "./ButtonComponent";
@@ -24,23 +28,36 @@ import {
 // styles
 
 const Card = ({
-  props: {
-    image = DefaultCardImage,
-    imageAlt = "default alt text",
-    title = "Default Title",
-    description = "Default Description",
-    socialLinks: {
-      facebookLink = "#",
-      instagramLink = "#",
-      twitterLink = "#",
-      youtubeLink = "#",
-      websiteLink = "#",
-    } = {},
-    location = "Default Location",
-    deadLine = "Default Deadline",
-    timeOut = "Default Timeout",
-  } = {},
+  image = '', 
+  imageAlt = '', 
+  title = '', 
+  description = '', 
+  socialLinks: {
+      facebookLink = '', 
+      instagramLink = '', 
+      twitterLink = '', 
+      youtubeLink = '', 
+      websiteLink = ''
+  } = {}, 
+  location = '', 
+  deadLine = '', 
+  timeOut = '',
+  id,
+  type,
+  route,
+  isHeartClicked = false, 
+
 }) => {
+  const dispatch = useDispatch();
+  const handleHeartClick = async () => {
+         await removeFavorite(id, type);
+        dispatch(setIsClicked({ id: id }))
+    };
+  const handleRemoveHeartClick = async () => {
+    await addFavorite(id, type)
+        dispatch(setIsClicked({ id: id }))
+    }
+
   const socialMediaIcons = [
     { icon: Facebook, linkKey: facebookLink },
     { icon: Twitter, linkKey: twitterLink },
@@ -178,10 +195,15 @@ const Card = ({
                   }
                 )}
               </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between cursor-pointer">
                 <div className={styles.bookmarkContainer}>
                   <div>
-                    <img src={BookMark} alt="Bookmark" />
+                    {isHeartClicked ?
+                      <div>      
+                        <img className="w-9" src={FilledHeart} alt="Bookmark" onClick={handleHeartClick} />
+                        </div> : <div>
+                      <img src={BookMark} alt="Bookmark" onClick={handleRemoveHeartClick} />
+                  </div> }
                   </div>
                   <Link to="">
                     <img src={Map} alt="Map" />
@@ -189,7 +211,7 @@ const Card = ({
                 </div>
 
                 <Link
-                  to={`/company/companydetail/${companyUrl}`}
+                  to={route}
                   className={styles.readMoreLink}
                 >
                   <Button

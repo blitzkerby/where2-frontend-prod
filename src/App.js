@@ -20,6 +20,12 @@ import PublicOnlyROute from "./components/reusable/PublicOnlyRoute";
 import CreateDiscussionPage from "./pages/CreateDiscussionPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import VisitProfile from "./components/accountUtilities/sidebarComponents/User/VisitProfile";
+import UniversityDetail from "./pages/UniversityDetail"
+import LivelihoodPage from "./pages/LivelihoodPage";
+import JobPage from "./pages/JobPage";
+import JobDetailPage from "./pages/JobDetailPage";
+import StudentLoanPage from "./pages/StudentLoanPage";
+
 
 const queryClient = new QueryClient();
 
@@ -37,7 +43,7 @@ const router = createBrowserRouter([
     path: "/homepage",
     element: <HomePage />
   },
-  { path: "/login",element: <PublicOnlyROute><LoginPage /></PublicOnlyROute>},
+  { path: "/login",element: <LoginPage />},
   { path: "/signup",element: <PublicOnlyROute><RegisterPage /></PublicOnlyROute>},
   { path: "/forget-password", element: <PublicOnlyROute><ForgetPasswordPage /></PublicOnlyROute>},
   { path: "/reset-password/:token", element: <ResetPasswordPage />},
@@ -48,7 +54,22 @@ const router = createBrowserRouter([
   { path: "/discussions", element: <DiscussionsPage/> },
   { path: "/discussions/create", element: <CreateDiscussionPage/> },
   { path: "/health", element: <HealthPage/>},
-  {path: "/user/:userId", element: <VisitProfile/>}
+  { path: "/user/:userId", element: <VisitProfile /> },
+  {
+    path: "/universities",
+    element: <UniversityPage />,
+    children: [
+      { path: "search", element: <UniversityPage /> },
+      { path: ":id", element: <UniversityDetail/> }
+    ]
+  },
+  { path:"/livelihood", element: <LivelihoodPage />},
+  { path: "/jobs", element: <JobPage/> },
+  { path: "/job-detail/:jobId", element: <JobDetailPage/> },
+  { path: "/scholarships", element: <ScholarshipPage /> },
+  { path: "/scholarship/:id", element: <ScholarshipDetailPage /> },
+  {path:"/student-loans", element:<StudentLoanPage />}
+
 ]);
 
 function App() {

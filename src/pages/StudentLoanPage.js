@@ -8,11 +8,12 @@ import Pagination from "../components/reusable/Pagination";
 import ListContainer from "../components/reusable/ListContainer";
 import { useLocation } from 'react-router-dom';
 import { LoadingOverlay } from "../components/reusable/Loading";
+import StudentLoanList from "../components/StudentLoanList";
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }  
-const JobPage = () => {
+const StudentLoanPage = () => {
     const urlParams = useQuery();
 
     const page = parseInt(urlParams.get('page')) || 1;
@@ -21,20 +22,20 @@ const JobPage = () => {
     const { data, loading, error, totalPage } = useSelector((state) => state.pagination);
 
     useEffect(() => {
-        dispatch(fetchAllList({page,limit,model: 'Job'}))
+        dispatch(fetchAllList({page,limit,model: 'StudentLoan'}))
     },[dispatch, page])
     return (
-        <div>
+        <>
             <Navbar />
             <ListContainer>
             {loading && <LoadingOverlay/>}
             {error && <p>{error}</p>}
-            <JobList jobs={data}/>
+            <StudentLoanList studentLoans={data}/>
             </ListContainer>
-            <Pagination totalPage={totalPage} currentPage={page} route={'jobs'}/>
+            <Pagination totalPage={totalPage} currentPage={page} route={'studen-loans'}/>
             <Footer />
-        </div>
+        </>
     )
 };
 
-export default JobPage;
+export default StudentLoanPage;

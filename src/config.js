@@ -43,6 +43,34 @@ const config = {
     getDiscussions: `${API_URL}/api/discussions`,
     addComment: (discussionId, commentId) => `${API_URL}/api/discussions/${discussionId}/comment/${commentId}`,
     getAllComments: (discussionId) => `${API_URL}/api/discussions/${discussionId}/comments`
+  },
+  universities: {
+    getAllUniversity : `${API_URL}/api/list/university/all`,
+    getUniversityBySearch : `${API_URL}/api/list/search/university/`,
+    getUniversityById : `${API_URL}/api/detail/university/`,
+  },
+   // Jobs
+  job: {
+    getAllJob: `${ API_URL }/api/jobs`,
+     getAssociatedCompany: (jobId) => `${ API_URL }/api/jobs/associatedCompany/${ jobId }`,
+  },
+   // Favorites
+  favorite: {
+    addFavorite: `${ API_URL }/api/favorites/addFavorite`,
+    getFavorite: (userId, category) => `${ API_URL }/api/favorites/${ userId }/${ category }`,
+    removedFavorite: (cardId,category)=> `${ API_URL }/api/favorites/${ cardId }/${ category }`
+    
+  },
+  scholarships: {
+    getAllScholarships: `${API_URL}/api/scholarships`,
+    
+  },
+  search: {
+    searchAny: `${ API_URL }/api/`
+  },
+  list: {
+    getAllList: (model)=> `${API_URL}/api/list/${model}`
   }
+
 };
 export default config;

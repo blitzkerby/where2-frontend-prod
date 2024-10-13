@@ -15,6 +15,7 @@ import SearchBar from '../components/reusable/SearchBar';
 import { searchUniversities } from '../features/slices/searchbarSlice';
 import { fetchUniversities, setUniversities } from '../features/slices/universitySlice';
 import { useLocation } from 'react-router-dom';
+import { fetchAllList } from '../features/slices/paginationSlice';
 
 /** Enable for debugging */
 const isDebug = true;
@@ -37,8 +38,8 @@ const UniversityPage = () => {
     }
 
     const dispatch = useDispatch();
-    const { universities, loading, error } = useSelector((state) => state.universities);
-    const { totalPage } = useSelector((state) => state.pagination);
+    // const { universities, loading, error } = useSelector((state) => state.universities);
+    const { totalPage,data,loading, error } = useSelector((state) => state.pagination);
 
     /**
      * useEffect Hook
@@ -53,7 +54,7 @@ const UniversityPage = () => {
      */
     useEffect(() => {
         if (!searchQuery) {
-            dispatch(fetchUniversities({ page, limit }));
+            dispatch(fetchAllList({ page, limit, model: 'University' }));
         } else {
             handleSearch(searchQuery);
         }
@@ -86,8 +87,8 @@ const UniversityPage = () => {
                 {loading && <LoadingOverlay />}
                 {error && <p>{error}</p>}
                 <SearchBar handleSearch={handleSearch} searchPlaceholder="Search universities..." />
-                <UniversityList universities={universities} />
-                <Pagination totalPage={totalPage} currentPage={page} />
+                <UniversityList universities={data} />
+                <Pagination totalPage={totalPage} currentPage={page} route={'universities'} />
             </ListContainer>
             <Footer />
         </div>

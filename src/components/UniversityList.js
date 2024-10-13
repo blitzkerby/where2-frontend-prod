@@ -1,7 +1,13 @@
+import { useSelector,useDispatch } from "react-redux";
 import Card from "./reusable/Card";
-
+import { useEffect } from "react";
+import { getFavorite } from "../features/slices/favoriteSlice";
 const UniversityList = ({ universities }) => {
-    
+    const dispatch = useDispatch();
+    const { isClicked } = useSelector((state) => state.favorites);
+    useEffect(() => {
+        dispatch(getFavorite("university"))
+    }, []);
     if (universities[0] == "No results found") {
         return null;
     }
@@ -23,7 +29,9 @@ const UniversityList = ({ universities }) => {
                     websiteLink={university.website}
                     location={university.location}
                     id={university.id}
-                    route={`${university.id}`}
+                    type={'university'}
+                    route={`${ university.id }`}
+                    isHeartClicked = {isClicked[university.id]}
                 />
             ))}
         </>
