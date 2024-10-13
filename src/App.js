@@ -24,6 +24,7 @@ import UniversityDetail from "./pages/UniversityDetail"
 import LivelihoodPage from "./pages/LivelihoodPage";
 import JobPage from "./pages/JobPage";
 import JobDetailPage from "./pages/JobDetailPage";
+import StudentLoanPage from "./pages/StudentLoanPage";
 
 
 const queryClient = new QueryClient();
@@ -66,7 +67,8 @@ const router = createBrowserRouter([
   { path: "/jobs", element: <JobPage/> },
   { path: "/job-detail/:jobId", element: <JobDetailPage/> },
   { path: "/scholarships", element: <ScholarshipPage /> },
-  { path: "/scholarship/:id", element: <ScholarshipDetailPage/>},
+  { path: "/scholarship/:id", element: <ScholarshipDetailPage /> },
+  {path:"/student-loans", element:<StudentLoanPage />}
 
 ]);
 

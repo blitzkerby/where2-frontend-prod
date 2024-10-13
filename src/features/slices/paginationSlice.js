@@ -22,7 +22,7 @@ const paginationSlice = createSlice({
     },
     reducers: {
         setTotalPage: (state, action) => {
-            state.totalPage = 10;
+            state.totalPage = 0;
         },
     },
     extraReducers: (builder)=>{
