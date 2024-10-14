@@ -36,7 +36,7 @@ const UniversityList = ({ universities }) => {
                     id={university.id}
                     type={'university'}
                     route={`${ university.id }`}
-                    isHeartClicked = {isClicked[university.id]}
+                    // isHeartClicked = {isClicked[university.id]}
                 />
             ))}
         </>
