@@ -15,10 +15,7 @@ export const fetchAllList = createAsyncThunk(
 const paginationSlice = createSlice({
     name: 'pagination',
     initialState: {
-        data: [],
-        loading: false,
-        error: null,
-        totalPage: 10,
+        totalPage: 1,
     },
     reducers: {
         setTotalPage: (state, action) => {

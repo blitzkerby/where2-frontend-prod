@@ -45,9 +45,9 @@ const config = {
     getAllComments: (discussionId) => `${API_URL}/api/discussions/${discussionId}/comments`
   },
   universities: {
-    getAllUniversity : `${API_URL}/api/list/university/all`,
-    getUniversityBySearch : `${API_URL}/api/list/search/university/`,
-    getUniversityById : `${API_URL}/api/detail/university/`,
+    getAllUniversity : `${API_URL}/api/list/university`,
+    getUniversityBySearch : `${API_URL}/api/list/search/university`,
+    getUniversityById : `${API_URL}/api/detail/university`,
   },
    // Jobs
   job: {

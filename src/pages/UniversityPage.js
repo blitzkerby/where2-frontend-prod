@@ -1,45 +1,44 @@
 // src/pages/UniversityPage.js
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+
+import { search } from '../features/slices/searchbarSlice';
+import { fetchUniversities, setUniversities } from '../features/slices/universitySlice';
 
 import { LoadingOverlay } from '../components/reusable/Loading';
 import UniversityList from '../components/UniversityList';
-
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
 import ListContainer from '../components/reusable/ListContainer';
-
 import Pagination from '../components/reusable/Pagination';
 import SearchBar from '../components/reusable/SearchBar';
+import { setTotalPage } from '../features/slices/paginationSlice';
 
-import { searchUniversities } from '../features/slices/searchbarSlice';
-import { fetchUniversities, setUniversities } from '../features/slices/universitySlice';
-import { useLocation } from 'react-router-dom';
-import { fetchAllList } from '../features/slices/paginationSlice';
+
 
 /** Enable for debugging */
 const isDebug = true;
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
-}  
+}
 
 const UniversityPage = () => {
     const urlParams = useQuery();
-
     const page = parseInt(urlParams.get('page')) || 1;
-    const searchQuery = urlParams.get('q') || '';
     const limit = parseInt(urlParams.get('limit')) || 10;
+    const searchQuery = urlParams.get('q') || '';
+
+    const dispatch = useDispatch();
+    const { universities, loading, error } = useSelector((state) => state.universities);
+    const { totalPage } = useSelector((state) => state.pagination);
 
     if (isDebug) {
         console.log("UniversityPage says: page is", page);
-        console.log("UniversityPage says: query is", searchQuery);
         console.log("UniversityPage says: limit is", limit);
+        console.log("UniversityPage says: query is", searchQuery);
     }
-
-    const dispatch = useDispatch();
-    // const { universities, loading, error } = useSelector((state) => state.universities);
-    const { totalPage,data,loading, error } = useSelector((state) => state.pagination);
 
     /**
      * useEffect Hook
@@ -53,12 +52,21 @@ const UniversityPage = () => {
      * @param {number} limit - Limit of items per page
      */
     useEffect(() => {
-        if (!searchQuery) {
-            dispatch(fetchAllList({ page, limit, model: 'University' }));
+        if (searchQuery === "") {
+            dispatch(fetchUniversities({ page }));
         } else {
             handleSearch(searchQuery);
         }
+
+        if (isDebug) {
+            console.log("UniversityPage says: total page is ", totalPage);
+            console.log("UniversityPage says: search results are ", universities);
+        }
     }, [dispatch, page, searchQuery, limit]);
+
+    useEffect(() => {
+
+    })
 
     /**
      * handleSearch
@@ -71,12 +79,14 @@ const UniversityPage = () => {
      */
     const handleSearch = async (query) => {
         try {
-            const data = await searchUniversities({ query, page });
-            dispatch(setUniversities(data));
-            return data;
+            const data = await dispatch(search({ query, page, category: "university" })).unwrap();
+            dispatch(setUniversities(data.universities || []));
+            dispatch(setTotalPage(data.pagination.totalPages) || 1);
         } catch (error) {
-            if (isDebug) console.error('Error fetching data:', error);
-            throw error; 
+            if (isDebug) {
+                console.error('Error fetching data:', error);
+            }
+            throw error;
         }
     };
 
@@ -86,9 +96,9 @@ const UniversityPage = () => {
             <ListContainer>
                 {loading && <LoadingOverlay />}
                 {error && <p>{error}</p>}
-                <SearchBar handleSearch={handleSearch} searchPlaceholder="Search universities..." />
-                <UniversityList universities={data} />
-                <Pagination totalPage={totalPage} currentPage={page} route={'universities'} />
+                <SearchBar handleSearch={handleSearch} searchPlaceholder="Search universities..." category="university"/>
+                <UniversityList universities={universities} />
+                <Pagination totalPage={totalPage} currentPage={page} category="university" searchQuery={searchQuery}/>
             </ListContainer>
             <Footer />
         </div>

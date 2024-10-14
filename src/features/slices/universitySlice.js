@@ -33,7 +33,7 @@ export const fetchUniversities = createAsyncThunk(
 export const fetchUniversity = createAsyncThunk(
     'universities/fetchUniversity',
     async (id) => {
-        const response = await axios.get(`${config.universities.getUniversityById}`);
+        const response = await axios.get(`${config.universities.getUniversityById}/${id}`);
         return response.data;
     }
 )
@@ -48,6 +48,9 @@ export const searchUniversities = createAsyncThunk(
     'universities/searchUniversities',
     async (query) => {
         const response = await axios.get(`${config.universities.search}?query=${encodeURIComponent(query)}`);
+
+        // Dispatch actions to update pagination state
+        dispatch(setTotalPage(response.data.pagination.totalPages));       
         return response.data;
     }
 )
@@ -57,6 +60,7 @@ const universitySlice = createSlice({
     initialState: {
         universities: [],
         universityId: 0,
+
         university: [],
         loading: false,
         error: null,

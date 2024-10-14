@@ -25,7 +25,7 @@ import LivelihoodPage from "./pages/LivelihoodPage";
 import JobPage from "./pages/JobPage";
 import JobDetailPage from "./pages/JobDetailPage";
 import StudentLoanPage from "./pages/StudentLoanPage";
-
+import ErrorPage from "./pages/ErrorPage";
 
 const queryClient = new QueryClient();
 
@@ -33,15 +33,12 @@ const router = createBrowserRouter([
   {
     path: '/',
     index: true,
-    element: <HomePage />
+    element: <HomePage />,
+    errorElement: <ErrorPage />
   },
   {
     path: "/home",
-    element: <HomePage />
-  },
-  {
-    path: "/homepage",
-    element: <HomePage />
+    element: <HomePage />,
   },
   { path: "/login",element: <LoginPage />},
   { path: "/signup",element: <PublicOnlyROute><RegisterPage /></PublicOnlyROute>},
@@ -55,14 +52,45 @@ const router = createBrowserRouter([
   { path: "/discussions/create", element: <CreateDiscussionPage/> },
   { path: "/health", element: <HealthPage/>},
   { path: "/user/:userId", element: <VisitProfile /> },
+  // {
+  //   path: "/universities",
+  //   element: <UniversityPage />,
+  //   children: [
+  //     { path: "search", element: <UniversityPage /> },
+  //     { path: ":id", element: <UniversityDetail/> }
+  //   ]
+  // },
   {
-    path: "/universities",
-    element: <UniversityPage />,
+    path: "/list",
     children: [
-      { path: "search", element: <UniversityPage /> },
-      { path: ":id", element: <UniversityDetail/> }
+      {
+        path: "university",
+        children: [
+          { path: "", element: <UniversityPage /> },
+          { path: "search", element: <UniversityPage /> },
+          { path: ":id", element: <UniversityDetail /> }
+        ]
+      },
+      // {
+      //   path: "/scholarship",
+      //   children: [
+      //     { path: "", element: <ScholarshipPage /> },
+      //     { path: "search", element: <ScholarshipPage /> },
+      //     { path: ":id", element: <ScholarshipDetail /> }
+      //   ]
+      // }
     ]
-  },
+  },  
+  { path: "/jobs", element: <JobPage /> },
+  { path: "/login",element: <LoginPage />},
+  { path: "/signup",element: <RegisterPage />},
+  { path: "/scholarships", element: <ScholarshipPage/>},
+  { path: "/profile/:userName", element: <UserProfile /> },
+  { path: "/job-detail/:jobId", element: <JobDetailPage/> },
+  { path: "/forget-password", element: <ForgetPasswordPage />},
+  { path: "/signup/verification", element: <VerificationPage/> },
+  { path: "/dashboard/:userName", element: <DashboardComponent/> },
+  { path: "/profile/:userName", element: <UserProfile /> },
   { path:"/livelihood", element: <LivelihoodPage />},
   { path: "/jobs", element: <JobPage/> },
   { path: "/job-detail/:jobId", element: <JobDetailPage/> },

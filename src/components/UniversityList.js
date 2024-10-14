@@ -1,18 +1,23 @@
-import { useSelector,useDispatch } from "react-redux";
-import Card from "./reusable/Card";
-import { useEffect } from "react";
-import { getFavorite } from "../features/slices/favoriteSlice";
-const UniversityList = ({ universities }) => {
-    const dispatch = useDispatch();
-    const { isClicked } = useSelector((state) => state.favorites);
-    useEffect(() => {
-        dispatch(getFavorite("university"))
-    }, []);
-    if (universities[0] == "No results found") {
-        return null;
-    }
-    console.log(universities)
+const isDebug = true;  // Set to false to turn off console logging
 
+import Card from "./reusable/Card";
+
+/**
+ * UniversityList component
+ *
+ * @param {Array} universities - List of universities to display.
+ * @returns {JSX.Element} The list of university cards or a "No results found" message.
+ */
+const UniversityList = ({ universities }) => {
+
+    // Debugging
+    if (isDebug) {
+        console.log("UniversityList says: ", universities);
+    }
+
+    if (universities.length === 0) {
+        return <div style={{ textAlign: 'center', color: 'red', fontSize: '24px' }}>No results found :(</div>;
+    }
 
     return (
         <>
@@ -35,8 +40,7 @@ const UniversityList = ({ universities }) => {
                 />
             ))}
         </>
-
-    )
-}
+    );
+};
 
 export default UniversityList;

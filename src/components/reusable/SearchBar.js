@@ -9,7 +9,7 @@ const styles = {
   icon: "h-5 w-5 text-gray-400 z-[0]"
 };
 
-const SearchBar = ({ handleSearch, searchPlaceholder }) => {
+const SearchBar = ({ handleSearch, searchPlaceholder, category }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const SearchBar = ({ handleSearch, searchPlaceholder }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    navigate(`/universities/search?page=1&q=${searchQuery}`);
+    navigate(`/list/${category}/search?page=1&q=${searchQuery}`);
     handleSearch(searchQuery);
   };
 
@@ -44,10 +44,10 @@ const SearchBar = ({ handleSearch, searchPlaceholder }) => {
   );
 };
 
-const SearchComponent = ({ handleSearch, placeholder = "Search..." }) => {
+const SearchComponent = ({ handleSearch, placeholder = "Search..." , category}) => {
   return (
     <div>
-      <SearchBar handleSearch={handleSearch} searchPlaceholder={placeholder} />
+      <SearchBar handleSearch={handleSearch} searchPlaceholder={placeholder}  category={category}/>
     </div>
   );
 };
