@@ -63,7 +63,7 @@ const Health = () => {
         </header>
       </WrapperComponent>
 
-      <main className="py-16 px-4">
+      <main className="py-8 px-4">
         {selectedArticle ? (
           <Article
             image={selectedArticle.image}
@@ -74,10 +74,6 @@ const Health = () => {
           />
         ) : (
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-xl font-bold text-center mb-12 underline">
-              Health Articles
-            </h2>
-
             <WrapperComponent>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {articles.map((article) => (
