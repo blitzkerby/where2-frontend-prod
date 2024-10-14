@@ -31,6 +31,7 @@ const LoginComponent = () => {
       const resultAction = await dispatch(login({ email, password }));
       if (login.fulfilled.match(resultAction)) {
         navigate("/home");
+        window.location.reload(true)
       }
     } catch (err) {
       console.error("Failed to log in. Please try again!");

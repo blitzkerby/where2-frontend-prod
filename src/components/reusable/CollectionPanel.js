@@ -29,7 +29,7 @@ const CollectionPanel = ({ category }) => {
     //     dispatch(setIsLoading())
     // ,5000)
     useEffect(() => {
-        dispatch(getFavorite(category));
+        dispatch(getFavorite({category}));
         // setCategories(false)
         console.log("inside useEffect", favorites)
         // console.log("isloading in UseEffect", isLoading)
@@ -96,7 +96,7 @@ const CollectionPanel = ({ category }) => {
                 <div className="max-w-7xl mx-auto flex-col gap-y-8 justify-between flex p-6 bg-white rounded-3xl shadow-inner border-2  w-full overflow-hidden max-h-[1000px] overflow-y-scroll">
                     {isLoading[`${category}`] ? <LoadingOverlay /> : <FavoriteList favorites={favorites} category={category} />}
                     {/* {!isLoading?<FavoriteList favorites={favorites} category={category} />:null} */}
-                    {error && <p>{error}</p>}
+                    {error && <p>{"You Have not add to your favorite yet..."}</p>}
                     
                     
             </div>

@@ -1,7 +1,7 @@
 // dependencies
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Facebook, Instagram, Twitter, Youtube, Chrome } from "lucide-react";
 
 // assets
@@ -16,7 +16,7 @@ import DefaultCardImage from "../../assets/images/card-image-default.png";
 
 //function
 import { addFavorite,removeFavorite,setIsClicked } from "../../features/slices/favoriteSlice";
-
+const user = JSON.parse(localStorage.getItem('authData'));
 // components
 import Button from "./ButtonComponent";
 import {
@@ -48,15 +48,22 @@ const Card = ({
   isHeartClicked = false, 
 
 }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleHeartClick = async () => {
-         await removeFavorite(id, type);
-        dispatch(setIsClicked({ id: id }))
+      await removeFavorite(id, type);
+      dispatch(setIsClicked({ id: id }))
+  
     };
   const handleRemoveHeartClick = async () => {
-    await addFavorite(id, type)
-        dispatch(setIsClicked({ id: id }))
+    if (!user) {
+      alert("Please Log in or Sing up to add your COLLECTION!");
+      navigate('/login');
+    } else {
+      await addFavorite(id, type);
+      dispatch(setIsClicked({ id: id }))
     }
+  };
 
   const socialMediaIcons = [
     { icon: Facebook, linkKey: facebookLink },
