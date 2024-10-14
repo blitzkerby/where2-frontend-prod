@@ -27,7 +27,7 @@ function useQuery() {
 const UniversityPage = () => {
     const urlParams = useQuery();
     const page = parseInt(urlParams.get('page')) || 1;
-    const limit = parseInt(urlParams.get('limit')) || 10;
+    // const limit = 10;
     const searchQuery = urlParams.get('q') || '';
 
     const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const UniversityPage = () => {
 
     if (isDebug) {
         console.log("UniversityPage says: page is", page);
-        console.log("UniversityPage says: limit is", limit);
+        // console.log("UniversityPage says: limit is", limit);
         console.log("UniversityPage says: query is", searchQuery);
     }
 
@@ -62,7 +62,7 @@ const UniversityPage = () => {
             console.log("UniversityPage says: total page is ", totalPage);
             console.log("UniversityPage says: search results are ", universities);
         }
-    }, [dispatch, page, searchQuery, limit]);
+    }, [dispatch, page, searchQuery]);
 
     useEffect(() => {
 

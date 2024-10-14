@@ -40,7 +40,7 @@ const Navbar = () => {
   };
 
   const menuItems = [
-    { logo: <School />, name: "Universities", to: "/universities", showMobile: true },
+    { logo: <School />, name: "Universities", to: "/list/university", showMobile: true },
     { logo: <BookOpenTextIcon />, name: "Scholarships", to: "/scholarships", showMobile: true },
     { logo: <LucideBriefcaseBusiness />, name: "Livelihood", to: "/livelihood", showMobile: true },
     { logo: <Activity />, name: "Health", to: "/health", showMobile: true },
@@ -60,7 +60,7 @@ const Navbar = () => {
     // { logo: <School/>, name: "Universities", to: "/list/university" },
     // { logo: <BookOpenTextIcon/>, name: "Scholarships", to: "/scholarships" },
     // { logo: <LucideBriefcaseBusiness/>, name: "Livelihood", to: "/livelihood" },
-    { logo: <BookMarked/>, name: "Bookmarks", to: "/bookmarks" },
+    // { logo: <BookMarked/>, name: "Bookmarks", to: "/bookmarks" },
     { logo: <ChartColumnIcon/>, name: "Dashboard", to: `/dashboard/${encodeURIComponent(username || entity)}` },
     // { logo: <User2/>, name: "Profile", to: `/profile/${encodeURIComponent(username || entity)}` },
     { logo: <LucideMessageCircleQuestion/>, name: "About Us", to: "/about-us" },
