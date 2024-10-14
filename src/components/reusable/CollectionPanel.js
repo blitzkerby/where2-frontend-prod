@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Edit2, Eye, EyeOff } from "lucide-react";
 import { Menu } from "lucide-react";
-import Sidebar from "./Sidebar";
+// import Sidebar from "./Sidebar";
 // import { fetchData } from "../../data/fetchData";
 // import addFavorite from "../../features/slices/functions/addFavorite";
 // import Card from "./CompanyCard";

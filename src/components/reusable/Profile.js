@@ -12,6 +12,8 @@ import { ChevronRight } from "lucide-react";
 import AdminDashboard from "../accountUtilities/sidebarComponents/Admin/Dashboard.js";
 import AdminContent from "../accountUtilities/sidebarComponents/Admin/AdminContent.js";
 import Logout from "./Logout.js";
+import CollectionPanel from "./CollectionPanel.js";
+
 
 export const SidebarContentContext = createContext();
 
@@ -95,7 +97,8 @@ console.log('Type sidbarcontent', sidebarContent)
                 <ChevronRight size={24} />
               </button>
             )}
-            <ContentComponent userInfo={userData} />
+            {/* <ContentComponent userInfo={userData} /> */}
+            {sidebarContent != "account" ? <CollectionPanel category={sidebarContent} /> : <ContentComponent userInfo={userData} />}
           </div>
         </div>
       </div>
