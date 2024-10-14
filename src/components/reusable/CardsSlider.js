@@ -54,13 +54,9 @@ const CardSlider = ({ cards = [], header = [] }) => {
   }, [currentIndex, totalCards, initialIndex]);
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto">
-      <div className="p-5 text-blue-900 text-[38px] sm:text-[35.8px]">
-        {header.length > 0 ? (
-          header.map((item, index) => <b key={index}>{item.suggested}</b>)
-        ) : (
-          <b>No header available</b>
-        )}
+    <div className="relative lg:h-[40vh] sm:h-[500px] w-full mx-auto my-[16px] bg-blue-100">
+      <div className="text-[#367588]">
+        <b>{header}</b>
       </div>
       <div className="overflow-hidden w-full h-full my-[32px]">
         <div
