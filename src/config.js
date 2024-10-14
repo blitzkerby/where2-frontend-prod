@@ -1,5 +1,6 @@
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
 const ENV = process.env.REACT_APP_NODE_ENV || "development";
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID || "clientId";
 
 const config = {
   apiUrl: API_URL,
@@ -52,5 +53,14 @@ const config = {
   chatbot: {
     sendMessage: `${API_URL}/api/ai/summary`,
   },
+  payment: {
+    makePayment: `${API_URL}/api/bakong-payment`,
+    createPaypalOrder: `${API_URL}/api/create-paypal-order`,
+    capturePaypalOrder: `${API_URL}/api/capture-paypal-order`,
+    createSubscription: `${API_URL}/api/create-subscription`,
+  },
+  paypal: {
+    clientID: process.env.REACT_APP_CLIENT_ID
+  }
 };
 export default config;

@@ -4,11 +4,11 @@ import Navbar from "../components/reusable/Navbar"
 
 const JobPage = () => {
     return (
-        <div>
+        <>
             <Navbar />
             <JobList />
             <Footer />
-        </div>
+        </>
     )
 };
 

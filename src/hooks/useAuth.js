@@ -9,24 +9,25 @@ const useAuth = () => {
   const [showDashboard, setShowDashboard] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(null);
+  const [token, setToken] = useState(null);
 
   const fetchUserDataAndRole = useCallback(async () => {
     setLoading(true);
     try {
       const authData = JSON.parse(localStorage.getItem("authData"));
-      if (authData) {
+      if (authData && authData.token) {
         const { userName, entity, token, id, role } = authData;
 
         setUsername(userName || "");
         setEntity(entity || "");
         setIsLoggedIn(true);
         setUserId(id || null);
+        setToken(token);
 
         if (role) {
-          // Use the role from localStorage if available
           setRole(role);
           setShowDashboard(role === "admin" || role === "developer");
-        } else if (token) {
+        } else {
           // Fetch role only if not available in localStorage
           const response = await fetch(config.auth.getUserRole, {
             headers: { Authorization: `Bearer ${token}` },
@@ -45,24 +46,15 @@ const useAuth = () => {
               JSON.stringify({ ...authData, role: data.role })
             );
           } else {
-            setRole("");
-            setShowDashboard(false);
+            throw new Error("Failed to fetch user role");
           }
         }
       } else {
-        // Clear all auth-related state if no authData in localStorage
-        setUsername("");
-        setEntity("");
-        setRole("");
-        setIsLoggedIn(false);
-        setShowDashboard(false);
-        setUserId(null);
+        throw new Error("No valid auth data found");
       }
     } catch (error) {
       console.error("Error fetching user data and role:", error);
-      setIsLoggedIn(false);
-      setShowDashboard(false);
-      setUserId(null);
+      clearAuthData();
     } finally {
       setLoading(false);
     }
@@ -72,16 +64,7 @@ const useAuth = () => {
     fetchUserDataAndRole();
   }, [fetchUserDataAndRole]);
 
-  const login = useCallback(
-    async (loginData) => {
-      // Implement your login logic here
-      // After successful login, call fetchUserDataAndRole
-      await fetchUserDataAndRole();
-    },
-    [fetchUserDataAndRole]
-  );
-
-  const logout = useCallback(() => {
+  const clearAuthData = useCallback(() => {
     localStorage.removeItem("authData");
     setIsLoggedIn(false);
     setUsername("");
@@ -89,7 +72,40 @@ const useAuth = () => {
     setRole("");
     setShowDashboard(false);
     setUserId(null);
+    setToken(null);
   }, []);
+
+  const login = useCallback(
+    async (loginData) => {
+      try {
+        // Implement your login logic here
+        // For example:
+        const response = await fetch(config.auth.login, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(loginData),
+        });
+
+        if (response.ok) {
+          const authData = await response.json();
+          localStorage.setItem("authData", JSON.stringify(authData));
+          await fetchUserDataAndRole();
+        } else {
+          throw new Error("Login failed");
+        }
+      } catch (error) {
+        console.error("Login error:", error);
+        clearAuthData();
+      }
+    },
+    [fetchUserDataAndRole, clearAuthData]
+  );
+
+  const logout = useCallback(() => {
+    clearAuthData();
+  }, [clearAuthData]);
 
   return {
     isLoggedIn,
@@ -99,6 +115,7 @@ const useAuth = () => {
     loading,
     showDashboard,
     userId,
+    token,
     login,
     logout,
     refreshAuth: fetchUserDataAndRole,

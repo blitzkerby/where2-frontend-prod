@@ -4,11 +4,11 @@ import Navbar from "./../components/reusable/Navbar";
 
 const RegisterPage = () => {
     return (
-            <div>
+            <>
                 <Navbar/>
                 <RegisterComponent />
                 <Footer />
-            </div>
+            </>
     )
 }
 

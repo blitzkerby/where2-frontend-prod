@@ -1,26 +1,31 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CommentSectionComponent from "../community/CommentSectionComponent";
 import ProfilePicture from "./ProfilePicture";
 import { useFetchBatchPhotos } from "./../../hooks/useFetchPhoto";
 import WrapperComponent from "./WrapperComponent";
+import config from "./../../config";
+
 const DiscussionCard = ({ discussion }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [localComments, setLocalComments] = useState(discussion.comments);
+  const [localComments, setLocalComments] = useState(discussion.comments || []);
   const navigate = useNavigate();
 
+  // Memoize the user IDs to avoid unnecessary recalculations
   const userIds = useMemo(() => {
     return [
-      discussion.user.id,
-      ...localComments.map((comment) => comment.user.id),
-    ];
-  }, [discussion.user.id, localComments]);
+      discussion.user?.id,
+      ...(localComments || []).map((comment) => comment?.user?.id),
+    ].filter(Boolean); // Filters out undefined or null values
+  }, [discussion.user?.id, localComments]);
 
+  // Fetch batch photos only when userIds change
   const { photoUrls, isLoading, error } = useFetchBatchPhotos(userIds);
 
   const handleCommentAdded = (newComment) => {
-    setLocalComments((prevComments) => [...prevComments, newComment]);
+    setLocalComments((prevComments) => [newComment, ...prevComments]);
   };
+
 
   const handleUserClick = (userId) => (e) => {
     e.stopPropagation();
@@ -54,21 +59,22 @@ const DiscussionCard = ({ discussion }) => {
           {discussion.content}
         </p>
         <div className="flex justify-between items-center text-sm text-gray-500">
-          <div
-            className="flex items-center gap-2 cursor-pointer hover:text-gray-700"
-            onClick={handleUserClick(discussion.user.id)}
-          >
-            <span>Posted by </span>
-            <ProfilePicture
-              userId={discussion.user.id}
-              photoUrl={photoUrls[discussion.user.id]}
-              size={20}
-            />
-            <span>{discussion.user.email}</span>
-          </div>
+          {discussion.user && (
+            <div
+              className="flex items-center gap-2 cursor-pointer hover:text-gray-700"
+              onClick={handleUserClick(discussion.user.id)}
+            >
+              <span>Posted by </span>
+              <ProfilePicture
+                userId={discussion.user.id}
+                photoUrl={photoUrls[discussion.user.id]}
+                size={20}
+              />
+              <span>{discussion.user.email}</span>
+            </div>
+          )}
           <span>{localComments.length} comments</span>
         </div>
-
         {isExpanded && (
           <div onClick={handleCommentSectionClick}>
             <CommentSectionComponent

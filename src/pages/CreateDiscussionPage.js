@@ -6,13 +6,13 @@ import WrapperComponent from "../components/reusable/WrapperComponent";
 
 const CreateDiscussionPage = () => {
   return (
-    <div>
+    <>
       <Navbar />
       <WrapperComponent>
         <CreateDiscussionComponent />
       </WrapperComponent>
       <Footer />
-    </div>
+    </>
   );
 };
 

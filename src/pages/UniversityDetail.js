@@ -24,7 +24,7 @@ const UniversityPage = () => {
     }, [dispatch]);
 
     return (
-        <div>
+        <>
             <Navbar />
             <h1>{id}</h1>
             <ListContainer>
@@ -47,7 +47,7 @@ const UniversityPage = () => {
                     />
             </ListContainer>
             <Footer />
-        </div>
+        </>
     );
 };
 

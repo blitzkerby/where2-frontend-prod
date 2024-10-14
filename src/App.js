@@ -48,7 +48,7 @@ const router = createBrowserRouter([
   { path: "/discussions", element: <DiscussionsPage/> },
   { path: "/discussions/create", element: <CreateDiscussionPage/> },
   { path: "/health", element: <HealthPage/>},
-  {path: "/user/:userId", element: <VisitProfile/>}
+  {path: "/user/:userId", element: <VisitProfile/>},
 ]);
 
 function App() {

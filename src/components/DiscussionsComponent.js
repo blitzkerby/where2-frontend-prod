@@ -14,9 +14,9 @@ const DiscussionsComponent = () => {
   };
 
   return (
-    <div>
+    <>
       <SubpageHeroSection />
-      <div className="container min-h-screen mx-auto py-8">
+      <div className="container h-fit mx-auto py-8">
         {showCreateForm && isLoggedIn && allowedRoles.includes(role) ? (
           <CreateDiscussionComponent
             onDiscussionCreated={handleDiscussionCreated}
@@ -27,7 +27,7 @@ const DiscussionsComponent = () => {
           />
         )}
       </div>
-    </div>
+    </>
   );
 };
 

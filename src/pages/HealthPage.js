@@ -4,11 +4,11 @@ import HealthNavbar from "./../components/health/HealthNavbar"
 
 const LoginPage = () => {
   return (
-    <div>
+    <>
       <HealthNavbar />
         <Health />
       <Footer />
-    </div>
+    </>
   );
 };
 

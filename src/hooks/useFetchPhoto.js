@@ -44,7 +44,7 @@ export const useUploadPhoto = (userId) => {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState(null);
 
-  const uploadPhoto = async (file) => {
+  const uploadPhoto = async (file, p) => {
     if (!file || !userId) return null;
 
     setIsUploading(true);
