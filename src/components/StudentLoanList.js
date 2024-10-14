@@ -28,7 +28,7 @@ const StudentLoanList = ({ studentLoans }) => {
     return (
     <>
     {studentLoans.map(loan => {
-        return(
+        return (
             <Card
                 key={loan.loan_id}
                 id={loan.loan_id}
@@ -36,6 +36,10 @@ const StudentLoanList = ({ studentLoans }) => {
                 imageAlt={loan.image_alt}
                 title={loan.bank_name}
                 description={loan.loan_type}
+                interest={loan.interest_rate}
+                loan_size={loan.loan_limit}
+                currency={"KHR and USD"}
+                term={loan.loan_term}
                 // facebookLink={loan.updatedAt}
                 // instagramLink={loan.updatedAt}
                 // twitterLink={loan.createdAt}

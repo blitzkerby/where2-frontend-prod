@@ -36,6 +36,8 @@ const JobList = ({ jobs }) => {
                 image={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB6qQYTiaG58zHg3LwPcbPaqOrkFmAschW8A&s'}
                 imageAlt={job.job_rquire}
                 title={job.position}
+                position={job.position}
+                salary={job.salary}
                 description={job.job_desc}
                 // facebookLink={job.updatedAt}
                 // instagramLink={job.updatedAt}

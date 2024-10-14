@@ -28,6 +28,12 @@ import {
 // styles
 
 const Card = ({
+  position,
+  salary,
+  currency,
+  term,
+  loan_size,
+  interest,
   image = '', 
   imageAlt = '', 
   title = '', 
@@ -38,7 +44,7 @@ const Card = ({
       twitterLink = '', 
       youtubeLink = '', 
       websiteLink = ''
-  } = {}, 
+  } = {},
   location = '', 
   deadLine = '', 
   timeOut = '',
@@ -172,6 +178,24 @@ const Card = ({
                 </div>
               ))}
             </div>
+            {type === "job"?  <div className="py-2">
+              <p className="py-1">Position :<span> {position}</span></p>
+              <p>Salary :<span> ${salary}</span></p>
+            </div> : null}
+            {type === "loan"? <div className="py-2">
+              <p>
+                Currency :<span> {currency}</span>
+              </p>
+              <p>
+                Term:<span> {term}</span>
+              </p>
+              <p>
+                Loan Size:<span> {loan_size}</span>
+              </p>
+              <p>
+                Interest Rate:<span> {interest}</span>
+              </p>
+            </div> : null}
           </div>
           <div
             className={`${styles.bodyContainer.large} ${styles.bodyContainer.small}`}
