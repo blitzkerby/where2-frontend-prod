@@ -23,8 +23,8 @@ const UserAccount = ({ userInfo }) => {
   const formattedDate = new Date(userInfo.createdAt).toLocaleDateString('en-CA');
 
   return (
-    <section className="w-full bg-white rounded-3xl shadow-md border">
-      <div className="lg:w-full lg:pl-[128px] lg:pr-[128px] lg:mx-auto h-full px-4 pb-6 pt-12 sm:px-6 lg:pb-0">
+    <section className="w-full h-full bg-white rounded-3xl my-auto shadow-md border">
+      <div className="lg:w-full lg:py-[128px] lg:px-[64px] lg:mx-auto h-full px-4 pb-6 pt-12 sm:px-6 lg:pb-0">
         <div className="flex items-center justify-center mb-6">
           <ProfilePictureUpload userId={userInfo.id} />
         </div>

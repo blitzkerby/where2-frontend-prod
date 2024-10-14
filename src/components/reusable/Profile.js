@@ -56,16 +56,16 @@ const Profile = ({ userData, isPublic }) => {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   const ContentComponent = contentComponents[sidebarContent] || (() => null);
-console.log('Type sidbarcontent', sidebarContent)
+
   return (
-    <div className="flex h-screen overflow-hidden relative">
+    <div className="flex w-full h-screen relative">
       <SidebarContentContext.Provider value={setSidebarContent}>
         {/* Sidebar */}
         <div
-          className={`transition-all duration-300 ease-in-out
+          className={`transition-all duration-300 ease-in-out h-full
           ${isMobile ? "absolute" : "relative"} 
           ${sidebarOpen ? "w-64" : "w-0"} 
-          ${isMobile ? "top-0 left-0 h-full z-30" : "flex-shrink-0 overflow-y-auto"}`}
+          ${isMobile ? "top-0 left-0 h-full z-30" : ""}`}
         >
           <Sidebar
             isOpen={sidebarOpen}
@@ -77,16 +77,16 @@ console.log('Type sidbarcontent', sidebarContent)
         {/* Backdrop for mobile */}
         {isMobile && sidebarOpen && (
           <div
-            className="fixed inset-0 z-20 bg-black bg-opacity-50"
+            className="fixed inset-0 z-20 bg-black bg-opacity-50 h-full"
             onClick={() => setSidebarOpen(false)}
           />
         )}
       </SidebarContentContext.Provider>
 
       {/* Main Content */}
-      <div className={`flex-grow overflow-hidden ${isMobile ? "relative z-10" : ""}`}>
-        <div className="h-full overflow-y-auto">
-          <div className="p-4">
+      <div className={`flex-grow h-full overflow-hidden ${isMobile ? "relative z-10" : ""}`}>
+        <div className="overflow-y-auto h-full">
+          <div className="px-4 h-full">
             {isMobile && !sidebarOpen && (
               <button
                 onClick={toggleSidebar}

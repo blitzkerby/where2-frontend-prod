@@ -77,7 +77,7 @@ const UserProfile = () => {
   return (
     <>
       <Navbar />
-      <div className="w-full max-h-full mt-[70px] lg:mb-[32px] relative">
+      <div className="w-full h-full mt-[70px] lg:mb-[32px] relative">
         <Profile userData={userData} />
       </div>
       <Footer />
