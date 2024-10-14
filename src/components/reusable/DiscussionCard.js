@@ -40,6 +40,10 @@ const DiscussionCard = ({ discussion }) => {
     e.stopPropagation();
   };
 
+  useEffect(() => {
+    console.log("Comment updated: ", localComments)
+  }, [localComments])
+
   return (
     <WrapperComponent>
       <div
