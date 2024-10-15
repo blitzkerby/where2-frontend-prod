@@ -86,7 +86,7 @@ const FavoriteSlices = createSlice({
                             state.isClicked[`${ fav.scholarship.id }`] = true
                         });
                       
-                    } else if (fav.categories === 'accomodation') {
+                    } else if (fav.categories === 'accommodation') {
                         state.isLoading = {
                             'job': true, 'university': true, 'loan': true, 'scholarship': true, 'accommodation': false
                         };

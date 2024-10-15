@@ -1,4 +1,5 @@
 import FavoriteCard from "./FavoriteCard";
+import Card from "./Card";
 const FavoriteList = ({ favorites, category }) => {
     let renderFavorite;
     if (category === "job") {
@@ -9,16 +10,19 @@ const FavoriteList = ({ favorites, category }) => {
         renderFavorite = favorites.map((job) => (
             <FavoriteCard
                 key={job.id}
-                // title={job.title}
+                title={job.company_name}
+                position={job.position}
+                salary={job.salary}
                 description={job.job_desc}
-                //   facebookLink={job.facebookLink}
-                //   instagramLink={job.instagramLink}
-                //   twitterLink={job.twitterLink}
-                //   youtubeLink={job.youtubeLink}
-                //   websiteLink={job.websiteLink}
+                // facebookLink={job.updatedAt}
+                // instagramLink={job.updatedAt}
+                // twitterLink={job.createdAt}
+                // youtubeLink={job.createdAt}
+                // websiteLink={job.createdAt}
                 location={job.location}
-                deadLine={job.deadLine}
-                timeOut={job.salary}
+                deadLine={job.deadline}
+                timeOut={job.work_hour}
+                type={"job"}
                 route={`/job-detail/${job.id}`}
             />
         ));
@@ -54,10 +58,12 @@ const FavoriteList = ({ favorites, category }) => {
             <FavoriteCard
                 key={loan.loan_id}
                 id={loan.loan_id}
-                // image={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB6qQYTiaG58zHg3LwPcbPaqOrkFmAschW8A&s'}
-                // imageAlt={loan.image_alt}
                 title={loan.bank_name}
                 description={loan.loan_type}
+                interest={loan.interest_rate}
+                loan_size={loan.loan_limit}
+                currency={"KHR and USD"}
+                term={loan.loan_term}
                 // facebookLink={loan.updatedAt}
                 // instagramLink={loan.updatedAt}
                 // twitterLink={loan.createdAt}
@@ -66,7 +72,7 @@ const FavoriteList = ({ favorites, category }) => {
                 location={loan.address}
                 deadLine={loan.deadline}
                 // timeOut={loan.salary}
-                // type={"loan"}
+                type={"loan"}
                 route={`/loan-detail`}
             // isHeartClicked={isClicked[loan.loan_id]}
             />
@@ -92,22 +98,29 @@ const FavoriteList = ({ favorites, category }) => {
             />
         ))
     } else {
-        favorites = favorites.map(fav => fav.accomodation)
+        favorites = favorites.map(fav => fav.accommodation)
         // console.log('new favorite university', favorites);
         // console.log('new isLoading university',isLoading);
-        renderFavorite = favorites.map((accomodation) => (
+        renderFavorite = favorites.map((accommodation) => (
             <FavoriteCard
-            key={accomodation.id}
-            // image={accomodation.image_url}
-            // imageAlt={accomodation.image_alt}
-            title={accomodation.name}
-            description={accomodation.description}
-            location={accomodation.location}
-            deadLine={accomodation.deadLine}
-            id={accomodation.id}
-            type={'accomodation'}
-            route={`/accomodation/${ accomodation.id }`}
-            // isHeartClicked={isClicked[scholarship.id]}
+            key={accommodation.id}
+                id={accommodation.id}
+                type={"accommodation"}
+            // image={'https://th.bing.com/th/id/R.5a8394ded8bc846fa7be1d13d7ff568b?rik=eAfE14B5fVvw4A&pid=ImgRaw&r=0'}
+            // imageAlt={"room"}
+            title={accommodation.name}
+            size={accommodation.size}
+            price = {accommodation.price}
+            address = {accommodation.location}
+            // description={accommodation.accommodation_desc}
+            // facebookLink={accommodation.updatedAt}
+            // instagramLink={accommodation.updatedAt}
+            // twitterLink={accommodation.createdAt}
+            // youtubeLink={accommodation.createdAt}
+            // websiteLink={accommodation.createdAt}
+            // deadLine={accommodation.deadline}
+            // timeOut={accommodation.salary}
+            route={`/accommodation-detail/${ accommodation.id }`}
             />
         ))
     }

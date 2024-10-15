@@ -34,6 +34,9 @@ const Card = ({
   term,
   loan_size,
   interest,
+  size,
+  price,
+  address,
   image = '', 
   imageAlt = '', 
   title = '', 
@@ -194,6 +197,17 @@ const Card = ({
               </p>
               <p>
                 Interest Rate:<span> {interest}</span>
+              </p>
+            </div> : null}
+            {type === "accommodation"? <div className="py-2">
+              <p>
+                Size :<span> {size}</span>
+              </p>
+              <p>
+                Price:<span> {price}</span>
+              </p>
+              <p>
+                Location:<span> {address}</span>
               </p>
             </div> : null}
           </div>

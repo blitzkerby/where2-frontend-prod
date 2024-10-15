@@ -70,6 +70,9 @@ const config = {
   },
   list: {
     getAllList: (model)=> `${API_URL}/api/list/${model}`
+  },
+  accommodation: {
+    getOneAccommodation : (id) => `${API_URL}/api/accommodation/${id}`
   }
 
 };

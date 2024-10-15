@@ -11,7 +11,7 @@ import Calender from '../../assets/svg/calender.svg';
 // import { NODE_ENV } from '../../constants';
 
 
-const FavoriteCard = ({ title, description, facebookLink, instagramLink, twitterLink, youtubeLink, websiteLink, location, deadLine, timeOut, route }) => {
+const FavoriteCard = ({ title, description, facebookLink, instagramLink, twitterLink, youtubeLink, websiteLink, location, deadLine, timeOut, route, type, position,salary, currency, interest, term, loan_size, size, address,price}) => {
     const socialMediaIcons = [
         { icon: Facebook, linkKey: facebookLink },
         { icon: Twitter, linkKey: twitterLink },
@@ -41,6 +41,37 @@ const FavoriteCard = ({ title, description, facebookLink, instagramLink, twitter
                                         {index !== 2 ? <p className='border-r-gray-200 border-r-2 p-1 text-nowrap'>{linkKey}</p> : <p className='text-nowrap'>{linkKey}</p>}
                                     </div>
                                 ))}
+                            </div>
+                            <div>
+                            {type === "job"?  <div className="py-2">
+              <p className="py-1">Position :<span> {position}</span></p>
+              <p>Salary :<span> ${salary}</span></p>
+            </div> : null}
+            {type === "loan"? <div className="py-2">
+              <p>
+                Currency :<span> {currency}</span>
+              </p>
+              <p>
+                Term:<span> {term}</span>
+              </p>
+              <p>
+                Loan Size:<span> {loan_size}</span>
+              </p>
+              <p>
+                Interest Rate:<span> {interest}</span>
+              </p>
+            </div> : null}
+            {type === "accommodation"? <div className="py-2">
+              <p>
+                Size :<span> {size}</span>
+              </p>
+              <p>
+                Price:<span> {price}</span>
+              </p>
+              <p>
+                Location:<span> {address}</span>
+              </p>
+            </div> : null}
                             </div>
                         </div>
                         <div className="text-clip overflow-hidden w-full h-[200px]">
