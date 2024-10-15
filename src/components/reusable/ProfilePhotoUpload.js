@@ -13,7 +13,7 @@ const ProfilePictureUpload = () => {
     const selectedFile = e.target.files[0];
     if (!selectedFile) return;
 
-    const newPhotoUrl = await uploadPhoto(selectedFile);
+    const newPhotoUrl = await uploadPhoto(selectedFile, "profile-picture");
     if (newPhotoUrl) {
       fetchPhoto();
     }

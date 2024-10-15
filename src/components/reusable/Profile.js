@@ -15,8 +15,6 @@ import Logout from "./Logout.js";
 
 export const SidebarContentContext = createContext();
 
-const MOBILE_BREAKPOINT = 980;
-
 const contentComponents = {
   schoolList: UniversityListing,
   account: UserAccount,
@@ -36,9 +34,9 @@ const Profile = ({ userData, isPublic }) => {
 
   useEffect(() => {
     const checkScreenSize = () => {
-      const newIsMobile = window.innerWidth < MOBILE_BREAKPOINT;
+      const newIsMobile = window.innerWidth < 980;
       setIsMobile(newIsMobile);
-      setSidebarOpen(!newIsMobile);
+      setSidebarOpen(!newIsMobile); // Sidebar open by default on large screens
     };
 
     checkScreenSize();
@@ -47,10 +45,15 @@ const Profile = ({ userData, isPublic }) => {
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-  if (loading) return <LoadingOverlay />;
-  if (!role && !isPublic) return <div>Error: Could not fetch user role</div>;
+  if (loading) {
+    return <LoadingOverlay />;
+  }
 
-  const toggleSidebar = () => setSidebarOpen((prev) => !prev);
+  if (!role && !isPublic) {
+    return <div>Error: Could not fetch user role</div>;
+  }
+
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   const ContentComponent = contentComponents[sidebarContent] || (() => null);
 
@@ -69,34 +72,36 @@ const Profile = ({ userData, isPublic }) => {
             onClose={() => isMobile && setSidebarOpen(false)}
             userRole={role}
           />
-        </aside>
+        </div>
 
-        {/* Mobile Backdrop */}
+        {/* Backdrop for mobile */}
         {isMobile && sidebarOpen && (
           <div
             className="fixed inset-0 z-20 bg-black bg-opacity-50 h-full"
             onClick={() => setSidebarOpen(false)}
           />
         )}
+      </SidebarContentContext.Provider>
 
       {/* Main Content */}
-      <div className={`flex-grow h-full overflow-hidden ${isMobile ? "relative z-10" : ""}`}>
-        <div className="overflow-y-auto h-full">
-          <div className="px-4 h-full">
-            {isMobile && !sidebarOpen && (
-              <button
-                onClick={toggleSidebar}
-                className="fixed left-4 z-20 p-3 text-black bg-white rounded-full shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                aria-label="Open sidebar"
-              >
-                <ChevronRight size={24} />
-              </button>
-            )}
-            <ContentComponent userInfo={userData} />
-          </div>
-        </main>
+      <div
+        className={`flex-grow h-full overflow-hidden ${
+          isMobile ? "relative z-10" : ""
+        }`}
+      >
+        <div className="h-screen">
+          {isMobile && !sidebarOpen && (
+            <button
+              onClick={toggleSidebar}
+              className="fixed left-4 z-20 p-3 text-black bg-white rounded-full shadow-md"
+            >
+              <ChevronRight size={24} />
+            </button>
+          )}
+          <ContentComponent userInfo={userData} />
+        </div>
       </div>
-    </SidebarContentContext.Provider>
+    </div>
   );
 };
 

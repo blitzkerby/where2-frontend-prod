@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import ButtonComponent from "./../reusable/Button";
 import ContainerComponent from "../reusable/ContainerComponent";
 import { register } from "../../features/slices/authSlice";
-import { LoadingSpinner } from "../reusable/Loading";
+import { LoadingSpinner, LoadingOverlay } from "../reusable/Loading";
 
 const TermsAndConditionsComponent = () => {
   const [agreed, setAgreed] = useState(false);
@@ -24,7 +24,9 @@ const TermsAndConditionsComponent = () => {
         const email = response.email || registrationData.email;
         navigate("/signup/verification", { state: { email } });
       } catch (err) {
-        setError(err.message || "Username or email is not available. Please try again.");
+        setError(
+          err.message || "Username or email is not available. Please try again."
+        );
       }
     }
   };
@@ -32,6 +34,10 @@ const TermsAndConditionsComponent = () => {
   const handleBack = () => {
     navigate(-1);
   };
+
+  if (status === "loading") {
+    return <LoadingOverlay message="We are processing your request..." />;
+  }
 
   return (
     <ContainerComponent>
@@ -44,7 +50,9 @@ const TermsAndConditionsComponent = () => {
         </button>
       </div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-center text-gray-800">Our Terms and Services</h2>
+        <h2 className="text-xl font-bold text-center text-gray-800">
+          Our Terms and Services
+        </h2>
         <div className="w-1/4 h-0.5 bg-gray-300 mx-auto mt-4"></div>
       </div>
 
@@ -56,7 +64,7 @@ const TermsAndConditionsComponent = () => {
           viverra pretium tellus neque. Ullamcorper suspendisse aenean leo
           pharetra in sit semper et. Amet quam placerat sem.
         </p>
-        
+
         <h3 className="font-semibold mb-2">2. Clause 2</h3>
         <p className="text-sm text-gray-600 mb-4">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra
@@ -79,20 +87,26 @@ const TermsAndConditionsComponent = () => {
             Agree to Terms and Services
           </label>
         </div>
-        
+
         <div className="flex justify-center items-center">
-        <ButtonComponent
+          <ButtonComponent
             variant="primary"
             className="mt-2 w-[197px] h-[32px] sm:w-[343px] sm:h-[50px]"
             disabled={!agreed || status === "loading"}
             type="submit"
           >
-            {status === "loading" ? <LoadingSpinner/> : "Agree & Proceed to Verification"}
+            {status === "loading" ? (
+              <LoadingSpinner />
+            ) : (
+              "Agree & Proceed to Verification"
+            )}
           </ButtonComponent>
         </div>
       </form>
 
-      {error && <p className="text-red-500 text-sm text-center mt-4">{error}</p>}
+      {error && (
+        <p className="text-red-500 text-sm text-center mt-4">{error}</p>
+      )}
 
       <div className="mt-6 text-center">
         <p className="text-sm text-gray-600">

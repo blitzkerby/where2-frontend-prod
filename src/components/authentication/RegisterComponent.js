@@ -7,7 +7,7 @@ import ContainerComponent from "./../reusable/ContainerComponent";
 import { clearAuthState } from "./../../features/slices/authSlice";
 import { LoadingOverlay, LoadingSpinner } from "./../reusable/Loading";
 import { MapPin } from "lucide-react";
-import  useGeolocation  from "./../../hooks/useGeolocation";
+import useGeolocation from "./../../hooks/useGeolocation";
 
 const RegisterComponent = () => {
   const [accountType, setAccountType] = useState("personal");
@@ -29,7 +29,12 @@ const RegisterComponent = () => {
   const navigate = useNavigate();
   const { status, message } = useSelector((state) => state.auth);
 
-  const { location, getLocation, isGettingLocation, error: locationError } = useGeolocation();
+  const {
+    location,
+    getLocation,
+    isGettingLocation,
+    error: locationError,
+  } = useGeolocation();
 
   useEffect(() => {
     dispatch(clearAuthState());
@@ -54,13 +59,32 @@ const RegisterComponent = () => {
   }, [dispatch]);
 
   const validateForm = () => {
-    const personalFields = ['firstName', 'lastName', 'userName', 'email', 'password', 'passwordConfirm', 'location'];
-    const businessFields = ['entity', 'firstName', 'lastName', 'location', 'phoneNumber', 'email', 'password', 'passwordConfirm', 'dateOfBirth'];
-    
-    const requiredFields = accountType === "business" ? businessFields : personalFields;
-    
-    const missingFields = requiredFields.filter(field => !formData[field]);
-    
+    const personalFields = [
+      "firstName",
+      "lastName",
+      "userName",
+      "email",
+      "password",
+      "passwordConfirm",
+      "location",
+    ];
+    const businessFields = [
+      "entity",
+      "firstName",
+      "lastName",
+      "location",
+      "phoneNumber",
+      "email",
+      "password",
+      "passwordConfirm",
+      "dateOfBirth",
+    ];
+
+    const requiredFields =
+      accountType === "business" ? businessFields : personalFields;
+
+    const missingFields = requiredFields.filter((field) => !formData[field]);
+
     if (missingFields.length > 0) {
       setError(`Missing required fields: ${missingFields.join(", ")}`);
       return false;
@@ -70,19 +94,19 @@ const RegisterComponent = () => {
       setError("Passwords do not match");
       return false;
     }
-    
+
     if (formData.password.length < 6) {
       setError("Password must be at least 6 characters long");
       return false;
     }
-  
+
     return true;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-  
+
     if (validateForm()) {
       const registrationData = {
         firstName: formData.firstName,
@@ -95,93 +119,69 @@ const RegisterComponent = () => {
         passwordConfirm: formData.passwordConfirm,
         entity: formData.entity,
         formType: accountType,
-        dateOfBirth: formData.dateOfBirth ? new Date(formData.dateOfBirth).toISOString().split('T')[0] : null,
+        dateOfBirth: formData.dateOfBirth
+          ? new Date(formData.dateOfBirth).toISOString().split("T")[0]
+          : null,
       };
 
       navigate("/terms-and-conditions", { state: { registrationData } });
     }
   };
 
+  if (isGettingLocation) {
     return (
       <ContainerComponent title="CREATE ACCOUNT">
-        <div className="flex justify-center mb-6">
-          <button
-            className={`mr-4 pb-2 ${
-              accountType === "personal"
-                ? "border-b-2 border-black font-medium"
-                : "text-gray-500"
-            }`}
-            onClick={() => setAccountType("personal")}
-          >
-            Personal
-          </button>
-          <button
-            className={`ml-4 pb-2 ${
-              accountType === "business"
-                ? "border-b-4 border-black font-medium"
-                : "text-gray-500"
-            }`}
-            onClick={() => setAccountType("business")}
-          >
-            Business
-          </button>
+        <div className="flex justify-center">
+          <LoadingSpinner />
         </div>
-        <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
-          {accountType === "business" && (
-            <FormInput
-              name="entity"
-              label="Enter Your Entity"
-              type="text"
-              value={formData.entity}
-              onChange={handleInputChange}
-              required
-              autoComplete="off"
-              autoCapitalize="off"
-              autoCorrect="off"
-            />
-          )}
-          <div className="grid grid-cols-2 gap-4">
-            <FormInput
-              name="firstName"
-              label="First Name"
-              type="text"
-              value={formData.firstName}
-              onChange={handleInputChange}
-              required
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="off"
-            />
-            <FormInput
-              name="lastName"
-              label="Last Name"
-              type="text"
-              value={formData.lastName}
-              onChange={handleInputChange}
-              required
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="off"
-            />
-          </div>
-          {accountType === "personal" && (
-            <FormInput
-              name="userName"
-              label="Username"
-              type="text"
-              value={formData.userName}
-              onChange={handleInputChange}
-              required
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="off"
-            />
-          )}
+      </ContainerComponent>
+    );
+  }
+
+  return (
+    <ContainerComponent title="CREATE ACCOUNT">
+      <div className="flex justify-center mb-6">
+        <button
+          className={`mr-4 pb-2 ${
+            accountType === "personal"
+              ? "border-b-2 border-black font-medium"
+              : "text-gray-500"
+          }`}
+          onClick={() => setAccountType("personal")}
+        >
+          Personal
+        </button>
+        <button
+          className={`ml-4 pb-2 ${
+            accountType === "business"
+              ? "border-b-4 border-black font-medium"
+              : "text-gray-500"
+          }`}
+          onClick={() => setAccountType("business")}
+        >
+          Business
+        </button>
+      </div>
+      <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
+        {accountType === "business" && (
           <FormInput
-            name="email"
-            label="Email"
-            type="email"
-            value={formData.email}
+            name="entity"
+            label="Enter Your Entity"
+            type="text"
+            value={formData.entity}
+            onChange={handleInputChange}
+            required
+            autoComplete="off"
+            autoCapitalize="off"
+            autoCorrect="off"
+          />
+        )}
+        <div className="grid grid-cols-2 gap-4">
+          <FormInput
+            name="firstName"
+            label="First Name"
+            type="text"
+            value={formData.firstName}
             onChange={handleInputChange}
             required
             autoComplete="off"
@@ -189,17 +189,53 @@ const RegisterComponent = () => {
             autoCapitalize="off"
           />
           <FormInput
-            name="phoneNumber"
-            label="Phone Number"
-            type="tel"
-            value={formData.phoneNumber}
+            name="lastName"
+            label="Last Name"
+            type="text"
+            value={formData.lastName}
             onChange={handleInputChange}
             required
             autoComplete="off"
             autoCorrect="off"
             autoCapitalize="off"
           />
-          <div className="relative">
+        </div>
+        {accountType === "personal" && (
+          <FormInput
+            name="userName"
+            label="Username"
+            type="text"
+            value={formData.userName}
+            onChange={handleInputChange}
+            required
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+          />
+        )}
+        <FormInput
+          name="email"
+          label="Email"
+          type="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          required
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+        />
+        <FormInput
+          name="phoneNumber"
+          label="Phone Number"
+          type="tel"
+          value={formData.phoneNumber}
+          onChange={handleInputChange}
+          required
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
+        />
+        <div className="relative">
           <FormInput
             name="location"
             label="Location"
@@ -221,71 +257,73 @@ const RegisterComponent = () => {
             <MapPin size={20} />
           </button>
         </div>
-        { isGettingLocation && <LoadingOverlay/> }
-        {locationError && <p className="text-red-500 text-sm">{locationError}</p>}
-          {accountType === "business" && (
-            <FormInput
-              name="dateOfBirth"
-              label="Date of Birth"
-              type="date"
-              value={formData.dateOfBirth}
-              onChange={handleInputChange}
-              required
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="off"
-            />
-          )}
-          <div className="grid grid-cols-2 gap-4">
-            <FormInput
-              name="password"
-              label="Password"
-              type="password"
-              value={formData.password}
-              onChange={handleInputChange}
-              required
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="off"
-            />
-            <FormInput
-              name="passwordConfirm"
-              label="Confirm Password"
-              type="password"
-              value={formData.passwordConfirm}
-              onChange={handleInputChange}
-              required
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="off"
-            />
-          </div>
-          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-          {status === "failed" && (
-            <p className="text-red-500 text-sm text-center">{message}</p>
-          )}
-          <div className="flex justify-center items-center">
-            <ButtonComponent
-              variant="primary"
-              className="mt-2 w-[197px] sm:w-full h-[38px] sm:w-[343px] sm:h-[50px]"
-              type="submit"
-              disabled={status === "loading"}
-            >
-              {status === "loading" ? <LoadingSpinner /> : "Next"}
-            </ButtonComponent>
-          </div>
-        </form>
-    
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">
-            Already have an account?{" "}
-            <Link to="/login" className="text-[rgb(0,122,255)] underline">
-              Log in
-            </Link>
-          </p>
+        {isGettingLocation && <LoadingOverlay />}
+        {locationError && (
+          <p className="text-red-500 text-sm">{locationError}</p>
+        )}
+        {accountType === "business" && (
+          <FormInput
+            name="dateOfBirth"
+            label="Date of Birth"
+            type="date"
+            value={formData.dateOfBirth}
+            onChange={handleInputChange}
+            required
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+          />
+        )}
+        <div className="grid grid-cols-2 gap-4">
+          <FormInput
+            name="password"
+            label="Password"
+            type="password"
+            value={formData.password}
+            onChange={handleInputChange}
+            required
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+          />
+          <FormInput
+            name="passwordConfirm"
+            label="Confirm Password"
+            type="password"
+            value={formData.passwordConfirm}
+            onChange={handleInputChange}
+            required
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+          />
         </div>
-      </ContainerComponent>
-    );
-  };
+        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+        {status === "failed" && (
+          <p className="text-red-500 text-sm text-center">{message}</p>
+        )}
+        <div className="flex justify-center items-center">
+          <ButtonComponent
+            variant="primary"
+            className="mt-2 w-[197px] sm:w-full h-[38px] sm:w-[343px] sm:h-[50px]"
+            type="submit"
+            disabled={status === "loading"}
+          >
+            {status === "loading" ? <LoadingSpinner /> : "Next"}
+          </ButtonComponent>
+        </div>
+      </form>
+
+      <div className="mt-6 text-center">
+        <p className="text-sm text-gray-600">
+          Already have an account?{" "}
+          <Link to="/login" className="text-[rgb(0,122,255)] underline">
+            Log in
+          </Link>
+        </p>
+      </div>
+    </ContainerComponent>
+  );
+};
 
 export default RegisterComponent;

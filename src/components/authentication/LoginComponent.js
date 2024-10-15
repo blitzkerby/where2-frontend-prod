@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import FormInput from "../reusable/InputField";
-import ButtonComponent from "../reusable/Button";
-import ContainerComponent from "../reusable/ContainerComponent";
-import { login, clearAuthState } from "../../features/slices/authSlice";
-import { LoadingSpinner } from "../reusable/Loading.js";
-// import ProtectedLoginRoute from "../reusable/ProtectedRoute";
+import FormInput from "./../reusable/InputField";
+import ButtonComponent from "./../reusable/Button";
+import ContainerComponent from "./../reusable/ContainerComponent";
+import { login, clearAuthState } from "./../../features/slices/authSlice";
+import { LoadingSpinner, LoadingOverlay } from "./../reusable/Loading.js";
 
 const LoginComponent = () => {
   const [email, setEmail] = useState("");
@@ -14,10 +13,11 @@ const LoginComponent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { status, error, isAuthenticated } = useSelector((state) => state.auth);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/home");
+      navigate("/");
     }
   }, [isAuthenticated, navigate]);
 
@@ -28,14 +28,20 @@ const LoginComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const resultAction = await dispatch(login({ email, password }));
       if (login.fulfilled.match(resultAction)) {
         navigate("/home");
       }
     } catch (err) {
+      setLoading(false);
       console.error("Failed to log in. Please try again!");
     }
   };
+
+  if (loading) {
+    return <LoadingOverlay message="Logging in..." />;
+  }
 
   return (
     <ContainerComponent title="LOG IN" className="lg:h-[718px]">
@@ -81,7 +87,7 @@ const LoginComponent = () => {
         </Link>
         <p className="mt-6 text-sm text-gray-600 ">
           Don't have an Account?{" "}
-          <Link to="/register" className="text-[rgb(0,122,255)] underline">
+          <Link to="/signup" className="text-[rgb(0,122,255)] underline">
             Sign Up
           </Link>
         </p>

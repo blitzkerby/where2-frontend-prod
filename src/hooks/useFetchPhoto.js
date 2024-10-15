@@ -44,14 +44,16 @@ export const useUploadPhoto = (userId) => {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState(null);
 
-  const uploadPhoto = async (file, p) => {
-    if (!file || !userId) return null;
+  const uploadPhoto = async (file, folder) => {
+    if (!file || !userId || !folder) return null;
 
     setIsUploading(true);
     setUploadError(null);
 
     try {
-      const { data: s3Data } = await axios.get(config.photo.getS3Url);
+      const { data: s3Data } = await axios.post(config.photo.getS3Url, {
+        folder,
+      });
       console.log("Received S3 pre-signed URL:", s3Data);
 
       if (!s3Data || !s3Data.url) {

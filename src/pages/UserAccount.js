@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import FormInput from "../components/reusable/InputField";
 import useAuth from "../hooks/useAuth";
@@ -20,16 +20,18 @@ const UserAccount = ({ userInfo }) => {
     return null;
   }
 
-  const formattedDate = new Date(userInfo.createdAt).toLocaleDateString('en-CA');
+  const formattedDate = new Date(userInfo.createdAt).toLocaleDateString(
+    "en-CA"
+  );
 
   return (
     <section className="w-full h-full bg-white rounded-3xl my-auto shadow-md border">
-      <div className="lg:w-full lg:py-[128px] lg:px-[64px] lg:mx-auto h-full px-4 pb-6 pt-12 sm:px-6 lg:pb-0">
-        <div className="flex items-center justify-center mb-6">
+      <div className="lg:w-full lg:py-[32px] lg:px-[64px] lg:mx-auto h-full px-4 pb-6 pt-12 sm:px-6 lg:pb-0">
+        <div className="flex items-center justify-center mb-3">
           <ProfilePictureUpload userId={userInfo.id} />
         </div>
-  
-        <p className="text-center mb-6">{userInfo.lastName}</p>
+
+        <p className="text-center mb-3">{userInfo.lastName}</p>
 
         <FormInput
           label="Bio"
@@ -38,7 +40,7 @@ const UserAccount = ({ userInfo }) => {
           className="p-3 sm:p-4 h-fit"
           rounded
         />
-  
+
         <div className="space-y-4">
           {userInfo.entity && (
             <FormInput
@@ -77,7 +79,7 @@ const UserAccount = ({ userInfo }) => {
               rounded
               disabled
               className="p-3 sm:p-4"
-            />  
+            />
             <FormInput
               label="Phone Number"
               value={userInfo.phoneNumber}
@@ -85,9 +87,9 @@ const UserAccount = ({ userInfo }) => {
               rounded
               disabled
               className="p-3 sm:p-4"
-            />  
+            />
           </div>
-  
+
           <FormInput
             label="Location"
             placeholder="Enter Location"
@@ -113,7 +115,7 @@ const UserAccount = ({ userInfo }) => {
             className="p-3 sm:p-4"
           />
         </div>
-        <VisitorTracker path={location.pathname}/>
+        <VisitorTracker path={location.pathname} />
       </div>
     </section>
   );
