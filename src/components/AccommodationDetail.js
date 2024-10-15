@@ -3,27 +3,58 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getOneAccommodation } from "../features/slices/accommodationSlice";
 import { LoadingOverlay } from "./reusable/Loading";
+
 const AccommodationDetail = () => {
     const param = useParams();
     const dispatch = useDispatch();
-    // const [accommodation, setAccommodation] = useState();
     const { loading, error, accommodation } = useSelector(state => state.accommodations);
     
      useEffect(() => {
          dispatch(getOneAccommodation(param.id))
-         console.log("uniq   detail",accommodation)
     },[])
-    console.log("uniq   detail", accommodation)
-    if (!loading) {
-       console.log(accommodation.id,accommodation.name)
-    }
- 
     return (
-        <>
-        {loading && <LoadingOverlay />}
-        <div>
-                
-        </div>
+        <>       
+            {loading && <LoadingOverlay />}
+            { !loading && <div className ="flex content-center">
+           <div className ="mt-48 mx-auto max-w-[1440px]">
+                    <h1 className="mb-4 p-4"><b>{accommodation.type}</b></h1>
+                <div className="flex gap-4 p-4">
+                        <p>Rental Price:<span> ${accommodation.price}</span></p>
+                    <p>Availability:<span> {accommodation.availability}</span></p>
+                </div>
+                <div className="flex gap-4 flex-wrap p-4">
+                    <div className="flex-1">
+                    <img className="w-full rounded-lg h-[250px]" src={accommodation.image_url.img1} alt="room" />
+                    </div>
+                    <div className="flex-1">
+                    <img className="w-full rounded-lg h-[250px]" src={accommodation.image_url.img2} alt="room" />
+                    </div>
+                    <div className="flex-1">
+                    <img className="w-full rounded-lg h-[250px]" src={accommodation.image_url.img3} alt="room" />
+                    </div>
+                    <div className="flex-1">
+                    <img className="w-full rounded-lg h-[250px]" src={accommodation.image_url.img4} alt="room" />
+                    </div> 
+                    </div>
+                    <div className="p-4">
+                    <h1><b>Details:</b></h1>
+                            <ul>
+                            <li>Size:<span>{ accommodation.size}</span></li>
+                            <li>Price:<span>${accommodation.price}</span></li>
+                                <li>Bed:<span>1</span></li>
+                        </ul>
+                        <h1 className="py-4"><b>Contact:</b></h1>
+                        <div>
+                            <p>Location:<span> { accommodation.location}</span></p>
+                            <p>Tel:<span>012 xxx xxx</span></p>
+                        </div>
+                        <h1 className="py-4"><b>Notes:</b></h1>
+                        <div>
+                            <p>{ accommodation.description}</p>
+                        </div>
+                    </div>
+                </div>
+                </div>}
          {error && <p>{error}</p>}
         </>
     )
