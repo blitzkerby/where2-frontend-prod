@@ -49,6 +49,7 @@ const config = {
       `${API_URL}/api/discussions/${discussionId}/comment/${commentId}`,
     getAllComments: (discussionId) =>
       `${API_URL}/api/discussions/${discussionId}/comments`,
+    deleteDiscussion: (discussionId) => `${API_URL}/api/discussion/${discussionId}`,
   },
   universities: {
     getAllUniversity: `${API_URL}/api/list/university/all`,

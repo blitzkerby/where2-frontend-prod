@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import ButtonComponent from "../reusable/Button";
-import config from "../../config";
-import { LoadingOverlay } from "../reusable/Loading";
-import useAuth from "../../hooks/useAuth";
-import DiscussionCard from "../reusable/DiscussionCard";
-import WrapperComponent from "../reusable/WrapperComponent";
+import ButtonComponent from "./../reusable/Button";
+import config from "./../../config";
+import { LoadingOverlay } from "./../reusable/Loading";
+import useAuth from "./../../hooks/useAuth";
+import DiscussionCard from "./../reusable/DiscussionCard";
+import WrapperComponent from "./../reusable/WrapperComponent";
 
 const DiscussionList = () => {
   const [discussions, setDiscussions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { showDashboard } = useAuth();
   const navigate = useNavigate();
+
+  const handleDeleteSuccess = async (deletedDiscussionId) => {
+    setDiscussions(prevDiscussions => 
+      prevDiscussions.filter(disc => disc.id !== deletedDiscussionId)
+    );
+  }
 
   const fetchDiscussions = async () => {
     try {
@@ -61,7 +67,7 @@ const DiscussionList = () => {
       <WrapperComponent>
         <div className="space-y-8 mt-[64px]">
           {discussions.map((discussion) => (
-            <DiscussionCard key={discussion.id} discussion={discussion} />
+            <DiscussionCard key={discussion.id} discussion={discussion} onDeleteSuccess={handleDeleteSuccess}/>
           ))}
         </div>
       </WrapperComponent>
