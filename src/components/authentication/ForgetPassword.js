@@ -5,7 +5,7 @@ import FormInput from "../reusable/InputField";
 import ButtonComponent from "../reusable/Button";
 import ContainerComponent from "../reusable/ContainerComponent";
 import { forgotPassword, clearAuthState } from "../../features/slices/authSlice";
-import { LoadingSpinner } from "../reusable/Loading";
+import { LoadingSpinner, LoadingOverlay } from "../reusable/Loading";
 import config from "../../config";
 
 const ForgetPasswordComponent = () => {
@@ -26,6 +26,10 @@ const ForgetPasswordComponent = () => {
       dispatch(forgotPassword({ email }));
     }
   };
+
+  if (status === "loading") {
+    return <LoadingOverlay message="We are sending a password reset link..."/>
+  }
 
   return (
     <ContainerComponent title="FORGET PASSWORD">

@@ -12,6 +12,7 @@ import {
 import { X, User, Heart, ChevronDown, ChevronRight, BookKey, Users, School, House, Briefcase, BadgeDollarSignIcon, ChartNoAxesColumnIncreasingIcon } from "lucide-react";
 import { SidebarContentContext } from "../reusable/Profile";
 import { useNavigate } from "react-router-dom";
+import Logout from "./../reusable/Logout";
 
 
 const MenuItem = ({ item, depth = 0, onItemClick, isSelected }) => {
@@ -126,13 +127,13 @@ const Sidebar = ({ isOpen, onClose, userRole }) => {
         ]
       },
       { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5" /> },
-      { label: 'Log Out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut") },
+      { label: 'Log out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut") },
     ],
     admin: [
       { label: 'Content', icon: <DocumentDuplicateIcon className="h-5 w-5" />, badge: '14', onClick: () => handleItemClick("AdminContent", "adminContent") },
       { label: 'Profile', icon: <UserCircleIcon className="h-5 w-5" /> , onClick: () => handleItemClick("account", "account") },
       { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5"/> , onClick: () => handleItemClick("setting", "setting")  },
-      { label: 'Log Out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut")  },
+      { label: 'Log out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut")  },
       { label: 'Dashboard', icon: <ChartNoAxesColumnIncreasingIcon className="h-5 w-5" /> , onClick: () => handleItemClick("adminDashboard", "adminDashboard") },
     ],
     developer: [

@@ -17,13 +17,13 @@ export const useFetchPhoto = (userId) => {
     setError(null);
 
     try {
-      const response = await axios.post(
+      const response = await axios.get(
         config.photo.fetchProfilePicture(userId) + `?t=${Date.now()}`
       );
 
       if (response.data.status === "success") {
         // Ensure you're getting the correct URL
-        setPhotoUrl(response.data.profilePictureUrl);
+        setPhotoUrl(response.data.data.profilePictureUrl);
       } else {
         throw new Error("Failed to fetch profile picture");
       }
@@ -47,37 +47,49 @@ export const useUploadPhoto = (userId) => {
   const [uploadError, setUploadError] = useState(null);
 
   const uploadPhoto = async (file, folder) => {
-    if (!file || !userId || !folder) return null;
+    if (!file || !userId || !folder) {
+      console.warn("File, userId, or folder is missing");
+      return null;
+    }
 
     setIsUploading(true);
     setUploadError(null);
 
     try {
-      const { data: s3Data } = await axios.post(config.photo.getS3Url, {
-        folder,
-      });
+      const { data: s3Data } = await axios.post(config.photo.getS3Url, { folder });
       console.log("Received S3 pre-signed URL:", s3Data);
 
-      if (!s3Data || !s3Data.uploadUrl) {
+      if (!s3Data || !s3Data.url) {
         throw new Error("Invalid S3 pre-signed URL received");
       }
 
-      await axios.put(s3Data.uploadUrl, file, {
+      await axios.put(s3Data.url, file, {
         headers: {
           "Content-Type": file.type, // Retain the content type for the upload
         },
       });
       console.log("File uploaded to S3 successfully");
 
-      // Now we expect the backend to handle URL construction
+      const urlParts = new URL(s3Data.url);
+      const imageUrl = `${urlParts.protocol}//${urlParts.host}${urlParts.pathname}`;
+      console.log("Constructed Image URL:", imageUrl);
+
+      if (!imageUrl) {
+        throw new Error("S3 URL construction failed");
+      }
+
       const response = await axios.post(config.photo.uploadProfilePicture, {
         userId,
-        imageUrl: s3Data.uploadUrl, // Send the key, and the backend constructs the URL
+        imageUrl,
       });
 
       console.log("Response from uploadProfilePicture:", response.data);
 
-      return response.data.profilePictureUrl; // Return the URL from the response
+      if (!response.data || !response.data.profilePictureUrl) {
+        throw new Error("Failed to upload profile picture");
+      }
+
+      return response.data.profilePictureUrl;
     } catch (error) {
       console.error("Error uploading profile picture:", error);
       setUploadError(`Failed to upload profile picture: ${error.message}`);
@@ -89,7 +101,6 @@ export const useUploadPhoto = (userId) => {
 
   return { uploadPhoto, isUploading, uploadError };
 };
-
 export const useFetchBatchPhotos = (userIds) => {
   const [photoUrls, setPhotoUrls] = useState({});
   const [isLoading, setIsLoading] = useState(true);

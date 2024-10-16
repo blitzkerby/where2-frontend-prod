@@ -40,7 +40,7 @@ const LoginComponent = () => {
   };
 
   if (loading) {
-    return <LoadingOverlay message="Logging in..." />;
+    return <LoadingOverlay message="We are logging you in..." />;
   }
 
   return (

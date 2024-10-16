@@ -132,7 +132,7 @@ const RegisterComponent = () => {
     return (
       <ContainerComponent title="CREATE ACCOUNT">
         <div className="flex justify-center">
-          <LoadingSpinner />
+          <LoadingOverlay message="We are fetching your location..." />
         </div>
       </ContainerComponent>
     );

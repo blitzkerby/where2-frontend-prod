@@ -9,13 +9,13 @@ import ProfilePictureUpload from "../components/reusable/ProfilePhotoUpload";
 const UserAccount = ({ userInfo }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { role, loading } = useAuth();
+  const { role, loading, isLoggedIn } = useAuth();
 
   if (loading) {
-    return <LoadingOverlay />;
+    return <LoadingOverlay message="We are fetching your profile..."/>;
   }
 
-  if (!role) {
+  if (!role || !isLoggedIn) {
     navigate("/login");
     return null;
   }
