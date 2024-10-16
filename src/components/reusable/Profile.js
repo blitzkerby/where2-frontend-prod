@@ -87,7 +87,7 @@ const Profile = ({ userData, isPublic }) => {
         {/* Main Content */}
         <div className={`flex-grow overflow-hidden ${isMobile ? "relative z-10" : ""}`}>
           <div className="h-full overflow-y-auto">
-            <div className="p-4">
+            <div className="px-4 h-full">
               {isMobile && !sidebarOpen && (
                 <button
                   onClick={toggleSidebar}
