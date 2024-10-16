@@ -4,11 +4,12 @@ import CommentSectionComponent from "../community/CommentSectionComponent";
 import ProfilePicture from "./ProfilePicture";
 import { useFetchBatchPhotos } from "./../../hooks/useFetchPhoto";
 import WrapperComponent from "./WrapperComponent";
-import config from "./../../config";
+import useIsMobile from "./../../hooks/useIsMobile";
 
 const DiscussionCard = ({ discussion }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [localComments, setLocalComments] = useState(discussion.comments || []);
+  const { isMobile, isDesktop } = useIsMobile();
   const navigate = useNavigate();
 
   // Memoize the user IDs to avoid unnecessary recalculations
@@ -68,7 +69,7 @@ const DiscussionCard = ({ discussion }) => {
               className="flex items-center gap-2 cursor-pointer hover:text-gray-700"
               onClick={handleUserClick(discussion.user.id)}
             >
-              <span>Posted by </span>
+              { isMobile ? <span>By </span> : <span>Posted by </span>}
               <ProfilePicture
                 userId={discussion.user.id}
                 photoUrl={photoUrls[discussion.user.id]}
