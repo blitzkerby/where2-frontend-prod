@@ -7,7 +7,7 @@ import { setTotalPage } from './paginationSlice';
 
 /**
  * Fetch all universities with pagination.
- * @route GET /universities
+ * @route GET /api/list/university/
  * @param {Object} param - The pagination parameters.
  * @param {number} param.page - The current page number.
  * @param {number} param.limit - The number of items per page.
@@ -15,8 +15,8 @@ import { setTotalPage } from './paginationSlice';
  */
 export const fetchUniversities = createAsyncThunk(
     'universities/fetchUniversities',
-    async ({ page , limit }, { dispatch }) => {
-        const response = await axios.get(`${config.universities.getAllUniversity}?page=${page}&limit=${limit}`);
+    async ({ page }, { dispatch }) => {
+        const response = await axios.get(`${config.universities.getAllUniversity}?page=${page}`);
         
         // Dispatch actions to update pagination state
         dispatch(setTotalPage(response.data.pagination.totalPages));       
@@ -26,7 +26,7 @@ export const fetchUniversities = createAsyncThunk(
 
 /**
  * Fetch a specific university by ID.
- * @route GET /universities/:id
+ * @route GET /api/list/university/:id
  * @param {number} id - The ID of the university to fetch.
  * @access Public
  */
@@ -40,17 +40,15 @@ export const fetchUniversity = createAsyncThunk(
 
 /**
  * Search universities by query.
- * @route GET /universities/search
+ * @route GET /api/list/university/search
  * @param {string} query - The search query.
  * @access Public
  */
 export const searchUniversities = createAsyncThunk(
     'universities/searchUniversities',
-    async (query) => {
-        const response = await axios.get(`${config.universities.search}?query=${encodeURIComponent(query)}`);
-
-        // Dispatch actions to update pagination state
-        dispatch(setTotalPage(response.data.pagination.totalPages));       
+    async ({ query, page }, { dispatch }) => {
+        const response = await axios.get(`${config.universities.getUniversityBySearch}?q=${encodeURIComponent(query)}&page=${page}`);
+        dispatch(setTotalPage(response.data.pagination.totalPages || 1));       
         return response.data;
     }
 )
@@ -74,7 +72,7 @@ const universitySlice = createSlice({
         builder
             /**
              * Fetch all universities.
-             * @route GET /universities
+             * @route GET /api/list/university/
              * @access Public
              */
             .addCase(fetchUniversities.pending, (state) => {
@@ -92,7 +90,7 @@ const universitySlice = createSlice({
 
             /**
              * Fetch a specific university by ID.
-             * @route GET /universities/:id
+             * @route GET /api/list/university/:id
              * @access Public
              */
             .addCase(fetchUniversity.pending, (state) => {
@@ -110,7 +108,7 @@ const universitySlice = createSlice({
 
             /**
              * Search universities by query.
-             * @route GET /universities/search
+             * @route GET /api/list/university/search
              * @access Public
              */
             .addCase(searchUniversities.pending, (state) => {
@@ -119,7 +117,7 @@ const universitySlice = createSlice({
             })
             .addCase(searchUniversities.fulfilled, (state, action) => {
                 state.loading = false;
-                state.universities = action.payload;
+                state.universities = action.payload.universities;
             })
             .addCase(searchUniversities.rejected, (state, action) => {
                 state.loading = false;

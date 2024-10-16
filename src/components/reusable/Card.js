@@ -18,14 +18,12 @@ const Card = ({
   location = '',
   deadLine = '',
   timeOut = '',
-  id,
-  type,
   route,
 }) => {
   const navigate = useNavigate();
 
   const handleReadMoreClick = () => {
-    route = "/detail/universities/1";
+    // route = "/detail/universities/1";
     console.log("REDIRECTING!", route);
     navigate(route);
   };
@@ -51,9 +49,9 @@ const Card = ({
   return (
     <div className="sm:max-w-[600px] sm:w-[100%] sm:flex-col relative clip-border-box rounded-xl border flex md:flex-row shadow-md lg:h-[348px] lg:w-[886px]">
       <div className="bg-cover bg-center lg:w-[398px] sm:w-[100%] sm:max-h-[348px] rounded-xl flex-shrink-0">
-        {image ? (
+        {image && (
           <img className="top-0 left-0 w-full h-full object-cover -z-10" src={image} alt={imageAlt} onError={handleError} />
-        ) : null}
+        )}
       </div>
       <div className="flex-1 lg:pl-9 lg:pr-5 lg:py-3 sm:px-5 sm:py-5">
         <div className="sm:mt-3">

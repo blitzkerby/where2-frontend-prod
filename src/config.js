@@ -46,7 +46,7 @@ const config = {
   },
   universities: {
     getAllUniversity : `${API_URL}/api/list/university`,
-    getUniversityBySearch : `${API_URL}/api/list/search/university`,
+    getUniversityBySearch : `${API_URL}/api/list/university/search`,
     getUniversityById : `${API_URL}/api/detail/university`,
   },
    // Jobs

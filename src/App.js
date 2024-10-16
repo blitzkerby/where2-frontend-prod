@@ -68,17 +68,19 @@ const router = createBrowserRouter([
         children: [
           { path: "", element: <UniversityPage /> },
           { path: "search", element: <UniversityPage /> },
+        ]
+      },
+    ]
+  },  
+  {
+    path: "/detail",
+    children: [
+      {
+        path: "university",
+        children: [
           { path: ":id", element: <UniversityDetail /> }
         ]
       },
-      // {
-      //   path: "/scholarship",
-      //   children: [
-      //     { path: "", element: <ScholarshipPage /> },
-      //     { path: "search", element: <ScholarshipPage /> },
-      //     { path: ":id", element: <ScholarshipDetail /> }
-      //   ]
-      // }
     ]
   },  
   { path: "/jobs", element: <JobPage /> },

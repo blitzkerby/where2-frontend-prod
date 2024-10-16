@@ -1,4 +1,4 @@
-const isDebug = true;  // Set to false to turn off console logging
+const isDebug = false;  // Set to false to turn off console logging
 
 import Card from "./reusable/Card";
 
@@ -33,9 +33,7 @@ const UniversityList = ({ universities }) => {
                     telegramLink={university.telegram_url}
                     websiteLink={university.website}
                     location={university.location}
-                    id={university.id}
-                    type={'university'}
-                    route={`${ university.id }`}
+                    route={`/detail/university/${ university.id }`}
                     // isHeartClicked = {isClicked[university.id]}
                 />
             ))}
