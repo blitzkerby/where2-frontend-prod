@@ -11,8 +11,6 @@ import {
 } from '@heroicons/react/24/solid';
 import { X, User, Heart, ChevronDown, ChevronRight, BookKey, Users, School, House, Briefcase, BadgeDollarSignIcon, ChartNoAxesColumnIncreasingIcon } from "lucide-react";
 import { SidebarContentContext } from "../reusable/Profile";
-import { useNavigate } from "react-router-dom";
-import Logout from "./../reusable/Logout";
 
 
 const MenuItem = ({ item, depth = 0, onItemClick, isSelected }) => {
@@ -148,7 +146,7 @@ const Sidebar = ({ isOpen, onClose, userRole }) => {
   };
 
   return (
-    <div
+          <div
       ref={sidebarRef}
       className={`rounded-r-[20px] h-full p-[16px] left-0 w-64 shadow-md border-[1px] bg-white text-black transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"

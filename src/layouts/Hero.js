@@ -1,6 +1,6 @@
 import React from "react";
-import { Search } from "lucide-react";
 import useAuth from "./../hooks/useAuth";
+import WrapperComponent from "./../components/reusable/WrapperComponent";
 
 const Hero = ({ props, children }) => {
   const {
@@ -46,7 +46,8 @@ const Hero = ({ props, children }) => {
   };
 
   return (
-    <section className={`${styles.section} ${backgroundGradient}`}>
+    <WrapperComponent>
+          <section className={`${styles.section} ${backgroundGradient}`}>
       <div className={styles.container}>
         <div
           className={`${styles.gradientOverlay} `}
@@ -62,6 +63,8 @@ const Hero = ({ props, children }) => {
         </div>
       </div>
     </section>
+    </WrapperComponent>
+
   );
 };
 

@@ -3,7 +3,6 @@ import Navbar from "../components/reusable/Navbar";
 import Footer from "../components/reusable/Footer";
 import Hero from "../layouts/Hero";
 import Searchbar from "../components/reusable/SearchBar";
-import WrapperComponent from "../components/reusable/WrapperComponent";
 // import Card from "../components/reusable/Card";
 
 // assets
@@ -105,21 +104,14 @@ const HomePage = () => {
     <>
       <Navbar />
       <div className="mt-[64px]">
-        <WrapperComponent>
           <Hero props={hero1}>
             <Searchbar searchPlaceholder={hero1.searchPlaceholder} />
           </Hero>
-        </WrapperComponent>
       </div>
 
-      <WrapperComponent>
         <CardSlider cards={cards} />
-      </WrapperComponent>
 
-      <WrapperComponent>
         <Hero props={hero2} />
-      </WrapperComponent>
-
       <Footer />
     </>
   );
