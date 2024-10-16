@@ -6,6 +6,7 @@ import JobFinder from '../assets/images/job-finder.jpg';
 import LiveliHood from '../assets/images/livelihood.png'
 import LivelihoodBox from "./reusable/LivelihoodBox";
 import { useState, useEffect } from "react";
+import WrapperComponent from "./reusable/WrapperComponent";
 const Livelihood = () => {
     const [isMobile, setIsMobile] = useState(false);
     useEffect(() => {
@@ -37,7 +38,7 @@ const Livelihood = () => {
     return (
         <section className="bg-[#F4F8FA]">
             <div className="flex flex-col align-middle justify-center gap-6 p-6 mt-[64px] h-max">
-                <img src={LiveliHood} />
+                    <img src={LiveliHood} alt="Hero photo of livelidhood page"/>
                 <CardSlider cards={cards} header={"Finish Graduation?"} />
                 <section className="flex gap-x-12 px-12 mx-auto mb-[64px]">
                     {isMobile ? null : <div className="flex-1 content-center">
