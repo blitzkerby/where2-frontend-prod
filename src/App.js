@@ -16,10 +16,11 @@ import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
 import DashboardComponent from "./components/accountUtilities/sidebarComponents/Admin/Dashboard";
 import DiscussionsPage from "./pages/DiscussionPage";
 import HealthPage from "./pages/HealthPage";
-import PublicOnlyROute from "./components/reusable/PublicOnlyRoute";
+import PublicOnlyROute from "./components/routes/PublicOnlyRoute";
 import CreateDiscussionPage from "./pages/CreateDiscussionPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import VisitProfile from "./components/accountUtilities/sidebarComponents/User/VisitProfile";
+import LoggedInOnlyRoute from "./components/routes/LoggedInRoute";
 
 const queryClient = new QueryClient();
 
@@ -44,10 +45,10 @@ const router = createBrowserRouter([
   { path: "/terms-and-conditions", element: <PublicOnlyROute><TermsAndConditionsPage/></PublicOnlyROute>},
   { path: "/signup/verification", element: <PublicOnlyROute><VerificationPage/></PublicOnlyROute> },
   { path: "/dashboard/:userName", element: <DashboardComponent/> },
-  { path: "/profile/:userName", element: <UserProfile/> },
-  { path: "/discussions", element: <DiscussionsPage/> },
-  { path: "/discussions/create", element: <CreateDiscussionPage/> },
-  { path: "/health", element: <HealthPage/>},
+  { path: "/profile/:userName", element: <LoggedInOnlyRoute><UserProfile/></LoggedInOnlyRoute> },
+  { path: "/discussions", element: <DiscussionsPage/>},
+  { path: "/discussions/create", element: <LoggedInOnlyRoute><CreateDiscussionPage/></LoggedInOnlyRoute> },
+  { path: "/health", element: <LoggedInOnlyRoute><HealthPage/></LoggedInOnlyRoute>},
   {path: "/user/:userId", element: <VisitProfile/>},
 ]);
 

@@ -39,6 +39,7 @@ const UserAccount = ({ userInfo }) => {
           placeholder="Tell everyone about yourself..."
           className="p-3 sm:p-4 h-fit"
           rounded
+          disabled
         />
 
         <div className="space-y-4">

@@ -133,8 +133,8 @@ const Sidebar = ({ isOpen, onClose, userRole }) => {
       { label: 'Content', icon: <DocumentDuplicateIcon className="h-5 w-5" />, badge: '14', onClick: () => handleItemClick("AdminContent", "adminContent") },
       { label: 'Profile', icon: <UserCircleIcon className="h-5 w-5" /> , onClick: () => handleItemClick("account", "account") },
       { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5"/> , onClick: () => handleItemClick("setting", "setting")  },
-      { label: 'Log out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut")  },
       { label: 'Dashboard', icon: <ChartNoAxesColumnIncreasingIcon className="h-5 w-5" /> , onClick: () => handleItemClick("adminDashboard", "adminDashboard") },
+      { label: 'Log out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut")  },
     ],
     developer: [
       { label: 'Account', icon: <User className="w-5 h-5" />, onClick: () => handleItemClick("account", "account") },
@@ -142,8 +142,8 @@ const Sidebar = ({ isOpen, onClose, userRole }) => {
       { label: 'School', icon: <BookKey className="w-5 h-5" />, onClick: () => handleItemClick("school", "schoolList") },
       { label: 'Accommodation', icon: <House />, onClick: () => handleItemClick("accommodation", "accommodationList") },
       { label: 'Part time job', icon: <Briefcase />, onClick: () => handleItemClick("job", "jobList") },
-      { label: 'Log out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut")},
       { label: 'Dashboard', icon: <ChartNoAxesColumnIncreasingIcon className="h-5 w-5" /> , onClick: () => handleItemClick("developerDashboard", "adminDashboard") },
+      { label: 'Log out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut")}
     ]
   };
 

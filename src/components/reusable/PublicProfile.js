@@ -16,13 +16,14 @@ const PublicProfile = ({ userInfo }) => {
   const {loading} = useAuth();
 
   if (loading) {
-    return <LoadingOverlay />;
+    return <LoadingOverlay message='We are fetching the public profile...'/>;
   }
 
   const formattedDate = new Date(userInfo.createdAt).toLocaleDateString('en-CA');
 
   return (
     <>
+    <Navbar/>
     <ContainerComponent>
     <section className="w-full rounded-3xl pb-[64px] ">
       <div className="lg:w-full lg:pl-[128px] lg:pr-[128px] lg:mx-auto h-full px-4 pb-6 pt-12 sm:px-6 lg:pb-0">
