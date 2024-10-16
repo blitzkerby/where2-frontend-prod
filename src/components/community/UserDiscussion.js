@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import DiscussionCard from './DiscussionCard'
 import { useNavigate } from 'react-router-dom';
+import useAuth from './../../hooks/useAuth';
+import { Link } from 'react-router-dom';
 import config from './../../config';
 
 const UserDiscussions = ({ userId }) => {
     const [userDiscussions, setUserDiscussions] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const { isLoggedIn } = useAuth();
   
     useEffect(() => {
       const fetchUserDiscussions = async () => {
@@ -30,9 +33,14 @@ const UserDiscussions = ({ userId }) => {
   
       fetchUserDiscussions();
     }, [userId]);
+
+    const handleOnDeleteSuccess = (deletedId) => {
+      setUserDiscussions(prev => prev.filter(d => d.id !== deletedId));
+      window.location.reload();
+    }
   
     if (isLoading) {
-      return <div>Loading your discussions...</div>;
+      return <div>Loading...</div>;
     }
   
     if (error) {
@@ -43,15 +51,13 @@ const UserDiscussions = ({ userId }) => {
       <div className="mt-8">
         <h2 className="text-2xl font-bold mb-4">Your Discussions</h2>
         {userDiscussions.length === 0 ? (
-          <p>You haven't created any discussions yet.</p>
+          <p>You haven't created any discussions yet. { isLoggedIn ? null : `Please <Link to="/login">Login</Link>`}</p>
         ) : (
           userDiscussions.map(discussion => (
             <DiscussionCard 
               key={discussion.id} 
               discussion={discussion}
-              onDeleteSuccess={(deletedId) => {
-                setUserDiscussions(prev => prev.filter(d => d.id !== deletedId));
-              }}
+              onDeleteSuccess={handleOnDeleteSuccess}
             />
           ))
         )}
