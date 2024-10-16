@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import config from "./../config";
 
+
+// THIS FUNCTION IS USED TO FETCH USER PHOTO
 export const useFetchPhoto = (userId) => {
   const [photoUrl, setPhotoUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +24,6 @@ export const useFetchPhoto = (userId) => {
       );
 
       if (response.data.status === "success") {
-        // Ensure you're getting the correct URL
         setPhotoUrl(response.data.data.profilePictureUrl);
       } else {
         throw new Error("Failed to fetch profile picture");
@@ -42,10 +43,12 @@ export const useFetchPhoto = (userId) => {
   return { photoUrl, isLoading, error, fetchPhoto };
 };
 
+// THIS FUNCTION IS USED TO UPLOAD PICTURE
 export const useUploadPhoto = (userId) => {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState(null);
 
+  // THE FUNCTION IS ABLE TO RECEIVE TWO PROPS, ONE IS FOR FILE, AND ONE IS FOR FOLDER. IF FOLDER IS "PROFILE-PICTURE" IT IS STORED WITHIN THE PROFILE PICTURES FOLDER WITHIN THE S3BUCKET
   const uploadPhoto = async (file, folder) => {
     if (!file || !userId || !folder) {
       console.warn("File, userId, or folder is missing");
@@ -56,6 +59,7 @@ export const useUploadPhoto = (userId) => {
     setUploadError(null);
 
     try {
+      // OBTAINING DATA FROM BACKEND (BACKEND API IS STORED IN config.js)
       const { data: s3Data } = await axios.post(config.photo.getS3Url, { folder });
       console.log("Received S3 pre-signed URL:", s3Data);
 
@@ -65,7 +69,7 @@ export const useUploadPhoto = (userId) => {
 
       await axios.put(s3Data.url, file, {
         headers: {
-          "Content-Type": file.type, // Retain the content type for the upload
+          "Content-Type": file.type,
         },
       });
       console.log("File uploaded to S3 successfully");
@@ -101,6 +105,8 @@ export const useUploadPhoto = (userId) => {
 
   return { uploadPhoto, isUploading, uploadError };
 };
+
+// THIS FUNCITON IS USED TO FETCH MULTIPLE PROFILE PICTURES FOR EFFICIENTCY
 export const useFetchBatchPhotos = (userIds) => {
   const [photoUrls, setPhotoUrls] = useState({});
   const [isLoading, setIsLoading] = useState(true);

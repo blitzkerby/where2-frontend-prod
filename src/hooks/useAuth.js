@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import config from "./../config";
 
+// INITIAL STATES OF USEAUTH
 const useAuth = () => {
   const [authState, setAuthState] = useState({
     isLoggedIn: false,
@@ -16,6 +17,7 @@ const useAuth = () => {
   const fetchUserDataAndRole = useCallback(async () => {
     setAuthState(prev => ({ ...prev, loading: true }));
     try {
+      // FETCHING DATA STORED FROM LOCAL STORAGE
       const authData = JSON.parse(localStorage.getItem("authData"));
       if (!authData || !authData.token) {
         throw new Error("No valid auth data found");
@@ -24,11 +26,13 @@ const useAuth = () => {
       const { userName, entity, token, id, role } = authData;
 
       let userRole = role;
+      // IF THERE IS NO DATA IN LOCAL STORAGE, FETCH DATA FROM THE SERVER
       if (!userRole) {
         const response = await fetch(config.auth.getUserRole, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
+        // THROW ERROR TO THE CONSOLE WHEN THERE IS ERROR FOUND
         if (!response.ok) {
           throw new Error("Failed to fetch user role");
         }
@@ -47,6 +51,7 @@ const useAuth = () => {
         username: userName || "",
         entity: entity || "",
         role: userRole,
+        // DASHBOARD IS SHOWN ONLY TO THE ADMIN AND DEVELOPER; IF THE ROLE IS NOT IN THE TWO, ITS HIDDEN
         showDashboard: userRole === "admin" || userRole === "developer",
         loading: false,
         userId: id || null,
@@ -62,6 +67,7 @@ const useAuth = () => {
     fetchUserDataAndRole();
   }, [fetchUserDataAndRole]);
 
+  // CLEARING AUTH DATA
   const clearAuthData = useCallback(() => {
     localStorage.removeItem("authData");
     setAuthState({
