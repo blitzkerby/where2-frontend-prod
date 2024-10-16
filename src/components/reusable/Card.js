@@ -8,6 +8,9 @@ import MiniClock from '../../assets/svg/miniClock.svg';
 import { Facebook, Instagram, Twitter, Youtube, Chrome } from 'lucide-react';
 import Button from './ButtonComponent';
 import { addFavorite } from '../../features/slices/favoriteSlice';
+import { useDispatch } from 'react-redux'; 
+
+const user = JSON.parse(localStorage.getItem('authData'));
 
 const Card = ({
   image = '',
@@ -15,17 +18,39 @@ const Card = ({
   title = '',
   description = '',
   socialLinks: { facebookLink = '', instagramLink = '', twitterLink = '', youtubeLink = '', websiteLink = '' } = {},
-  location = '',
-  deadLine = '',
+  position,
+  salary,
+  currency,
+  term,
+  loan_size,
+  interest,
+  location = '', 
+  deadLine = '', 
   timeOut = '',
   route,
+  type
 }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleReadMoreClick = () => {
-    // route = "/detail/universities/1";
-    console.log("REDIRECTING!", route);
     navigate(route);
+  };
+  
+  const handleHeartClick = async () => {
+      await removeFavorite(id, type);
+      dispatch(setIsClicked({ id: id }))
+  
+    };
+    
+  const handleRemoveHeartClick = async () => {
+    if (!user) {
+      alert("Please Log in or Sing up to add your COLLECTION!");
+      navigate('/login');
+    } else {
+      await addFavorite(id, type);
+      dispatch(setIsClicked({ id: id }))
+    }
   };
 
   const handleError = (event) => {
@@ -72,6 +97,24 @@ const Card = ({
               )
             ))}
           </div>
+            {type === "job"?  <div className="py-2">
+              <p className="py-1">Position :<span> {position}</span></p>
+              <p>Salary :<span> ${salary}</span></p>
+            </div> : null}
+            {type === "loan"? <div className="py-2">
+              <p>
+                Currency :<span> {currency}</span>
+              </p>
+              <p>
+                Term:<span> {term}</span>
+              </p>
+              <p>
+                Loan Size:<span> {loan_size}</span>
+              </p>
+              <p>
+                Interest Rate:<span> {interest}</span>
+              </p>
+            </div> : null}
         </div>
         <div className="flex flex-col lg:h-[78%] sm:h-[200px]">
           <div className="flex-1 text-clip overflow-hidden">

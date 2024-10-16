@@ -9,7 +9,8 @@ import {
   BookOpenIcon,
   BeakerIcon,
 } from '@heroicons/react/24/solid';
-import { X, User, Heart, ChevronDown, ChevronRight, BookKey, Users, School, House, Briefcase, BadgeDollarSignIcon, ChartNoAxesColumnIncreasingIcon } from "lucide-react";
+import { X, User, Heart, ChevronDown, ChevronRight, BookKey, Users, School, House, Briefcase, BadgeDollarSignIcon, ChartNoAxesColumnIncreasingIcon,GraduationCap } from "lucide-react";
+
 import { SidebarContentContext } from "../reusable/Profile";
 import { useNavigate } from "react-router-dom";
 
@@ -119,10 +120,11 @@ const Sidebar = ({ isOpen, onClose, userRole }) => {
         label: 'Collection',
         icon: <Heart className="w-5 h-5" />,
         children: [
-          { label: 'School', icon: <School />, onClick: () => handleItemClick("school", "school") },
+          { label: 'University', icon: <School />, onClick: () => handleItemClick("university", "university") },
+          { label: 'Scholarship', icon: <GraduationCap />, onClick: () => handleItemClick("scholarship", "scholarship") },
           { label: 'Accommodation', icon: <House />, onClick: () => handleItemClick("accommodation", "accommodation") },
           { label: 'Part-time Job', icon: <Briefcase />, onClick: () => handleItemClick("job", "job") },
-          { label: 'Financial', icon: <BadgeDollarSignIcon />, onClick: () => handleItemClick("financial", "financial") }
+          { label: 'Student Loan', icon: <BadgeDollarSignIcon />, onClick: () => handleItemClick("loan", "loan") }
         ]
       },
       { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5" /> },

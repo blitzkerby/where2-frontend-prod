@@ -1,23 +1,24 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import config from "../../config";
-
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const user = JSON.parse(localStorage.getItem('authData'));
-export const addFavorite = async(cardId, category) => {
-    const addFavorite =  await axios.post(
-        config.favorite.addFavorite,
-        {
-            user_id: user.id,
-            card: cardId,
-            categories: category
-        }
-    );
+export const addFavorite = async (cardId, category) => {
+        const addFavorite =  await axios.post(
+            config.favorite.addFavorite,
+            {
+                user_id: user.id,
+                card: cardId,
+                categories: category
+            }
+        );
     return cardId
 };
 
-export const getFavorite = createAsyncThunk("getFavorite", async (category) => {
-    const getAllFavorite = await axios.get(config.favorite.getFavorite(user.id, category));
-    console.log(getAllFavorite)
+export const getFavorite = createAsyncThunk("getFavorite", async ({ category, page, limit }) => {
+    const getAllFavorite = await axios.get(`${ config.favorite.getFavorite(user.id, category) }?page=${ page }&limit=${ limit }`);
     return getAllFavorite;
 });
 
@@ -31,8 +32,12 @@ const FavoriteSlices = createSlice({
     initialState: { isLoading:{ 'job': true, 'university': true, 'loan': true, 'scholarship':true,'accommodation':true}, favorites: [], isClicked: {},error:null},
     reducers: {
         setIsClicked(state, action) {
-            state.isClicked[`${action.payload.id}`] = !state.isClicked[`${action.payload.id}`]
+            state.isClicked[`${ action.payload.id }`] = !state.isClicked[`${ action.payload.id }`];
+            console.log("IsClicked", state.isClicked)
         },
+        removedIsClicked(state, action) {
+            state.isClicked = {};
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -44,7 +49,8 @@ const FavoriteSlices = createSlice({
             })
             .addCase(getFavorite.fulfilled, (state, action) => {
                 state.favorites = action.payload.data.data.allFavorite;
-                state.isLoading = false
+                state.isLoading = false;
+                // state.isClicked = {};
                 state.favorites.map(fav => {
                     if (fav.categories === 'university') {
                         state.isLoading = {
@@ -68,7 +74,7 @@ const FavoriteSlices = createSlice({
                             'job': true, 'university': true, 'loan': false, 'scholarship': true, 'accommodation': true
                         };
                         state.favorites.map(fav => {
-                            state.isClicked[`${ fav.loan.id }`] = true
+                            state.isClicked[`${ fav.loan.loan_id }`] = true
                         });
                       
                      
@@ -102,5 +108,5 @@ const FavoriteSlices = createSlice({
 }
     
 );
-export const { setIsClicked, setIsLoading} = FavoriteSlices.actions;
+export const { setIsClicked, setIsLoading, removedIsClicked} = FavoriteSlices.actions;
 export default FavoriteSlices.reducer;

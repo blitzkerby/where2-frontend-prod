@@ -1,22 +1,34 @@
 
 import Card from "./reusable/Card";
 import { useDispatch, useSelector } from "react-redux";
-// import { fetchJob } from "../../features/slices/jobSlice";
+
 import { useEffect } from "react";
 import { getFavorite } from "../features/slices/favoriteSlice";
-// import { setCurrentPage, selectCurrentPage, selectItemsPerPage, selectTotalItems } from '../../features/slices/paginationSlice';
-// import PaginationComponent from "../reusable/Pagination";
-// import { addFavorite } from "../../features/slices/favoriteSlice";
+import { useLocation } from "react-router-dom";
+import { removedIsClicked } from "../features/slices/favoriteSlice";
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+} 
 const StudentLoanList = ({ studentLoans }) => {
+    const urlParams = useQuery();
+
+    const page = parseInt(urlParams.get('page')) || 1;
+    const limit = parseInt(urlParams.get('limit')) || 10;
     const dispatch = useDispatch();
     const { isClicked } = useSelector((state) => state.favorites);
+    console.log("this is page StudentLoan", page)
+    console.log("this is isClicked favorite",isClicked)
     useEffect(() => {
-        dispatch(getFavorite("loan"))
-    }, []);
+        if (page === 1) {
+            dispatch(removedIsClicked());
+        }
+        dispatch(getFavorite({ category: "loan", page, limit }))
+        
+    }, [page]);
     return (
     <>
     {studentLoans.map(loan => {
-        return(
+        return (
             <Card
                 key={loan.loan_id}
                 id={loan.loan_id}
@@ -24,6 +36,10 @@ const StudentLoanList = ({ studentLoans }) => {
                 imageAlt={loan.image_alt}
                 title={loan.bank_name}
                 description={loan.loan_type}
+                interest={loan.interest_rate}
+                loan_size={loan.loan_limit}
+                currency={"KHR and USD"}
+                term={loan.loan_term}
                 // facebookLink={loan.updatedAt}
                 // instagramLink={loan.updatedAt}
                 // twitterLink={loan.createdAt}

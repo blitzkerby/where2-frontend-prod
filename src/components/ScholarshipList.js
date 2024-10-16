@@ -7,35 +7,49 @@ import Navbar from "./reusable/Navbar";
 import { useDispatch, useSelector } from 'react-redux';  // Import hooks from react-redux
 import { fetchScholarships } from "../features/slices/scholarshipsSlice";
 import { getFavorite } from "../features/slices/favoriteSlice";
+import { useLocation } from "react-router-dom";
+import { removedIsClicked } from "../features/slices/favoriteSlice";
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+} 
 const ScholarshipList = ({ scholarship }) => {
+    const urlParams = useQuery();
+
+    const page = parseInt(urlParams.get('page')) || 1;
+    const limit = parseInt(urlParams.get('limit')) || 10;
     const dispatch = useDispatch();
     const { isClicked } = useSelector((state) => state.favorites);
+    // console.log("this is isclicked scholarship", isClicked)
+    console.log("this is page scholarship",page)
     useEffect(() => {
-        dispatch(getFavorite("scholarship"));
-    }, []);
+        if (page === 1) {
+            dispatch(removedIsClicked());
+        }
+        dispatch(getFavorite({category:"scholarship",page,limit}));
+    }, [page]);
     // const dispatch = useDispatch();  // Create a dispatch function
     // const { scholarships, loading, error } = useSelector((state) => state.scholarships);  // Access scholarships data from the store
 
     // const [currentFilterUni, setCurrentFilterUni] = useState('');
 
     // Define the items for the FilterComponent here
-    const items = [
-        {
-            id: '2132',
-            label: 'University',
-            content: ['Western', 'TECHNO', 'AUPP', 'RUPP', 'PARAGON']
-        },
-        {
-            id: '2eqsa',
-            label: 'Location',
-            content: ['Phnom Penh', 'Siem Reap']
-        },
-        {
-            id: 'sadsd',
-            label: 'Status',
-            content: ['Open', 'Closed']
-        }
-    ];
+    // const items = [
+    //     {
+    //         id: '2132',
+    //         label: 'University',
+    //         content: ['Western', 'TECHNO', 'AUPP', 'RUPP', 'PARAGON']
+    //     },
+    //     {
+    //         id: '2eqsa',
+    //         label: 'Location',
+    //         content: ['Phnom Penh', 'Siem Reap']
+    //     },
+    //     {
+    //         id: 'sadsd',
+    //         label: 'Status',
+    //         content: ['Open', 'Closed']
+    //     }
+    // ];
 
     // useEffect(() => {
         // Fetch scholarships when the component mounts

@@ -11,7 +11,7 @@ import Calender from '../../assets/svg/calender.svg';
 // import { NODE_ENV } from '../../constants';
 
 
-const FavoriteCard = ({ title, description, facebookLink, instagramLink, twitterLink, youtubeLink, websiteLink, location, deadLine, timeOut }) => {
+const FavoriteCard = ({ title, description, facebookLink, instagramLink, twitterLink, youtubeLink, websiteLink, location, deadLine, timeOut, route }) => {
     const socialMediaIcons = [
         { icon: Facebook, linkKey: facebookLink },
         { icon: Twitter, linkKey: twitterLink },
@@ -69,7 +69,7 @@ const FavoriteCard = ({ title, description, facebookLink, instagramLink, twitter
                         </div>
                         </div>
                         <div >
-                            <Link to={`/company/companydetail/:company`} className="text-blue-500 hover:underline">
+                            <Link to={route} className="text-blue-500 hover:underline">
                                 <Button className="font- text-1xl p-2 px-3" variant="outline" size="large">
                                     Read More
                                 </Button>
