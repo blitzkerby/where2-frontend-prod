@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import ButtonComponent from "../reusable/Button";
-import FormInput from "../reusable/InputField";
-import ContainerComponent from "../reusable/ContainerComponent";
-import useAuth from "../../hooks/useAuth";
-import config from "../../config";
+import ButtonComponent from "./../reusable/Button";
+import FormInput from "./../reusable/InputField";
+import ContainerComponent from "./../reusable/ContainerComponent";
+import useAuth from "./../../hooks/useAuth";
+import config from "./../../config";
 import axios from "axios";
 import { MapPin } from "lucide-react";
-import useGeolocation from "../../hooks/useGeolocation";
+import useGeolocation from "./../../hooks/useGeolocation";
 import { v4 as uuidv4 } from "uuid";
-import { LoadingSpinner } from "../reusable/Loading";
+import { LoadingSpinner } from "./../reusable/Loading";
 
 const CreateDiscussion = () => {
   const navigate = useNavigate();
@@ -103,7 +103,7 @@ const CreateDiscussion = () => {
           type="text"
           value={formData.title}
           onChange={handleChange}
-          placeholder="Enter discussion title"
+          placeholder="Title needs to be at least 10 characters long."
           required
         />
 
@@ -111,6 +111,7 @@ const CreateDiscussion = () => {
           <FormInput
             name="location"
             label="Location"
+            placeholder="Click on the pin button to automatically fill in the location."
             type="text"
             value={formData.location}
             onChange={handleChange}
@@ -119,22 +120,21 @@ const CreateDiscussion = () => {
             autoCorrect="off"
             autoCapitalize="off"
           />
-          <button
-            type="button"
+          <ButtonComponent
+            variant="ghost"
+            size="small"
             onClick={() => {
               getLocation().then((location) => handleLocationChange(location));
             }}
             disabled={isGettingLocation}
-            className="absolute right-2 bottom-2 transform -translate-y-1/2"
-            title="Get current location"
-            aria-label="Get current location"
+            className="absolute right-2 bottom-0 transform -translate-y-1/2"
           >
             {isGettingLocation ? (
               <LoadingSpinner size={16} />
             ) : (
               <MapPin size={20} />
             )}
-          </button>
+          </ButtonComponent>
         </div>
 
         <div className="flex-1">
@@ -149,7 +149,7 @@ const CreateDiscussion = () => {
             name="content"
             value={formData.content}
             onChange={handleChange}
-            placeholder="Write your discussion content here..."
+            placeholder="Content needs to be at least 10 characters long."
             required
             className="mt-3 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border-[2px] min-h-[200px] p-2"
           />

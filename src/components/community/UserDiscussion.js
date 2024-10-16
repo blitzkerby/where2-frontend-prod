@@ -56,7 +56,8 @@ const UserDiscussions = ({ userId }) => {
       <h2 className="text-2xl font-bold mb-4">Your Discussions</h2>
       {userDiscussions.length === 0 ? (
         <p>
-          You haven't created any discussions yet.{" "}
+          Your posted discussion will appear here. You haven't created any
+          discussions yet.{" "}
           {isLoggedIn ? null : `Please ${(<Link to="/login">Login</Link>)}`}
         </p>
       ) : (
