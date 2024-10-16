@@ -1,12 +1,12 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import CommentSectionComponent from "../community/CommentSectionComponent";
-import ProfilePicture from "./ProfilePicture";
+import CommentSectionComponent from "./CommentSectionComponent";
+import ProfilePicture from "./../reusable/ProfilePicture";
 import { useFetchBatchPhotos } from "./../../hooks/useFetchPhoto";
-import WrapperComponent from "./WrapperComponent";
+import WrapperComponent from "./../reusable/WrapperComponent";
 import useIsMobile from "./../../hooks/useIsMobile";
 import useAuth from "./../../hooks/useAuth";
-import ButtonComponent from "./Button";
+import ButtonComponent from "./../reusable/Button";
 import config from "./../../config";
 import axios from "axios";
 

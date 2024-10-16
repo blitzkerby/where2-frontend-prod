@@ -5,8 +5,9 @@ import ButtonComponent from "./../reusable/Button";
 import config from "./../../config";
 import { LoadingOverlay } from "./../reusable/Loading";
 import useAuth from "./../../hooks/useAuth";
-import DiscussionCard from "./../reusable/DiscussionCard";
+import DiscussionCard from "./DiscussionCard";
 import WrapperComponent from "./../reusable/WrapperComponent";
+import ContainerComponent from "./../reusable/ContainerComponent";
 
 const DiscussionList = () => {
   const [discussions, setDiscussions] = useState([]);
@@ -50,7 +51,7 @@ const DiscussionList = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto">
       <div className="flex justify-between h-full items-center">
         <h2 className="text-xl sm:hidden">Community Discussions</h2>
         {showDashboard && (

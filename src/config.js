@@ -45,6 +45,8 @@ const config = {
   community: {
     createDiscussion: `${API_URL}/api/discussion`,
     getDiscussions: `${API_URL}/api/discussions`,
+    getUserDiscussions: (userId) =>
+      `${API_URL}/api/discussions/${userId}`,
     addComment: (discussionId, commentId) =>
       `${API_URL}/api/discussions/${discussionId}/comment/${commentId}`,
     getAllComments: (discussionId) =>
