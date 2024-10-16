@@ -53,6 +53,9 @@ function Footer() {
                 <li>
                   <FooterLink href="/health">W2Health</FooterLink>
                 </li>
+                <li>
+                  <FooterLink href="/discussions">W2Community</FooterLink>
+                </li>
               </ul>
             </div>
           </div>

@@ -22,7 +22,7 @@ const useIsMobile = () => {
     };
   }, []);
 
-  return { isMobile, isDesktop }; // Return both states
+  return { isMobile, isDesktop }; 
 };
 
 export default useIsMobile;

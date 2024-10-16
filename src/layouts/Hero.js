@@ -47,7 +47,7 @@ const Hero = ({ props, children }) => {
 
   return (
     <WrapperComponent>
-          <section className={`${styles.section} ${backgroundGradient}`}>
+    <section className={`${styles.section} ${backgroundGradient}`}>
       <div className={styles.container}>
         <div
           className={`${styles.gradientOverlay} `}
