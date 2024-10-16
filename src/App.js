@@ -27,6 +27,7 @@ import JobDetailPage from "./pages/JobDetailPage";
 import StudentLoanPage from "./pages/StudentLoanPage";
 import AccommodationPage from "./pages/AccommodationPage";
 import AccommodationDetailPage from "./pages/AccommodationDetailPage";
+import LoggedInOnlyRoute from "./components/routes/LoggedInRoute";
 
 
 const queryClient = new QueryClient();
@@ -45,17 +46,17 @@ const router = createBrowserRouter([
     path: "/homepage",
     element: <HomePage />
   },
-  { path: "/login",element: <LoginPage />},
+  { path: "/login",element: <PublicOnlyROute><LoginPage /></PublicOnlyROute>},
   { path: "/signup",element: <PublicOnlyROute><RegisterPage /></PublicOnlyROute>},
   { path: "/forget-password", element: <PublicOnlyROute><ForgetPasswordPage /></PublicOnlyROute>},
-  { path: "/reset-password/:token", element: <ResetPasswordPage />},
+  { path: "/reset-password/:token", element: <PublicOnlyROute><ResetPasswordPage /></PublicOnlyROute>},
   { path: "/terms-and-conditions", element: <PublicOnlyROute><TermsAndConditionsPage/></PublicOnlyROute>},
   { path: "/signup/verification", element: <PublicOnlyROute><VerificationPage/></PublicOnlyROute> },
   { path: "/dashboard/:userName", element: <DashboardComponent/> },
   { path: "/profile/:userName", element: <UserProfile/> },
   { path: "/discussions", element: <DiscussionsPage/> },
   { path: "/discussions/create", element: <CreateDiscussionPage/> },
-  { path: "/health", element: <HealthPage/>},
+  { path: "/health", element: <LoggedInOnlyRoute><HealthPage/></LoggedInOnlyRoute>},
   { path: "/user/:userId", element: <VisitProfile /> },
   {
     path: "/universities",
