@@ -22,7 +22,7 @@ const Hero = ({ props , children }) => {
         gradientClipPath: { clipPath: "polygon(0 0, 100% 0, 100% 70%, 0 100%)" },
 
         /* textbox */
-        title: "text-h1 tracking-tight font-black",
+        title: "text-h1 tracking-tight font-black text-[38px]",
         subtitle: "text-h2 tracking-tight mb-8",
         contentWrapper: "absolute w-full z-10 mx-auto top-[7%] mt-section-top-margin max-w-[660px]",
 

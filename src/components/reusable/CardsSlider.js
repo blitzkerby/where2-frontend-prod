@@ -67,8 +67,10 @@ const CardSlider = ({ cards, header }) => {
 
   return (
     <div className="relative w-full max-w-6xl mx-auto">
-      <div className="p-5 text-[#367588]">
-        <b>{header}</b>
+      <div className="p-5 text-blue-900 text-[38px]">
+      {header.map((item, index) => (
+        <b key={index}>{item.suggested}</b>
+      ))}
       </div>
       <div className="overflow-hidden w-full">
         <div

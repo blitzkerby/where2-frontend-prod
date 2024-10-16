@@ -5,6 +5,7 @@ import Footer from "../components/reusable/Footer";
 import Hero from "../layouts/Hero";
 import Searchbar from "../components/reusable/SearchBar";
 import WrapperComponent from "../components/reusable/WrapperComponent";
+
 // import Card from "../components/reusable/Card";
 
 // assets
@@ -27,16 +28,20 @@ const hero1 = {
 // background: linear-gradient(180deg, #E3E3E3 0%, #EEEEEE 19%, #FFFFFF 82%, #F6F6F6 100%);
 
 const hero2 = {
-  title: "DISCOVER YOUR FUTURE.",
-  subtitle: "Everything starts here.",
-  searchPlaceholder: "Search University by name",
+  title: "PURSUE YOUR CAREER.",
+  subtitle: "By supporting yourself.",
   backgroundGradient: "from-blue-100",
   titleColor: "text-blue-900",
   subtitleColor: "text-blue-600",
-  mainImageSrc: "",
+  mainImageSrc: SecondaryHero,
   mainImageAlt: "University building",
   onSearch: () => {},
 };
+const header =[
+  {
+    suggested: "SUGGESTED FOR YOU"
+  }
+]
 const cards = [
   {
     title: "Scholarships",
@@ -103,13 +108,12 @@ const HomePage = () => {
       </WrapperComponent>
 
       <WrapperComponent>
-        <CardSlider cards={cards} />
+        <CardSlider cards={cards} header={header} />
       </WrapperComponent>
 
       <WrapperComponent>
         <Hero props={hero2} />
       </WrapperComponent>
-
       <WrapperComponent>
         <Footer />
       </WrapperComponent>
