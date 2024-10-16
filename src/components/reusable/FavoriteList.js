@@ -73,7 +73,7 @@ const FavoriteList = ({ favorites, category }) => {
                 deadLine={loan.deadline}
                 // timeOut={loan.salary}
                 type={"loan"}
-                route={`/loan-detail`}
+                route={loan.link}
             // isHeartClicked={isClicked[loan.loan_id]}
             />
         ))

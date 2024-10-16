@@ -9,20 +9,23 @@ const AccommodationDetail = () => {
     const dispatch = useDispatch();
     const { loading, error, accommodation } = useSelector(state => state.accommodations);
     
-     useEffect(() => {
-         dispatch(getOneAccommodation(param.id))
-    },[])
+    useEffect(() => {
+        dispatch(getOneAccommodation(param.id))
+    }, []);
+  
     return (
         <>       
             {loading && <LoadingOverlay />}
-            { !loading && <div className ="flex content-center">
-           <div className ="mt-48 mx-auto max-w-[1440px]">
-                    <h1 className="mb-4 p-4"><b>{accommodation.type}</b></h1>
+            {!loading && <>
+                <div className="mx-auto max-w-[1440px]">
+                <h1 className="mt-[100px] mb-4 p-4"><b>{accommodation.type}</b></h1>
                 <div className="flex gap-4 p-4">
                         <p>Rental Price:<span> ${accommodation.price}</span></p>
                     <p>Availability:<span> {accommodation.availability}</span></p>
-                </div>
-                <div className="flex gap-4 flex-wrap p-4">
+                    </div>
+                <div className="flex content-center p-4 mx-auto max-w-[1440px] ">
+                <div className= "h-[250px] overflow-scroll">
+                <div className="flex gap-4 min-w-[1400px]">
                     <div className="flex-1">
                     <img className="w-full rounded-lg h-[250px]" src={accommodation.image_url.img1} alt="room" />
                     </div>
@@ -36,17 +39,19 @@ const AccommodationDetail = () => {
                     <img className="w-full rounded-lg h-[250px]" src={accommodation.image_url.img4} alt="room" />
                     </div> 
                     </div>
+                </div>
+            </div>
                     <div className="p-4">
                     <h1><b>Details:</b></h1>
                             <ul>
-                            <li>Size:<span>{ accommodation.size}</span></li>
-                            <li>Price:<span>${accommodation.price}</span></li>
-                                <li>Bed:<span>1</span></li>
+                            <li>Size:<span> { accommodation.size}</span></li>
+                            <li>Price:<span> ${accommodation.price}</span></li>
+                                <li>Bed:<span> 1</span></li>
                         </ul>
                         <h1 className="py-4"><b>Contact:</b></h1>
                         <div>
                             <p>Location:<span> { accommodation.location}</span></p>
-                            <p>Tel:<span>012 xxx xxx</span></p>
+                            <p>Tel:<span> {accommodation.contact}</span></p>
                         </div>
                         <h1 className="py-4"><b>Notes:</b></h1>
                         <div>
@@ -54,7 +59,8 @@ const AccommodationDetail = () => {
                         </div>
                     </div>
                 </div>
-                </div>}
+            
+        </>}
          {error && <p>{error}</p>}
         </>
     )

@@ -3,30 +3,25 @@ import { useParams } from 'react-router-dom';
 import ScholarDetails from '../components/ScholarshipDetail';
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
+import { fetchScholarships } from '../features/slices/scholarshipsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { LoadingOverlay } from '../components/reusable/Loading';
 const ScholarshipDetail = () => {
     const { id } = useParams(); // Get ID from URL
-    const [scholarship, setScholarship] = useState(null);
+
+	const dispatch = useDispatch();
+	const {scholarships, loading, error} = useSelector((state)=>state.scholarships)
 		console.log(id)
     useEffect(() => {
-        const fetchScholarship = async () => {
-            try {
-                const response = await fetch(`http://localhost:4000/api/scholarships/${id}`); 
-                const data = await response.json();
-                setScholarship(data.data);
-								console.log(data.data)
-            } catch (error) {
-                console.error('Error fetching scholarship:', error);
-            }
-        };
-
-        fetchScholarship();
+		dispatch(fetchScholarships(id))
     }, [id]);
 
-    if (!scholarship) return <div>Loading...</div>; // Show loading state until data is fetched
+	
 
     return (<>
-		<Navbar/>
-			{scholarship.map(
+		<Navbar />
+		{loading && <LoadingOverlay />}
+			{scholarships.map(
 				(scholarship)=>(
 					<ScholarDetails 
 					key={scholarship.id}
@@ -40,7 +35,8 @@ const ScholarshipDetail = () => {
 					telegramLink={scholarship.telegramLink} 
 			/>
 				)
-			)}
+		)}
+		{error && <p>{error}</p>}
 			<Footer/>
 			</>
       

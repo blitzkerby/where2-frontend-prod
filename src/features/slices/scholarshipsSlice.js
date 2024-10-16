@@ -5,9 +5,9 @@ import config from "../../config"
 
 export const fetchScholarships = createAsyncThunk(
     'scholarships/fetchScholarships',
-    async () => {
-        const response = await axios.get(config.scholarships.getAllScholarships);
-        return response.data.scholarships;
+    async (id) => {
+        const response = await axios.get(config.scholarships.getAllScholarships(id));
+        return response.data.scholarship;
     }
 );
 
@@ -27,7 +27,7 @@ const scholarshipsSlice = createSlice({
             })
             .addCase(fetchScholarships.fulfilled, (state, action) => {
                 state.loading = false;
-                state.scholarships = action.payload;
+                state.scholarships = [action.payload];
             })
             .addCase(fetchScholarships.rejected, (state, action) => {
                 state.loading = false;

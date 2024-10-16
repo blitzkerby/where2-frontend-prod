@@ -35,15 +35,16 @@ const FavoriteCard = ({ title, description, facebookLink, instagramLink, twitter
                         <h1 className={`${cardTitle}`}>{title}</h1>
                         <div className='flex justify-between w-full'>
                             <div className="flex items-center space-x-8">
-                                {workDetails.map(({ icon , linkKey }, index) => (
+                                {type === "job"?workDetails.map(({ icon , linkKey }, index) => (
                                     <div key={index} className="flex items-center text-[12px]">
                                         <img src={icon} alt={icon}/>
                                         {index !== 2 ? <p className='border-r-gray-200 border-r-2 p-1 text-nowrap'>{linkKey}</p> : <p className='text-nowrap'>{linkKey}</p>}
                                     </div>
-                                ))}
+                                )) :null}
                             </div>
-                            <div>
-                            {type === "job"?  <div className="py-2">
+                        </div>
+            
+            {type === "job"?  <div className="py-2">
               <p className="py-1">Position :<span> {position}</span></p>
               <p>Salary :<span> ${salary}</span></p>
             </div> : null}
@@ -72,8 +73,8 @@ const FavoriteCard = ({ title, description, facebookLink, instagramLink, twitter
                 Location:<span> {address}</span>
               </p>
             </div> : null}
-                            </div>
-                        </div>
+                            
+                        
                         <div className="text-clip overflow-hidden w-full h-[200px]">
                             <p className={`${cardDescription} mt-3 text-justify`}>{description}</p>
                         </div>
@@ -111,6 +112,7 @@ const FavoriteCard = ({ title, description, facebookLink, instagramLink, twitter
                 </div>
             </div>
         </div>
+        
     );
 };
 

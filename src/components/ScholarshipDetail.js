@@ -3,7 +3,7 @@ import { Facebook, Instagram, Twitter} from 'lucide-react';
 import { NODE_ENV } from '../Constants';
 import { Link } from 'react-router-dom';
 
-function ScholarDetails({ image, description, title ,websiteLink,facebookLink, instagramLink, twitterLink, telegramLink}) {
+function ScholarDetails({ image, description, title,facebookLink, instagramLink, twitterLink}) {
 	const socialMediaIcons = [
 		{ icon: Facebook, linkKey: facebookLink },
 		{ icon: Twitter, linkKey: twitterLink },
@@ -54,71 +54,7 @@ function ScholarDetails({ image, description, title ,websiteLink,facebookLink, i
     <p className="mt-5">
       Requirement
     </p>
-    {websiteLink && (
-      <div className="mt-2">
-        <a
-          className="text-sm block text-ellipsis overflow-hidden whitespace-nowrap"
-          href={websiteLink}
-          style={{ color: 'rgba(0,0,0,0.45)' }}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Website
-        </a>
-      </div>
-    )}
-    {instagramLink && (
-      <div className="mt-2">
-        <a
-          className="text-sm block text-ellipsis overflow-hidden whitespace-nowrap"
-          href={instagramLink}
-          style={{ color: 'rgba(0,0,0,0.45)' }}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Instagram
-        </a>
-      </div>
-    )}
-    {telegramLink && (
-      <div className="mt-2">
-        <a
-          className="text-sm block text-ellipsis overflow-hidden whitespace-nowrap"
-          href={telegramLink}
-          style={{ color: 'rgba(0,0,0,0.45)' }}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Telegram
-        </a>
-      </div>
-    )}
-    {twitterLink && (
-      <div className="mt-2">
-        <a
-          className="text-sm block text-ellipsis overflow-hidden whitespace-nowrap"
-          href={twitterLink}
-          style={{ color: 'rgba(0,0,0,0.45)' }}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Twitter
-        </a>
-      </div>
-    )}
-    {facebookLink && (
-      <div className="mt-2">
-        <a
-          className="text-sm block text-ellipsis overflow-hidden whitespace-nowrap"
-          href={facebookLink}
-          style={{ color: 'rgba(0,0,0,0.45)' }}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Facebook
-        </a>
-      </div>
-    )}
+
   </div>
 </div>
 

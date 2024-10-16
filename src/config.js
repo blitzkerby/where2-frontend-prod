@@ -62,7 +62,7 @@ const config = {
     
   },
   scholarships: {
-    getAllScholarships: `${API_URL}/api/scholarships`,
+    getAllScholarships: (id) => `${API_URL}/api/scholarships/${id}`,
     
   },
   search: {
