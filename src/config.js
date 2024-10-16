@@ -1,5 +1,6 @@
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
 const ENV = process.env.REACT_APP_NODE_ENV || "development";
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID || "clientId";
 
 const config = {
   apiUrl: API_URL,
@@ -27,7 +28,8 @@ const config = {
   },
   profile: {
     getMyProfile: (userId) => `${API_URL}/api/users/profile/${userId}`,
-    getPublicProfile: (userId) => `${API_URL}/api/users/profile/public/${userId}`
+    getPublicProfile: (userId) =>
+      `${API_URL}/api/users/profile/public/${userId}`,
   },
   analytics: {
     getAllUsers: `${API_URL}/api/users/user-list`,
@@ -36,40 +38,59 @@ const config = {
   photo: {
     getS3Url: `${API_URL}/api/user/s3Url`,
     uploadProfilePicture: `${API_URL}/api/user/profile-picture`,
-    fetchProfilePicture: (userId) => `${API_URL}/api/user/${userId}/profile-picture`,
+    fetchProfilePicture: (userId) =>
+      `${API_URL}/api/user/${userId}/profile-picture`,
+    fetchBatchProfilePictures: `${API_URL}/api/user/users/batch-profile-pictures`,
   },
   community: {
     createDiscussion: `${API_URL}/api/discussion`,
     getDiscussions: `${API_URL}/api/discussions`,
-    addComment: (discussionId, commentId) => `${API_URL}/api/discussions/${discussionId}/comment/${commentId}`,
-    getAllComments: (discussionId) => `${API_URL}/api/discussions/${discussionId}/comments`
+    addComment: (discussionId, commentId) =>
+      `${API_URL}/api/discussions/${discussionId}/comment/${commentId}`,
+    getAllComments: (discussionId) =>
+      `${API_URL}/api/discussions/${discussionId}/comments`,
   },
   universities: {
     getAllUniversity : `${API_URL}/api/list/university`,
     getUniversityById : `${API_URL}/api/detail/university`,
   },
-   // Jobs
   job: {
-    getAllJob: `${ API_URL }/api/jobs`,
-     getAssociatedCompany: (jobId) => `${ API_URL }/api/jobs/associatedCompany/${ jobId }`,
+    getAllJob: `${API_URL}/api/jobs`,
+    getAssociatedCompany: (jobId) =>
+      `${API_URL}/api/jobs/associatedCompany/${jobId}`,
   },
-   // Favorites
   favorite: {
-    addFavorite: `${ API_URL }/api/favorites/addFavorite`,
-    getFavorite: (userId, category) => `${ API_URL }/api/favorites/${ userId }/${ category }`,
-    removedFavorite: (cardId,category)=> `${ API_URL }/api/favorites/${ cardId }/${ category }`
-    
+    addFavorite: `${API_URL}/api/favorites/addFavorite`,
+    getFavorite: (userId, category) =>
+      `${API_URL}/api/favorites/${userId}/${category}`,
+    removedFavorite: (cardId, category) =>
+      `${API_URL}/api/favorites/${cardId}/${category}`,
   },
   scholarships: {
-    getAllScholarships: `${API_URL}/api/scholarships`,
-    
+    getAllScholarships: (id) => `${API_URL}/api/scholarships/${id}`,
   },
   search: {
-    searchAny: `${ API_URL }/api/`
+    searchAny: `${API_URL}/api/`,
   },
   list: {
-    getAllList: (model)=> `${API_URL}/api/list/${model}`
-  }
-
+    getAllList: (model) => `${API_URL}/api/list/${model}`,
+  },
+  accommodation: {
+    getOneAccommodation: (id) => `${API_URL}/api/accommodation/${id}`,
+  },
+  chatbot: {
+    sendMessage: `${API_URL}/api/ai/summary`,
+  },
+  payment: {
+    makePayment: `${API_URL}/api/bakong-payment`,
+    createPaypalOrder: `${API_URL}/api/create-paypal-order`,
+    capturePaypalOrder: `${API_URL}/api/capture-paypal-order`,
+    createSubscription: `${API_URL}/api/create-subscription`,
+  },
+  paypal: {
+    clientID: CLIENT_ID,
+  },
 };
+
 export default config;
+

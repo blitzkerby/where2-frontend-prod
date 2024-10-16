@@ -4,11 +4,11 @@ import Navbar from "./../components/reusable/Navbar";
 
 const ResetPasswordPage = () => {
     return (
-        <div>
+        <>
             <Navbar/>
             <ResetPasswordComponent />
             <Footer/>
-        </div>
+        </>
     )
 }
 

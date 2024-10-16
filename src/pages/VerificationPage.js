@@ -4,11 +4,11 @@ import Navbar from "./../components/reusable/Navbar";
 
 const VerificationPage = () => {
     return (
-        <div>
+        <>
             <Navbar/>
             <VerificationComponent />
             <Footer />
-        </div>
+        </>
     );
 };
 

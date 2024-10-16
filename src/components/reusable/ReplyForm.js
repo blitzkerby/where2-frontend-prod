@@ -8,13 +8,10 @@ import useAuth from '../../hooks/useAuth';
 import config from './../../config';
 
 const ReplyForm = ({ discussionId, onReplySubmitted, onCancel }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
   const [content, setContent] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
-  const [isSuccess, setIsSuccess] = useState(false);
-  
+
   const { userId } = useAuth();
 
   const handleSubmit = async (e) => {
@@ -27,8 +24,6 @@ const ReplyForm = ({ discussionId, onReplySubmitted, onCancel }) => {
     const newCommentId = uuidv4();
 
     try {
-      console.log('Comment being sent:', content.trim());
-
       const response = await axios.post(config.community.addComment(discussionId, newCommentId), {
         content: content.trim(),
         userId: userId,
@@ -41,20 +36,18 @@ const ReplyForm = ({ discussionId, onReplySubmitted, onCancel }) => {
           onCancel(); 
         }
       }
-
-      setIsSuccess(true);
     } catch (error) {
-      console.error('Error posting reply:', error);
       setError(error.response?.data?.message || 'Failed to post reply. Please try again.');
-      setIsSuccess(false);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  if (isSuccess) {
-    window.location.reload();
-  }
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      handleSubmit(event);
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="mt-4 space-y-4">
@@ -62,6 +55,7 @@ const ReplyForm = ({ discussionId, onReplySubmitted, onCancel }) => {
         <FormInput
           value={content}
           onChange={(e) => setContent(e.target.value)}
+          onKeyDown={handleKeyDown} // Handle Enter key
           placeholder="Write your reply..."
           className="w-full min-h-[100px] mb-2"
           disabled={isSubmitting}

@@ -23,15 +23,17 @@ const ScholarshipPage = () => {
     useEffect(() => {
         dispatch(fetchAllList({page,limit,model: 'Scholarship'}))
     },[dispatch, page])
+
 	return (
 		<div>
 			<Navbar />
             <ListContainer>
-            {loading && <LoadingOverlay/>}
-            {error && <p>{error}</p>}
-			<ScholarshipList scholarship={data} />
+                {loading && <LoadingOverlay/>}
+                {/* {error && <p>{error}</p>} */}
+
+                <ScholarshipList scholarship={data} />
+			    <Pagination totalPage={totalPage} currentPage={page} route={'scholarships'} />
 			</ListContainer>
-			<Pagination totalPage={totalPage} currentPage={page} route={'scholarships'} />
 			<Footer />
 		</div>
 	)

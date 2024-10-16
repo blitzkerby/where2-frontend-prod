@@ -16,7 +16,7 @@ import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
 import DashboardComponent from "./components/accountUtilities/sidebarComponents/Admin/Dashboard";
 import DiscussionsPage from "./pages/DiscussionPage";
 import HealthPage from "./pages/HealthPage";
-import PublicOnlyROute from "./components/reusable/PublicOnlyRoute";
+import PublicOnlyROute from "./components/routes/PublicOnlyRoute";
 import CreateDiscussionPage from "./pages/CreateDiscussionPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import VisitProfile from "./components/accountUtilities/sidebarComponents/User/VisitProfile";
@@ -25,6 +25,8 @@ import LivelihoodPage from "./pages/LivelihoodPage";
 import JobPage from "./pages/JobPage";
 import JobDetailPage from "./pages/JobDetailPage";
 import StudentLoanPage from "./pages/StudentLoanPage";
+import AccommodationPage from "./pages/AccommodationPage";
+import AccommodationDetailPage from "./pages/AccommodationDetailPage";
 import ErrorPage from "./pages/ErrorPage";
 
 const queryClient = new QueryClient();
@@ -98,7 +100,9 @@ const router = createBrowserRouter([
   { path: "/job-detail/:jobId", element: <JobDetailPage/> },
   { path: "/scholarships", element: <ScholarshipPage /> },
   { path: "/scholarship/:id", element: <ScholarshipDetailPage /> },
-  {path:"/student-loans", element:<StudentLoanPage />}
+  { path: "/student-loans", element: <StudentLoanPage /> },
+  { path: "/accommodations", element: <AccommodationPage /> },
+  {path:"/accommodation-detail/:id",element:<AccommodationDetailPage />},
 
 ]);
 

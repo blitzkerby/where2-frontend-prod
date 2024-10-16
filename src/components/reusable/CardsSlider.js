@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import DefaultCard from './DefaultCard';
+import React, { useState, useEffect, useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import DefaultCard from "./DefaultCard";
+import WrapperComponent from "./WrapperComponent";
 
 const CardSlider = ({ cards, header }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -38,7 +38,6 @@ const CardSlider = ({ cards, header }) => {
     setCurrentIndex((prevIndex) => prevIndex - 1);
   };
 
-
   // Auto slide functionality with setInterval
   useEffect(() => {
     const autoSlide = setInterval(() => {
@@ -66,31 +65,34 @@ const CardSlider = ({ cards, header }) => {
   }, [currentIndex, totalCards, initialIndex]);
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto">
-      <div className="p-5 text-[#367588]">
+    <div className="relative lg:max-h-[25vh] sm:max-h-[4000px] w-full mx-auto my-[16px]">
+      <div className="text-[#367588]">
         <b>{header}</b>
       </div>
-      <div className="overflow-hidden w-full">
+      <div className="overflow-hidden w-full h-full my-[32px]">
         <div
           ref={containerRef}
           className={`flex transition-transform duration-300 ease-in-out ${
-            !isTransitioning && 'transition-none' // Disable transition when resetting
+            !isTransitioning && "transition-none" // Disable transition when resetting
           }`}
           style={{
-            transform: `translateX(-${currentIndex * (isMobile ? 100 : 100 / 3)}%)`,
+            transform: `translateX(-${
+              currentIndex * (isMobile ? 100 : 100 / 3)
+            }%)`,
           }}
         >
+          {/* Render the cloned cards in a loop */}
           {clonedCards.map((card, index) => (
             <div
-            key={index}
-            className={`flex-shrink-0 p-2 ${isMobile ? "w-full" : "w-1/3"}`}
-          >
-            <DefaultCard card={card}/>
+              key={index}
+              className={`flex-shrink-0 p-2 min-h-full ${isMobile ? "w-full" : "w-1/3"}`}
+            >
+              <DefaultCard card={card} />
             </div>
           ))}
         </div>
       </div>
-      <div className="absolute bottom-4 right-4 flex space-x-2">
+      <div className="absolute bottom-[-10px] right-4 flex space-x-2">
         <button
           onClick={prevSlide}
           className="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors"

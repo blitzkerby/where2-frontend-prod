@@ -29,7 +29,7 @@ const UniversityPage = () => {
     }
 
     return (
-        <div>
+        <>
             <Navbar />
             {university && (
                 <DetailLayout
@@ -44,7 +44,7 @@ const UniversityPage = () => {
                 />
             )}
             <Footer />
-        </div>
+        </>
     );
 };
 

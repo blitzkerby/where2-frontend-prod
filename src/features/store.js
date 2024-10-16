@@ -4,7 +4,8 @@ import jobReducer from "./slices/jobSlice";
 import pagReducer from './slices/paginationSlice';
 import favoriteReducer from './slices/favoriteSlice';
 import universityReducer from './slices/universitySlice';
-import scholarReducer from './slices/scholarshipsSlice'
+import scholarReducer from './slices/scholarshipsSlice';
+import accommodationReducer from './slices/accommodationSlice'
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     pagination: pagReducer,
     favorites: favoriteReducer,
     scholarships: scholarReducer,
+    accommodations: accommodationReducer
   },
 
 },

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { LoadingOverlay } from '../../../reusable/Loading';
-import useAuth from '../../../../hooks/useAuth';
-import FetchProfile from '../../../reusable/functions/ViewProfile';
-import PublicProfile from '../../../reusable/PublicProfile';
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { LoadingOverlay } from "../../../reusable/Loading";
+import useAuth from "../../../../hooks/useAuth";
+import FetchProfile from "../../../reusable/functions/ViewProfile";
+import PublicProfile from "../../../reusable/PublicProfile";
 
 const VisitProfile = () => {
   const [userData, setUserData] = useState(null);
@@ -15,25 +15,29 @@ const VisitProfile = () => {
   // Use paramUserId if it's present, otherwise fall back to currentUserId
   const targetUserId = paramUserId || currentUserId;
 
-  console.log('Fetching profile for ID:', targetUserId);
+  console.log("Fetching profile for ID:", targetUserId);
 
   useEffect(() => {
     const loadProfile = async () => {
       if (!isLoggedIn) {
-        setError('User is not logged in');
+        setError("User is not logged in");
         return;
       }
 
-      // Permission check: If paramUserId exists and it's not the current user's ID, and the user isn't an developer
-      if (paramUserId && paramUserId !== currentUserId && role !== 'developer') {
-        setError('You do not have permission to view this profile');
+      // Permission check: If paramUserId exists and it's not the current user's ID, and the user isn't a developer
+      if (
+        paramUserId &&
+        paramUserId !== currentUserId &&
+        role !== "developer"
+      ) {
+        setError("You do not have permission to view this profile");
         return;
       }
 
       try {
-        const authData = JSON.parse(localStorage.getItem('authData'));
+        const authData = JSON.parse(localStorage.getItem("authData"));
         if (!authData || !authData.token) {
-          throw new Error('No valid authentication token found');
+          throw new Error("No valid authentication token found");
         }
 
         // Fetch profile using targetUserId (which will be paramUserId or currentUserId)
@@ -49,12 +53,13 @@ const VisitProfile = () => {
     }
   }, [isLoggedIn, currentUserId, paramUserId, role, loading, targetUserId]);
 
-  // Redirect to login if there's an error or user is not logged in
-  if (error || (!loading && !isLoggedIn)) {
-    console.error('Redirecting due to error or not logged in:', error);
-    navigate("/login");
-    return null;
-  }
+  useEffect(() => {
+    // Redirect to login if there's an error or user is not logged in
+    if (error || (!loading && !isLoggedIn)) {
+      console.error("Redirecting due to error or not logged in:", error);
+      navigate("/login");
+    }
+  }, [error, isLoggedIn, loading, navigate]);
 
   // Show loading spinner if still loading or user data is not yet available
   if (loading || !userData) {

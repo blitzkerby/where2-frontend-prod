@@ -1,7 +1,7 @@
-import { useEffect , useState } from "react";
+import { useEffect} from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import jobSlice, { fetchCompany } from "../../features/slices/jobSlice";
+import { fetchCompany } from "../../features/slices/jobSlice";
 
 import { useParams } from "react-router-dom";
 
@@ -10,7 +10,7 @@ import Website from "./../../assets/svg/website.svg";
 import Telephone from "./../../assets/svg/telephone.svg";
 import Location from "./../../assets/svg/location.svg";
 
-import { Cpu } from "lucide-react";
+
 import IconText from "../reusable/IconText";
 
 import DetailText from "../reusable/DetailText";

@@ -24,7 +24,7 @@ const JobPage = () => {
         dispatch(fetchAllList({page,limit,model: 'Job'}))
     },[dispatch, page])
     return (
-        <div>
+        <>
             <Navbar />
             <ListContainer>
             {loading && <LoadingOverlay/>}
@@ -33,7 +33,7 @@ const JobPage = () => {
             </ListContainer>
             <Pagination totalPage={totalPage} currentPage={page} route={'jobs'}/>
             <Footer />
-        </div>
+        </>
     )
 };
 

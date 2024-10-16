@@ -79,7 +79,7 @@ const ListingComponent = ({ title, data, columns, totalItems, additionalStats })
   }, [localData, columns, searchTerm]);
 
   return (
-    <section className="lg:w-[90%] sm:w-[100%] sm:mr-[32px] lg:ml-[64px] bg-white rounded-lg shadow-lg h-full">
+    <section className="w-full bg-white rounded-lg shadow-lg h-full">
       <div className="flex justify-between items-center py-5 w-[80%] mx-auto">
         <h1 className="text-3xl text-blue-600 font-bold">{title}</h1>
         <div className="flex gap-2 sm:hidden">

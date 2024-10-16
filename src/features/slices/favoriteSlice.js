@@ -1,10 +1,9 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import config from "../../config";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
 const user = JSON.parse(localStorage.getItem('authData'));
+
 export const addFavorite = async (cardId, category) => {
         const addFavorite =  await axios.post(
             config.favorite.addFavorite,
@@ -14,7 +13,7 @@ export const addFavorite = async (cardId, category) => {
                 categories: category
             }
         );
-    return cardId
+    return addFavorite
 };
 
 export const getFavorite = createAsyncThunk("getFavorite", async ({ category, page, limit }) => {
@@ -33,7 +32,7 @@ const FavoriteSlices = createSlice({
     reducers: {
         setIsClicked(state, action) {
             state.isClicked[`${ action.payload.id }`] = !state.isClicked[`${ action.payload.id }`];
-            console.log("IsClicked", state.isClicked)
+            
         },
         removedIsClicked(state, action) {
             state.isClicked = {};
@@ -45,12 +44,11 @@ const FavoriteSlices = createSlice({
                 state.isLoading = true;
                 state.error = null;
                 state.favorites = [];
-                console.log("Pending is called")
+                
             })
             .addCase(getFavorite.fulfilled, (state, action) => {
                 state.favorites = action.payload.data.data.allFavorite;
                 state.isLoading = false;
-                // state.isClicked = {};
                 state.favorites.map(fav => {
                     if (fav.categories === 'university') {
                         state.isLoading = {
@@ -86,7 +84,7 @@ const FavoriteSlices = createSlice({
                             state.isClicked[`${ fav.scholarship.id }`] = true
                         });
                       
-                    } else if (fav.categories === 'accomodation') {
+                    } else if (fav.categories === 'accommodation') {
                         state.isLoading = {
                             'job': true, 'university': true, 'loan': true, 'scholarship': true, 'accommodation': false
                         };

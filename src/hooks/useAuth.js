@@ -1,55 +1,65 @@
-import { useState, useEffect, useCallback } from 'react';
-import config from '../config';
+import { useState, useEffect, useCallback, useMemo } from "react";
+import config from "./../config";
 
+// INITIAL STATES OF USEAUTH
 const useAuth = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState("");
-  const [entity, setEntity] = useState("");
-  const [role, setRole] = useState("");
-  const [showDashboard, setShowDashboard] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [userId, setUserId] = useState(null);
+  const [authState, setAuthState] = useState({
+    isLoggedIn: false,
+    username: "",
+    entity: "",
+    role: "",
+    showDashboard: false,
+    loading: true,
+    userId: null,
+    token: null,
+  });
 
   const fetchUserDataAndRole = useCallback(async () => {
+    setAuthState(prev => ({ ...prev, loading: true }));
     try {
-      const authData = JSON.parse(localStorage.getItem('authData'));
-      if (authData) {
-        const { userName, entity, token, id } = authData;
-        
-        setUsername(userName || "");
-        setEntity(entity || "");
-        setIsLoggedIn(true);
-        setUserId(id || null);
-
-        if (token) {
-          const response = await fetch(config.auth.getUserRole, {
-            headers: { Authorization: `Bearer ${token}` }
-          });
-
-          if (response.ok) {
-            const data = await response.json();
-            setRole(data.role);
-            setShowDashboard(data.role === 'admin' || data.role === 'developer');
-          } else {
-            setRole("");
-            setShowDashboard(false);
-          }
-        }
-      } else {
-        setUsername("");
-        setEntity("");
-        setRole("");
-        setIsLoggedIn(false);
-        setShowDashboard(false);
-        setUserId(null);
+      // FETCHING DATA STORED FROM LOCAL STORAGE
+      const authData = JSON.parse(localStorage.getItem("authData"));
+      if (!authData || !authData.token) {
+        throw new Error("No valid auth data found");
       }
+
+      const { userName, entity, token, id, role } = authData;
+
+      let userRole = role;
+      // IF THERE IS NO DATA IN LOCAL STORAGE, FETCH DATA FROM THE SERVER
+      if (!userRole) {
+        const response = await fetch(config.auth.getUserRole, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        // THROW ERROR TO THE CONSOLE WHEN THERE IS ERROR FOUND
+        if (!response.ok) {
+          throw new Error("Failed to fetch user role");
+        }
+
+        const data = await response.json();
+        userRole = data.role;
+
+        localStorage.setItem(
+          "authData",
+          JSON.stringify({ ...authData, role: userRole })
+        );
+      }
+
+      setAuthState({
+        isLoggedIn: true,
+        username: userName || "",
+        entity: entity || "",
+        role: userRole,
+        // DASHBOARD IS SHOWN ONLY TO THE ADMIN AND DEVELOPER; IF THE ROLE IS NOT IN THE TWO, ITS HIDDEN
+        showDashboard: userRole === "admin" || userRole === "developer",
+        loading: false,
+        userId: id || null,
+        token,
+      });
     } catch (error) {
-      console.error('Error fetching user data and role:', error);
-      setIsLoggedIn(false);
-      setShowDashboard(false);
-      setUserId(null);
-    } finally {
-      setLoading(false);
+      console.error("Error fetching user data and role:", error);
+      clearAuthData();
     }
   }, []);
 
@@ -57,8 +67,56 @@ const useAuth = () => {
     fetchUserDataAndRole();
   }, [fetchUserDataAndRole]);
 
-  return { isLoggedIn, username, entity, role, loading, showDashboard, userId, refreshAuth: fetchUserDataAndRole };
+  // CLEARING AUTH DATA
+  const clearAuthData = useCallback(() => {
+    localStorage.removeItem("authData");
+    setAuthState({
+      isLoggedIn: false,
+      username: "",
+      entity: "",
+      role: "",
+      showDashboard: false,
+      loading: false,
+      userId: null,
+      token: null,
+    });
+  }, []);
+
+  const login = useCallback(async (loginData) => {
+    try {
+      const response = await fetch(config.auth.login, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Login failed");
+      }
+
+      const authData = await response.json();
+      localStorage.setItem("authData", JSON.stringify(authData));
+      await fetchUserDataAndRole();
+    } catch (error) {
+      console.error("Login error:", error);
+      clearAuthData();
+      throw error; // Re-throw the error for the component to handle
+    }
+  }, [fetchUserDataAndRole, clearAuthData]);
+
+  const logout = useCallback(() => {
+    clearAuthData();
+  }, [clearAuthData]);
+
+  const authActions = useMemo(() => ({
+    login,
+    logout,
+    refreshAuth: fetchUserDataAndRole,
+  }), [login, logout, fetchUserDataAndRole]);
+
+  return { ...authState, ...authActions };
 };
 
 export default useAuth;
-

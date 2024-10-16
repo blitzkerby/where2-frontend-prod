@@ -16,11 +16,15 @@ import { setTotalPage } from './paginationSlice';
 export const fetchUniversities = createAsyncThunk(
     'universities/fetchUniversities',
     async ({ page }, { dispatch }) => {
-        const response = await axios.get(`${config.universities.getAllUniversity}?page=${page}`);
-        
-        // Dispatch actions to update pagination state
-        dispatch(setTotalPage(response.data.pagination.totalPages || 1));       
-        return response.data.list;
+        try {
+            const response = await axios.get(`${config.universities.getAllUniversity}?page=${page}`);
+            
+            // Dispatch actions to update pagination state
+            dispatch(setTotalPage(response.data.pagination.totalPages || 1));       
+            return response.data.list;
+        } catch (error) {
+            return []
+        }
     }
 );
 
@@ -48,7 +52,7 @@ export const searchUniversities = createAsyncThunk(
     'universities/searchUniversities',
     async ({ query, page }, { dispatch }) => {
         const response = await axios.get(`${config.universities.getAllUniversity}?q=${encodeURIComponent(query)}&page=${page}`);
-        dispatch(setTotalPage(response.data.pagination.totalPages || 1));       
+        dispatch(setTotalPage(response.data.pagination.totalPages || 1));      
         return response.data.list;
     }
 )
@@ -122,6 +126,7 @@ const universitySlice = createSlice({
             .addCase(searchUniversities.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
+                state.universities = []
             })
     },
 });

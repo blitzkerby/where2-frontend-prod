@@ -1,33 +1,34 @@
 import FavoriteCard from "./FavoriteCard";
+
 const FavoriteList = ({ favorites, category }) => {
     let renderFavorite;
     if (category === "job") {
-        console.log("Favorite before map", favorites)
         favorites = favorites.map(fav => fav.job)
-        // console.log('new favorite job', favorites);
-        // console.log('new isLoading job',isLoading);
+
         renderFavorite = favorites.map((job) => (
             <FavoriteCard
                 key={job.id}
-                // title={job.title}
+                title={job.company_name}
+                position={job.position}
+                salary={job.salary}
                 description={job.job_desc}
-                //   facebookLink={job.facebookLink}
-                //   instagramLink={job.instagramLink}
-                //   twitterLink={job.twitterLink}
-                //   youtubeLink={job.youtubeLink}
-                //   websiteLink={job.websiteLink}
+                // facebookLink={job.updatedAt}
+                // instagramLink={job.updatedAt}
+                // twitterLink={job.createdAt}
+                // youtubeLink={job.createdAt}
+                // websiteLink={job.createdAt}
                 location={job.location}
-                deadLine={job.deadLine}
-                timeOut={job.salary}
+                deadLine={job.deadline}
+                timeOut={job.work_hour}
+                type={"job"}
                 route={`/job-detail/${job.id}`}
             />
         ));
             
     } else if (category === "university") {
-        console.log("Favorite before map university", favorites)
+
         favorites = favorites.map(fav => fav.university)
-        // console.log('new favorite university', favorites);
-        // console.log('new isLoading university',isLoading);
+
         renderFavorite = favorites.map((university) => (
             <FavoriteCard
                 key={university.id}
@@ -44,20 +45,21 @@ const FavoriteList = ({ favorites, category }) => {
             // timeOut={university.salary}
             />
         ));
-        //  dispatch(setIsLoading());
+
     } else if (category === "loan") {
-        // console.log("Favorite before map university",favorites)
+
         favorites = favorites.map(fav => fav.loan)
-        // console.log('new favorite university', favorites);
-        // console.log('new isLoading university',isLoading);
+
         renderFavorite = favorites.map((loan) => (
             <FavoriteCard
                 key={loan.loan_id}
                 id={loan.loan_id}
-                // image={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB6qQYTiaG58zHg3LwPcbPaqOrkFmAschW8A&s'}
-                // imageAlt={loan.image_alt}
                 title={loan.bank_name}
                 description={loan.loan_type}
+                interest={loan.interest_rate}
+                loan_size={loan.loan_limit}
+                currency={"KHR and USD"}
+                term={loan.loan_term}
                 // facebookLink={loan.updatedAt}
                 // instagramLink={loan.updatedAt}
                 // twitterLink={loan.createdAt}
@@ -66,21 +68,18 @@ const FavoriteList = ({ favorites, category }) => {
                 location={loan.address}
                 deadLine={loan.deadline}
                 // timeOut={loan.salary}
-                // type={"loan"}
-                route={`/loan-detail`}
-            // isHeartClicked={isClicked[loan.loan_id]}
+                type={"loan"}
+                route={loan.link}
+
             />
         ))
     } else if (category === "scholarship") {
-        // console.log("Favorite before map university",favorites)
+
         favorites = favorites.map(fav => fav.scholarship)
-        // console.log('new favorite university', favorites);
-        // console.log('new isLoading university',isLoading);
+
         renderFavorite = favorites.map((scholarship) => (
             <FavoriteCard
             key={scholarship.id}
-            // image={scholarship.image_url}
-            // imageAlt={scholarship.image_alt}
             title={scholarship.name}
             description={scholarship.description}
             location={scholarship.location}
@@ -88,26 +87,30 @@ const FavoriteList = ({ favorites, category }) => {
             id={scholarship.id}
             type={'scholarship'}
             route={`/scholarship/${ scholarship.id }`}
-            // isHeartClicked={isClicked[scholarship.id]}
+
             />
         ))
     } else {
-        favorites = favorites.map(fav => fav.accomodation)
-        // console.log('new favorite university', favorites);
-        // console.log('new isLoading university',isLoading);
-        renderFavorite = favorites.map((accomodation) => (
+        favorites = favorites.map(fav => fav.accommodation)
+
+        renderFavorite = favorites.map((accommodation) => (
             <FavoriteCard
-            key={accomodation.id}
-            // image={accomodation.image_url}
-            // imageAlt={accomodation.image_alt}
-            title={accomodation.name}
-            description={accomodation.description}
-            location={accomodation.location}
-            deadLine={accomodation.deadLine}
-            id={accomodation.id}
-            type={'accomodation'}
-            route={`/accomodation/${ accomodation.id }`}
-            // isHeartClicked={isClicked[scholarship.id]}
+            key={accommodation.id}
+            id={accommodation.id}
+            type={"accommodation"}
+            title={accommodation.name}
+            size={accommodation.size}
+            price = {accommodation.price}
+            address = {accommodation.location}
+            description={accommodation.description}
+            // facebookLink={accommodation.updatedAt}
+            // instagramLink={accommodation.updatedAt}
+            // twitterLink={accommodation.createdAt}
+            // youtubeLink={accommodation.createdAt}
+            // websiteLink={accommodation.createdAt}
+            // deadLine={accommodation.deadline}
+            // timeOut={accommodation.salary}
+            route={`/accommodation-detail/${ accommodation.id }`}
             />
         ))
     }

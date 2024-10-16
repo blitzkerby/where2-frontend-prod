@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import useOnScreen from "../../hooks/useOnScreen";
 
+// USED FOR ADDITING ANIMATIONS (WRAPPING AROUND A COMPONENT)
 const WrapperComponent = ({ children }) => {
     const ref = useRef();
     const isVisible = useOnScreen(ref, '-50px');

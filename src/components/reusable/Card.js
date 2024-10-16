@@ -1,14 +1,23 @@
+// dependencies
 import React from 'react';
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
+
+//assets
 import Map from '../../assets/svg/map.svg';
 import MiniMap from '../../assets/svg/miniMap.svg';
 import BookMark from '../../assets/svg/bookmark.svg';
 import Calender from '../../assets/svg/calender.svg';
 import MiniClock from '../../assets/svg/miniClock.svg';
 import { Facebook, Instagram, Twitter, Youtube, Chrome } from 'lucide-react';
+
+//components
 import Button from './ButtonComponent';
+
+//slice
 import { addFavorite } from '../../features/slices/favoriteSlice';
-import { useDispatch } from 'react-redux'; 
+
+// import { addFavorite,removeFavorite,setIsClicked } from "../../features/slices/favoriteSlice";
 
 const user = JSON.parse(localStorage.getItem('authData'));
 
@@ -115,6 +124,17 @@ const Card = ({
               </p>
               <p>
                 Interest Rate:<span> {interest}</span>
+              </p>
+            </div> : null}
+            {type === "accommodation"? <div className="py-2">
+              <p>
+                Size :<span> {size}</span>
+              </p>
+              <p>
+                Price:<span> {price}</span>
+              </p>
+              <p>
+                Location:<span> {address}</span>
               </p>
             </div> : null}
         </div>
