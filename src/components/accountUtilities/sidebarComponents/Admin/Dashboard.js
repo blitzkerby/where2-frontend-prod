@@ -14,6 +14,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import useAuth from "../../../../hooks/useAuth";
 
 const generateDummyData = (type, month, year) => {
   const getDaysInMonth = (month, year) => new Date(year, month, 0).getDate();
@@ -149,6 +150,7 @@ const PostViewsDashboard = () => {
   const [data, setData] = useState([]);
   const [topPosts, setTopPosts] = useState([]);
   const [deviceDistribution, setDeviceDistribution] = useState([]);
+  const { entity } = useAuth();
 
   useEffect(() => {
     setData(generateDummyData(timeFrame, selectedMonth + 1, selectedYear));
@@ -192,7 +194,9 @@ const PostViewsDashboard = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6 text-right pb-[10.5px] tracking-tight">Post Views Dashboard</h1>
+      <h1 className="text-3xl font-bold mb-6 text-right pb-[10.5px] tracking-tight">
+        Welcome to Dashboard, {entity}
+      </h1>
 
       <div className="mb-6 flex flex-wrap items-center">
         {/* ... (keep the existing time frame and date selection buttons/dropdowns) */}
@@ -204,63 +208,69 @@ const PostViewsDashboard = () => {
         <div>
           <h2 className="text-xl font-semibold mb-4">Views Over Time</h2>
           <div className="max-w-4xl mx-auto p-4">
-  <h1 className="text-2xl font-bold mb-4">Post Views Dashboard</h1>
-  <div className="mb-4 flex flex-wrap items-center">
-    <button
-      onClick={() => handleTimeFrameChange("weekly")}
-      className={`mr-2 mb-2 px-4 py-2 ${
-        timeFrame === "weekly" ? "bg-blue-500 text-white" : "bg-gray-200"
-      } rounded`}
-    >
-      Weekly
-    </button>
-    <button
-      onClick={() => handleTimeFrameChange("monthly")}
-      className={`mr-2 mb-2 px-4 py-2 ${
-        timeFrame === "monthly" ? "bg-blue-500 text-white" : "bg-gray-200"
-      } rounded`}
-    >
-      Monthly
-    </button>
-    <button
-      onClick={() => handleTimeFrameChange("yearly")}
-      className={`mr-2 mb-2 px-4 py-2 ${
-        timeFrame === "yearly" ? "bg-blue-500 text-white" : "bg-gray-200"
-      } rounded`}
-    >
-      Yearly
-    </button>
+            <h1 className="text-2xl font-bold mb-4">Post View Dashboard</h1>
+            <div className="mb-4 flex flex-wrap items-center">
+              <button
+                onClick={() => handleTimeFrameChange("weekly")}
+                className={`mr-2 mb-2 px-4 py-2 ${
+                  timeFrame === "weekly"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200"
+                } rounded`}
+              >
+                Weekly
+              </button>
+              <button
+                onClick={() => handleTimeFrameChange("monthly")}
+                className={`mr-2 mb-2 px-4 py-2 ${
+                  timeFrame === "monthly"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200"
+                } rounded`}
+              >
+                Monthly
+              </button>
+              <button
+                onClick={() => handleTimeFrameChange("yearly")}
+                className={`mr-2 mb-2 px-4 py-2 ${
+                  timeFrame === "yearly"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200"
+                } rounded`}
+              >
+                Yearly
+              </button>
 
-    {timeFrame !== "weekly" && (
-      <select
-        value={selectedYear}
-        onChange={(e) => setSelectedYear(Number(e.target.value))}
-        className="mr-2 mb-2 px-4 py-2 bg-white border border-gray-300 rounded"
-      >
-        {years.map((year) => (
-          <option key={year} value={year}>
-            {year}
-          </option>
-        ))}
-      </select>
-    )}
+              {timeFrame !== "weekly" && (
+                <select
+                  value={selectedYear}
+                  onChange={(e) => setSelectedYear(Number(e.target.value))}
+                  className="mr-2 mb-2 px-4 py-2 bg-white border border-gray-300 rounded"
+                >
+                  {years.map((year) => (
+                    <option key={year} value={year}>
+                      {year}
+                    </option>
+                  ))}
+                </select>
+              )}
 
-    {timeFrame === "monthly" && (
-      <select
-        value={selectedMonth}
-        onChange={(e) => setSelectedMonth(Number(e.target.value))}
-        className="mb-2 px-4 py-2 bg-white border border-gray-300 rounded"
-      >
-        {months.map((month, index) => (
-          <option key={month} value={index}>
-            {month}
-          </option>
-        ))}
-      </select>
-    )}
-  </div>
-  <ViewsChart data={data} timeFrame={timeFrame} />
-</div>
+              {timeFrame === "monthly" && (
+                <select
+                  value={selectedMonth}
+                  onChange={(e) => setSelectedMonth(Number(e.target.value))}
+                  className="mb-2 px-4 py-2 bg-white border border-gray-300 rounded"
+                >
+                  {months.map((month, index) => (
+                    <option key={month} value={index}>
+                      {month}
+                    </option>
+                  ))}
+                </select>
+              )}
+            </div>
+            <ViewsChart data={data} timeFrame={timeFrame} />
+          </div>
         </div>
         <div>
           <h2 className="text-xl font-semibold mb-4">Top Customers</h2>
@@ -282,11 +292,8 @@ const PostViewsDashboard = () => {
           Views in the last hour: <span className="font-bold">1,892</span>
         </p>
       </div>
-
-
     </div>
   );
 };
 
 export default PostViewsDashboard;
-

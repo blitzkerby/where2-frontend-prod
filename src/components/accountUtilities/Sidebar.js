@@ -12,7 +12,6 @@ import {
 import { X, User, Heart, ChevronDown, ChevronRight, BookKey, Users, School, House, Briefcase, BadgeDollarSignIcon, ChartNoAxesColumnIncreasingIcon,GraduationCap } from "lucide-react";
 
 import { SidebarContentContext } from "../reusable/Profile";
-import { useNavigate } from "react-router-dom";
 
 
 const MenuItem = ({ item, depth = 0, onItemClick, isSelected }) => {
@@ -38,7 +37,7 @@ const MenuItem = ({ item, depth = 0, onItemClick, isSelected }) => {
   return (
     <>
       <div
-        className={`flex items-center w-full p-3 rounded-lg text-start leading-tight transition-all duration-300 ease-in-out transform hover:bg-gray-100 cursor-pointer ${
+        className={`flex items-center w-full h-full p-3 rounded-lg text-start leading-tight transition-all duration-300 ease-in-out transform hover:bg-gray-100 cursor-pointer ${
           depth > 0 ? 'pl-' + (depth * 4 + 3) : ''
         } ${isSelected ? 'bg-gray-200' : ''}`}
         onClick={(e) => {
@@ -128,14 +127,14 @@ const Sidebar = ({ isOpen, onClose, userRole }) => {
         ]
       },
       { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5" /> },
-      { label: 'Log Out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut") },
+      { label: 'Log out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut") },
     ],
     admin: [
       { label: 'Content', icon: <DocumentDuplicateIcon className="h-5 w-5" />, badge: '14', onClick: () => handleItemClick("AdminContent", "adminContent") },
       { label: 'Profile', icon: <UserCircleIcon className="h-5 w-5" /> , onClick: () => handleItemClick("account", "account") },
       { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5"/> , onClick: () => handleItemClick("setting", "setting")  },
-      { label: 'Log Out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut")  },
       { label: 'Dashboard', icon: <ChartNoAxesColumnIncreasingIcon className="h-5 w-5" /> , onClick: () => handleItemClick("adminDashboard", "adminDashboard") },
+      { label: 'Log out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut")  },
     ],
     developer: [
       { label: 'Account', icon: <User className="w-5 h-5" />, onClick: () => handleItemClick("account", "account") },
@@ -143,15 +142,15 @@ const Sidebar = ({ isOpen, onClose, userRole }) => {
       { label: 'School', icon: <BookKey className="w-5 h-5" />, onClick: () => handleItemClick("school", "schoolList") },
       { label: 'Accommodation', icon: <House />, onClick: () => handleItemClick("accommodation", "accommodationList") },
       { label: 'Part time job', icon: <Briefcase />, onClick: () => handleItemClick("job", "jobList") },
-      { label: 'Log out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut")},
       { label: 'Dashboard', icon: <ChartNoAxesColumnIncreasingIcon className="h-5 w-5" /> , onClick: () => handleItemClick("developerDashboard", "adminDashboard") },
+      { label: 'Log out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut")}
     ]
   };
 
   return (
     <div
       ref={sidebarRef}
-      className={`rounded-r-[20px] p-[16px] h-[100vh] left-0 w-64 shadow-md border-[1px] bg-white text-black transform ${
+      className={`rounded-r-[20px] h-full p-[16px] left-0 w-64 shadow-md border-[1px] bg-white text-black transform ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       } transition-transform duration-500 ease-in-out z-10`}
     >

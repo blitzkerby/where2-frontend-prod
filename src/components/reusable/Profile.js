@@ -25,7 +25,7 @@ const contentComponents = {
   accommodationList: AccommodationListing,
   adminDashboard: AdminDashboard,
   adminContent: AdminContent,
-  logOut: Logout
+  logOut: Logout,
 };
 
 const Profile = ({ userData, isPublic }) => {
@@ -58,16 +58,16 @@ const Profile = ({ userData, isPublic }) => {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   const ContentComponent = contentComponents[sidebarContent] || (() => null);
-console.log('Type sidbarcontent', sidebarContent)
+
   return (
-    <div className="flex h-screen overflow-hidden relative">
+    <div className="flex w-full h-screen relative">
       <SidebarContentContext.Provider value={setSidebarContent}>
         {/* Sidebar */}
         <div
-          className={`transition-all duration-300 ease-in-out
+          className={`transition-all duration-300 ease-in-out h-full
           ${isMobile ? "absolute" : "relative"} 
           ${sidebarOpen ? "w-64" : "w-0"} 
-          ${isMobile ? "top-0 left-0 h-full z-30" : "flex-shrink-0 overflow-y-auto"}`}
+          ${isMobile ? "top-0 left-0 h-full z-30" : ""}`}
         >
           <Sidebar
             isOpen={sidebarOpen}
@@ -79,29 +79,32 @@ console.log('Type sidbarcontent', sidebarContent)
         {/* Backdrop for mobile */}
         {isMobile && sidebarOpen && (
           <div
-            className="fixed inset-0 z-20 bg-black bg-opacity-50"
+            className="fixed inset-0 z-20 bg-black bg-opacity-50 h-full"
             onClick={() => setSidebarOpen(false)}
           />
         )}
-      </SidebarContentContext.Provider>
 
-      {/* Main Content */}
-      <div className={`flex-grow overflow-hidden ${isMobile ? "relative z-10" : ""}`}>
-        <div className="h-full overflow-y-auto">
-          <div className="p-4">
-            {isMobile && !sidebarOpen && (
-              <button
-                onClick={toggleSidebar}
-                className="fixed left-4 z-20 p-3 text-black bg-white rounded-full shadow-md"
-              >
-                <ChevronRight size={24} />
-              </button>
-            )}
-            {/* <ContentComponent userInfo={userData} /> */}
-            {sidebarContent != "account" ? <CollectionPanel category={sidebarContent} /> : <ContentComponent userInfo={userData} />}
+        {/* Main Content */}
+        <div className={`flex-grow overflow-hidden ${isMobile ? "relative z-10" : ""}`}>
+          <div className="h-full overflow-y-auto">
+            <div className="p-4">
+              {isMobile && !sidebarOpen && (
+                <button
+                  onClick={toggleSidebar}
+                  className="fixed left-4 z-20 p-3 text-black bg-white rounded-full shadow-md"
+                >
+                  <ChevronRight size={24} />
+                </button>
+              )}
+              {sidebarContent !== "account" ? (
+                <CollectionPanel category={sidebarContent} />
+              ) : (
+                <ContentComponent userInfo={userData} />
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      </SidebarContentContext.Provider>
     </div>
   );
 };

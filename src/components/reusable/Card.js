@@ -13,10 +13,6 @@ import Calender from "../../assets/svg/calender.svg";
 import FilledHeart from "../../assets/svg/filled-heard.svg"
 // constants
 import DefaultCardImage from "../../assets/images/card-image-default.png";
-
-//function
-import { addFavorite,removeFavorite,setIsClicked } from "../../features/slices/favoriteSlice";
-const user = JSON.parse(localStorage.getItem('authData'));
 // components
 import Button from "./ButtonComponent";
 import {
@@ -24,6 +20,10 @@ import {
   cardTitle,
   cardDescription,
 } from "./tailwindcardclass/cardClass";
+
+//function
+import { addFavorite,removeFavorite,setIsClicked } from "../../features/slices/favoriteSlice";
+const user = JSON.parse(localStorage.getItem('authData'));
 
 // styles
 

@@ -4,11 +4,11 @@ import Navbar from "./../components/reusable/Navbar";
 
 const TermsAndConditionsPage = () => {
     return (
-        <div>
+        <>
             <Navbar/>
             <TermsAndConditionsComponent />
             <Footer />
-        </div>
+        </>
     )
 }
 

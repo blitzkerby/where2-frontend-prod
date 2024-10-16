@@ -81,7 +81,7 @@ const UniversityPage = () => {
     };
 
     return (
-        <div>
+        <>
             <Navbar />
             <ListContainer>
                 {loading && <LoadingOverlay />}
@@ -91,7 +91,7 @@ const UniversityPage = () => {
                 <Pagination totalPage={totalPage} currentPage={page} route={'universities'} />
             </ListContainer>
             <Footer />
-        </div>
+        </>
     );
 };
 

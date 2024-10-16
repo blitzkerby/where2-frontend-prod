@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import FormInput from "../reusable/InputField";
-import ButtonComponent from "../reusable/Button";
-import ContainerComponent from "../reusable/ContainerComponent";
-import { login, clearAuthState } from "../../features/slices/authSlice";
-import { LoadingSpinner } from "../reusable/Loading.js";
-// import ProtectedLoginRoute from "../reusable/ProtectedRoute";
+import FormInput from "./../reusable/InputField";
+import ButtonComponent from "./../reusable/Button";
+import ContainerComponent from "./../reusable/ContainerComponent";
+import { login, clearAuthState } from "./../../features/slices/authSlice";
+import { LoadingSpinner, LoadingOverlay } from "./../reusable/Loading.js";
+import useAuth from "./../../hooks/useAuth.js";
 
+// LOGIN COMPONENTS
 const LoginComponent = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +18,7 @@ const LoginComponent = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/home");
+      navigate("/");
     }
   }, [isAuthenticated, navigate]);
 
@@ -30,13 +31,16 @@ const LoginComponent = () => {
     try {
       const resultAction = await dispatch(login({ email, password }));
       if (login.fulfilled.match(resultAction)) {
-        navigate("/home");
-        window.location.reload(true)
+        navigate("/");
       }
     } catch (err) {
       console.error("Failed to log in. Please try again!");
     }
   };
+
+  if (status === "loading") {
+    return <LoadingOverlay message="We are logging you in..." />;
+  }
 
   return (
     <ContainerComponent title="LOG IN" className="lg:h-[718px]">
@@ -82,7 +86,7 @@ const LoginComponent = () => {
         </Link>
         <p className="mt-6 text-sm text-gray-600 ">
           Don't have an Account?{" "}
-          <Link to="/register" className="text-[rgb(0,122,255)] underline">
+          <Link to="/signup" className="text-[rgb(0,122,255)] underline">
             Sign Up
           </Link>
         </p>

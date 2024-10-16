@@ -16,7 +16,7 @@ import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
 import DashboardComponent from "./components/accountUtilities/sidebarComponents/Admin/Dashboard";
 import DiscussionsPage from "./pages/DiscussionPage";
 import HealthPage from "./pages/HealthPage";
-import PublicOnlyROute from "./components/reusable/PublicOnlyRoute";
+import PublicOnlyROute from "./components/routes/PublicOnlyRoute";
 import CreateDiscussionPage from "./pages/CreateDiscussionPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import VisitProfile from "./components/accountUtilities/sidebarComponents/User/VisitProfile";

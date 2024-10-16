@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 
+
+// CUSTOM HOOK USED TO OBTAIN GEOLOCATION BASED ON USER GPS
 const useGeolocation = () => {
     const [location, setLocation] = useState("");
     const [isGettingLocation, setIsGettingLocation] = useState(false);

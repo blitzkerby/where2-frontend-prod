@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import config from "./../../config";
 
+
+// THIS COMPONENT IS USED TO PLACE WITHIN A COMPONENT, OR  A POST, IT WILL TRACK THE NUMBER OF RECORDS EACH DAY TO A CERTAIN PATH
 const VisitTracker = ({ path }) => {
     const [visits, setVisits] = useState([]);
     const [error, setError] = useState(null);
@@ -22,14 +24,11 @@ const VisitTracker = ({ path }) => {
 
         const fetchVisits = async () => {
             try {
-                const endDate = new Date().toISOString().split('T')[0];
-                const startDate = new Date();
-                startDate.setDate(startDate.getDate() - 6);
-                const startDateString = startDate.toISOString().split('T')[0];
+                const today = new Date().toISOString().split('T')[0];
         
-                console.log('Fetching visits from:', config.user.visits);
+                console.log('Fetching visits for today:', config.user.visits);
                 const response = await axios.get(config.user.visits, {
-                    params: { path, startDate: startDateString, endDate }
+                    params: { path, startDate: today, endDate: today }
                 });
         
                 console.log('Response data:', response.data);
@@ -69,4 +68,3 @@ const VisitTracker = ({ path }) => {
 };
 
 export default VisitTracker;
-

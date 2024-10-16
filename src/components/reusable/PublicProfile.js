@@ -11,18 +11,19 @@ import { useParams } from 'react-router-dom';
 import Navbar from './../../components/reusable/Navbar';
 import Footer from './Footer';
 const PublicProfile = ({ userInfo }) => {
-    console.log(userInfo.id  , userInfo)
-    const {userId} = useParams()
+  console.log(userInfo.id  , userInfo)
+  const {userId} = useParams()
   const {loading} = useAuth();
 
   if (loading) {
-    return <LoadingOverlay />;
+    return <LoadingOverlay message='We are fetching the public profile...'/>;
   }
 
   const formattedDate = new Date(userInfo.createdAt).toLocaleDateString('en-CA');
 
   return (
     <>
+    <Navbar/>
     <ContainerComponent>
     <section className="w-full rounded-3xl pb-[64px] ">
       <div className="lg:w-full lg:pl-[128px] lg:pr-[128px] lg:mx-auto h-full px-4 pb-6 pt-12 sm:px-6 lg:pb-0">
@@ -34,10 +35,11 @@ const PublicProfile = ({ userInfo }) => {
 
         <FormInput
           label="Bio"
-          value={userInfo?.bio}
+          value={userInfo?.bio ? userInfo.bio : "This user does not seem to have set any bio..."}
           placeholder="Tell everyone about yourself..."
           className="p-3 sm:p-4 h-fit"
           rounded
+          disabled
         />
   
         <div className="space-y-4">

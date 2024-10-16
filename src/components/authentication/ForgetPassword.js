@@ -5,9 +5,11 @@ import FormInput from "../reusable/InputField";
 import ButtonComponent from "../reusable/Button";
 import ContainerComponent from "../reusable/ContainerComponent";
 import { forgotPassword, clearAuthState } from "../../features/slices/authSlice";
-import { LoadingSpinner } from "../reusable/Loading";
+import { LoadingSpinner, LoadingOverlay } from "../reusable/Loading";
 import config from "../../config";
 
+
+// THIS COMPONENT IS USED FOR FORGET PASSWORD FUNCTIONALITY; THE USER CAN TYPE IN HIS EMAIL AND WE WILL SEND HIM A LINK TO RESET HIS PASSWORD
 const ForgetPasswordComponent = () => {
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
@@ -26,6 +28,10 @@ const ForgetPasswordComponent = () => {
       dispatch(forgotPassword({ email }));
     }
   };
+
+  if (status === "loading") {
+    return <LoadingOverlay message="We are sending a password reset link..."/>
+  }
 
   return (
     <ContainerComponent title="FORGET PASSWORD">
