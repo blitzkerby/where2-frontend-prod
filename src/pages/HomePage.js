@@ -35,6 +35,7 @@ const hero2 = {
   subtitleColor: "text-blue-600",
   mainImageSrc: SecondaryHero,
   mainImageAlt: "University building",
+  button:"Find part time jobs",
   onSearch: () => {},
 };
 const header =[
@@ -95,7 +96,23 @@ const cards = [
     image: "",
   }
 ];
-
+const cardFeature = [
+  {
+    title: "Scholarships",
+    description: "Explore the latest scholarships available for Cambodian students.",
+    image: "",
+  },
+  {
+    title: "Universities",
+    description: "Join us at the University Fair to learn more about programs and meet representatives from top universities.",
+    image: "",
+  },
+  {
+    title: "Livelihood",
+    description: "Attend the Career Expo and meet potential employers from various industries.",
+    image: "",
+  },
+]
 const HomePage = () => {
   return (
     <div>
@@ -109,10 +126,14 @@ const HomePage = () => {
 
       <WrapperComponent>
         <CardSlider cards={cards} header={header} />
+
       </WrapperComponent>
 
       <WrapperComponent>
         <Hero props={hero2} />
+      </WrapperComponent>
+      <WrapperComponent>
+        <CardSlider cardFeature={cardFeature} />
       </WrapperComponent>
       <WrapperComponent>
         <Footer />

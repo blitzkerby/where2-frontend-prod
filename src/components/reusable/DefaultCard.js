@@ -18,4 +18,4 @@ const DefaultCard = ({ card }) => {
   );
 };
 
-export default DefaultCard;
+export default DefaultCard

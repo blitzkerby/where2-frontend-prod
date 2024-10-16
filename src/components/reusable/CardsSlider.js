@@ -2,19 +2,18 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import DefaultCard from './DefaultCard';
-
-const CardSlider = ({ cards, header }) => {
+import DefaultCardToptitle from './DefaultCardTopTiltle';
+const CardSlider = ({ cards,cardFeature, header }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(true);
   const containerRef = useRef(null);
-
+  const totalCardsFeature = cardFeature.length;
   // We duplicate the card list by appending the first few cards at the end and the last few at the beginning
   const clonedCards = [
     ...cards.slice(-3), // Last 3 cards prepended
     ...cards,
     ...cards.slice(0, 3), // First 3 cards appended
   ];
-
   const totalCards = clonedCards.length;
   const actualCards = cards.length;
 
@@ -67,7 +66,7 @@ const CardSlider = ({ cards, header }) => {
 
   return (
     <div className="relative w-full max-w-6xl mx-auto">
-      <div className="p-5 text-blue-900 text-[38px]">
+      <div className="p-5 text-blue-900 text-[38px] sm:text-[35.8px]">
       {header.map((item, index) => (
         <b key={index}>{item.suggested}</b>
       ))}
@@ -88,6 +87,15 @@ const CardSlider = ({ cards, header }) => {
             className={`flex-shrink-0 p-2 ${isMobile ? "w-full" : "w-1/3"}`}
           >
             <DefaultCard card={card}/>
+            </div>
+          ))}
+          {totalCardsFeature.map((card,index)=>(
+            <div
+            key={index}
+            className={``}
+            
+            >
+              <DefaultCardToptitle card={card}/>
             </div>
           ))}
         </div>
