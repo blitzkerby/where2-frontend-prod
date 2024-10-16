@@ -22,6 +22,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import VisitProfile from "./components/accountUtilities/sidebarComponents/User/VisitProfile";
 import LoggedInOnlyRoute from "./components/routes/LoggedInRoute";
 
+// THIS IS USED TO CREATE QUERYCLIENT FOR THE USEQUERY FROM REACT QUERY
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([

@@ -4,13 +4,13 @@ import {
   createEntityAdapter,
 } from "@reduxjs/toolkit";
 import axios from "axios";
-import config from "../../config"
+import config from "./../../config"
   
   const handleAsyncError = (error, defaultMessage) => {
     return error.response?.data?.message || defaultMessage;
   };
   
-  // 1. Register user
+  // REGISTERING USER SLICE
   export const register = createAsyncThunk(
     "auth/register",
     async (userData, thunkAPI) => {
@@ -55,6 +55,7 @@ import config from "../../config"
   );
   
   
+  // SEND VERIFICATION CODE FUNCTION
   export const sendVerificationCode = createAsyncThunk(
     "auth/sendVerificationCode",
     async ({ email }, thunkAPI) => {
@@ -93,7 +94,8 @@ import config from "../../config"
   );
   
   
-  // 1.1. Verify account
+
+  // VERIFY ACOOUNT FUNCTION
   export const verifyAccount = createAsyncThunk(
     "auth/verifyAccount",
     async ({ verificationCode }, thunkAPI) => {
@@ -115,7 +117,7 @@ import config from "../../config"
       }
     })
   
-  // 1.2. Resend Verification code
+  // RESEND VERIFICATION CODE FUNCTION
   export const resendVerificationCode = createAsyncThunk(
     "auth/resendVerificationCode",
     async ({ email }, thunkAPI) => {
@@ -133,7 +135,7 @@ import config from "../../config"
     }
   );
   
-  //1.3. Send welcome email
+  // RESEND WELCOME EMAIL
   export const sendWelcomeEmail = createAsyncThunk(
     "auth/sendWelcomeEmail",
     async ({ email }, thunkAPI) => {
@@ -151,7 +153,7 @@ import config from "../../config"
     }
   );
   
-  // 2. Login user
+  // LOGIN USER
   export const login = createAsyncThunk(
     "auth/login",
     async ({ email, password }, thunkAPI) => {
@@ -195,7 +197,8 @@ import config from "../../config"
     }
   );
   
-  // 3. Logout user
+
+  // LOGOUT USER
   export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     try {
       await axios.post(config.auth.logoutUrl);
@@ -211,7 +214,7 @@ import config from "../../config"
     }
   });
   
-  // 4. Forget password
+  // FORGOT PASSWORD SLICE
   export const forgotPassword = createAsyncThunk(
     "auth/forgotPassword",
     async ({ email }, thunkAPI) => {
@@ -241,7 +244,7 @@ import config from "../../config"
     }
   );
   
-  // 5. Reset password
+  // RESET PASSWORD SLICE
   export const resetPassword = createAsyncThunk(
     "auth/resetPassword",
     async ({ token, password, passwordConfirm }, thunkAPI) => {
@@ -259,7 +262,7 @@ import config from "../../config"
     }
   );
   
-  // 6. Refresh token
+  // REFRESH TOKEN
   export const refreshToken = createAsyncThunk(
     "auth/refreshToken",
     async (_, thunkAPI) => {

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import config from "./../../config";
 
+
+// THIS COMPONENT IS USED TO PLACE WITHIN A COMPONENT, OR  A POST, IT WILL TRACK THE NUMBER OF RECORDS EACH DAY TO A CERTAIN PATH
 const VisitTracker = ({ path }) => {
     const [visits, setVisits] = useState([]);
     const [error, setError] = useState(null);
