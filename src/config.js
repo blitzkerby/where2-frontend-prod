@@ -1,5 +1,6 @@
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
-const ENV = process.env.NODE_ENV || "development";
+const ENV = process.env.REACT_APP_NODE_ENV || "development";
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID || "clientId";
 
 const config = {
   apiUrl: API_URL,
@@ -23,8 +24,43 @@ const config = {
   user: {
     upload: `${API_URL}/api/upload`,
     visitorTrack: `${API_URL}/api/visitors/track-visit`,
-    visits: `${API_URL}/api/visitors/visits`
+    visits: `${API_URL}/api/visitors/visits`,
+  },
+  profile: {
+    getMyProfile: (userId) => `${API_URL}/api/users/profile/${userId}`,
+    getPublicProfile: (userId) =>
+      `${API_URL}/api/users/profile/public/${userId}`,
+  },
+  analytics: {
+    getAllUsers: `${API_URL}/api/users/user-list`,
+    deleteUserById: (userId) => `${API_URL}/api/users/delete-user/${userId}`,
+  },
+  photo: {
+    getS3Url: `${API_URL}/api/user/s3Url`,
+    uploadProfilePicture: `${API_URL}/api/user/profile-picture`,
+    fetchProfilePicture: (userId) =>
+      `${API_URL}/api/user/${userId}/profile-picture`,
+    fetchBatchProfilePictures: `${API_URL}/api/user/users/batch-profile-pictures`,
+  },
+  community: {
+    createDiscussion: `${API_URL}/api/discussion`,
+    getDiscussions: `${API_URL}/api/discussions`,
+    addComment: (discussionId, commentId) =>
+      `${API_URL}/api/discussions/${discussionId}/comment/${commentId}`,
+    getAllComments: (discussionId) =>
+      `${API_URL}/api/discussions/${discussionId}/comments`,
+  },
+  chatbot: {
+    sendMessage: `${API_URL}/api/ai/summary`,
+  },
+  payment: {
+    makePayment: `${API_URL}/api/bakong-payment`,
+    createPaypalOrder: `${API_URL}/api/create-paypal-order`,
+    capturePaypalOrder: `${API_URL}/api/capture-paypal-order`,
+    createSubscription: `${API_URL}/api/create-subscription`,
+  },
+  paypal: {
+    clientID: process.env.REACT_APP_CLIENT_ID
   }
 };
-
 export default config;

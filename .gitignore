@@ -1,14 +1,16 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# assets
-assets/
-
 # test
 test/
+/test
+/test
 
 # temporary
 /temp
+temp/
+temp/
 
+.env
 
 # dependencies
 /node_modules
@@ -35,5 +37,4 @@ yarn-error.log*
 .env
 pnpm-lock.yaml
 
-/temp
-/test
+temp/

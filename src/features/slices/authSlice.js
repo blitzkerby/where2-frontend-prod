@@ -1,9 +1,9 @@
 import {
-    createSlice,
-    createAsyncThunk,
-    createEntityAdapter,
-  } from "@reduxjs/toolkit";
-  import axios from "axios";
+  createSlice,
+  createAsyncThunk,
+  createEntityAdapter,
+} from "@reduxjs/toolkit";
+import axios from "axios";
 import config from "../../config"
   
   const handleAsyncError = (error, defaultMessage) => {
@@ -79,11 +79,9 @@ import config from "../../config"
           return "Verification code sent successfully.";
         }
       } catch (error) {
-        // Log the error in both development and production
         console.error("Error sending verification code:", error);
   
         if (axios.isAxiosError(error) && !error.response) {
-          // Network error
           return thunkAPI.rejectWithValue("Network error. Please check your internet connection.");
         }
   
@@ -174,6 +172,8 @@ import config from "../../config"
           userName,
           entity,
         };
+
+        console.log(token, id, userName, entity)
         localStorage.setItem("authData", JSON.stringify(authData));
         
         if (config.isDevelopment) {

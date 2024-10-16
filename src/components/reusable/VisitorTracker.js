@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import config from "../../config";
+import config from "./../../config";
 
 const VisitTracker = ({ path }) => {
     const [visits, setVisits] = useState([]);
@@ -22,14 +22,11 @@ const VisitTracker = ({ path }) => {
 
         const fetchVisits = async () => {
             try {
-                const endDate = new Date().toISOString().split('T')[0];
-                const startDate = new Date();
-                startDate.setDate(startDate.getDate() - 6);
-                const startDateString = startDate.toISOString().split('T')[0];
+                const today = new Date().toISOString().split('T')[0];
         
-                console.log('Fetching visits from:', config.user.visits);
+                console.log('Fetching visits for today:', config.user.visits);
                 const response = await axios.get(config.user.visits, {
-                    params: { path, startDate: startDateString, endDate }
+                    params: { path, startDate: today, endDate: today }
                 });
         
                 console.log('Response data:', response.data);
@@ -52,22 +49,20 @@ const VisitTracker = ({ path }) => {
     }
 
     return (
-        <div className="p-6 bg-gray-100 rounded-lg shadow-md">
-            <h2 className="text-xl font-bold mb-4">Visit Tracker for {path}</h2>
-            <ul className="space-y-2">
+        <div className="py-6">
+            <div className="w-full h-full">
                 {visits.length === 0 ? (
-                    <li className="text-gray-500">No visits recorded yet.</li>
+                    <span className="text-gray-500">No visits recorded yet.</span>
                 ) : (
                     visits.map((visit) => (
-                        <li key={visit.id} className="p-4 bg-white rounded border border-gray-300 shadow-sm">
-                            {visit.date}: {visit.count} visits
-                        </li>
+                        <p key={visit.id} className="w-full h-full text-right p-4 bg-white">
+                            Total visits today: {visit.count} visit(s)
+                        </p>
                     ))
                 )}
-            </ul>
+            </div>
         </div>
     );
 };
 
 export default VisitTracker;
-

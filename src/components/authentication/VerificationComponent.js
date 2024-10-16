@@ -1,21 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import ContainerComponent from '../reusable/ContainerComponent';
-import FormInput from '../reusable/InputField';
-import ButtonComponent from '../reusable/Button';
-import { verifyAccount, clearAuthState, sendWelcomeEmail, resendVerificationCode } from '../../features/slices/authSlice';
-import { LoadingOverlay } from '../reusable/Loading';
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import ContainerComponent from "../reusable/ContainerComponent";
+import FormInput from "../reusable/InputField";
+import ButtonComponent from "../reusable/Button";
+import {
+  verifyAccount,
+  clearAuthState,
+  sendWelcomeEmail,
+  resendVerificationCode,
+} from "../../features/slices/authSlice";
+import { LoadingOverlay } from "../reusable/Loading";
 
 const VerificationComponent = () => {
-  const [verificationCode, setVerificationCode] = useState('');
+  const [verificationCode, setVerificationCode] = useState("");
   const [timeLeft, setTimeLeft] = useState(600);
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { status, error, message, isVerified } = useSelector((state) => state.auth);
+  const { status, error, message, isVerified } = useSelector(
+    (state) => state.auth
+  );
 
-  const email = location.state?.email || '';
+  const email = location.state?.email || "";
 
   useEffect(() => {
     dispatch(clearAuthState());
@@ -23,7 +30,7 @@ const VerificationComponent = () => {
 
   useEffect(() => {
     if (!email) {
-      navigate('/signup');
+      navigate("/signup");
     }
   }, [email, navigate, dispatch]);
 
@@ -38,7 +45,7 @@ const VerificationComponent = () => {
   useEffect(() => {
     if (isVerified) {
       const trimmedEmail = email.trim();
-  
+
       if (trimmedEmail) {
         dispatch(sendWelcomeEmail({ email: trimmedEmail }))
           .unwrap()
@@ -46,7 +53,7 @@ const VerificationComponent = () => {
             console.log("Welcome email sent successfully");
             const timer = setTimeout(() => {
               dispatch(clearAuthState());
-              navigate('/login');
+              navigate("/login");
             }, 3000);
             return () => clearTimeout(timer);
           })
@@ -71,9 +78,15 @@ const VerificationComponent = () => {
       dispatch(resendVerificationCode({ email }))
         .unwrap()
         .then(() => setTimeLeft(600))
-        .catch((err) => console.error("Failed to resend verification code:", err));
+        .catch((err) =>
+          console.error("Failed to resend verification code:", err)
+        );
     }
   };
+
+  if (status === "loading") {
+    return <LoadingOverlay message="Verifying account..." />;
+  }
 
   if (!email) {
     return <div>Loading...</div>;
@@ -94,12 +107,14 @@ const VerificationComponent = () => {
           required
         />
         <p className="text-sm text-gray-500">
-          Code will expire in {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+          Code will expire in {Math.floor(timeLeft / 60)}:
+          {(timeLeft % 60).toString().padStart(2, "0")}
         </p>
         {error && <p className="text-red-500 text-sm text-center">{error}</p>}
         {isVerified && (
           <p className="text-green-500 text-sm text-center">
-            {message || 'Account verified successfully. Redirecting to login...'}
+            {message ||
+              "Account verified successfully. Redirecting to login..."}
           </p>
         )}
         <div className="flex justify-center items-center">

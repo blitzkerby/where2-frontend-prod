@@ -80,6 +80,10 @@ const ResetPasswordComponent = () => {
     );
   }
 
+  if (status === "loading") {
+    return <LoadingOverlay message="Resetting password..."/>
+  }
+
   return (
     <ContainerComponent title="RESET PASSWORD">
       <p className="text-sm text-gray-600 text-center mb-6">

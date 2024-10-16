@@ -6,7 +6,7 @@
 @import '@fontsource/poppins/600.css'; /* Semi Bold */
 @import '@fontsource/poppins/700.css'; /* Bold */
 @import '@fontsource/poppins/800.css'; /* Extra Bold */
-@import '@fontsource/poppins/900.css'; Black
+@import '@fontsource/poppins/900.css'; /* Black */
 
 html {
     font-size: 16px;
