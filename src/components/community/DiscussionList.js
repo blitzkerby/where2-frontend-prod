@@ -16,10 +16,10 @@ const DiscussionList = () => {
   const navigate = useNavigate();
 
   const handleDeleteSuccess = async (deletedDiscussionId) => {
-    setDiscussions(prevDiscussions => 
-      prevDiscussions.filter(disc => disc.id !== deletedDiscussionId)
+    setDiscussions((prevDiscussions) =>
+      prevDiscussions.filter((disc) => disc.id !== deletedDiscussionId)
     );
-  }
+  };
 
   const fetchDiscussions = async () => {
     try {
@@ -68,7 +68,11 @@ const DiscussionList = () => {
       <WrapperComponent>
         <div className="space-y-8 mt-[64px]">
           {discussions.map((discussion) => (
-            <DiscussionCard key={discussion.id} discussion={discussion} onDeleteSuccess={handleDeleteSuccess}/>
+            <DiscussionCard
+              key={discussion.id}
+              discussion={discussion}
+              onDeleteSuccess={handleDeleteSuccess}
+            />
           ))}
         </div>
       </WrapperComponent>
