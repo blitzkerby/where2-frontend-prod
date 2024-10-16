@@ -35,11 +35,9 @@ const DiscussionsComponent = () => {
               </div>
             </div>
             <div className="lg:w-1/3 w-full">
-              {isLoggedIn && (
-                <div className="bg-white shadow-md rounded-lg p-6 h-full">
-                  <UserDiscussions userId={userId} />
-                </div>
-              )}
+              <div className="bg-white shadow-md rounded-lg p-6 h-full">
+                <UserDiscussions userId={userId} />
+              </div>
             </div>
           </div>
         )}

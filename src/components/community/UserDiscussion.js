@@ -54,11 +54,11 @@ const UserDiscussions = ({ userId }) => {
   return (
     <div className="mt-8">
       <h2 className="text-2xl font-bold mb-4">Your Discussions</h2>
-      {userDiscussions.length === 0 ? (
+      {userDiscussions.length === 0 || !isLoggedIn ? (
         <p>
           Your posted discussion will appear here. You haven't created any
           discussions yet.{" "}
-          {isLoggedIn ? null : `Please ${(<Link to="/login">Login</Link>)}`}
+          {isLoggedIn ? null : `Please login to see your posted discussion.`}
         </p>
       ) : (
         userDiscussions.map((discussion) => (
