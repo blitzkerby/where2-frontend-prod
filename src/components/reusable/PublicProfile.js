@@ -35,10 +35,11 @@ const PublicProfile = ({ userInfo }) => {
 
         <FormInput
           label="Bio"
-          value={userInfo?.bio}
+          value={userInfo?.bio ? userInfo.bio : "This user does not seem to have set any bio..."}
           placeholder="Tell everyone about yourself..."
           className="p-3 sm:p-4 h-fit"
           rounded
+          disabled
         />
   
         <div className="space-y-4">

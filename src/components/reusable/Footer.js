@@ -7,7 +7,7 @@ import { BiTargetLock } from "react-icons/bi";
 import { PiPersonSimpleHike } from "react-icons/pi";
 
 const FooterLink = ({ href, children }) => (
-  <Link to={href} className="mb-2 hover:underline">
+  <Link to={href} className="mb-2 hover:underline tracking-tight">
     {children}
   </Link>
 );

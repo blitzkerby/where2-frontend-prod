@@ -1,12 +1,11 @@
 import ButtonComponent from "./../reusable/Button";
 import WrapperComponent from "./../reusable/WrapperComponent";
-import TextSummary from "./../reusable/TextSummary";
 
 const HealthArticleCard = ({ id, image, title, description, onClick }) => {
   return (
     <WrapperComponent>
       <div
-        className="bg-white rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer"
+        className="bg-white rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer tracking-tightest"
         onClick={() => onClick(id)}
       >
         <img

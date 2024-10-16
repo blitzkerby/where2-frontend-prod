@@ -20,7 +20,7 @@ const Hero = ({ props, children }) => {
   const styles = {
     /* containers */
     section: "relative w-full lg:h-[90vh] sm:h-[500px] z-[0] gap-10 mb-[16px]",
-    container: "w-full h-full bg-white text-center flex justify-center",
+    container: "w-full h-full bg-white text-center flex justify-center text-tighter",
 
     gradientOverlay: "inset-0 bg-gradient-to-b opacity-50",
     gradientClipPath: { clipPath: "polygon(0 0, 100% 0, 100% 70%, 0 100%)" },

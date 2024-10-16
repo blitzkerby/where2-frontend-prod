@@ -47,7 +47,7 @@ const ArticleList = () => {
   return (
     <>
       <WrapperComponent>
-        <header className="lg:w-[70%] sm:w-[80%] mx-auto py-16 text-center">
+        <header className="lg:w-[70%] sm:w-[80%] mx-auto py-16 text-center tracking-tightest">
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold mb-6">
             Mental Health and Health Services and Product Reviews
           </h1>
