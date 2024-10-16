@@ -5,6 +5,7 @@ import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
 import DetailLayout from '../layouts/DetailLayout';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const UniversityPage = () => {
     const dispatch = useDispatch();
@@ -14,6 +15,13 @@ const UniversityPage = () => {
 
     useEffect(() => {
         dispatch(fetchUniversity(id));
+
+        // async function test(){
+        //     const response = await axios.get(`http://127.0.0.1:4000/api/detail/university/1`);
+        //     console.log(response)
+        // }
+
+        // test()
     }, [dispatch, id]);
 
     if (isLoading) {

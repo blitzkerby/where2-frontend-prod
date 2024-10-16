@@ -28,7 +28,9 @@ const Card = ({
   deadLine = '', 
   timeOut = '',
   route,
-  type
+  type,
+  isHeartClicked = false, 
+  id,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -139,14 +141,14 @@ const Card = ({
             <div className="flex justify-between cursor-pointer">
               <div className="w-[100px] flex justify-around">
                 <div>
-                  {/* {isHeartClicked ? 
+                  {isHeartClicked ? 
                     <div>
                       <img className="w-9" src={FilledHeart} alt="Bookmark" onClick={handleHeartClick} />
                     </div> : 
                     <div>
                       <img src={BookMark} alt="Bookmark" onClick={handleRemoveHeartClick} />
                     </div> 
-                  } */}
+                  }
                 </div>
                 <Link to="">
                   <img src={Map} alt="Map" />

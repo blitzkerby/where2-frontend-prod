@@ -12,10 +12,11 @@ import Footer from '../components/reusable/Footer';
 import ListContainer from '../components/reusable/ListContainer';
 import Pagination from '../components/reusable/Pagination';
 import SearchBar from '../components/reusable/SearchBar';
+import axios from 'axios';
 
 
 /** Enable for debugging */
-const isDebug = false;
+const isDebug = true;
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -24,7 +25,6 @@ function useQuery() {
 const UniversityPage = () => {
     const urlParams = useQuery();
     const page = parseInt(urlParams.get('page')) || 1;
-    // const limit = 10;
     const searchQuery = urlParams.get('q') || '';
 
     const dispatch = useDispatch();

@@ -19,8 +19,8 @@ export const fetchUniversities = createAsyncThunk(
         const response = await axios.get(`${config.universities.getAllUniversity}?page=${page}`);
         
         // Dispatch actions to update pagination state
-        dispatch(setTotalPage(response.data.pagination.totalPages));       
-        return response.data;
+        dispatch(setTotalPage(response.data.pagination.totalPages || 1));       
+        return response.data.list;
     }
 );
 
@@ -34,7 +34,7 @@ export const fetchUniversity = createAsyncThunk(
     'universities/fetchUniversity',
     async (id) => {
         const response = await axios.get(`${config.universities.getUniversityById}/${id}`);
-        return response.data;
+        return response.data.list;
     }
 )
 
@@ -47,9 +47,9 @@ export const fetchUniversity = createAsyncThunk(
 export const searchUniversities = createAsyncThunk(
     'universities/searchUniversities',
     async ({ query, page }, { dispatch }) => {
-        const response = await axios.get(`${config.universities.getUniversityBySearch}?q=${encodeURIComponent(query)}&page=${page}`);
+        const response = await axios.get(`${config.universities.getAllUniversity}?q=${encodeURIComponent(query)}&page=${page}`);
         dispatch(setTotalPage(response.data.pagination.totalPages || 1));       
-        return response.data;
+        return response.data.list;
     }
 )
 
@@ -81,7 +81,7 @@ const universitySlice = createSlice({
             })
             .addCase(fetchUniversities.fulfilled, (state, action) => {
                 state.loading = false;
-                state.universities = action.payload.universities;
+                state.universities = action.payload;
             })
             .addCase(fetchUniversities.rejected, (state, action) => {
                 state.loading = false;
@@ -99,7 +99,7 @@ const universitySlice = createSlice({
             })
             .addCase(fetchUniversity.fulfilled, (state, action) => {
                 state.loading = false;
-                state.university = action.payload.university;
+                state.university = action.payload;
             })
             .addCase(fetchUniversity.rejected, (state, action) => {
                 state.loading = false;
@@ -117,7 +117,7 @@ const universitySlice = createSlice({
             })
             .addCase(searchUniversities.fulfilled, (state, action) => {
                 state.loading = false;
-                state.universities = action.payload.universities;
+                state.universities = action.payload
             })
             .addCase(searchUniversities.rejected, (state, action) => {
                 state.loading = false;

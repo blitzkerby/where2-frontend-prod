@@ -1,4 +1,4 @@
-const isDebug = false;  // Set to false to turn off console logging
+const isDebug = true;  // Set to false to turn off console logging
 
 import Card from "./reusable/Card";
 
