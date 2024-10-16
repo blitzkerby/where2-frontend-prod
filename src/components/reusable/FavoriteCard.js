@@ -20,7 +20,7 @@ const FavoriteCard = ({ title, description, facebookLink, instagramLink, twitter
         { icon: Chrome, linkKey: websiteLink, isExternal: true },
     ];
     const links = { facebookLink, twitterLink, youtubeLink, websiteLink, instagramLink };
-    // const companyUrl = title.toLowerCase().replace(/\s+/g, '-');
+
     const workDetails = [
         { icon: MiniClock, linkKey: timeOut },
         { icon: Calender, linkKey: deadLine },

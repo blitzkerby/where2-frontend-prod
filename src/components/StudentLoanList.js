@@ -16,8 +16,7 @@ const StudentLoanList = ({ studentLoans }) => {
     const limit = parseInt(urlParams.get('limit')) || 10;
     const dispatch = useDispatch();
     const { isClicked } = useSelector((state) => state.favorites);
-    console.log("this is page StudentLoan", page)
-    console.log("this is isClicked favorite",isClicked)
+
     useEffect(() => {
         if (page === 1) {
             dispatch(removedIsClicked());

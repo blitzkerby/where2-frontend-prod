@@ -1,12 +1,10 @@
 import FavoriteCard from "./FavoriteCard";
-import Card from "./Card";
+
 const FavoriteList = ({ favorites, category }) => {
     let renderFavorite;
     if (category === "job") {
-        console.log("Favorite before map", favorites)
         favorites = favorites.map(fav => fav.job)
-        // console.log('new favorite job', favorites);
-        // console.log('new isLoading job',isLoading);
+
         renderFavorite = favorites.map((job) => (
             <FavoriteCard
                 key={job.id}
@@ -28,10 +26,9 @@ const FavoriteList = ({ favorites, category }) => {
         ));
             
     } else if (category === "university") {
-        console.log("Favorite before map university", favorites)
+
         favorites = favorites.map(fav => fav.university)
-        // console.log('new favorite university', favorites);
-        // console.log('new isLoading university',isLoading);
+
         renderFavorite = favorites.map((university) => (
             <FavoriteCard
                 key={university.id}
@@ -48,12 +45,11 @@ const FavoriteList = ({ favorites, category }) => {
             // timeOut={university.salary}
             />
         ));
-        //  dispatch(setIsLoading());
+
     } else if (category === "loan") {
-        // console.log("Favorite before map university",favorites)
+
         favorites = favorites.map(fav => fav.loan)
-        // console.log('new favorite university', favorites);
-        // console.log('new isLoading university',isLoading);
+
         renderFavorite = favorites.map((loan) => (
             <FavoriteCard
                 key={loan.loan_id}
@@ -74,19 +70,16 @@ const FavoriteList = ({ favorites, category }) => {
                 // timeOut={loan.salary}
                 type={"loan"}
                 route={loan.link}
-            // isHeartClicked={isClicked[loan.loan_id]}
+
             />
         ))
     } else if (category === "scholarship") {
-        // console.log("Favorite before map university",favorites)
+
         favorites = favorites.map(fav => fav.scholarship)
-        // console.log('new favorite university', favorites);
-        // console.log('new isLoading university',isLoading);
+
         renderFavorite = favorites.map((scholarship) => (
             <FavoriteCard
             key={scholarship.id}
-            // image={scholarship.image_url}
-            // imageAlt={scholarship.image_alt}
             title={scholarship.name}
             description={scholarship.description}
             location={scholarship.location}
@@ -94,25 +87,22 @@ const FavoriteList = ({ favorites, category }) => {
             id={scholarship.id}
             type={'scholarship'}
             route={`/scholarship/${ scholarship.id }`}
-            // isHeartClicked={isClicked[scholarship.id]}
+
             />
         ))
     } else {
         favorites = favorites.map(fav => fav.accommodation)
-        // console.log('new favorite university', favorites);
-        // console.log('new isLoading university',isLoading);
+
         renderFavorite = favorites.map((accommodation) => (
             <FavoriteCard
             key={accommodation.id}
-                id={accommodation.id}
-                type={"accommodation"}
-            // image={'https://th.bing.com/th/id/R.5a8394ded8bc846fa7be1d13d7ff568b?rik=eAfE14B5fVvw4A&pid=ImgRaw&r=0'}
-            // imageAlt={"room"}
+            id={accommodation.id}
+            type={"accommodation"}
             title={accommodation.name}
             size={accommodation.size}
             price = {accommodation.price}
             address = {accommodation.location}
-            // description={accommodation.accommodation_desc}
+            description={accommodation.description}
             // facebookLink={accommodation.updatedAt}
             // instagramLink={accommodation.updatedAt}
             // twitterLink={accommodation.createdAt}

@@ -10,8 +10,8 @@ const ScholarshipDetail = () => {
     const { id } = useParams(); // Get ID from URL
 
 	const dispatch = useDispatch();
-	const {scholarships, loading, error} = useSelector((state)=>state.scholarships)
-		console.log(id)
+	const { scholarships, loading, error } = useSelector((state) => state.scholarships)
+	
     useEffect(() => {
 		dispatch(fetchScholarships(id))
     }, [id]);

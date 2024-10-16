@@ -1,12 +1,12 @@
 
 import Card from "../reusable/Card";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchJob } from "../../features/slices/jobSlice";
+
 import { useEffect } from "react";
-import ListContainer from "../reusable/ListContainer";
-import { setCurrentPage, selectCurrentPage, selectItemsPerPage, selectTotalItems } from '../../features/slices/paginationSlice';
-import PaginationComponent from "../reusable/Pagination";
-import { addFavorite,getFavorite } from "../../features/slices/favoriteSlice";
+
+
+
+import { getFavorite } from "../../features/slices/favoriteSlice";
 import { useLocation } from "react-router-dom";
 import { removedIsClicked } from "../../features/slices/favoriteSlice";
 function useQuery() {
