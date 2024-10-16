@@ -1,6 +1,6 @@
-const isDebug = true;  // Set to false to turn off console logging
-
 import Card from "./reusable/Card";
+
+const isDebug = true;  // Set to false to turn off console logging
 
 /**
  * UniversityList component

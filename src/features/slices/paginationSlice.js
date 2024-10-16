@@ -2,6 +2,7 @@
 import { createSlice,createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import config from '../../config';
+
 export const fetchAllList = createAsyncThunk(
     'allList',
     async ({ page , limit, model}, { dispatch }) => {
@@ -12,6 +13,7 @@ export const fetchAllList = createAsyncThunk(
         return response.data;
     }
 );
+
 const paginationSlice = createSlice({
     name: 'pagination',
     initialState: {

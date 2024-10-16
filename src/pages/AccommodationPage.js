@@ -1,24 +1,28 @@
-import { useDispatch, useSelector } from "react-redux";
-import Footer from "../components/reusable/Footer"
-import Navbar from "../components/reusable/Navbar"
-import { useEffect } from "react";
-import { fetchAllList } from "../features/slices/paginationSlice";
-import Pagination from "../components/reusable/Pagination";
-import ListContainer from "../components/reusable/ListContainer";
-import { useLocation } from 'react-router-dom';
-import { LoadingOverlay } from "../components/reusable/Loading";
-import AccommodationList from "../components/AccommodationList";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}  
+import { useQuery } from '../utils/useQuery';
+
+import { LoadingOverlay } from '../components/reusable/Loading';
+
+import Navbar from '../components/reusable/Navbar';
+import Footer from '../components/reusable/Footer';
+import Pagination from '../components/reusable/Pagination';
+import ListContainer from '../components/reusable/ListContainer';
+
+/** Enable for debugging */
+const isDebug = true;
+
 const AccommodationPage = () => {
     const urlParams = useQuery();
 
     const page = parseInt(urlParams.get('page')) || 1;
-    const limit = parseInt(urlParams.get('limit')) || 10;
+    const searchQuery = urlParams.get('q') || '';
+
     const dispatch = useDispatch();
-    const { data, loading, error, totalPage } = useSelector((state) => state.pagination);
+    const { universities, loading, error } = useSelector((state) => state.universities);
+    const { totalPage } = useSelector((state) => state.pagination);
+
 console.log("AccommodationList", data)
     useEffect(() => {
         dispatch(fetchAllList({page,limit,model: 'Accommodation'}))
@@ -31,7 +35,7 @@ console.log("AccommodationList", data)
             {error && <p>{error}</p>}
             <AccommodationList accommodations={data} />
             </ListContainer>
-            <Pagination totalPage={totalPage} currentPage={page} route={'accommodations'}/>
+            <Pagination totalPage={totalPage} currentPage={page} category='accommodations'/>
             <Footer />
         </div>
     )

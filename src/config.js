@@ -50,10 +50,6 @@ const config = {
     getAllComments: (discussionId) =>
       `${API_URL}/api/discussions/${discussionId}/comments`,
   },
-  universities: {
-    getAllUniversity : `${API_URL}/api/list/university`,
-    getUniversityById : `${API_URL}/api/detail/university`,
-  },
   job: {
     getAllJob: `${API_URL}/api/jobs`,
     getAssociatedCompany: (jobId) =>
@@ -66,17 +62,23 @@ const config = {
     removedFavorite: (cardId, category) =>
       `${API_URL}/api/favorites/${cardId}/${category}`,
   },
+  universities: {
+    getAllUniversity : `${API_URL}/api/list/university`,
+    getUniversityById : `${API_URL}/api/detail/university`,
+  },
   scholarships: {
-    getAllScholarships: (id) => `${API_URL}/api/scholarships/${id}`,
+    getAllScholarships: `${API_URL}/api/list/scholarship`,
+    getScholarshipById: `${API_URL}/api/detail/scholarship`,
+  },
+  accommodation: {
+    getAllAccommodation: `${API_URL}/api/list/accommodation`,
+    getAccommodationById: `${API_URL}/api/detail/accommodation`,
   },
   search: {
     searchAny: `${API_URL}/api/`,
   },
   list: {
     getAllList: (model) => `${API_URL}/api/list/${model}`,
-  },
-  accommodation: {
-    getOneAccommodation: (id) => `${API_URL}/api/accommodation/${id}`,
   },
   chatbot: {
     sendMessage: `${API_URL}/api/ai/summary`,

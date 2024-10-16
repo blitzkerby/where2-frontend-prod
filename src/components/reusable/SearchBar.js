@@ -19,7 +19,7 @@ const SearchBar = ({ handleSearch, searchPlaceholder, category }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    navigate(`/list/${category}/search?page=1&q=${searchQuery}`);
+    navigate(`/list/${category}?q=${searchQuery}&page=1`);
     handleSearch(searchQuery);
   };
 

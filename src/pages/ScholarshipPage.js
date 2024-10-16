@@ -1,28 +1,41 @@
-import React from "react";
-import ScholarshipList from "../components/ScholarshipList";
+import React, { useEffect } from 'react';
 import { useDispatch,useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
-import Pagination from "../components/reusable/Pagination";
+
+import { useQuery } from '../utils/useQuery';
+
 import { fetchAllList } from "../features/slices/paginationSlice";
-import Footer from "../components/reusable/Footer";
-import ListContainer from "../components/reusable/ListContainer";
-import Navbar from "../components/reusable/Navbar";
+import { fetchScholarships, searchScholarships } from '../features/slices/scholarshipsSlice';
+
 import { LoadingOverlay } from "../components/reusable/Loading";
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}  
+
+import ScholarshipList from "../components/ScholarshipList";
+
+import Footer from "../components/reusable/Footer";
+import Navbar from "../components/reusable/Navbar";
+import SearchBar from '../components/reusable/SearchBar';
+import Pagination from "../components/reusable/Pagination";
+import ListContainer from "../components/reusable/ListContainer";
+
+/** Enable for debugging */
+const isDebug = true;
+
 const ScholarshipPage = () => {
 	const urlParams = useQuery();
 
     const page = parseInt(urlParams.get('page')) || 1;
-    const limit = parseInt(urlParams.get('limit')) || 10;
+    const searchQuery = urlParams.get('q') || '';
+
     const dispatch = useDispatch();
-    const { data, loading, error, totalPage } = useSelector((state) => state.pagination);
+    const { scholarships, loading, error } = useSelector((state) => state.scholarships) 
+    const { totalPage } = useSelector((state) => state.pagination);
 
     useEffect(() => {
-        dispatch(fetchAllList({page,limit,model: 'Scholarship'}))
-    },[dispatch, page])
+        if (searchQuery === ""){
+            dispatch(fetchScholarships({ page }))
+        } else {
+            dispatch(searchScholarships({ page, query: searchQuery }))
+        }
+    }, [dispatch, page, searchQuery])
 
 	return (
 		<div>
@@ -31,8 +44,9 @@ const ScholarshipPage = () => {
                 {loading && <LoadingOverlay/>}
                 {/* {error && <p>{error}</p>} */}
 
-                <ScholarshipList scholarship={data} />
-			    <Pagination totalPage={totalPage} currentPage={page} route={'scholarships'} />
+                <SearchBar handleSearch={searchScholarships} searchPlaceholder="Search scholarships..." category="scholarship"/>
+                <ScholarshipList scholarship={scholarships} />
+			    <Pagination totalPage={totalPage} currentPage={page} category={'scholarship'} searchQuery={searchQuery}/>
 			</ListContainer>
 			<Footer />
 		</div>

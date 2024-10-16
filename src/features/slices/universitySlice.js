@@ -10,7 +10,6 @@ import { setTotalPage } from './paginationSlice';
  * @route GET /api/list/university/
  * @param {Object} param - The pagination parameters.
  * @param {number} param.page - The current page number.
- * @param {number} param.limit - The number of items per page.
  * @access Public
  */
 export const fetchUniversities = createAsyncThunk(
@@ -18,8 +17,7 @@ export const fetchUniversities = createAsyncThunk(
     async ({ page }, { dispatch }) => {
         try {
             const response = await axios.get(`${config.universities.getAllUniversity}?page=${page}`);
-            
-            // Dispatch actions to update pagination state
+
             dispatch(setTotalPage(response.data.pagination.totalPages || 1));       
             return response.data.list;
         } catch (error) {
@@ -44,7 +42,7 @@ export const fetchUniversity = createAsyncThunk(
 
 /**
  * Search universities by query.
- * @route GET /api/list/university/search
+ * @route GET /api/list/university
  * @param {string} query - The search query.
  * @access Public
  */
@@ -61,8 +59,6 @@ const universitySlice = createSlice({
     name: 'universities',
     initialState: {
         universities: [],
-        universityId: 0,
-
         university: [],
         loading: false,
         error: null,

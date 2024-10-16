@@ -1,32 +1,77 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import config from "../../config";
+import { setTotalPage } from "./paginationSlice";
 
+/**
+ * Fetch all accommodations with pagination.
+ * @route GET /api/list/accommodation/
+ * @param {Object} param - The pagination parameters.
+ * @param {number} param.page - The current page number.
+ * @access Public
+ */
+export const fetchAccommodations = createAsyncThunk(
+    'accommodation/fetchAccommodations',
+    async ({ page }, { dispatch }) => {
+        try {
+            const response = await axios.get(`${config.accommodation.getAllAccommodation}?page=${page}`);
 
-export const getOneAccommodation = createAsyncThunk("/accommodation", async (id) => {
-    const accommodation = await axios.get(config.accommodation.getOneAccommodation(id));
+            dispatch(setTotalPage(response.data.pagination.setTotalPage || 1))
+            return response.data.oneAccommodation;
+        } catch (error) {
+            return []
+        }
+    }
+);
 
-    return accommodation;
-});
+/**
+ * Fetch a specific accommodation by ID.
+ * @route GET /api/list/accommodation/:id
+ * @param {number} id - The ID of the accommodation to fetch.
+ * @access Public
+ */
+export const fetchAccommodation = createAsyncThunk(
+    'accommodation/fetchAccommodation',
+    async (id) => {
+        const response = await axios.get(`${config.accommodation.getAccommodationById}/${id}`);
+        return response.data.list;
+    }
+);
 
-const accommodationSlices = createSlice({
-    name: "accommodation",
-    initialState: { loading: true, error: null, accommodation: [] },
+const accommodationSlice = createSlice({
+    name: 'accommodation',
+    initialState: {
+        loading: false,
+        error: null,
+        accommodation: null,
+    },
+    reducers: {
+        /**
+         * Set the current accommodation data.
+         * @param {Object} state - The current state.
+         * @param {Object} action - The action payload.
+         */
+        setAccommodation: (state, action) => {
+            state.accommodation = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder
-            .addCase(getOneAccommodation.pending, (state, action) => {
+            // Fetch accommodation by ID
+            .addCase(fetchAccommodation.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(getOneAccommodation.fulfilled, (state, action) => {
+            .addCase(fetchAccommodation.fulfilled, (state, action) => {
                 state.loading = false;
-                state.accommodation = action.payload.data.oneAccommodation
+                state.accommodation = action.payload;
             })
-            .addCase(getOneAccommodation.rejected, (state, action) => {
+            .addCase(fetchAccommodation.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message;
-            })
+                state.error = action.payload || action.error.message;
+            });
     }
 });
 
-export default accommodationSlices.reducer;
+export const { setAccommodation } = accommodationSlice.actions;
+export default accommodationSlice.reducer;

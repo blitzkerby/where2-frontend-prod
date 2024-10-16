@@ -1,29 +1,25 @@
-// src/pages/UniversityPage.js
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+
+import { useQuery } from '../utils/useQuery';
 
 import { fetchUniversities, searchUniversities } from '../features/slices/universitySlice';
 
 import { LoadingOverlay } from '../components/reusable/Loading';
-import UniversityList from '../components/UniversityList';
+
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
-import ListContainer from '../components/reusable/ListContainer';
-import Pagination from '../components/reusable/Pagination';
 import SearchBar from '../components/reusable/SearchBar';
-import axios from 'axios';
-
+import UniversityList from '../components/UniversityList';
+import Pagination from '../components/reusable/Pagination';
+import ListContainer from '../components/reusable/ListContainer';
 
 /** Enable for debugging */
 const isDebug = true;
 
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
-
 const UniversityPage = () => {
     const urlParams = useQuery();
+
     const page = parseInt(urlParams.get('page')) || 1;
     const searchQuery = urlParams.get('q') || '';
 

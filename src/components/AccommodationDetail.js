@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getOneAccommodation } from "../features/slices/accommodationSlice";
+import { fetchAccommodation } from "../features/slices/accommodationSlice";
 import { LoadingOverlay } from "./reusable/Loading";
 
 const AccommodationDetail = () => {
@@ -10,7 +10,7 @@ const AccommodationDetail = () => {
     const { loading, error, accommodation } = useSelector(state => state.accommodations);
     
     useEffect(() => {
-        dispatch(getOneAccommodation(param.id))
+        dispatch(fetchAccommodation(param.id))
     }, []);
   
     return (
