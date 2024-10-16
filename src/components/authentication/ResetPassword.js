@@ -7,6 +7,7 @@ import ContainerComponent from "../reusable/ContainerComponent";
 import { resetPassword, clearAuthState } from "../../features/slices/authSlice";
 import { LoadingSpinner, LoadingOverlay } from "../reusable/Loading";
 
+// THIS COMPONENT IS USED TO RESET USERPASSWORD
 const ResetPasswordComponent = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -81,7 +82,7 @@ const ResetPasswordComponent = () => {
   }
 
   if (status === "loading") {
-    return <LoadingOverlay message="Resetting password..."/>
+    return <LoadingOverlay message="We are resetting your password. Please be patient..."/>
   }
 
   return (

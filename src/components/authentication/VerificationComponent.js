@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import ContainerComponent from "../reusable/ContainerComponent";
-import FormInput from "../reusable/InputField";
-import ButtonComponent from "../reusable/Button";
+import ContainerComponent from "./../reusable/ContainerComponent";
+import FormInput from "./../reusable/InputField";
+import ButtonComponent from "./../reusable/Button";
 import {
   verifyAccount,
   clearAuthState,
   sendWelcomeEmail,
   resendVerificationCode,
-} from "../../features/slices/authSlice";
-import { LoadingOverlay } from "../reusable/Loading";
+} from "./../../features/slices/authSlice";
+import { LoadingOverlay } from "./../reusable/Loading";
 
 const VerificationComponent = () => {
   const [verificationCode, setVerificationCode] = useState("");
+  // SET THE TIME LEFT TO LIMIT THE NUMBER OF ATTEMPTS (PREVENTING SPAM OF CLICKS)
   const [timeLeft, setTimeLeft] = useState(600);
   const location = useLocation();
   const dispatch = useDispatch();
@@ -28,12 +29,14 @@ const VerificationComponent = () => {
     dispatch(clearAuthState());
   }, [dispatch]);
 
+  // IF THERE IS NO EMAIL, RETURNING THE USER TO THE SIGNUP PAGE
   useEffect(() => {
     if (!email) {
       navigate("/signup");
     }
   }, [email, navigate, dispatch]);
 
+  // SET TIMER FOR THE RESEND CODE
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
@@ -84,6 +87,7 @@ const VerificationComponent = () => {
     }
   };
 
+  // SHOWING THE LOADING OVERLAY COMPONENT WHEN THE USER IS SIGNING UP
   if (status === "loading") {
     return <LoadingOverlay message="Verifying account..." />;
   }

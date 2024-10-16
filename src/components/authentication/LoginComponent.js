@@ -6,14 +6,15 @@ import ButtonComponent from "./../reusable/Button";
 import ContainerComponent from "./../reusable/ContainerComponent";
 import { login, clearAuthState } from "./../../features/slices/authSlice";
 import { LoadingSpinner, LoadingOverlay } from "./../reusable/Loading.js";
+import useAuth from "./../../hooks/useAuth.js";
 
+// LOGIN COMPONENTS
 const LoginComponent = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { status, error, isAuthenticated } = useSelector((state) => state.auth);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -28,18 +29,16 @@ const LoginComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
       const resultAction = await dispatch(login({ email, password }));
       if (login.fulfilled.match(resultAction)) {
-        navigate("/home");
+        navigate("/");
       }
     } catch (err) {
-      setLoading(false);
       console.error("Failed to log in. Please try again!");
     }
   };
 
-  if (loading) {
+  if (status === "loading") {
     return <LoadingOverlay message="We are logging you in..." />;
   }
 

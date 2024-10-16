@@ -6,7 +6,19 @@ import ContainerComponent from "../reusable/ContainerComponent";
 import { register } from "../../features/slices/authSlice";
 import { LoadingSpinner, LoadingOverlay } from "../reusable/Loading";
 
+
+// HARD CODED TERMSANDCONDITIONS; WE WILL UPDATE THIS WHEN WE HAVE COME UP WITH TERMSANDCONDITIONS LATER
+const termsAndConditions = [
+  {
+    p1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra condimentum eget purus in. Consectetur eget id morbi amet amet. Ipsum viverra pretium tellus neque. Ullamcorper suspendisse aenean leo pharetra in sit semper et. Amet quam placerat sem.",
+  },
+  {
+    p2: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra condimentum eget purus in. Consectetur eget id morbi amet amet. Ipsum viverra pretium tellus neque. Ullamcorper suspendisse aenean leo pharetra in sit semper et. Amet quam placerat sem.",
+  },
+];
+
 const TermsAndConditionsComponent = () => {
+  // USED TO ONLY ENABLE THE BUTTON IF THE USER CHECKS THE BOX
   const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -31,14 +43,12 @@ const TermsAndConditionsComponent = () => {
     }
   };
 
-  if (status === 'loading') {
-    return <LoadingOverlay message="We are processing your request..."/>
-  }
-
+  // BACK BUTTON
   const handleBack = () => {
     navigate(-1);
   };
 
+  // SHOWING THE LOADINGOVERLAY COMPONENT WHEN STATUS IS LOADING
   if (status === "loading") {
     return <LoadingOverlay message="We are processing your request..." />;
   }
@@ -62,20 +72,10 @@ const TermsAndConditionsComponent = () => {
 
       <div className="mb-6 overflow-y-auto max-h-[40vh]">
         <h3 className="font-semibold mb-2">1. Clause 1</h3>
-        <p className="text-sm text-gray-600 mb-4">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra
-          condimentum eget purus in. Consectetur eget id morbi amet amet. Ipsum
-          viverra pretium tellus neque. Ullamcorper suspendisse aenean leo
-          pharetra in sit semper et. Amet quam placerat sem.
-        </p>
+        <p className="text-sm text-gray-600 mb-4">{termsAndConditions[0].p1}</p>
 
         <h3 className="font-semibold mb-2">2. Clause 2</h3>
-        <p className="text-sm text-gray-600 mb-4">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra
-          condimentum eget purus in. Consectetur eget id morbi amet amet. Ipsum
-          viverra pretium tellus neque. Ullamcorper suspendisse aenean leo
-          pharetra in sit semper et. Amet quam placerat sem.
-        </p>
+        <p className="text-sm text-gray-600 mb-4">{termsAndConditions[1].p2}</p>
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -99,11 +99,7 @@ const TermsAndConditionsComponent = () => {
             disabled={!agreed || status === "loading"}
             type="submit"
           >
-            {status === "loading" ? (
-              <LoadingSpinner />
-            ) : (
-              "Agree & Proceed to Verification"
-            )}
+            {status === "loading" ? <LoadingSpinner /> : "Agree & Proceed"}
           </ButtonComponent>
         </div>
       </form>

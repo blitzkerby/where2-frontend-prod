@@ -9,7 +9,9 @@ import { LoadingOverlay, LoadingSpinner } from "./../reusable/Loading";
 import { MapPin } from "lucide-react";
 import useGeolocation from "./../../hooks/useGeolocation";
 
+// THIS COMPONENT IS USED TO REGISTER USER
 const RegisterComponent = () => {
+  // THERE ARE TWO TYPE OF FORMS: PERSONAL AND BUSSINESSS
   const [accountType, setAccountType] = useState("personal");
   const [formData, setFormData] = useState({
     entity: "",
