@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
 import axios from "axios";
-import { LoadingSpinner } from "../reusable/Loading";
-import { useParams, useNavigate } from "react-router-dom";
+import { LoadingSpinner } from "./../reusable/Loading";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
+import VisitTracker from "./../reusable/VisitorTracker";
 import WrapperComponent from "./../reusable/WrapperComponent";
 import ButtonComponent from "./../reusable/Button";
 import HealthNavbar from "./HealthNavbar";
@@ -16,6 +17,7 @@ const HealthArticlePage = () => {
   const [error, setError] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -101,6 +103,7 @@ const HealthArticlePage = () => {
                 <div className="bg-gray-900 rounded-xl p-6 shadow-lg">
                   <TextSummary textToSummarize={article.content} />
                 </div>
+                  <VisitTracker path={location.pathname}/>
               </WrapperComponent>
             </div>
           </div>
