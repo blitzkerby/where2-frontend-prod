@@ -126,7 +126,7 @@ const Sidebar = ({ isOpen, onClose, userRole }) => {
           { label: 'Student Loan', icon: <BadgeDollarSignIcon />, onClick: () => handleItemClick("loan", "loan") }
         ]
       },
-      { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5" /> },
+      { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5" />, onClick: () => handleItemClick("setting", "setting") },
       { label: 'Log out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut") },
     ],
     admin: [
