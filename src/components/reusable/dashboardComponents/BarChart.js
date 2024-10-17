@@ -9,7 +9,7 @@ const PostsBarChart = ({
   barColor = '#82ca9d',
   title = 'Posts',
   height = 300,
-  fetchFunction
+  isDataArray = true,
 }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,16 +19,11 @@ const PostsBarChart = ({
     const fetchData = async () => {
       try {
         setLoading(true);
-        let result;
-        if (fetchFunction) {
-          result = await fetchFunction();
-        } else if (fetchUrl) {
-          const response = await axios.get(fetchUrl);
-          result = response.data;
-        } else {
-          throw new Error('Either fetchUrl or fetchFunction must be provided');
-        }
-        setData(result);
+        const response = await axios.get(fetchUrl);
+
+        const fetchedData = isDataArray ? response.data.data : response.data;
+
+        setData(fetchedData); 
         setError(null);
       } catch (error) {
         console.error(`Error fetching ${title} data:`, error);
@@ -39,7 +34,7 @@ const PostsBarChart = ({
     };
 
     fetchData();
-  }, [fetchUrl, fetchFunction, title]);
+  }, [fetchUrl, title, isDataArray]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;

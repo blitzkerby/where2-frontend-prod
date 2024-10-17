@@ -98,6 +98,8 @@ const config = {
     getDiscussionsPerDay: `${API_URL}/api/dashboard/discussions-per-day`,
     getDeviceDistribution: `${API_URL}/api/dashboard/device-distribution`,
     getActiveAndViews: `${API_URL}/api/dashboard/active-and-views`,
+    getUserCounts: `${API_URL}/api/dashboard/user-counts-by-city`,
+    getCommentsPerDay: `${API_URL}/api/dashboard/comments/by-day`,
   }
 };
 

@@ -18,6 +18,7 @@ import useAuth from "./../../../../hooks/useAuth";
 import PostsBarChart from "./../../../reusable/dashboardComponents/BarChart";
 import CustomedPieChart from "./../../../reusable/dashboardComponents/CustomedPieChart";
 import UsersStatusComponent from "./../../../reusable/dashboardComponents/UsersStatus";
+import TopPostsChart from "./../../../reusable/dashboardComponents/TopPostsChart";
 import axios from "axios";
 import config from "./../../../../config";
 
@@ -77,49 +78,6 @@ const ViewsChart = ({ data, timeFrame }) => (
     </LineChart>
   </ResponsiveContainer>
 );
-
-const TopPostsChart = ({ data }) => (
-  <ResponsiveContainer width="100%" height={300}>
-    <BarChart
-      data={data}
-      layout="vertical"
-      margin={{ top: 5, right: 30, left: 100, bottom: 5 }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis type="number" />
-      <YAxis dataKey="name" type="category" />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="views" fill="#E2F1E7" />
-    </BarChart>
-  </ResponsiveContainer>
-);
-
-const DeviceDistributionChart = ({ data }) => {
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
-
-  return (
-    <ResponsiveContainer width="100%" height={300}>
-      <PieChart>
-        <Pie
-          data={data}
-          cx="50%"
-          cy="50%"
-          labelLine={false}
-          outerRadius={80}
-          fill="#8884d8"
-          dataKey="value"
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-        <Tooltip />
-        <Legend />
-      </PieChart>
-    </ResponsiveContainer>
-  );
-};
 
 const SummaryStatistics = ({ data }) => {
   const totalViews = data.reduce((sum, item) => sum + item.views, 0);
@@ -294,30 +252,44 @@ const PostViewsDashboard = () => {
             <ViewsChart data={data} timeFrame={timeFrame} />
           </div>
         </div>
-        <div>
-          <h2 className="text-xl font-semibold mb-4">Top Customers</h2>
-          <TopPostsChart data={topPosts} />
-        </div>
       </div>
 
-      <div className="mb-6">
+      <div>
+          <h2 className="text-xl font-semibold mb-4">User counts based on City</h2>
+          <TopPostsChart fetchUrl={config.dashboard.getUserCounts} />
+      </div>
+
+      <div className="my-6">
         <h2 className="text-xl font-semibold mb-4">User Status</h2>
           <UsersStatusComponent activeUsers={activeUsers} viewsToday={viewsToday}/>
       </div>
 
 
-      <div className="mb-6">
+      <div className="my-6">
         <h2 className="text-xl font-semibold mb-4">Device Distribution</h2>
           <CustomedPieChart fetchUrl={config.dashboard.getDeviceDistribution} />
       </div>
 
-      <div className="mb-6">
+      <div className="p-6">
+      <div className="my-6">
         <h2 className="text-xl font-semibold mb-4">Number of Posts</h2>
         <PostsBarChart 
-        fetchUrl={config.dashboard.getDiscussionsPerDay}
-        title="Post(s) created per day"
-      />
+          fetchUrl={config.dashboard.getDiscussionsPerDay} // Fetch URL for posts
+          title="Post(s) created per day"
+          isDataArray={false}
+        />
       </div>
+
+      <div className="my-6">
+        <h2 className="text-xl font-semibold mb-4">Number of Comment(s)</h2>
+        <PostsBarChart 
+          fetchUrl={config.dashboard.getCommentsPerDay} // Fetch URL for comments
+          title="Comment(s) created per day"
+          barColor="#82ca9d"
+          isDataArray={true}
+        />
+      </div>
+    </div>
     </div>
   );
 };
