@@ -43,10 +43,10 @@ const HealthArticleList = () => {
     <>
       <WrapperComponent>
         <header className="lg:w-[70%] sm:w-[80%] mx-auto py-16 text-center tracking-tightest">
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold mb-6">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold mb-6 tracking-tighter">
             Mental Health and Health Services and Product Reviews
           </h1>
-          <p className="text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto text-balance">
+          <p className="text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto text-balance tracking-tightest">
             Our mission is to provide exceptional health and wellness services
             to our user, community, and nation. We only publish trustworthy
             articles and publications, translated from reliable well-known
@@ -54,7 +54,7 @@ const HealthArticleList = () => {
           </p>
         </header>
       </WrapperComponent>
-      <div className="w-[80%] mx-auto">
+      <div className="lg:w-[85%] sm:w-[95%] mx-auto">
         <WrapperComponent>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-2">
             {articles.map((article) => (
