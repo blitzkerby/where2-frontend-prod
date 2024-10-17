@@ -85,8 +85,8 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
   return (
     <WrapperComponent>
       <div
-        className={`lg:p-3 sm:p-3 bg-white hover:scale-100 ${
-          isExpanded ? "z-100" : "lg:max-h-[144px]"
+        className={`lg:p-3 sm:p-1 bg-white hover:scale-100 ${
+          isExpanded ? "min-h-fit" : ""
         } rounded-lg shadow hover:shadow-lg cursor-pointer relative`}
         onClick={toggleExpand}
       >
@@ -94,12 +94,15 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
           {discussion.title}
         </h3>
         <p
-          className={`text-gray-600 mb-4 ${
-            isExpanded ? "" : "truncate text-ellipsis"
-          }`}
-        >
-          {discussion.content}
-        </p>
+    className={`text-gray-600 mb-4 ${
+      isExpanded
+        ? "whitespace-normal" // Allow wrapping when expanded
+        : "overflow-hidden whitespace-nowrap text-ellipsis" // Truncate when collapsed
+    }`}
+  >
+    {discussion.content}
+  </p>
+
         <div className="flex justify-between items-center text-sm text-gray-500">
           {discussion.user && (
             <div

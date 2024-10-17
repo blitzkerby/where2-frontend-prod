@@ -51,7 +51,7 @@ const DiscussionList = () => {
   }
 
   return (
-    <div className="w-[90%] mx-auto min-h-full">
+    <div className="w-[90%] py-4 mx-auto min-h-full">
       <div className="flex justify-between h-full items-center">
         <h2 className="text-xl sm:hidden">Community Discussions</h2>
         {showDashboard && (

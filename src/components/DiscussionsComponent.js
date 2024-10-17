@@ -18,7 +18,7 @@ const DiscussionsComponent = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
       <SubpageHeroSection />
-      <div className="w-[95%] mx-auto px-4 sm:px-6 lg:px-8 py-8 h-full">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-4 py-8 h-full">
         {showCreateForm && isLoggedIn && allowedRoles.includes(role) ? (
           <div className="bg-white shadow-md rounded-lg p-6">
             <CreateDiscussionComponent
@@ -26,15 +26,15 @@ const DiscussionsComponent = () => {
             />
           </div>
         ) : (
-          <div className="flex flex-col lg:flex-row gap-8 h-full">
-            <div className="lg:w-[90%] w-full">
-              <div className="bg-white shadow-md rounded-lg lg:p-6 sm:p-3 min-h-[600px]">
+          <div className="flex w-full flex-col lg:flex-row gap-8 h-full">
+            <div className="lg:w-[70%]">
+              <div className="bg-white shadow-md rounded-lg sm:p-3 min-h-[600px]">
                 <DiscussionList
                   onNewDiscussionClick={() => setShowCreateForm(true)}
                 />
               </div>
             </div>
-            <div className="lg:w-1/3 w-full">
+            <div className="lg:w-[28%]">
               <div className="bg-white shadow-md rounded-lg p-6 h-full">
                 <UserDiscussions userId={userId} />
               </div>
