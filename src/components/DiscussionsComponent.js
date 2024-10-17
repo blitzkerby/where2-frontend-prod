@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import CreateDiscussionComponent from "./community/CreateDiscussionComponent";
 import DiscussionList from "./community/DiscussionList";
 import SubpageHeroSection from "./community/SubHeroSectionComponent";
-import ButtonComponent from "./reusable/Button";
 import UserDiscussions from "./community/UserDiscussion";
 import useAuth from "./../hooks/useAuth";
 
@@ -26,9 +25,9 @@ const DiscussionsComponent = () => {
             />
           </div>
         ) : (
-          <div className="flex w-full flex-col lg:flex-row gap-8 h-full">
+          <div className="flex w-full flex-col lg:flex-row gap-4 h-full">
             <div className="lg:w-[70%]">
-              <div className="bg-white shadow-md rounded-lg sm:p-3 min-h-[600px]">
+              <div className="bg-white shadow-md rounded-lg py-8 sm:p-3 min-h-[600px]">
                 <DiscussionList
                   onNewDiscussionClick={() => setShowCreateForm(true)}
                 />

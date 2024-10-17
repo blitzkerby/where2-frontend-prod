@@ -31,6 +31,7 @@ import LoggedInOnlyRoute from "./components/routes/LoggedInRoute";
 import HealthArticlePage from "./components/health/HealthArticlePage";
 
 
+
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
