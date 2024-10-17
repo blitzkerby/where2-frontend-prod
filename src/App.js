@@ -28,6 +28,7 @@ import StudentLoanPage from "./pages/StudentLoanPage";
 import AccommodationPage from "./pages/AccommodationPage";
 import AccommodationDetailPage from "./pages/AccommodationDetailPage";
 import LoggedInOnlyRoute from "./components/routes/LoggedInRoute";
+import HealthArticlePage from "./components/health/HealthArticlePage";
 
 
 const queryClient = new QueryClient();
@@ -74,6 +75,7 @@ const router = createBrowserRouter([
   { path: "/student-loans", element: <StudentLoanPage /> },
   { path: "/accommodations", element: <AccommodationPage /> },
   {path:"/accommodation-detail/:id",element:<AccommodationDetailPage />},
+  { path: "/health/article/:id", element: <HealthArticlePage />},
 
 ]);
 

@@ -1,19 +1,15 @@
 // src/pages/UniversityPage.js
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { LoadingOverlay } from '../components/reusable/Loading';
 import UniversityList from '../components/UniversityList';
-
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
 import ListContainer from '../components/reusable/ListContainer';
-
 import Pagination from '../components/reusable/Pagination';
 import SearchBar from '../components/reusable/SearchBar';
-
-import { searchUniversities } from '../features/slices/searchbarSlice';
-import { fetchUniversities, setUniversities } from '../features/slices/universitySlice';
+import { searchUniversities, setUniversities } from '../features/slices/searchbarSlice';
+import { fetchUniversities } from '../features/slices/universitySlice';
 import { useLocation } from 'react-router-dom';
 import { fetchAllList } from '../features/slices/paginationSlice';
 
@@ -26,7 +22,6 @@ function useQuery() {
 
 const UniversityPage = () => {
     const urlParams = useQuery();
-
     const page = parseInt(urlParams.get('page')) || 1;
     const searchQuery = urlParams.get('q') || '';
     const limit = parseInt(urlParams.get('limit')) || 10;
@@ -38,46 +33,27 @@ const UniversityPage = () => {
     }
 
     const dispatch = useDispatch();
-    // const { universities, loading, error } = useSelector((state) => state.universities);
-    const { totalPage,data,loading, error } = useSelector((state) => state.pagination);
+    const { totalPage, data, loading, error } = useSelector((state) => state.pagination);
 
-    /**
-     * useEffect Hook
-     * 
-     * Fetches universities based on current page and limit if no search query is provided.
-     * If a search query is present, it triggers the search functionality.
-     * 
-     * @param {Function} dispatch - Redux dispatch function
-     * @param {number} page - Current page number for pagination
-     * @param {string} searchQuery - Current search query
-     * @param {number} limit - Limit of items per page
-     */
     useEffect(() => {
         if (!searchQuery) {
             dispatch(fetchAllList({ page, limit, model: 'University' }));
         } else {
-            handleSearch(searchQuery);
+            handleSearch(searchQuery, page);
         }
     }, [dispatch, page, searchQuery, limit]);
 
-    /**
-     * handleSearch
-     * 
-     * Executes a search query to fetch universities matching the given search term.
-     * The results are dispatched to update the universities list in the Redux store.
-     * 
-     * @param {string} query - The search term to query universities
-     * @returns {Promise<Array|Error>} - Returns a promise that resolves to the fetched data or rejects with an error
-     */
-    const handleSearch = async (query) => {
-        try {
-            const data = await searchUniversities({ query, page });
-            dispatch(setUniversities(data));
-            return data;
-        } catch (error) {
-            if (isDebug) console.error('Error fetching data:', error);
-            throw error; 
-        }
+    const handleSearch = (query, currentPage) => {
+        // Dispatch the search action, assuming it returns a promise
+        dispatch(searchUniversities({ query, page: currentPage }))
+            .unwrap()
+            .then(data => {
+                dispatch(setUniversities(data)); // Update the universities list with search results
+            })
+            .catch(error => {
+                if (isDebug) console.error('Error fetching data:', error);
+                // Handle error if needed
+            });
     };
 
     return (
@@ -85,7 +61,7 @@ const UniversityPage = () => {
             <Navbar />
             <ListContainer>
                 {loading && <LoadingOverlay />}
-                {error && <p>{error}</p>}
+                {error && <p className="text-red-500">{error}</p>}
                 <SearchBar handleSearch={handleSearch} searchPlaceholder="Search universities..." />
                 <UniversityList universities={data} />
                 <Pagination totalPage={totalPage} currentPage={page} route={'universities'} />
@@ -96,3 +72,4 @@ const UniversityPage = () => {
 };
 
 export default UniversityPage;
+

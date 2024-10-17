@@ -99,7 +99,11 @@ const config = {
     getDeviceDistribution: `${API_URL}/api/dashboard/device-distribution`,
     getActiveAndViews: `${API_URL}/api/dashboard/active-and-views`,
     getUserCounts: `${API_URL}/api/dashboard/user-counts-by-city`,
-    getCommentsPerDay: `${API_URL}/api/dashboard/comments/by-day`,
+    getCommentsPerDay: `${API_URL}/api/dashboard/comments-by-day`,
+  },
+  health: {
+    getAllHealthArticles: `${API_URL}/api/health/health-articles`,
+    getHealthArticleById: (id) => `${API_URL}/api/health/health-articles/${id}`,
   }
 };
 
