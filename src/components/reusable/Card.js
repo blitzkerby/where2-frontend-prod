@@ -83,8 +83,12 @@ const Card = ({
   ];
 
   return (
-    <div className="sm:max-w-[600px] sm:w-[100%] sm:flex-col relative clip-border-box rounded-xl border flex md:flex-row shadow-md lg:h-[348px] lg:w-[886px]">
-      <div className="bg-cover bg-center lg:w-[398px] sm:w-[100%] sm:max-h-[348px] rounded-xl flex-shrink-0">
+    <div className="relative clip-border-box rounded-xl border flex md:flex-row shadow-md
+        lg:h-[348px] lg:w-[886px]
+        sm:max-w-[600px] sm:w-[100%] sm:flex-col">
+      <div className="bg-cover bg-center rounded-xl flex-shrink-0
+          lg:w-[398px]
+          sm:w-[100%] sm:max-h-[348px]">
         {image && (
           <img className="top-0 left-0 w-full h-full object-cover -z-10" src={image} alt={imageAlt} onError={handleError} />
         )}

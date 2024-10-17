@@ -2,11 +2,37 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search } from "lucide-react";
 
-const styles = {
-  form: "relative mx-[20px]",
-  input: "w-full py-3 px-4 pr-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white bg-opacity-80",
-  button: "absolute right-3 top-1/2 transform -translate-y-1/2",
-  icon: "h-5 w-5 text-gray-400 z-[0]"
+const tailwindStyles = {
+  form: "rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white bg-opacity-80",
+  input: "bg-opacity-0",
+  button: "",
+  icon: "text-gray-400"
+};
+
+const cssStyles = {
+  form: {
+    height: "54px",
+    display: "flex",
+    justifyContent: "space-between",
+    overflow: "hidden",
+    width: "inherit",
+    padding: "0 1.6875rem",
+    position: "relative",
+    transition: "border-radius 0.5s ease"
+  },
+  input: {
+    width: "100%",
+    border: "none",
+    outline: "none",
+    background: "transparent",
+    color: "inherit"
+  },
+  formFocusWithin: {
+    borderRadius: "10px"
+  },
+  formBlur: {
+    borderRadius: "30px"
+  }
 };
 
 const SearchBar = ({ handleSearch, searchPlaceholder, category }) => {
@@ -24,33 +50,38 @@ const SearchBar = ({ handleSearch, searchPlaceholder, category }) => {
   };
 
   return (
-    <form onSubmit={onSubmit} className={styles.form}>
+      <form
+        onSubmit={onSubmit}
+        className={tailwindStyles.form}
+        style={cssStyles.form}
+        onFocus={(e) => e.currentTarget.style.borderRadius = cssStyles.formFocusWithin.borderRadius}
+        onBlur={(e) => e.currentTarget.style.borderRadius = cssStyles.formBlur.borderRadius}
+      >
       <input 
         type="text" 
         name="search" 
         placeholder={searchPlaceholder} 
         value={searchQuery}
         onChange={onChange}
-        className={styles.input}
+        className={`${tailwindStyles.input}`} 
+        style={cssStyles.input}
       />
       <button 
         type="submit" 
-        className={styles.button}
+        className={`${tailwindStyles.button}`} 
+        style={cssStyles.button}
         aria-label="Search"
       >
-        <Search className={styles.icon} />
+        <Search className={tailwindStyles.icon} style={cssStyles.icon} />
       </button>
     </form>
   );
 };
 
-const SearchComponent = ({ handleSearch, placeholder = "Search..." , category}) => {
+const SearchComponent = ({ handleSearch, placeholder = "Search...", category }) => {
   return (
-    <div>
-      <SearchBar handleSearch={handleSearch} searchPlaceholder={placeholder}  category={category}/>
-    </div>
+    <SearchBar handleSearch={handleSearch} searchPlaceholder={placeholder} category={category} />
   );
 };
 
 export default SearchComponent;
-

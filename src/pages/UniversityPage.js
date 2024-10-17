@@ -7,10 +7,11 @@ import { fetchUniversities, searchUniversities } from '../features/slices/univer
 
 import { LoadingOverlay } from '../components/reusable/Loading';
 
+import UniversityList from '../components/UniversityList';
+
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
 import SearchBar from '../components/reusable/SearchBar';
-import UniversityList from '../components/UniversityList';
 import Pagination from '../components/reusable/Pagination';
 import ListContainer from '../components/reusable/ListContainer';
 
@@ -19,18 +20,12 @@ const isDebug = true;
 
 const UniversityPage = () => {
     const urlParams = useQuery();
-
     const page = parseInt(urlParams.get('page')) || 1;
     const searchQuery = urlParams.get('q') || '';
 
     const dispatch = useDispatch();
     const { universities, loading, error } = useSelector((state) => state.universities);
     const { totalPage } = useSelector((state) => state.pagination);
-
-    if (isDebug) {
-        console.log("UniversityPage says: page is", page);
-        console.log("UniversityPage says: query is", searchQuery);
-    }
 
     /**
      * useEffect Hook
@@ -61,14 +56,18 @@ const UniversityPage = () => {
     return (
         <>
             <Navbar />
-            <div className="max-w-full flex justify-center min-h-screen lg:max-w-[980px] sm:w-[100%] mx-auto gap-[30px] lg:gap-[40px] mt-[248px] lg:mt-[276px] lg:w-[100%] grid sm:px-[35px]">
+            <ListContainer>
                 {loading && <LoadingOverlay />}
                 {/* {error && <p>{error}</p>} */}
                 
                 <SearchBar handleSearch={searchUniversities} searchPlaceholder="Search universities..." category="university"/>
                 <UniversityList universities={universities} />
-                <Pagination totalPage={totalPage} currentPage={page} category="university" searchQuery={searchQuery}/>
-            </div>
+                <Pagination 
+                    totalPage={totalPage} 
+                    currentPage={page}
+                    category="university"
+                    searchQuery={searchQuery}/>
+            </ListContainer>
             <Footer />
         </>
     );

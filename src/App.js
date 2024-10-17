@@ -20,7 +20,6 @@ import PublicOnlyROute from "./components/routes/PublicOnlyRoute";
 import CreateDiscussionPage from "./pages/CreateDiscussionPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import VisitProfile from "./components/accountUtilities/sidebarComponents/User/VisitProfile";
-import UniversityDetail from "./pages/UniversityDetail"
 import LivelihoodPage from "./pages/LivelihoodPage";
 import JobPage from "./pages/JobPage";
 import JobDetailPage from "./pages/JobDetailPage";
@@ -28,6 +27,7 @@ import StudentLoanPage from "./pages/StudentLoanPage";
 import AccommodationPage from "./pages/AccommodationPage";
 import AccommodationDetailPage from "./pages/AccommodationDetailPage";
 import ErrorPage from "./pages/ErrorPage";
+import UniversityDetailPage from "./pages/UniversityDetailPage";
 
 const queryClient = new QueryClient();
 
@@ -65,30 +65,22 @@ const router = createBrowserRouter([
   {
     path: "/list",
     children: [
-      {
-        path: "university",
-        children: [
-          { path: "", element: <UniversityPage /> },
-          { path: "search", element: <UniversityPage /> },
-        ]
-      },
-      {
-        path: "scholarship",
-        children: [
-          { path: "", element: <ScholarshipPage /> },
-          { path: "search", element: <ScholarshipPage /> },
-        ]
-      }
+      { path: "job", element: <JobPage /> },
+      { path: "university", element: <UniversityPage/>},
+      { path: "scholarship", element: <ScholarshipPage/>},
+      { path: "student-loan", element: <StudentLoanPage /> },
+      { path: "accommodation", element: <AccommodationPage /> },
     ]
   },  
   {
     path: "/detail",
     children: [
-      { path: "university/:id", element: <UniversityDetail /> },
-      { path: "scholarship/:id", element: <ScholarshipDetailPage /> }
+      { path: "university/:id", element: <UniversityDetailPage /> },
+      { path: "scholarship/:id", element: <ScholarshipDetailPage /> },
+      { path: "job/:id", element: < JobDetailPage/>}
     ]
   },  
-  { path: "/jobs", element: <JobPage /> },
+  
   { path: "/login",element: <LoginPage />},
   { path: "/signup",element: <RegisterPage />},
   { path: "/scholarships", element: <ScholarshipPage/>},
@@ -99,8 +91,6 @@ const router = createBrowserRouter([
   { path: "/dashboard/:userName", element: <DashboardComponent/> },
   { path: "/profile/:userName", element: <UserProfile /> },
   { path:"/livelihood", element: <LivelihoodPage />},
-  { path: "/jobs", element: <JobPage/> },
-  { path: "/job-detail/:jobId", element: <JobDetailPage/> },
   { path: "/scholarships", element: <ScholarshipPage /> },
   { path: "/scholarship/:id", element: <ScholarshipDetailPage /> },
   { path: "/student-loans", element: <StudentLoanPage /> },

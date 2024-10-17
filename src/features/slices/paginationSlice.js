@@ -5,12 +5,12 @@ import config from '../../config';
 
 export const fetchAllList = createAsyncThunk(
     'allList',
-    async ({ page , limit, model}, { dispatch }) => {
+    async ({ page , limit, model }, { dispatch }) => {
         const response = await axios.get(`${ config.list.getAllList(model)}?page=${page}&limit=${limit}`);
         
         // Dispatch actions to update pagination state
         dispatch(setTotalPage(response.data.pagination.totalPages));       
-        return response.data;
+        return response.list;
     }
 );
 

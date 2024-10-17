@@ -41,7 +41,7 @@ const Navbar = () => {
 
   const menuItems = [
     { logo: <School />, name: "Universities", to: "/list/university", showMobile: true },
-    { logo: <BookOpenTextIcon />, name: "Scholarships", to: "/scholarships", showMobile: true },
+    { logo: <BookOpenTextIcon />, name: "Scholarships", to: "/list/scholarship", showMobile: true },
     { logo: <LucideBriefcaseBusiness />, name: "Livelihood", to: "/livelihood", showMobile: true },
     { logo: <Activity />, name: "Health", to: "/health", showMobile: true },
     {

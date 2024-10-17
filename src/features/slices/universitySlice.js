@@ -1,4 +1,3 @@
-// src/features/slices/universitySlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 

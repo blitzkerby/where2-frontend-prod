@@ -1,27 +1,23 @@
 import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { fetchUniversity } from '../features/slices/universitySlice';
+
+import DetailLayout from '../layouts/DetailLayout';
+
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
-import DetailLayout from '../layouts/DetailLayout';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
 
-const UniversityPage = () => {
+const UniversityDetailPage = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
+
     const university = useSelector((state) => state.universities.university);
     const isLoading = useSelector((state) => state.universities.isLoading);
 
     useEffect(() => {
         dispatch(fetchUniversity(id));
-
-        // async function test(){
-        //     const response = await axios.get(`http://127.0.0.1:4000/api/detail/university/1`);
-        //     console.log(response)
-        // }
-
-        // test()
     }, [dispatch, id]);
 
     if (isLoading) {
@@ -48,4 +44,4 @@ const UniversityPage = () => {
     );
 };
 
-export default UniversityPage;
+export default UniversityDetailPage;

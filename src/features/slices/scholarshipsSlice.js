@@ -1,47 +1,56 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
-import config from "../../config"
+import config from "../../config";
 import { setTotalPage } from './paginationSlice';
 
+/**
+ * Fetch all scholarships with pagination.
+ * @route GET /api/list/scholarship/
+ * @param {Object} param - The pagination parameters.
+ * @param {number} param.page - The current page number.
+ * @access Public
+ */
 export const fetchScholarships = createAsyncThunk(
     'scholarships/fetchScholarships',
     async ({ page }, { dispatch }) => {
         try {
             const response = await axios.get(`${config.scholarships.getAllScholarships}?page=${page}`);
-
-            dispatch(setTotalPage(response.data.pagination.totalPages || 1));       
+            dispatch(setTotalPage(response.data.pagination.totalPages || 1));
             return response.data.list;
         } catch (error) {
-            return []
+            return [];
         }
     }
-)
+);
 
-// export const fetchScholarships = createAsyncThunk(
-//     'scholarships/fetchScholarships',
-//     async (id) => {
-//         const response = await axios.get(config.scholarships.getAllScholarships(id));
-//         return response.data.scholarship;
-//     }
-// );
-
+/**
+ * Fetch a specific scholarship by ID.
+ * @route GET /api/list/scholarship/:id
+ * @param {number} id - The ID of the scholarship to fetch.
+ * @access Public
+ */
 export const fetchScholarship = createAsyncThunk(
     'scholarships/fetchScholarship',
     async (id) => {
         const response = await axios.get(`${config.scholarships.getScholarshipById}/${id}`);
         return response.data.list;
     }
-)
+);
 
+/**
+ * Search scholarships by query.
+ * @route GET /api/list/scholarship
+ * @param {string} query - The search query.
+ * @access Public
+ */
 export const searchScholarships = createAsyncThunk(
     'scholarships/searchScholarships',
     async ({ query, page }, { dispatch }) => {
         const response = await axios.get(`${config.scholarships.getAllScholarships}?q=${encodeURIComponent(query)}&page=${page}`);
-        dispatch(setTotalPage(response.data.pagination.totalPages || 1))
+        dispatch(setTotalPage(response.data.pagination.totalPages || 1));
         return response.data.list;
     }
-)
+);
 
 const scholarshipsSlice = createSlice({
     name: 'scholarships',
@@ -51,7 +60,11 @@ const scholarshipsSlice = createSlice({
         loading: false,
         error: null,
     },
-    reducers: {},
+    reducers: {
+        setScholarships: (state, action) => {
+            state.scholarships = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder
             /**
@@ -71,7 +84,6 @@ const scholarshipsSlice = createSlice({
                 state.loading = false;
                 state.error = action.error.message;
             })
-
             /**
              * Fetch a specific scholarship by ID.
              * @route GET /api/list/scholarship/:id
@@ -83,15 +95,14 @@ const scholarshipsSlice = createSlice({
             })
             .addCase(fetchScholarship.fulfilled, (state, action) => {
                 state.loading = false;
-                state.scholarships = action.payload;
+                state.scholarship = action.payload;
             })
             .addCase(fetchScholarship.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
             })
-
             /**
-             * Search universities by query.
+             * Search scholarships by query.
              * @route GET /api/list/scholarship/search
              * @access Public
              */
@@ -101,15 +112,15 @@ const scholarshipsSlice = createSlice({
             })
             .addCase(searchScholarships.fulfilled, (state, action) => {
                 state.loading = false;
-                state.scholarships = action.payload
+                state.scholarships = action.payload;
             })
             .addCase(searchScholarships.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
-                state.scholarships = []
-            })
+                state.scholarships = [];
+            });
     },
 });
 
+export const { setScholarships } = scholarshipsSlice.actions;
 export default scholarshipsSlice.reducer;
-

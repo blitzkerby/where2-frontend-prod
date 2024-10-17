@@ -1,4 +1,9 @@
+import { useDispatch, useSelector } from "react-redux";
+
 import Card from "./reusable/Card";
+
+import { useEffect } from "react";
+import { removedIsClicked } from "../features/slices/favoriteSlice";
 
 const isDebug = true;  // Set to false to turn off console logging
 
@@ -18,6 +23,19 @@ const UniversityList = ({ universities }) => {
     if (universities.length === 0) {
         return <div style={{ textAlign: 'center', color: 'red', fontSize: '24px' }}>No results found :(</div>;
     }
+
+    // const dispatch = useDispatch();
+    // const { isClicked } = useSelector((state) => state.favorites);
+ 
+    // useEffect(() => {
+    //     if (page === 1) {
+    //         dispatch(removedIsClicked());
+    //     }
+    //     dispatch(getFavorite({category: "university",  page, limit }));
+    // }, [page]);
+    // if (universities[0] == "No results found") {
+    //     return null;
+    // }
 
     return (
         <>
