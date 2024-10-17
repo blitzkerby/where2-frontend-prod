@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import React from "react";
 const DefaultCard = ({ card }) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer">

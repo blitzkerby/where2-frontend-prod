@@ -5,7 +5,7 @@ import Footer from "../components/reusable/Footer";
 import Hero from "../layouts/Hero";
 import Searchbar from "../components/reusable/SearchBar";
 import WrapperComponent from "../components/reusable/WrapperComponent";
-
+import CardFeatureSlider from "../components/reusable/CardFeatureSlider";
 // import Card from "../components/reusable/Card";
 
 // assets
@@ -41,6 +41,11 @@ const hero2 = {
 const header =[
   {
     suggested: "SUGGESTED FOR YOU"
+  }
+]
+const headerCardFeature =[
+  {
+    suggested: "OUR FEATURE"
   }
 ]
 const cards = [
@@ -116,24 +121,20 @@ const cardFeature = [
 const HomePage = () => {
   return (
     <div>
-        <Navbar />
-
+      <Navbar />
       <WrapperComponent>
         <Hero props={hero1}>
           <Searchbar searchPlaceholder={hero1.searchPlaceholder} />
         </Hero>
       </WrapperComponent>
-
       <WrapperComponent>
         <CardSlider cards={cards} header={header} />
-
       </WrapperComponent>
-
       <WrapperComponent>
         <Hero props={hero2} />
       </WrapperComponent>
       <WrapperComponent>
-        <CardSlider cardFeature={cardFeature} />
+        <CardFeatureSlider cardFeature={cardFeature} header={headerCardFeature} />
       </WrapperComponent>
       <WrapperComponent>
         <Footer />
@@ -143,3 +144,5 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+
