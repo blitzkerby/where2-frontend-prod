@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import ButtonComponent from "../reusable/Button";
 import useAuth from "../../hooks/useAuth";
-import ProfilePicture from "../reusable/ProfilePicture";
+import ProfilePicture from "../reusable/PictureUpload";
 import ReplyForm from "../reusable/ReplyForm";
 import config from "./../../config";
 import axios from "axios";

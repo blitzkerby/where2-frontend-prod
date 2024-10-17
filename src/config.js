@@ -86,6 +86,9 @@ const config = {
   chatbot: {
     sendMessage: `${API_URL}/api/ai/summary`,
   },
+  contentCreateion : {
+    createUniversity : `${API_URL}/api/university/create`,
+  },
   payment: {
     makePayment: `${API_URL}/api/bakong-payment`,
     createPaypalOrder: `${API_URL}/api/create-paypal-order`,

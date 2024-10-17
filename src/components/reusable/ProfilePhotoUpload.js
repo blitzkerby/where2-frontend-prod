@@ -86,4 +86,4 @@ const ProfilePictureUpload = () => {
   );
 };
 
-export default ProfilePictureUpload;
+export default PictureUpload;

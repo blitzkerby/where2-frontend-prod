@@ -4,7 +4,7 @@ import FormInput from "../components/reusable/InputField";
 import useAuth from "../hooks/useAuth";
 import { LoadingOverlay } from "../components/reusable/Loading";
 import VisitorTracker from "../components/reusable/VisitorTracker";
-import ProfilePictureUpload from "../components/reusable/ProfilePhotoUpload";
+import PictureUpload from "../components/reusable/ProfilePhotoUpload";
 
 const UserAccount = ({ userInfo }) => {
   const location = useLocation();
@@ -28,7 +28,7 @@ const UserAccount = ({ userInfo }) => {
     <section className="w-full h-full bg-white rounded-3xl mb-[32px] shadow-md border">
       <div className="lg:w-full lg:py-[128px] lg:px-[64px] lg:mx-auto h-full px-4 pb-6 pt-12 sm:px-6 lg:pb-0">
         <div className="flex items-center justify-center mb-6">
-          <ProfilePictureUpload userId={userInfo.id} />
+          <PictureUpload userId={userInfo.id} />
         </div>
 
         <p className="text-center mb-3">{userInfo.lastName}</p>

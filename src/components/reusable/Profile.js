@@ -1,6 +1,5 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import Sidebar from "../accountUtilities/Sidebar.js";
-import { useEffect } from "react";
 import UniversityListing from "../accountUtilities/sidebarComponents/Developer/UniversityListing.js";
 import AccommodationListing from "../accountUtilities/sidebarComponents/Developer/AccommodationListing.js";
 import UserListing from "../accountUtilities/sidebarComponents/Developer/UsersListing.js";
@@ -25,10 +24,14 @@ const contentComponents = {
   adminDashboard: AdminDashboard,
   adminContent: AdminContent,
   logOut: Logout,
+  logOut: Logout,
 };
 
 const Profile = ({ userData, isPublic }) => {
-  const [sidebarContent, setSidebarContent] = useState("account");
+  const [sidebarContent, setSidebarContent] = useState(() => {
+    
+    return localStorage.getItem("sidebarContent") || "account";
+  });
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const { role, loading } = useAuth();
@@ -37,7 +40,7 @@ const Profile = ({ userData, isPublic }) => {
     const checkScreenSize = () => {
       const newIsMobile = window.innerWidth < 980;
       setIsMobile(newIsMobile);
-      setSidebarOpen(!newIsMobile); // Sidebar open by default on large screens
+      setSidebarOpen(!newIsMobile); 
     };
 
     checkScreenSize();
@@ -45,6 +48,11 @@ const Profile = ({ userData, isPublic }) => {
 
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
+
+  useEffect(() => {
+    
+    localStorage.setItem("sidebarContent", sidebarContent);
+  }, [sidebarContent]);
 
   if (loading) {
     return <LoadingOverlay />;

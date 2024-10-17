@@ -6,7 +6,7 @@ import { LoadingOverlay } from "../../components/reusable/Loading";
 import VisitorTracker from "../../components/reusable/VisitorTracker";
 import ProfilePictureUpload from "../../components/reusable/ProfilePhotoUpload";
 import ContainerComponent from './ContainerComponent';
-import ProfilePicture from './ProfilePicture';
+import ProfilePicture from './PictureUpload';
 import { useParams } from 'react-router-dom';
 import Navbar from './../../components/reusable/Navbar';
 import Footer from './Footer';

@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 import Dashboard from "./../../assets/svg/dashboard.svg";
 import Menu from "./../../assets/svg/menu.svg";
 import useAuth from "../../hooks/useAuth";
-import ProfilePicture from "../reusable/ProfilePicture";
+import ProfilePicture from "../reusable/PictureUpload";
 import { User2 } from "lucide-react";
 
 const MenuIcon = <img src={Menu} alt="Menu" />;

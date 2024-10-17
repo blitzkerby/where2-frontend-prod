@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 import { MessageCircleMore } from "lucide-react";
 import Menu from "./../../assets/svg/menu.svg";
 import useAuth from "./../../hooks/useAuth";
-import ProfilePicture from "./ProfilePicture";
+import ProfilePicture from "./PictureUpload";
 import WrapperComponent from "./WrapperComponent";
 import {
   School,
