@@ -32,7 +32,7 @@ function DetailLayout({ image, description, title, websiteLink, facebookLink, in
             </div>
             <div className="w-full mb-6">
                 <h2 className="text-2xl mb-4">{title}</h2>
-                <p className="text-base mb-4">{description}</p>
+                {description}
             </div>
             <div className="w-full social flex py-6 ml-0 gap-[15px]">
                 {socialMediaIcons.map(({ icon: Icon, linkKey }, index) => (

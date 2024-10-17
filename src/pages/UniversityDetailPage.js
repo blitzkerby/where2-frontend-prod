@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { convertObsidianToHTML } from "../utils/markdownConverter";
+
 import { fetchUniversity } from '../features/slices/universitySlice';
 
 import DetailLayout from '../layouts/DetailLayout';
@@ -15,6 +17,8 @@ const UniversityDetailPage = () => {
 
     const university = useSelector((state) => state.universities.university);
     const isLoading = useSelector((state) => state.universities.isLoading);
+    
+    console.log(university)
 
     useEffect(() => {
         dispatch(fetchUniversity(id));
