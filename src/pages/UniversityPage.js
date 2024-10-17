@@ -36,11 +36,6 @@ const UniversityPage = () => {
 
     const items = [
         {
-            id: '2132',
-            label: 'University',
-            content: ['Western', 'TECHNO', 'AUPP', 'RUPP', 'PARAGON']
-        },
-        {
             id: '2eqsa',
             label: 'Location',
             content: ['Phnom Penh', 'Siem Reap']
