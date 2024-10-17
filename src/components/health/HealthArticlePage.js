@@ -75,21 +75,21 @@ const HealthArticlePage = () => {
           <div className="lg:flex lg:space-x-8">
             <div className="lg:w-full mb-8 lg:mb-0">
               <WrapperComponent>
-                <div className="bg-gray-900 w-full h-full rounded-xl p-4 shadow-lg">
+                <div className="bg-gray-900 w-full h-full rounded-xl shadow-lg">
                   <img
                     src={article.image || 'default-image-url.jpg'}
                     alt={article.title}
                     className="w-full  h-[400px] object-cover rounded-xl shadow-lg mb-6"
                   />
-                  <h1 className="text-3xl font-extrabold text-white mb-4 leading-tight tracking-tight">
+                  <h1 className="text-3xl font-extrabold text-white mb-4 leading-tight tracking-tight p-4">
                     {article.title}
                   </h1>
-                  <div className="flex items-center text-sm text-gray-400 mb-6 tracking-tighter">
+                  <div className="flex items-center text-sm text-gray-400 mb-6 tracking-tighter p-4">
                     <span className="font-medium">{article.author}</span>
                     <span className="mx-2">•</span>
                     <span>{formattedDate}</span>
                   </div>
-                  <div className="prose prose-lg max-w-none text-gray-300 tracking-tighter text-justify">
+                  <div className="prose prose-lg max-w-none text-gray-300 tracking-tighter text-justify p-4">
                     {article.content}
                   </div>
                 </div>
