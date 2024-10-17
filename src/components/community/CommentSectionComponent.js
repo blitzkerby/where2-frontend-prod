@@ -79,7 +79,7 @@ const CommentSectionComponent = ({
 
       {error && <div className="text-red-500 text-sm">{error}</div>}
 
-      <div className="space-y-4">
+      <div className="space-y-4 pl-8">
         {comments
           .filter(comment => comment && comment.user) // Check for both comment and user
           .map(comment => (
