@@ -86,11 +86,11 @@ const CommentSectionComponent = ({
             <div key={comment.id} className="bg-gray-50 p-4 rounded-lg">
               <div className="flex items-center gap-2 mb-2">
                 <ProfilePicture userId={comment.user.id} size={6} />
-                <span className="text-sm text-gray-600">
+                <span className="text-sm text-gray-600 truncate">
                   {comment.user.email}
                 </span>
               </div>
-              <p className="text-gray-700">{comment.content}</p>
+              <p className="text-gray-700 truncate text-ellipsis">{comment.content}</p>
             </div>
           ))}
       </div>
