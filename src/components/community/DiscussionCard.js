@@ -94,7 +94,7 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
           {discussion.title}
         </h3>
         <p
-    className={`text-gray-600 mb-4 ${
+    className={`text-gray-600 mb-4 text-justify ${
       isExpanded
         ? "whitespace-normal" // Allow wrapping when expanded
         : "overflow-hidden whitespace-nowrap text-ellipsis" // Truncate when collapsed
