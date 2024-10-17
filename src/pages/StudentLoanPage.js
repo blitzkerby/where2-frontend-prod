@@ -12,27 +12,26 @@ import StudentLoanList from "../components/StudentLoanList";
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
-}  
+} 
 const StudentLoanPage = () => {
     const urlParams = useQuery();
-
     const page = parseInt(urlParams.get('page')) || 1;
-    const limit = parseInt(urlParams.get('limit')) || 10;
     const dispatch = useDispatch();
     const { data, loading, error, totalPage } = useSelector((state) => state.pagination);
 
     useEffect(() => {
-        dispatch(fetchAllList({page,limit,model: 'StudentLoan'}))
-    },[dispatch, page])
+        dispatch(fetchAllList({page,limit:10,model: 'StudentLoan'}))
+    }, [dispatch, page])
+
     return (
         <>
             <Navbar />
             <ListContainer>
             {loading && <LoadingOverlay/>}
             {error && <p>{error}</p>}
-            <StudentLoanList studentLoans={data}/>
+            <StudentLoanList studentLoans={data} page={page}/>
             </ListContainer>
-            <Pagination totalPage={totalPage} currentPage={page} route={'studen-loans'}/>
+            <Pagination totalPage={totalPage} currentPage={page} category= {'student-loan'} route={'studen-loan'} />
             <Footer />
         </>
     )

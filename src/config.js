@@ -72,7 +72,7 @@ const config = {
   },
   accommodation: {
     getAllAccommodation: `${API_URL}/api/list/accommodation`,
-    getAccommodationById: `${API_URL}/api/detail/accommodation`,
+    getAccommodationById: `${API_URL}/api/accommodation`,
   },
   search: {
     searchAny: `${API_URL}/api/`,

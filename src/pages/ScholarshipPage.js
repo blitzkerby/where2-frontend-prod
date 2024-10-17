@@ -59,7 +59,7 @@ const ScholarshipPage = () => {
                 {/* {error && <p>{error}</p>} */}
                 
                 <SearchBar handleSearch={searchScholarships} searchPlaceholder="Search scholarships..." category="scholarship" />
-                <ScholarshipList scholarships={scholarships} />
+                <ScholarshipList scholarships={scholarships} page={page} />
                 <Pagination totalPage={totalPage} currentPage={page} category="scholarship" searchQuery={searchQuery} />
             </ListContainer>
             <Footer />

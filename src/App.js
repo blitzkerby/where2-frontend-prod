@@ -65,9 +65,9 @@ const router = createBrowserRouter([
   {
     path: "/list",
     children: [
-      { path: "job", element: <JobPage /> },
       { path: "university", element: <UniversityPage/>},
-      { path: "scholarship", element: <ScholarshipPage/>},
+      { path: "scholarship", element: <ScholarshipPage /> },
+      { path: "job", element: <JobPage /> },
       { path: "student-loan", element: <StudentLoanPage /> },
       { path: "accommodation", element: <AccommodationPage /> },
     ]
@@ -79,8 +79,10 @@ const router = createBrowserRouter([
       { path: "scholarship/:id", element: <ScholarshipDetailPage /> },
       { path: "job/:id", element: < JobDetailPage/>}
     ]
-  },  
-  
+  },
+  { path: "/student-loans", element: <StudentLoanPage /> },
+  { path: "/accommodations", element: <AccommodationPage /> },
+  // { path: "/jobs", element: <JobPage /> },
   { path: "/login",element: <LoginPage />},
   { path: "/signup",element: <RegisterPage />},
   { path: "/scholarships", element: <ScholarshipPage/>},
@@ -94,7 +96,7 @@ const router = createBrowserRouter([
   { path: "/scholarships", element: <ScholarshipPage /> },
   { path: "/scholarship/:id", element: <ScholarshipDetailPage /> },
   { path: "/student-loans", element: <StudentLoanPage /> },
-  { path: "/accommodations", element: <AccommodationPage /> },
+  // { path: "/accommodations", element: <AccommodationPage /> },
   {path:"/accommodation-detail/:id",element:<AccommodationDetailPage />},
 
 ]);

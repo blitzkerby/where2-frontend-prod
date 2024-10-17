@@ -4,21 +4,15 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { removedIsClicked,getFavorite } from "../features/slices/favoriteSlice";
 import Card from "./reusable/Card";
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-} 
-const AccommodationList = ({ accommodations }) => {
-    const urlParams = useQuery();
 
-    const page = parseInt(urlParams.get('page')) || 1;
-    const limit = parseInt(urlParams.get('limit')) || 10;
+const AccommodationList = ({ accommodations, page }) => {
     const dispatch = useDispatch();
     const { isClicked } = useSelector((state) => state.favorites);
     useEffect(() => {
         if (page === 1) {
             dispatch(removedIsClicked());
         }
-        dispatch(getFavorite({category:"accommodation",page,limit}))
+        dispatch(getFavorite({category:"accommodation",page,limit:10}))
     }, [page]);
     
     return (

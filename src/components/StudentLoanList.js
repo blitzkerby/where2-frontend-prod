@@ -3,17 +3,12 @@ import Card from "./reusable/Card";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useEffect } from "react";
-import { getFavorite } from "../features/slices/favoriteSlice";
-import { useLocation } from "react-router-dom";
-import { removedIsClicked } from "../features/slices/favoriteSlice";
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-} 
-const StudentLoanList = ({ studentLoans }) => {
-    const urlParams = useQuery();
+import { removedIsClicked,getFavorite } from "../features/slices/favoriteSlice";
 
-    const page = parseInt(urlParams.get('page')) || 1;
-    const limit = parseInt(urlParams.get('limit')) || 10;
+
+
+const StudentLoanList = ({ studentLoans, page }) => {
+
     const dispatch = useDispatch();
     const { isClicked } = useSelector((state) => state.favorites);
 
@@ -21,9 +16,10 @@ const StudentLoanList = ({ studentLoans }) => {
         if (page === 1) {
             dispatch(removedIsClicked());
         }
-        dispatch(getFavorite({ category: "loan", page, limit }))
+        dispatch(getFavorite({ category: "loan", page, limit:10 }))
         
     }, [page]);
+
     return (
     <>
     {studentLoans.map(loan => {

@@ -12,18 +12,15 @@ import { removedIsClicked } from "../../features/slices/favoriteSlice";
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 } 
-const JobList = ({ jobs }) => {
-    const urlParams = useQuery();
+const JobList = ({ jobs, page }) => {
 
-    const page = parseInt(urlParams.get('page')) || 1;
-    const limit = parseInt(urlParams.get('limit')) || 10;
     const dispatch = useDispatch();
     const { isClicked } = useSelector((state) => state.favorites);
     useEffect(() => {
         if (page === 1) {
             dispatch(removedIsClicked());
         }
-        dispatch(getFavorite({category:"job",page,limit}))
+        dispatch(getFavorite({category:"job",page,limit:10}))
     }, [page]);
     
     return (
@@ -49,7 +46,7 @@ const JobList = ({ jobs }) => {
                 timeOut={job.salary}
                 type={"job"}
                 isHeartClicked = {isClicked[job.id]}
-                route={`/job-detail/${ job.id }`}
+                route={`/job-detail/${job.id}`}
             />)
         
     })}

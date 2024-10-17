@@ -10,12 +10,14 @@ import BookMark from '../../assets/svg/bookmark.svg';
 import Calender from '../../assets/svg/calender.svg';
 import MiniClock from '../../assets/svg/miniClock.svg';
 import { Facebook, Instagram, Twitter, Youtube, Chrome } from 'lucide-react';
+import FilledHeart from '../../assets/svg/filled-heart.svg'
 
 //components
 import Button from './ButtonComponent';
 
 //slice
-import { addFavorite,removeFavorite,setIsClicked } from "../../features/slices/favoriteSlice";
+import { addFavorite, removeFavorite } from "../../features/slices/favoriteSlice";
+import  {setIsClicked}  from '../../features/slices/favoriteSlice';
 
 const user = JSON.parse(localStorage.getItem('authData'));
 
