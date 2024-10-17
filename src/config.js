@@ -108,6 +108,7 @@ const config = {
   health: {
     getAllHealthArticles: `${API_URL}/api/health/health-articles`,
     getHealthArticleById: (id) => `${API_URL}/api/health/health-articles/${id}`,
+    createUniversity : `${API_URL}/api/detail/university/create`,
   }
 };
 

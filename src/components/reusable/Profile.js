@@ -24,7 +24,7 @@ const contentComponents = {
   adminDashboard: AdminDashboard,
   adminContent: AdminContent,
   logOut: Logout,
-  logOut: Logout,
+  collectionPanel: CollectionPanel,
 };
 
 const Profile = ({ userData, isPublic }) => {
@@ -92,13 +92,9 @@ const Profile = ({ userData, isPublic }) => {
         )}
 
         {/* Main Content */}
-        <div
-          className={`flex-grow overflow-hidden ${
-            isMobile ? "relative z-10" : ""
-          }`}
-        >
-          <div className="h-full overflow-y-auto">
-            <div className="px-4 min-h-full sm:mb-[16px]">
+        <div className={`flex-grow max-h-[inherite] overflow-y-scroll ${isMobile ? "relative z-10" : ""}`}>
+          <div className="h-full">
+            <div className="p-4">
               {isMobile && !sidebarOpen && (
                 <button
                   onClick={toggleSidebar}
@@ -107,11 +103,7 @@ const Profile = ({ userData, isPublic }) => {
                   <ChevronRight size={24} />
                 </button>
               )}
-              {sidebarContent !== "account" ? (
-                <CollectionPanel category={sidebarContent} />
-              ) : (
                 <ContentComponent userInfo={userData} />
-              )}
             </div>
           </div>
         </div>

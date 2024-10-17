@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { PlusCircle, Trash2, Save, Image, Link, FileText , MapPin } from 'lucide-react';
+import { PlusCircle, Trash2, Save, Image, Link, FileText, MapPin } from 'lucide-react';
 import ButtonComponent from '../../../reusable/Button';
+import axios from 'axios';
+import config from '../../../../config';
 
 const UniversityAdminEditor = () => {
   const [imageUrl, setImageUrl] = useState('');
@@ -31,18 +33,18 @@ const UniversityAdminEditor = () => {
     }
   }, []);
 
-useEffect(() => {
-  const handleBeforeUnload = (event) => {
-    const confirmationMessage = 'Please save all changes before reloading if you don\'t want to remove them.';
-    event.returnValue = confirmationMessage; 
-    return confirmationMessage; 
-  };
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      const confirmationMessage = 'Please save all changes before reloading if you don\'t want to remove them.';
+      event.returnValue = confirmationMessage;
+      return confirmationMessage;
+    };
 
-  window.addEventListener('beforeunload', handleBeforeUnload);
-  return () => {
-    window.removeEventListener('beforeunload', handleBeforeUnload);
-  };
-}, []);
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
 
   const handleLinkChange = (index, field, value) => {
     const newLinks = [...links];
@@ -55,22 +57,32 @@ useEffect(() => {
     setLinks(newLinks);
   };
 
-  const handleApplyChanges = ()=>{
+  const handleApplyChanges = async () => {
     handleSaveChanges();
     alert('Changes saved successfully');
-  }
 
-  const data = {
-    'name' : universityName,
-    'description' : description,
-    'facebook_url' : links[1],
-     'instagram_url' : links[2],
-    'telegram_url' : links[0],
-    'website' : links[3],
-    'image_url' : imageUrl,
-    'image_alt' : universityName
-  }
-  console.log('Data:', data);
+    const data = {
+      name: universityName,
+      description: description,
+      facebook_url: links.find(link => link.title === 'Facebook')?.url || '',
+      instagram_url: links.find(link => link.title === 'Instagram')?.url || '',
+      telegram_url: links.find(link => link.title === 'Telegram')?.url || '',
+      website: links.find(link => link.title === 'Website')?.url || '',
+      image_url: imageUrl,
+      image_alt: universityName,
+      location: location
+    };
+
+    console.log('Sending the following data to the server:', data);
+
+    try {
+      const response = await axios.post(config.contentCreateion.createUniversity, data);
+      console.log('Server response:', response.data);
+    } catch (error) {
+      console.error('Error saving changes:', error.response ? error.response.data : error.message);
+    }
+  };
+
   const handleSaveChanges = () => {
     const data = {
       imageUrl,
@@ -79,10 +91,9 @@ useEffect(() => {
       links,
       location
     };
-    console.log('Saving the following data:' ,"name", universityName, "description" , description, "links" , links[0]);
+    console.log('Saving the following data:', data);
     localStorage.setItem('universityData', JSON.stringify(data));
   };
-
   return (
     <div className="max-w-6xl mx-auto p-6 bg-gray-100">
       <h1 className="text-3xl font-bold mb-8 text-center text-indigo-800">University Admin Dashboard</h1>
