@@ -6,7 +6,7 @@ import HomePage from "./pages/HomePage";
 import UserProfile from "./components/accountUtilities/UserProfile";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import UniversityPage from "./pages/UniversityPage";
+// import UniversityPage from "./pages/UniversityPage";
 import ScholarshipPage from "./pages/ScholarshipPage";
 import VerificationPage from "./pages/VerificationPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
@@ -59,14 +59,14 @@ const router = createBrowserRouter([
   { path: "/discussions/create", element: <CreateDiscussionPage/> },
   { path: "/health", element: <LoggedInOnlyRoute><HealthPage/></LoggedInOnlyRoute>},
   { path: "/user/:userId", element: <VisitProfile /> },
-  {
-    path: "/universities",
-    element: <UniversityPage />,
-    children: [
-      { path: "search", element: <UniversityPage /> },
-      { path: ":id", element: <UniversityDetail/> }
-    ]
-  },
+  // {
+  //   path: "/universities",
+  //   element: <UniversityPage />,
+  //   children: [
+  //     { path: "search", element: <UniversityPage /> },
+  //     { path: ":id", element: <UniversityDetail/> }
+  //   ]
+  // },
   { path:"/livelihood", element: <LivelihoodPage />},
   { path: "/jobs", element: <JobPage/> },
   { path: "/job-detail/:jobId", element: <JobDetailPage/> },
