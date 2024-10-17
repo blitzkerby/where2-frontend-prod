@@ -47,8 +47,8 @@ const TextSummary = ({ textToSummarize }) => {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-2xl font-bold text-white mb-4">
-        Article Summary
+      <h2 className="text-md font-light text-white mb-4 tracking-tightest">
+        Cannot comprehend the article? W2BOT is here to help...
       </h2>
 
       {error && (

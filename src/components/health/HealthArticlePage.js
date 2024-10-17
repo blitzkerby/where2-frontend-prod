@@ -73,13 +73,13 @@ const HealthArticlePage = () => {
       <div className="bg-black min-h-screen text-white">
         <div className="lg:w-[85%] sm:w-[95%] mx-auto py-8 px-4 sm:px-6 lg:px-8 mt-[64px]">
           <div className="lg:flex lg:space-x-8">
-            <div className="lg:w-2/3 mb-8 lg:mb-0">
+            <div className="lg:w-full mb-8 lg:mb-0">
               <WrapperComponent>
-                <div className="bg-gray-900 rounded-xl p-6 shadow-lg">
+                <div className="bg-gray-900 w-full h-full rounded-xl p-2 shadow-lg">
                   <img
                     src={article.image || 'default-image-url.jpg'}
                     alt={article.title}
-                    className="w-full h-[360px] object-cover rounded-xl shadow-lg mb-6"
+                    className="w-full  h-[400px] object-cover rounded-xl shadow-lg mb-6"
                   />
                   <h1 className="text-3xl font-extrabold text-white mb-4 leading-tight">
                     {article.title}
@@ -96,7 +96,7 @@ const HealthArticlePage = () => {
               </WrapperComponent>
             </div>
 
-            <div className="lg:w-1/3">
+            <div className="lg:w-[35%]">
               <WrapperComponent>
                 <div className="bg-gray-900 rounded-xl p-6 shadow-lg">
                   <TextSummary textToSummarize={article.content} />
