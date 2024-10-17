@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useQuery } from '../utils/useQuery';
@@ -11,6 +11,7 @@ import UniversityList from '../components/UniversityList';
 
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
+import Filter from '../components/reusable/Filter';
 import SearchBar from '../components/reusable/SearchBar';
 import Pagination from '../components/reusable/Pagination';
 import ListContainer from '../components/reusable/ListContainer';
@@ -26,6 +27,30 @@ const UniversityPage = () => {
     const dispatch = useDispatch();
     const { universities, loading, error } = useSelector((state) => state.universities);
     const { totalPage } = useSelector((state) => state.pagination);
+
+    const [currentFilterUni, setCurrentFilterUni] = useState('');
+
+    const handleUniversityFilterChange = (university) => {
+        setCurrentFilterUni(university);
+    };
+
+    const items = [
+        {
+            id: '2132',
+            label: 'University',
+            content: ['Western', 'TECHNO', 'AUPP', 'RUPP', 'PARAGON']
+        },
+        {
+            id: '2eqsa',
+            label: 'Location',
+            content: ['Phnom Penh', 'Siem Reap']
+        },
+        {
+            id: 'sadsd',
+            label: 'Status',
+            content: ['Open', 'Closed']
+        }
+    ];
 
     /**
      * useEffect Hook
@@ -61,6 +86,10 @@ const UniversityPage = () => {
                 {/* {error && <p>{error}</p>} */}
                 
                 <SearchBar handleSearch={searchUniversities} searchPlaceholder="Search universities..." category="university"/>
+                <Filter
+                    items={items}
+                    onUniversityFilterChange={handleUniversityFilterChange}
+                />
                 <UniversityList universities={universities} />
                 <Pagination 
                     totalPage={totalPage} 
