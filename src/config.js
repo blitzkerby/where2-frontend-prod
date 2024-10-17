@@ -97,6 +97,7 @@ const config = {
   dashboard: {
     getDiscussionsPerDay: `${API_URL}/api/dashboard/discussions-per-day`,
     getDeviceDistribution: `${API_URL}/api/dashboard/device-distribution`,
+    getActiveAndViews: `${API_URL}/api/dashboard/active-and-views`,
   }
 };
 

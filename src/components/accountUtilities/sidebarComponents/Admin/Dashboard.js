@@ -17,6 +17,8 @@ import {
 import useAuth from "./../../../../hooks/useAuth";
 import PostsBarChart from "./../../../reusable/dashboardComponents/BarChart";
 import CustomedPieChart from "./../../../reusable/dashboardComponents/CustomedPieChart";
+import UsersStatusComponent from "./../../../reusable/dashboardComponents/UsersStatus";
+import axios from "axios";
 import config from "./../../../../config";
 
 
@@ -154,7 +156,23 @@ const PostViewsDashboard = () => {
   const [data, setData] = useState([]);
   const [topPosts, setTopPosts] = useState([]);
   const [deviceDistribution, setDeviceDistribution] = useState([]);
+  const [activeUsers, setActiveUsers] = useState([]);
+  const [viewsToday, setViewsToday] = useState([]);
   const { username, entity } = useAuth();
+
+  useEffect(() => {
+    const fetchStatusData = async () => {
+      try {
+        const response = await axios.get(config.dashboard.getActiveAndViews);
+        setActiveUsers(response.data.activeUsers);
+        setViewsToday(response.data.viewsToday);
+      } catch (error) {
+        console.error('Error fetching status data:', error);
+      }
+    };
+
+    fetchStatusData();
+  }, []); // Empty dependency array means this will run once on mount
 
   useEffect(() => {
     setData(generateDummyData(timeFrame, selectedMonth + 1, selectedYear));
@@ -282,14 +300,9 @@ const PostViewsDashboard = () => {
         </div>
       </div>
 
-      <div className="bg-gray-100 p-4 rounded">
-        <h2 className="text-xl font-semibold mb-4">Real-time Updates</h2>
-        <p className="text-lg">
-          Currently active users: <span className="font-bold">237</span>
-        </p>
-        <p className="text-lg">
-          Views in the last hour: <span className="font-bold">1,892</span>
-        </p>
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold mb-4">User Status</h2>
+          <UsersStatusComponent activeUsers={activeUsers} viewsToday={viewsToday}/>
       </div>
 
 
