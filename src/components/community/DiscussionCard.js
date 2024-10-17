@@ -84,8 +84,8 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
   return (
     <WrapperComponent>
       <div
-        className={`lg:p-6 sm:p-3 bg-white transition-transform duration-500 ease-in-out transform hover:scale-110 ${
-          isExpanded ? "z-50" : "lg:max-h-[144px]"
+        className={`lg:p-3 sm:p-3 bg-white transition-transform duration-500 ease-in-out transform hover:scale-110 ${
+          isExpanded ? "z-100" : "lg:max-h-[144px]"
         } rounded-lg shadow hover:shadow-lg cursor-pointer relative`}
         onClick={toggleExpand}
       >

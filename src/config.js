@@ -94,6 +94,10 @@ const config = {
   paypal: {
     clientID: CLIENT_ID,
   },
+  dashboard: {
+    getDiscussionsPerDay: `${API_URL}/api/dashboard/discussions-per-day`,
+    getDeviceDistribution: `${API_URL}/api/dashboard/device-distribution`,
+  }
 };
 
 export default config;

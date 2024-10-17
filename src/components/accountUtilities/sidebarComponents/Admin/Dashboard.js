@@ -14,7 +14,11 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import useAuth from "../../../../hooks/useAuth";
+import useAuth from "./../../../../hooks/useAuth";
+import PostsBarChart from "./../../../reusable/dashboardComponents/BarChart";
+import CustomedPieChart from "./../../../reusable/dashboardComponents/CustomedPieChart";
+import config from "./../../../../config";
+
 
 const generateDummyData = (type, month, year) => {
   const getDaysInMonth = (month, year) => new Date(year, month, 0).getDate();
@@ -150,7 +154,7 @@ const PostViewsDashboard = () => {
   const [data, setData] = useState([]);
   const [topPosts, setTopPosts] = useState([]);
   const [deviceDistribution, setDeviceDistribution] = useState([]);
-  const { entity } = useAuth();
+  const { username, entity } = useAuth();
 
   useEffect(() => {
     setData(generateDummyData(timeFrame, selectedMonth + 1, selectedYear));
@@ -195,7 +199,7 @@ const PostViewsDashboard = () => {
   return (
     <div className="max-w-6xl mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6 text-right pb-[10.5px] tracking-tight">
-        Welcome to Dashboard, {entity}
+        Welcome to Dashboard, {username ? username : entity}
       </h1>
 
       <div className="mb-6 flex flex-wrap items-center">
@@ -278,11 +282,6 @@ const PostViewsDashboard = () => {
         </div>
       </div>
 
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold mb-4">Device Distribution</h2>
-        <DeviceDistributionChart data={deviceDistribution} />
-      </div>
-
       <div className="bg-gray-100 p-4 rounded">
         <h2 className="text-xl font-semibold mb-4">Real-time Updates</h2>
         <p className="text-lg">
@@ -291,6 +290,20 @@ const PostViewsDashboard = () => {
         <p className="text-lg">
           Views in the last hour: <span className="font-bold">1,892</span>
         </p>
+      </div>
+
+
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold mb-4">Device Distribution</h2>
+          <CustomedPieChart fetchUrl={config.dashboard.getDeviceDistribution} />
+      </div>
+
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold mb-4">Number of Posts</h2>
+        <PostsBarChart 
+        fetchUrl={config.dashboard.getDiscussionsPerDay}
+        title="Post(s) created per day"
+      />
       </div>
     </div>
   );
