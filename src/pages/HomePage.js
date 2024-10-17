@@ -3,6 +3,10 @@ import Navbar from "../components/reusable/Navbar";
 import Footer from "../components/reusable/Footer";
 import Hero from "../layouts/Hero";
 import Searchbar from "../components/reusable/SearchBar";
+import WrapperComponent from "../components/reusable/WrapperComponent";
+import CardFeatureSlider from "../components/reusable/CardFeatureSlider";
+import SaveSection from "../components/reusable/Saves";
+import JoinUs from "../components/reusable/JoinUs";
 // import Card from "../components/reusable/Card";
 
 // assets
@@ -25,16 +29,26 @@ const hero1 = {
 // background: linear-gradient(180deg, #E3E3E3 0%, #EEEEEE 19%, #FFFFFF 82%, #F6F6F6 100%);
 
 const hero2 = {
-  title: "DISCOVER YOUR FUTURE.",
-  subtitle: "Everything starts here.",
-  searchPlaceholder: "Search University by name",
+  title: "PURSUE YOUR CAREER.",
+  subtitle: "By supporting yourself.",
   backgroundGradient: "from-blue-100",
   titleColor: "text-blue-900",
   subtitleColor: "text-blue-600",
-  mainImageSrc: "",
+  mainImageSrc: SecondaryHero,
   mainImageAlt: "University building",
+  button:"Find part time jobs",
   onSearch: () => {},
 };
+const header =[
+  {
+    suggested: "SUGGESTED FOR YOU"
+  }
+]
+const headerCardFeature =[
+  {
+    suggested: "OUR FEATURE"
+  }
+]
 const cards = [
   {
     title: "Scholarships",
@@ -98,23 +112,54 @@ const cards = [
     image: "",
   },
 ];
-
+const cardFeature = [
+  {
+    title: "Scholarships",
+    description: "Explore the latest scholarships available for Cambodian students.",
+    image: "",
+  },
+  {
+    title: "Universities",
+    description: "Join us at the University Fair to learn more about programs and meet representatives from top universities.",
+    image: "",
+  },
+  {
+    title: "Livelihood",
+    description: "Attend the Career Expo and meet potential employers from various industries.",
+    image: "",
+  },
+]
 const HomePage = () => {
   return (
-    <>
+    <div>
       <Navbar />
-      <div className="mt-[64px]">
-          <Hero props={hero1}>
-            <Searchbar searchPlaceholder={hero1.searchPlaceholder} />
-          </Hero>
-      </div>
-
-        <CardSlider cards={cards} />
-
+      <WrapperComponent>
+        <Hero props={hero1}>
+          <Searchbar searchPlaceholder={hero1.searchPlaceholder} />
+        </Hero>
+      </WrapperComponent>
+      <WrapperComponent>
+        <CardSlider cards={cards} header={header} />
+      </WrapperComponent>
+      <WrapperComponent>
         <Hero props={hero2} />
-      <Footer />
-    </>
+      </WrapperComponent>
+      <WrapperComponent>
+        <CardFeatureSlider cardFeature={cardFeature} header={headerCardFeature} />
+      </WrapperComponent>
+      <WrapperComponent>
+        <SaveSection/>
+      </WrapperComponent>
+      <WrapperComponent>
+        <JoinUs/>
+      </WrapperComponent>
+      <WrapperComponent>
+        <Footer />
+      </WrapperComponent>
+    </div>
   );
 };
 
 export default HomePage;
+
+
