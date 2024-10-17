@@ -7,6 +7,7 @@ import Searchbar from "../components/reusable/SearchBar";
 import WrapperComponent from "../components/reusable/WrapperComponent";
 import CardFeatureSlider from "../components/reusable/CardFeatureSlider";
 import SaveSection from "../components/reusable/Saves";
+import JoinUs from "../components/reusable/JoinUs";
 // import Card from "../components/reusable/Card";
 
 // assets
@@ -139,6 +140,9 @@ const HomePage = () => {
       </WrapperComponent>
       <WrapperComponent>
         <SaveSection/>
+      </WrapperComponent>
+      <WrapperComponent>
+        <JoinUs/>
       </WrapperComponent>
       <WrapperComponent>
         <Footer />
