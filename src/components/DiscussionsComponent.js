@@ -28,7 +28,7 @@ const DiscussionsComponent = () => {
         ) : (
           <div className="flex flex-col lg:flex-row gap-8 h-full">
             <div className="lg:w-[90%] w-full">
-              <div className="bg-white shadow-md rounded-lg p-6 min-h-[600px]">
+              <div className="bg-white shadow-md rounded-lg lg:p-6 sm:p-3 min-h-[600px]">
                 <DiscussionList
                   onNewDiscussionClick={() => setShowCreateForm(true)}
                 />
