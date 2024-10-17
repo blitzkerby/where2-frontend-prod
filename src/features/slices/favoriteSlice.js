@@ -1,9 +1,14 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import config from "../../config";
+import { useSelector } from "react-redux";
 
-const user = JSON.parse(localStorage.getItem('authData'));
-
+let user;
+// const { isAuthenticated } = useSelector(state => state.auth);
+// if (isAuthenticated) {
+//     user = JSON.parse(localStorage.getItem('authData'));
+//     console.log("isAuth", isAuthenticated)
+// }
 export const addFavorite = async (cardId, category) => {
         const addFavorite =  await axios.post(
             config.favorite.addFavorite,
@@ -18,6 +23,7 @@ export const addFavorite = async (cardId, category) => {
 
 export const getFavorite = createAsyncThunk("getFavorite", async ({ category, page, limit }) => {
     const getAllFavorite = await axios.get(`${ config.favorite.getFavorite(user.id, category) }?page=${ page }&limit=${ limit }`);
+    console.log("first GetFavorite", getAllFavorite)
     return getAllFavorite;
 });
 
@@ -99,6 +105,8 @@ const FavoriteSlices = createSlice({
             .addCase(getFavorite.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.error.message;
+                console.log("User id", user.id)
+                
             })
             ;
       

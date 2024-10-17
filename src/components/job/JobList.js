@@ -16,12 +16,29 @@ const JobList = ({ jobs, page }) => {
 
     const dispatch = useDispatch();
     const { isClicked } = useSelector((state) => state.favorites);
+
+    // useEffect(() => {
+    //     if (page === 1) {
+    //         dispatch(removedIsClicked());
+    //     }
+    //     dispatch(getFavorite({ category: "job", page, limit: 10 }))
+    //     console.log("is UseEffect called in joblist")
+    // }, [page]);
     useEffect(() => {
-        if (page === 1) {
-            dispatch(removedIsClicked());
-        }
-        dispatch(getFavorite({category:"job",page,limit:10}))
-    }, [page]);
+        const fetchFavorites = async () => {
+            console.log("Page changed:", page);
+            console.log("Dispatching action");
+            try {
+                if (page === 1) {
+                    dispatch(removedIsClicked());
+                }
+               console.log(await dispatch(getFavorite({ category: "job", page, limit: 10 })));
+            } catch (error) {
+                console.error("Error fetching favorites:", error);
+            }
+        };
+        fetchFavorites();
+    }, [page, dispatch]);
     
     return (
     <>
