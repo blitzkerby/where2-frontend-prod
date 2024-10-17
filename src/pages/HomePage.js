@@ -6,6 +6,7 @@ import Hero from "../layouts/Hero";
 import Searchbar from "../components/reusable/SearchBar";
 import WrapperComponent from "../components/reusable/WrapperComponent";
 import CardFeatureSlider from "../components/reusable/CardFeatureSlider";
+import SaveSection from "../components/reusable/Saves";
 // import Card from "../components/reusable/Card";
 
 // assets
@@ -135,6 +136,9 @@ const HomePage = () => {
       </WrapperComponent>
       <WrapperComponent>
         <CardFeatureSlider cardFeature={cardFeature} header={headerCardFeature} />
+      </WrapperComponent>
+      <WrapperComponent>
+        <SaveSection/>
       </WrapperComponent>
       <WrapperComponent>
         <Footer />
