@@ -66,6 +66,7 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
         },
       });
       onDeleteSuccess(discussion.id)
+      window.location.reload();
     } catch (error) {
       console.error("Error deleting discussion:", error);
       alert("Failed to delete discussion")
