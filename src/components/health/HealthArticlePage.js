@@ -7,6 +7,7 @@ import WrapperComponent from "./../reusable/WrapperComponent";
 import ButtonComponent from "./../reusable/Button";
 import HealthNavbar from "./HealthNavbar";
 import Footer from "./../reusable/Footer";
+import TextSummary from "./../reusable/TextSummary"
 import config from "./../../config";
 
 const HealthArticlePage = () => {
@@ -41,14 +42,15 @@ const HealthArticlePage = () => {
   if (loading) return <LoadingSpinner className="h-screen" />;
 
   if (error) {
-    navigate('/health')
+    navigate('/health');
+    return null;
   }
 
   if (!article) {
     return (
       <WrapperComponent>
         <div className="text-center py-16">
-          <h1 className="text-3xl font-bold mb-4">Article Not Found</h1>
+          <h1 className="text-3xl font-bold mb-4 text-white">Article Not Found</h1>
           <ButtonComponent
             variant="primary"
             size="lg"
@@ -68,36 +70,45 @@ const HealthArticlePage = () => {
   return (
     <>
       <HealthNavbar />
-      <div className="max-w-4xl h-screen mx-auto py-8 px-4 sm:px-6 lg:px-8 mt-[64px]">
-        <WrapperComponent>
-        <img
-          src={article.image || 'default-image-url.jpg'}
-          alt={article.title}
-          className="w-full h-[360px] object-cover rounded-xl mb-8 shadow-lg"
-        />
+      <div className="bg-black min-h-screen text-white">
+        <div className="lg:w-[85%] sm:w-[95%] mx-auto py-8 px-4 sm:px-6 lg:px-8 mt-[64px]">
+          <div className="lg:flex lg:space-x-8">
+            <div className="lg:w-2/3 mb-8 lg:mb-0">
+              <WrapperComponent>
+                <div className="bg-gray-900 rounded-xl p-6 shadow-lg">
+                  <img
+                    src={article.image || 'default-image-url.jpg'}
+                    alt={article.title}
+                    className="w-full h-[360px] object-cover rounded-xl shadow-lg mb-6"
+                  />
+                  <h1 className="text-3xl font-extrabold text-white mb-4 leading-tight">
+                    {article.title}
+                  </h1>
+                  <div className="flex items-center text-sm text-gray-400 mb-6">
+                    <span className="font-medium">{article.author}</span>
+                    <span className="mx-2">•</span>
+                    <span>{formattedDate}</span>
+                  </div>
+                  <div className="prose prose-lg max-w-none text-gray-300">
+                    {article.content}
+                  </div>
+                </div>
+              </WrapperComponent>
+            </div>
 
-        </WrapperComponent>
-        <WrapperComponent>
-          <h1 className="text-4xl font-extrabold text-gray-900 mb-4 leading-tight">
-            {article.title}
-          </h1>
-        </WrapperComponent>
-        <WrapperComponent>
-          <div className="flex items-center text-sm text-gray-600 mb-8">
-            <span className="font-medium">{article.author}</span>
-            <span className="mx-2">•</span>
-            <span>{formattedDate}</span>
+            <div className="lg:w-1/3">
+              <WrapperComponent>
+                <div className="bg-gray-900 rounded-xl p-6 shadow-lg">
+                  <TextSummary textToSummarize={article.content} />
+                </div>
+              </WrapperComponent>
+            </div>
           </div>
-        </WrapperComponent>
-        <WrapperComponent>
-          <div className="prose prose-lg max-w-none text-gray-800">
-            {article.content}
-          </div>
-        </WrapperComponent>
+        </div>
       </div>
       <Footer />
     </>
   );
 };
 
-export default HealthArticlePage
+export default HealthArticlePage;
