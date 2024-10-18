@@ -6,7 +6,7 @@ import Navbar from "../reusable/Navbar";
 import Footer from "../reusable/Footer";
 import ContainerComponent from "../reusable/ContainerComponent";
 
-const getAuthData = () => {
+export const getAuthData = () => {
   const authData = localStorage.getItem("authData");
   if (!authData) {
     throw new Error("No authentication data found");

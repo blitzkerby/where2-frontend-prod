@@ -30,33 +30,44 @@ const UniversityList = ({ universities, page }) => {
     const { isClicked } = useSelector((state) => state.favorites);
  
     useEffect(() => {
-        if (page === 1) {
-            dispatch(removedIsClicked());
-        }
-        dispatch(getFavorite({category: "university",  page, limit:10 }));
-    }, [page]);
+        const fetchFavorites = async () => {
+            try {
+                if (page === 1) {
+                    dispatch(removedIsClicked());
+                }
+               await dispatch(getFavorite({ category: "university", page, limit: 10 }));
+            } catch (error) {
+                console.error("Error fetching favorites:", error);
+            }
+        };
+        fetchFavorites();
+    }, [page, dispatch]);
 
-
+    console.log("isclicked university", isClicked)
+    console.log("isclicked university 235", isClicked)
     return (
         <>
-            {universities.map((university, index) => (
-                <Card
-                    key={index}
-                    image={university.image_url}
-                    imageAlt={university.image_alt}
-                    title={university.name}
-                    description={university.description}
-                    facebookLink={university.facebook_url}
-                    instagramLink={university.instagram_url}
-                    telegramLink={university.telegram_url}
-                    websiteLink={university.website}
-                    location={university.location}
-                    route={`/detail/university/${ university.id }`}
-                    type={"university"}
-                    id={university.id}
-                    isHeartClicked = {isClicked[university.id]}
-                />
-            ))}
+        {
+            universities.map((university, index) => {
+                return (
+                    <Card
+                        key={index}
+                        image={university.image_url}
+                        imageAlt={university.image_alt}
+                        title={university.name}
+                        description={university.description}
+                        facebookLink={university.facebook_url}
+                        instagramLink={university.instagram_url}
+                        telegramLink={university.telegram_url}
+                        websiteLink={university.website}
+                        location={university.location}
+                        route={`/detail/university/${ university.id }`}
+                        type={"university"}
+                        id={university.id}
+                        isHeartClicked={isClicked[university.id]}
+                    />)
+            })
+            }
         </>
     );
 };

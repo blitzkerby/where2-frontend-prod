@@ -9,11 +9,18 @@ const AccommodationList = ({ accommodations, page }) => {
     const dispatch = useDispatch();
     const { isClicked } = useSelector((state) => state.favorites);
     useEffect(() => {
-        if (page === 1) {
-            dispatch(removedIsClicked());
-        }
-        dispatch(getFavorite({category:"accommodation",page,limit:10}))
-    }, [page]);
+        const fetchFavorites = async () => {
+            try {
+                if (page === 1) {
+                    dispatch(removedIsClicked());
+                }
+               await dispatch(getFavorite({ category: "accommodation", page, limit: 10 }));
+            } catch (error) {
+                console.error("Error fetching favorites:", error);
+            }
+        };
+        fetchFavorites();
+    }, [page, dispatch]);
     
     return (
     <>

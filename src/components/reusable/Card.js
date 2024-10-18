@@ -1,5 +1,5 @@
 // dependencies
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -38,35 +38,43 @@ const Card = ({
   timeOut = '',
   route,
   type,
-  isHeartClicked = false, 
+  isHeartClicked, 
   id,
   size,
   price,
   address
 }) => {
+  console.log("isHeartClick Uni",isHeartClicked)
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [heartClicked, setHeartClicked] = useState(isHeartClicked)
 
   const handleReadMoreClick = () => {
     navigate(route);
   };
   
   const handleHeartClick = async () => {
+    setHeartClicked(false)
       await removeFavorite(id, type);
-      dispatch(setIsClicked({ id: id }))
+    dispatch(setIsClicked({ id: id }))
+    console.log("handleHeart state", heartClicked)
   
     };
     
   const handleRemoveHeartClick = async () => {
+    setHeartClicked(true)
     if (!user) {
       alert("Please Log in or Sing up to add your COLLECTION!");
       navigate('/login');
+    
     } else {
       await addFavorite(id, type);
       dispatch(setIsClicked({ id: id }))
     }
+    
+    console.log("handleHeart remove state", heartClicked)
   };
-
+  console.log("setheartClick", heartClicked);
   const handleError = (event) => {
     event.target.src = "https://i.pinimg.com/564x/1b/b6/95/1bb69534ae81c183c82154062df5d94f.jpg";
   };
@@ -168,7 +176,7 @@ const Card = ({
             <div className="flex justify-between cursor-pointer">
               <div className="w-[100px] flex justify-around">
                 <div>
-                  {isHeartClicked ? 
+                  {heartClicked ? 
                     <div>
                       <img className="w-9" src={FilledHeart} alt="Bookmark" onClick={handleHeartClick} />
                     </div> : 

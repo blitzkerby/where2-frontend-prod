@@ -80,9 +80,7 @@ const router = createBrowserRouter([
       { path: "job/:id", element: < JobDetailPage/>}
     ]
   },
-  { path: "/student-loans", element: <StudentLoanPage /> },
-  { path: "/accommodations", element: <AccommodationPage /> },
-  // { path: "/jobs", element: <JobPage /> },
+ 
   { path: "/login",element: <LoginPage />},
   { path: "/signup",element: <RegisterPage />},
   { path: "/scholarships", element: <ScholarshipPage/>},
@@ -95,8 +93,6 @@ const router = createBrowserRouter([
   { path:"/livelihood", element: <LivelihoodPage />},
   { path: "/scholarships", element: <ScholarshipPage /> },
   { path: "/scholarship/:id", element: <ScholarshipDetailPage /> },
-  { path: "/student-loans", element: <StudentLoanPage /> },
-  // { path: "/accommodations", element: <AccommodationPage /> },
   {path:"/accommodation-detail/:id",element:<AccommodationDetailPage />},
 
 ]);

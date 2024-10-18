@@ -25,11 +25,18 @@ const ScholarshipList = ({ scholarships, page}) => {
     const { isClicked } = useSelector((state) => state.favorites);
 
     useEffect(() => {
-        if (page === 1) {
-            dispatch(removedIsClicked());
-        }
-        dispatch(getFavorite({ category: "scholarship", page, limit:10 }));
-    }, [page]);
+        const fetchFavorites = async () => {
+            try {
+                if (page === 1) {
+                    dispatch(removedIsClicked());
+                }
+               await dispatch(getFavorite({ category: "scholarship", page, limit: 10 }));
+            } catch (error) {
+                console.error("Error fetching favorites:", error);
+            }
+        };
+        fetchFavorites();
+    }, [page, dispatch]);
 
     // if (scholarships[0] == "No results found") {
     //     return null;
