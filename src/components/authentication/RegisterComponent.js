@@ -227,7 +227,7 @@ const RegisterComponent = () => {
           name="email"
           label="Email"
           type="email"
-          placeholder="Your registered email address"
+          placeholder="Your registered email address (make sure you have access to this email)"
           value={formData.email}
           onChange={handleInputChange}
           required
