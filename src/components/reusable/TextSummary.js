@@ -1,6 +1,5 @@
 import { useState } from "react";
 import ButtonComponent from "./Button";
-import FormInput from "./InputField";
 import config from "./../../config";
 
 const TextSummary = ({ textToSummarize }) => {
@@ -67,10 +66,10 @@ const TextSummary = ({ textToSummarize }) => {
         {isLoading ? (
           <div className="flex items-center justify-center space-x-2">
             <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></span>
-            <span>Generating Summary...</span>
+            <span>Summary...</span>
           </div>
         ) : (
-          "Generate Summary"
+          "Summary"
         )}
       </ButtonComponent>
 
