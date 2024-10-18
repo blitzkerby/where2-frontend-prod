@@ -49,11 +49,6 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
     e.stopPropagation();
   };
 
-  /**
-   * Stop event propagation when the delete button is clicked.
-   * To be implemented: delete the discussion comment.
-   * @param {React.MouseEvent} e Mouse event.
-   */
   const handleDelete = async (e) => {
     e.stopPropagation();
     if (window.confirm('Are you sure you want to delete this discussion?')) {
@@ -62,7 +57,7 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
     try {
       await axios.delete(config.community.deleteDiscussion(discussion.id), {
         headers: {
-          Authorization: `Bearer ${token}`, // Pass your auth token here
+          Authorization: `Bearer ${token}`,
         },
       });
       onDeleteSuccess(discussion.id)
@@ -76,32 +71,30 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
   };
 
   useEffect(() => {
-    // Update localComments when the discussion is updated (debugging purpose)
     console.log("Comment updated: ", localComments)
   }, [localComments])
 
   const isCurrentUserPost = discussion.user?.id === userId;
 
   return (
-    <WrapperComponent>
-      <div
-        className={`lg:p-3 sm:p-1 bg-white hover:scale-100 ${
-          isExpanded ? "min-h-fit" : ""
-        } rounded-lg shadow hover:shadow-lg cursor-pointer relative`}
-        onClick={toggleExpand}
-      >
-        <h3 className="text-xl font-semibold mb-2 truncate">
-          {discussion.title}
-        </h3>
-        <p
-    className={`text-gray-600 mb-4 text-justify ${
-      isExpanded
-        ? "whitespace-normal" // Allow wrapping when expanded
-        : "overflow-hidden whitespace-nowrap text-ellipsis" // Truncate when collapsed
-    }`}
-  >
-    {discussion.content}
-  </p>
+            <div
+              className={`lg:p-5 sm:p-1 bg-white hover:scale-100 ${
+                isExpanded ? "min-h-fit" : ""
+              } rounded-lg shadow hover:shadow-lg cursor-pointer relative`}
+              onClick={toggleExpand}
+            >
+              <h3 className="text-xl font-semibold mb-2 truncate">
+                {discussion.title}
+              </h3>
+              <p
+          className={`text-gray-600 mb-4 text-justify ${
+            isExpanded
+              ? "whitespace-normal" 
+              : "overflow-hidden whitespace-nowrap text-ellipsis"
+          }`}
+        >
+          {discussion.content}
+        </p>
 
         <div className="flex justify-between items-center text-sm text-gray-500">
           {discussion.user && (
@@ -143,7 +136,6 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
           </div>
         )}
       </div>
-    </WrapperComponent>
   );
 };
 
