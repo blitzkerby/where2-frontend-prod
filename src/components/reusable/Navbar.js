@@ -132,7 +132,7 @@ const Navbar = () => {
       {isOpen && (
         <div className="lg:hidden fixed inset-y-0 right-0 w-64 bg-white shadow-lg transition-transform duration-300 ease-in-out transform translate-x-0 z-[1003]">
           <div className="flex flex-col h-full">
-            <div className="p-4 border-b">
+            <div className="h-[64px] p-4 border-b">
               <button
                 onClick={toggleMenu}
                 className="p-2 rounded-md hover:bg-gray-300 float-right"
@@ -149,11 +149,11 @@ const Navbar = () => {
                     <Link
                       key={item.name}
                       to={item.to}
-                      className="px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center"
+                      className="px-4 py-4 text-gray-700 hover:bg-gray-100 flex items-center"
                       onClick={toggleMenu}
                     >
                       {item.logo}
-                      <span className="ml-2">{item.name}</span>
+                      <span className="ml-4">{item.name}</span>
                     </Link>
                   ))}
               </div>

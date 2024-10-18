@@ -58,7 +58,7 @@ const router = createBrowserRouter([
   { path: "/profile/:userName", element: <UserProfile/> },
   { path: "/discussions", element: <DiscussionsPage/> },
   { path: "/discussions/create", element: <CreateDiscussionPage/> },
-  { path: "/health", element: <LoggedInOnlyRoute><HealthPage/></LoggedInOnlyRoute>},
+  { path: "/health", element: <HealthPage/>},
   { path: "/user/:userId", element: <VisitProfile /> },
   // {
   //   path: "/universities",
