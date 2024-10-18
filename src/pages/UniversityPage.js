@@ -20,11 +20,13 @@ import ListContainer from '../components/reusable/ListContainer';
 import { setTotalPage } from '../features/slices/paginationSlice';
 
 /** Enable for debugging */
-const isDebug = true;
+const isDebug = false;
 
 const UniversityPage = () => {
     const urlParams = useQueryParams();
+
     const page = parseInt(urlParams.get('page')) || 1;
+    const location = urlParams.get('location') || '';
     const searchQuery = urlParams.get('q') || '';
 
     const dispatch = useDispatch();
@@ -33,10 +35,8 @@ const UniversityPage = () => {
 
     const navigate = useNavigate()
 
-    const location = "Siem Reap"
-
-    const handleUniversityFilterChange = (e) => {
-
+    const handleUniversityFilterChange = ({ location }) => {
+        navigate(`/list/university?location=${location}`)
     };
 
     const items = [
@@ -94,7 +94,7 @@ const UniversityPage = () => {
             console.log("UniversityPage says: total page is ", totalPage);
             console.log("UniversityPage says: search results are ", universities);
         }
-    }, [dispatch, page, searchQuery]);
+    }, [dispatch, page, searchQuery, location]);
 
     return (
         <>
