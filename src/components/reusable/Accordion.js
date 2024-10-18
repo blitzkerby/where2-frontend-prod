@@ -1,25 +1,17 @@
-
-import { useState } from "react";
+import React, { useState } from "react";
 import { GoChevronDown, GoChevronUp } from "react-icons/go";
 import AccordionButton from "./AccordionButton";
 
-function Accordion({ items , onUniversityFilterChange }) {
-  console.log("Accordion says: ", items)
-
+function Accordion({ items, applyFilter }) {
   const [expandedIndex, setExpandedIndex] = useState(-1);
 
   const handleClick = (nextIndex) => {
-    if (expandedIndex === nextIndex) {
-      setExpandedIndex(-1);
-    } else {
-      setExpandedIndex(nextIndex);
-    }
+    setExpandedIndex(expandedIndex === nextIndex ? -1 : nextIndex);
   };
 
   const renderItems = items.map((item, index) => {
     const isExpanded = index === expandedIndex;
-    const icon = <span>{isExpanded ? <GoChevronUp /> : <GoChevronDown />}</span>;
-
+    const icon = isExpanded ? <GoChevronUp /> : <GoChevronDown />;
     return (
       <div key={item.id}>
         <div
@@ -27,18 +19,19 @@ function Accordion({ items , onUniversityFilterChange }) {
           onClick={() => handleClick(index)}
         >
           {item.label}
-          {icon}
+          <span>{icon}</span>
         </div>
-        {isExpanded && Array.isArray(item.content) &&(
-					<div className="md:w-[300] flex flex-col md:flex-row p-2 overflow-x-auto">
-						{
-            item.content.map((contentItem, contentIndex) => (
-              <AccordionButton contentItem={contentItem} key={contentIndex} applyFilter={onUniversityFilterChange()}/>
-						))}
-					</div>
-				)
-          
-        }
+        {isExpanded && Array.isArray(item.content) && (
+          <div className="md:w-[300px] flex flex-col md:flex-row p-2 overflow-x-auto">
+            {item.content.map((contentItem, contentIndex) => (
+              <AccordionButton
+                key={contentIndex}
+                contentItem={contentItem}
+                applyFilter={() => applyFilter({ location: contentItem })}
+              />
+            ))}
+          </div>
+        )}
       </div>
     );
   });

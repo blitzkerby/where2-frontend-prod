@@ -5,9 +5,10 @@ import { BsArrowDownUp } from "react-icons/bs";
 import { LuX } from "react-icons/lu";
 import Accordion from "./Accordion";
 import DateRange from "./DateRange";
+import { useNavigate } from "react-router-dom";
 // import { items } from "./data";
 
-function FilterComponent ({ items , onUniversityFilterChange }){
+function FilterComponent ({ items }){
 	console.log("FilterComponent says: ", items)
 
 	const  [openFilter,setOpenFilter] = useState(false)
@@ -15,7 +16,16 @@ function FilterComponent ({ items , onUniversityFilterChange }){
 	const handleModel = () => {
 		setOpenFilter(!openFilter);
 	};
+
+	const navigate = useNavigate();
 	
+	const applyFilter = (filters) => {
+		const queryString = Object.entries(filters)
+		  .map(([key, value]) => `${key}=${value}`)
+		  .join("&");
+		navigate(`/list/university?${queryString}`);
+	};	
+
 	return(
 		<div className=" lg:w-[890px] mx-auto pt-1.5">
 			<div 
@@ -39,10 +49,10 @@ function FilterComponent ({ items , onUniversityFilterChange }){
 							</h3>
 						</div>
 						<Accordion 
-						items={items} 
-						handlemodel={handleModel} 
-						onUniversityFilterChange={onUniversityFilterChange}
-						 />
+							items={items} 
+							handlemodel={handleModel} 
+							applyFilter={applyFilter}
+						/>
 						<div>
 							{/* <DateRange/> */}
 						</div>	

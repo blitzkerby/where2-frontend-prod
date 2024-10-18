@@ -1,10 +1,12 @@
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useQueryParams } from '../hooks/useQueryParams';
 
+import { setTotalPage } from '../features/slices/paginationSlice';
 import { filterByLocation } from '../features/slices/filterSlice';
+
 import { fetchUniversities, searchUniversities, setUniversities } from '../features/slices/universitySlice';
 
 import { LoadingOverlay } from '../components/reusable/Loading';
@@ -17,7 +19,6 @@ import Filter from '../components/reusable/Filter';
 import SearchBar from '../components/reusable/SearchBar';
 import Pagination from '../components/reusable/Pagination';
 import ListContainer from '../components/reusable/ListContainer';
-import { setTotalPage } from '../features/slices/paginationSlice';
 
 /** Enable for debugging */
 const isDebug = false;
@@ -33,23 +34,13 @@ const UniversityPage = () => {
     const { universities, loading, error } = useSelector((state) => state.universities);
     const { totalPage } = useSelector((state) => state.pagination);
 
-    const navigate = useNavigate()
-
-    const handleUniversityFilterChange = ({ location }) => {
-        navigate(`/list/university?location=${location}`)
-    };
-
+    // university filter options
     const items = [
         {
             id: '2eqsa',
             label: 'Location',
             content: ['Phnom Penh', 'Siem Reap']
         },
-        {
-            id: 'sadsd',
-            label: 'Status',
-            content: ['Open', 'Closed']
-        }
     ];
 
     async function filterLocation(){
@@ -70,29 +61,13 @@ const UniversityPage = () => {
      * @param {boolean} isDebug - Flag for enabling debug logs
      */
     useEffect(() => {
-        // if (searchQuery === "") {
-        //     (isDebug) ? console.log("UniversityPage says : fetchingUniversities...") : null
-        //     dispatch(fetchUniversities({ page }));
-        // } else {
-        //     (isDebug) ? console.log("UniversityPage says : searching...") : null
-        //     dispatch(searchUniversities({ page , query : searchQuery }));
-        // }
-
         if (searchQuery !== "") {
-            (isDebug) ? console.log("UniversityPage says : searching...") : null
             dispatch(searchUniversities({ page, query : searchQuery}));
         } else if (location !== "") {
-            (isDebug) ? console.log("UniversityPage says : filtering by location...") : null
             // dispatch(filterByLocation({ page, location }));
             filterLocation()
         } else {
-            (isDebug) ? console.log("UniversityPage says : fetchingUniversities...") : null
             dispatch(fetchUniversities({ page }));
-        }
-
-        if (isDebug) {
-            console.log("UniversityPage says: total page is ", totalPage);
-            console.log("UniversityPage says: search results are ", universities);
         }
     }, [dispatch, page, searchQuery, location]);
 
@@ -104,10 +79,7 @@ const UniversityPage = () => {
                 {/* {error && <p>{error}</p>} */}
                 
                 <SearchBar handleSearch={searchUniversities} searchPlaceholder="Search universities..." category="university"/>
-                <Filter
-                    items={items}
-                    onUniversityFilterChange={handleUniversityFilterChange}
-                />
+                <Filter items={items}/>
                 <UniversityList universities={universities} />
                 <Pagination 
                     totalPage={totalPage} 
