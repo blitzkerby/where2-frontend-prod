@@ -18,7 +18,7 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
   const navigate = useNavigate();
 
   // CURRENT USERID
-  const { userId, token } = useAuth();
+  const { userId, token, role } = useAuth();
 
   // MEMOIZED USER IDS
   const userIds = useMemo(() => {
@@ -123,7 +123,7 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
             />
           </div>
         )}
-        {isCurrentUserPost && (
+        {isCurrentUserPost || role === "developer" && (
           <div className="absolute top-2 right-2" onClick={(e) => e.stopPropagation()}>
             <ButtonComponent
               variant="danger"
