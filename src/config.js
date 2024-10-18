@@ -86,8 +86,10 @@ const config = {
   chatbot: {
     sendMessage: `${API_URL}/api/ai/summary`,
   },
-  contentCreateion : {
-    createUniversity : `${API_URL}/api/university/create`,
+  contentCreation : {
+    createUniversity : `${API_URL}/api/detail/university/create`,
+    createJob : `${API_URL}/api/jobs/addJob`,
+    createAccomodation : `${API_URL}`
   },
   payment: {
     makePayment: `${API_URL}/api/bakong-payment`,

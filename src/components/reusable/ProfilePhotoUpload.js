@@ -6,7 +6,7 @@ import { LoadingOverlay } from "./Loading";
 
 const MAX_FILE_SIZE = 500 * 1024;
 
-const ProfilePictureUpload = () => {
+const PictureUpload = () => {
   const { userId } = useAuth();
   const { photoUrl, isLoading, error, fetchPhoto } = useFetchPhoto(userId);
   const { uploadPhoto, isUploading, uploadError } = useUploadPhoto(userId);
