@@ -96,7 +96,7 @@ const TermsAndConditionsComponent = () => {
           <ButtonComponent
             variant="primary"
             className="mt-2 w-[197px] sm:w-full h-[38px] sm:w-[343px] sm:h-[50px]"
-            disabled={!agreed || status === "loading"}
+            disabled={!agreed || status === "loading" || status === "succeeded"}
             type="submit"
           >
             {status === "loading" ? <LoadingSpinner /> : "Agree & Proceed"}

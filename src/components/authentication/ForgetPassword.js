@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import FormInput from "../reusable/InputField";
-import ButtonComponent from "../reusable/Button";
-import ContainerComponent from "../reusable/ContainerComponent";
-import { forgotPassword, clearAuthState } from "../../features/slices/authSlice";
-import { LoadingSpinner, LoadingOverlay } from "../reusable/Loading";
-import config from "../../config";
+import FormInput from "./../reusable/InputField";
+import ButtonComponent from "./../reusable/Button";
+import ContainerComponent from "./../reusable/ContainerComponent";
+import { forgotPassword, clearAuthState } from "./../../features/slices/authSlice";
+import { LoadingSpinner, LoadingOverlay } from "./../reusable/Loading";
+import config from "./../../config";
 
 
 // THIS COMPONENT IS USED FOR FORGET PASSWORD FUNCTIONALITY; THE USER CAN TYPE IN HIS EMAIL AND WE WILL SEND HIM A LINK TO RESET HIS PASSWORD
