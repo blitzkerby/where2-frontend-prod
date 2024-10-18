@@ -6,7 +6,6 @@ import ButtonComponent from "./../reusable/Button";
 import ContainerComponent from "./../reusable/ContainerComponent";
 import { login, clearAuthState } from "./../../features/slices/authSlice";
 import { LoadingSpinner, LoadingOverlay } from "./../reusable/Loading.js";
-import useAuth from "./../../hooks/useAuth.js";
 
 // LOGIN COMPONENTS
 const LoginComponent = () => {
