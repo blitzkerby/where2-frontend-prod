@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, {useEffect} from "react";
 import { Edit2 } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 import { useFetchPhoto, useUploadPhoto } from "./../../hooks/useFetchPhoto";
 import { LoadingOverlay } from "./Loading";
 
-const ProfilePictureUpload = () => {
+const MAX_FILE_SIZE = 500 * 1024;
+
+const PictureUpload = () => {
   const { userId } = useAuth();
   const { photoUrl, isLoading, error, fetchPhoto } = useFetchPhoto(userId);
   const { uploadPhoto, isUploading, uploadError } = useUploadPhoto(userId);
@@ -12,6 +14,12 @@ const ProfilePictureUpload = () => {
   const handleFileChange = async (e) => {
     const selectedFile = e.target.files[0];
     if (!selectedFile) return;
+
+    // CHECK FILE SIZE BEFORE UPLOADING
+    if (selectedFile.size > MAX_FILE_SIZE) {
+      alert("File size exceeds the maximum allowed (500 KB).");
+      return;
+    }
 
     const newPhotoUrl = await uploadPhoto(selectedFile, "profile-picture");
     if (newPhotoUrl) {
@@ -78,4 +86,4 @@ const ProfilePictureUpload = () => {
   );
 };
 
-export default ProfilePictureUpload;
+export default PictureUpload;

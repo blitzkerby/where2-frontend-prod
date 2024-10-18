@@ -13,6 +13,7 @@ const ResetPasswordComponent = () => {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [error, setError] = useState("");
   const [resetAttempted, setResetAttempted] = useState(false);
+  const [passwordMismatch, setPasswordMismatch] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,14 +28,24 @@ const ResetPasswordComponent = () => {
     if (resetAttempted && status === "succeeded") {
       const timer = setTimeout(() => {
         navigate("/login");
-      }, 3000);
+      }, 500);
       return () => clearTimeout(timer);
     }
   }, [status, resetAttempted, navigate]);
 
-  if (status === 'loading') {
-    return <LoadingOverlay message="We are resetting your password..."/>
-  }
+  useEffect(() => {
+    setPasswordMismatch(password !== passwordConfirm && password !== "" && passwordConfirm !== "");
+  }, [password, passwordConfirm]);
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setError("");
+  };
+
+  const handlePasswordConfirmChange = (e) => {
+    setPasswordConfirm(e.target.value);
+    setError("");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -95,8 +106,9 @@ const ResetPasswordComponent = () => {
           name="password"
           label="New Password"
           type="password"
+          className={passwordMismatch ? "border-rose-400 border-[1px]" : ""}
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handlePasswordChange}
           required
         />
         <FormInput
@@ -104,7 +116,8 @@ const ResetPasswordComponent = () => {
           label="Confirm New Password"
           type="password"
           value={passwordConfirm}
-          onChange={(e) => setPasswordConfirm(e.target.value)}
+          className={passwordMismatch ? "border-rose-400 border-[1px]" : ""}
+          onChange={handlePasswordConfirmChange}
           required
         />
         {error && <p className="text-red-500 text-sm text-center">{error}</p>}

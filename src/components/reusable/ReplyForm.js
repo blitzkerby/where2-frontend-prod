@@ -55,14 +55,14 @@ const ReplyForm = ({ discussionId, onReplySubmitted, onCancel }) => {
         <FormInput
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          onKeyDown={handleKeyDown} // Handle Enter key
-          placeholder="Write your reply..."
+          onKeyDown={handleKeyDown}
+          placeholder="Max length 100 characters"
           className="w-full min-h-[100px] mb-2"
           disabled={isSubmitting}
-          maxLength={200}
+          maxLength={100}
         />
         <div className="text-sm text-gray-500 text-right">
-          {content.length}/200 characters
+          {content.length}/100 characters
         </div>
       </div>
 
@@ -85,7 +85,7 @@ const ReplyForm = ({ discussionId, onReplySubmitted, onCancel }) => {
           type="submit"
           disabled={isSubmitting || !content.trim()}
         >
-          {isSubmitting ? 'Posting...' : 'Post Reply'}
+          {isSubmitting ? 'Posting...' : 'Reply'}
         </ButtonComponent>
       </div>
     </form>

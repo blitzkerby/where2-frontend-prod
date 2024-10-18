@@ -8,6 +8,7 @@ import DetailLayout from "../layouts/DetailLayout";
 
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
+import { LoadingOverlay } from "../components/reusable/Loading";
 
 function ScholarDetail() {
   const dispatch = useDispatch();

@@ -1,21 +1,19 @@
-import React from "react";
-import useAuth from "./../hooks/useAuth";
-import WrapperComponent from "./../components/reusable/WrapperComponent";
-
+import React from 'react';
+// import { Search } from 'lucide-react';
+import { Link } from 'react-router-dom';
 const Hero = ({ props, children }) => {
   const {
+    button,
     title,
     subtitle,
-    searchPlaceholder,
+    // searchPlaceholder,
     backgroundGradient,
     titleColor,
     subtitleColor,
     mainImageSrc,
     mainImageAlt,
-    onSearch,
+    // onSearch 
   } = { ...props };
-
-  const { username, entity } = useAuth(); // Use the custom hook to get the user
 
   const styles = {
     /* containers */
@@ -26,16 +24,16 @@ const Hero = ({ props, children }) => {
     gradientClipPath: { clipPath: "polygon(0 0, 100% 0, 100% 70%, 0 100%)" },
 
     /* textbox */
-    title: "text-4xl md:text-5xl lg:text-6xl tracking-tight font-black mb-2",
-    subtitle: "text-xl md:text-2xl lg:text-3xl tracking-tight mb-4",
-    welcome: "text-2xl md:text-3xl lg:text-4xl font-bold mb-4",
-    contentWrapper:
-      "absolute w-full z-10 mx-auto top-[7%] mt-section-top-margin max-w-[660px]",
+    title: "text-h1 tracking-tight font-black text-[38px]",
+    subtitle: "text-h2 tracking-tight mb-8 text-[28px]",
+    contentWrapper: "absolute w-full z-10 mx-auto top-[7%] mt-section-top-margin max-w-[660px] ",
 
     /* background image */
-    imageContainer: `flex justify-center w-full h-full`,
-    image:
-      "object-contain min-w-full min-h-full sm:object-cover transition-transform duration-500 ease-in-out transform hover:scale-110",
+    imageContainer: `mt-image-container-top-margin flex justify-center w-full h-full`,
+    image: "object-contain sm:object-cover",
+
+    /* partime job button */
+    button: "border rounded-[100px] bg-[#A9EBFF] w-fit px-[18px] py-[5px] text-[#375761] drop-shadow-lg ",
 
     /* components */
     form: "relative mx-[20px]",
@@ -46,7 +44,6 @@ const Hero = ({ props, children }) => {
   };
 
   return (
-    <WrapperComponent>
     <section className={`${styles.section} ${backgroundGradient}`}>
       <div className={styles.container}>
         <div
@@ -56,15 +53,23 @@ const Hero = ({ props, children }) => {
         <div className={styles.contentWrapper}>
           <h1 className={`${styles.title} ${titleColor}`}>{title}</h1>
           <p className={`${styles.subtitle} ${subtitleColor}`}>{subtitle}</p>
+
+          {button && (
+            <Link to="jobs">
+              <button className={`${styles.button}`}>{button}</button>
+            </Link>
+          )}
           {children}
         </div>
         <div className={styles.imageContainer}>
-          <img src={mainImageSrc} alt={mainImageAlt} className={styles.image} />
+          <img
+            src={mainImageSrc}
+            alt={mainImageAlt}
+            className={styles.image}
+          />
         </div>
       </div>
     </section>
-    </WrapperComponent>
-
   );
 };
 

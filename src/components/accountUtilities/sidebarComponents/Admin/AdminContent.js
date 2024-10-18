@@ -1,76 +1,239 @@
-import React, { useState, useEffect } from "react";
-import { Edit2, Eye, EyeOff } from "lucide-react";
-import { Menu } from "lucide-react";
-const AdminContent = ({image , title , views , detail}) => {
-  const [isPublic, setIsPublic] = useState(true);
-  const [isHovered, setIsHovered] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth > 1004);
-  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+import React, { useState, useEffect } from 'react';
+import { PlusCircle, Save, Image, Link, FileText, MapPin } from 'lucide-react';
+import ButtonComComponent from '../../../reusable/ButtonComponent';
+import axios from 'axios';
+import config from '../../../../config';
+import DropdownComponent from '../../../reusable/DropdownComponent';
 
+const dropdownItems = [
+  { label: 'University' },
+  { label: 'Job offer' },
+  { label: 'Accommodation' },
+];
 
+const entityConfig = {
+  'University': {
+    hasLocation: true,
+    createEndpoint: config.contentCreation.createUniversity,
+    fields: [
+      { name: 'university_name', label: 'University Name', type: 'text' },
+      { name: 'university_description', label: 'University Description', type: 'textarea' },
+      { name: 'location', label: 'Location', type: 'text' },
+    ],
+  },
+  'Job offer': {
+    hasLocation: true,
+    createEndpoint: config.contentCreation.createJob,
+    fields: [
+      { name: 'job_title', label: 'Job Title', type: 'text' },
+      { name: 'job_description', label: 'Job Description', type: 'textarea' },
+      { name: 'company_name', label: 'Company Name', type: 'text' },
+      { name: 'job_requirements', label: 'Job Requirements', type: 'textarea' },
+      { name: 'salary', label: 'Salary', type: 'number' },
+      { name: 'position', label: 'Position', type: 'text' },
+      { name: 'application_deadline', label: 'Application Deadline', type: 'date' },
+      { name: 'work_hours', label: 'Work Hours', type: 'text' },
+      { name: 'location', label: 'Location', type: 'text' },
+    ],
+  },
+  'Accommodation': {
+    hasLocation: true,
+    createEndpoint: config.contentCreation.createAccommodation,
+    fields: [
+      { name: 'accommodation_name', label: 'Accommodation Name', type: 'text' },
+      { name: 'accommodation_description', label: 'Accommodation Description', type: 'textarea' },
+      { name: 'accommodation_type', label: 'Accommodation Type', type: 'text' },
+      { name: 'price', label: 'Price', type: 'text' },
+      { name: 'availability', label: 'Availability', type: 'number' },
+      { name: 'size', label: 'Size', type: 'text' },
+      { name: 'google_map_link', label: 'Google Maps Link', type: 'text' },
+      { name: 'contact_information', label: 'Contact Information', type: 'text' },
+      { name: 'location', label: 'Location', type: 'text' },
+    ],
+  },
+};
+
+const AdminEditor = () => {
+  const [entity, setEntity] = useState(localStorage.getItem('businessEntity') || 'University');
+  const [imageUrl, setImageUrl] = useState('');
+  const [formData, setFormData] = useState({});
+  const [links, setLinks] = useState([
+    { title: 'Telegram', url: '' },
+    { title: 'Facebook', url: '' },
+    { title: 'Instagram', url: '' },
+    { title: 'Website', url: '' },
+  ]);
+
+  const entityDataKey = `${entity}Data`;
+
+  useEffect(() => {
+    const savedData = JSON.parse(localStorage.getItem(entityDataKey));
+    if (savedData) {
+      setImageUrl(savedData.imageUrl || '');
+      setFormData(savedData.formData || {});
+      setLinks(savedData.links || [
+        { title: 'Telegram', url: '' },
+        { title: 'Facebook', url: '' },
+        { title: 'Instagram', url: '' },
+        { title: 'Website', url: '' },
+      ]);
+    } else {
+      // Initialize formData with empty values for all fields
+      const initialFormData = {};
+      entityConfig[entity].fields.forEach(field => {
+        initialFormData[field.name] = '';
+      });
+      setFormData(initialFormData);
+    }
+  }, [entity, entityDataKey]);
+
+  const selectEntity = (selectedEntity) => {
+    console.log(selectedEntity.label);
+    localStorage.setItem('businessEntity', selectedEntity.label);
+    setEntity(selectedEntity.label);
+    setFormData({});
+  };
+
+  const handleInputChange = (fieldName, value) => {
+    setFormData(prev => ({ ...prev, [fieldName]: value }));
+  };
+
+  const handleLinkChange = (index, field, value) => {
+    const newLinks = [...links];
+    newLinks[index][field] = value;
+    setLinks(newLinks);
+  };
+
+  const handleApplyChanges = async () => {
+    handleSaveChanges();
+    alert('Changes saved successfully');
+
+    const data = {
+      ...formData,
+      facebook_url: links.find(link => link.title === 'Facebook')?.url || '',
+      instagram_url: links.find(link => link.title === 'Instagram')?.url || '',
+      telegram_url: links.find(link => link.title === 'Telegram')?.url || '',
+      website: links.find(link => link.title === 'Website')?.url || '',
+      image_url: imageUrl,
+      image_alt: formData[entityConfig[entity].fields[0].name], // Use the first field as image alt
+    };
+
+    console.log(`Sending the following ${entity} data to the server:`, data);
+
+    try {
+      const response = await axios.post(entityConfig[entity].createEndpoint, data);
+      console.log('Server response:', response.data);
+    } catch (error) {
+      console.error('Error saving changes:', error.response ? error.response.data : error.message);
+    }
+  };
+
+  const handleSaveChanges = () => {
+    const data = {
+      imageUrl,
+      formData,
+      links,
+    };
+    console.log('Saving the following data:', data);
+    localStorage.setItem(entityDataKey, JSON.stringify(data));
+  };
 
   return (
+    <div className="max-w-6xl mx-auto p-6 bg-gray-100 rounded-lg shadow-md">
+      <DropdownComponent items={dropdownItems} onItemClick={selectEntity} />
+      <h1 className="text-3xl font-bold mb-8 text-center text-indigo-800">
+        {entity} Admin Dashboard
+      </h1>
 
-      <div className="max-w-2xl mx-auto flex-col justify-between flex p-6 bg-white rounded-3xl shadow-lg border-2 h-[730px] w-full">
-        <h1 className="text-3xl font-bold mb-6">Content</h1>
-
-        <div
-          className="relative mb-4 cursor-pointer"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <img
-            src={image}
-            alt="University campus"
-            className="w-full h-48 object-cover rounded-lg"
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <h2 className="text-xl font-semibold mb-4 flex items-center text-indigo-700">
+            <Image size={24} className="mr-2" />
+            {entity} Image
+          </h2>
+          <input
+            type="text"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+            placeholder="Enter image URL"
+            className="w-full p-2 border border-gray-300 rounded mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
-          {isHovered && (
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg">
-              <Edit2 className="text-white" size={24} />
+          {imageUrl && <img src={imageUrl} alt={entity} className="w-full h-48 rounded object-contain" />}
+        </div>
+
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <h2 className="text-xl font-semibold mb-4 flex items-center text-indigo-700">
+            <FileText size={24} className="mr-2" />
+            {entity} Details
+          </h2>
+          {entityConfig[entity].fields.map((field) => (
+            <div key={field.name} className="mb-4">
+              <h2>{field.label}</h2>
+              {field.type === 'textarea' ? (
+                <textarea
+                  value={formData[field.name] || ''}
+                  onChange={(e) => handleInputChange(field.name, e.target.value)}
+                  rows={4}
+                  className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  placeholder={field.label}
+                />
+              ) : (
+                <input
+                  type={field.type}
+                  value={formData[field.name] || ''}
+                  onChange={(e) => handleInputChange(field.name, e.target.value)}
+                  className="w-full p-2 border border-gray-300 rounded mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  placeholder={field.label}
+                />
+              )}
             </div>
-          )}
-        </div>
-
-        <div>
-          <div className="mb-4 flex items-start">
-            <h2 className="text-xl font-semibold flex-grow">
-              {title}
-            </h2>
-            <Edit2 size={20} className="text-gray-500 cursor-pointer" />
-          </div>
-
-          <div className="mb-4 relative">
-            <p className="text-gray-600 pr-8">
-              {detail}
-            </p>
-            <Edit2
-              size={20}
-              className="absolute top-0 right-0 text-gray-500 cursor-pointer"
-            />
-          </div>
-        </div>
-
-        <div className="flex justify-between items-center">
-          <p className="text-gray-600">Number of View : {views}</p>
-          <div className="flex items-center space-x-2">
-            <button
-              onClick={() => setIsPublic(!isPublic)}
-              className={`flex items-center space-x-1 px-3 py-1 rounded-full text-sm ${
-                isPublic
-                  ? "bg-green-100 text-green-800"
-                  : "bg-red-100 text-red-800"
-              }`}
-            >
-              {isPublic ? <Eye size={16} /> : <EyeOff size={16} />}
-              <span>{isPublic ? "Public" : "Private"}</span> 
-            </button>
-            <button className="bg-sky-200 text-sky-800 px-4 py-1 rounded-full text-sm">
-              Request Change
-            </button>
-          </div>
+          ))}
         </div>
       </div>
+
+      <div className="mt-6 bg-white rounded-lg shadow-md p-6">
+        <h2 className="text-xl font-semibold mb-4 flex items-center text-indigo-700">
+          <Link size={24} className="mr-2" />
+          Important Links
+        </h2>
+        {links.map((link, index) => (
+          <div key={index} className="flex items-center lg:space-x-2 lg:mb-4 sm:flex-col">
+            <input
+              type="text"
+              readOnly
+              value={link.title}
+              placeholder={`${link.title}`}
+              className="flex-grow p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+            <input
+              type="text"
+              value={link.url}
+              onChange={(e) => handleLinkChange(index, 'url', e.target.value)}
+              placeholder="Link URL"
+              className="flex-grow p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:mb-5"
+            />
+          </div>
+        ))}
+      </div>
+
+      <ButtonComComponent
+        variant='success'
+        onClick={handleSaveChanges}
+        className="mt-6 w-full bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200 flex items-center justify-center text-lg font-semibold"
+      >
+        <Save size={24} />
+        <span className="ml-2">Save Changes</span>
+      </ButtonComComponent>
+      
+      <ButtonComComponent
+        onClick={handleApplyChanges}
+        className="mt-6 w-full bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 flex items-center justify-center text-lg font-semibold"
+      >
+        <PlusCircle size={24} />
+        <span className="ml-2">Apply Changes</span>
+      </ButtonComComponent>
+    </div>
   );
 };
 
-export default AdminContent;
+export default AdminEditor;

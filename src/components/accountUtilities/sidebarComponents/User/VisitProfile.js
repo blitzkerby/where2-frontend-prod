@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { LoadingOverlay } from "../../../reusable/Loading";
-import useAuth from "../../../../hooks/useAuth";
-import FetchProfile from "../../../reusable/functions/ViewProfile";
-import PublicProfile from "../../../reusable/PublicProfile";
+import { LoadingOverlay } from "./../../../reusable/Loading";
+import useAuth from "./../../../../hooks/useAuth";
+import FetchProfile from "./../../../reusable/functions/ViewProfile";
+import PublicProfile from "./../../../reusable/PublicProfile";
 
 const VisitProfile = () => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { userId: paramUserId } = useParams(); // Get userId from URL params
+  const { userId: paramUserId } = useParams();
   const { isLoggedIn, userId: currentUserId, role, loading } = useAuth();
 
   // Use paramUserId if it's present, otherwise fall back to currentUserId
   const targetUserId = paramUserId || currentUserId;
-
-  console.log("Fetching profile for ID:", targetUserId);
 
   useEffect(() => {
     const loadProfile = async () => {
@@ -25,13 +23,8 @@ const VisitProfile = () => {
       }
 
       // Permission check: If paramUserId exists and it's not the current user's ID, and the user isn't a developer
-      if (
-        paramUserId &&
-        paramUserId !== currentUserId &&
-        role !== "developer"
-      ) {
-        setError("You do not have permission to view this profile");
-        return;
+      if (!paramUserId) {
+        setError("No such user found.");
       }
 
       try {
@@ -63,7 +56,7 @@ const VisitProfile = () => {
 
   // Show loading spinner if still loading or user data is not yet available
   if (loading || !userData) {
-    return <LoadingOverlay />;
+    return <LoadingOverlay message="We are fetching the profile for you..."/>;
   }
 
   return (

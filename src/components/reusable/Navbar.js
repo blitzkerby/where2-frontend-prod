@@ -2,31 +2,29 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { X } from "lucide-react";
 import { MessageCircleMore } from "lucide-react";
-import Dashboard from "./../../assets/svg/dashboard.svg";
 import Menu from "./../../assets/svg/menu.svg";
 import useAuth from "./../../hooks/useAuth";
-import ProfilePicture from "./ProfilePicture";
+import ProfilePicture from "./PictureUpload";
 import WrapperComponent from "./WrapperComponent";
 import {
   School,
   BookOpenTextIcon,
   LucideBriefcaseBusiness,
-  ChartColumnIcon,
   User2,
-  LucideMessageCircleQuestion,
   Activity,
-  ChartNoAxesCombinedIcon
+  ChartNoAxesCombinedIcon,
 } from "lucide-react";
 
-const MenuIcon = <img src={Menu} alt="Menu" />;
+const MenuIcon = <img src={Menu} alt="Menu Item" />;
 const DashboardIcon = ({ username, entity }) => {
   const actualIdentifier = username || entity || "entity";
   const encodedIdentifier = encodeURIComponent(actualIdentifier);
+  // DECODED URL
   const dynamicDashboardUrl = `/dashboard/${encodedIdentifier}`;
 
   return (
     <Link to={dynamicDashboardUrl}>
-      <ChartNoAxesCombinedIcon/>
+      <ChartNoAxesCombinedIcon />
     </Link>
   );
 };
@@ -40,6 +38,24 @@ const Navbar = () => {
   };
 
   const menuItems = [
+    {
+      logo: <School />,
+      name: "Universities",
+      to: "/universities",
+      showMobile: true,
+    },
+    {
+      logo: <BookOpenTextIcon />,
+      name: "Scholarships",
+      to: "/scholarships",
+      showMobile: true,
+    },
+    {
+      logo: <LucideBriefcaseBusiness />,
+      name: "Livelihood",
+      to: "/livelihood",
+      showMobile: true,
+    },
     { logo: <School />, name: "Universities", to: "/list/university", showMobile: true },
     { logo: <BookOpenTextIcon />, name: "Scholarships", to: "/list/scholarship", showMobile: true },
     { logo: <LucideBriefcaseBusiness />, name: "Livelihood", to: "/livelihood", showMobile: true },
@@ -49,10 +65,10 @@ const Navbar = () => {
       name: "Profile",
       to: `/profile/${encodeURIComponent(username || entity)}`,
       showMobile: true,
-      showDesktop: false
+      showDesktop: false,
     },
     {
-      logo: <MessageCircleMore/>,
+      logo: <MessageCircleMore />,
       name: "Community",
       to: "/discussions",
       showMobile: true,
@@ -61,9 +77,9 @@ const Navbar = () => {
     // { logo: <BookOpenTextIcon/>, name: "Scholarships", to: "/scholarships" },
     // { logo: <LucideBriefcaseBusiness/>, name: "Livelihood", to: "/livelihood" },
     // { logo: <BookMarked/>, name: "Bookmarks", to: "/bookmarks" },
-    { logo: <ChartColumnIcon/>, name: "Dashboard", to: `/dashboard/${encodeURIComponent(username || entity)}` },
+    // { logo: <ChartColumnIcon/>, name: "Dashboard", to: `/dashboard/${encodeURIComponent(username || entity)}` },
     // { logo: <User2/>, name: "Profile", to: `/profile/${encodeURIComponent(username || entity)}` },
-    { logo: <LucideMessageCircleQuestion/>, name: "About Us", to: "/about-us" },
+    // { logo: <LucideMessageCircleQuestion/>, name: "About Us", to: "/about-us" },
   ];
 
   const identifier = username || entity;
@@ -77,15 +93,17 @@ const Navbar = () => {
             WHERE2
           </Link>
           <div className="flex align-center justify-between h-full mx-auto lg:w-[800px] tracking-tighter">
-            {menuItems.filter(item => item.showDesktop !== false).map((item) => (
-              <Link
-                key={item.name}
-                to={item.to}
-                className="flex mb-[6px] pt-[8px] align-center justify-center mx-0 whitespace-nowrap text-gray-700 hover:text-gray-900 h-full"
-              >
-                {item.name}
-              </Link>
-            ))}
+            {menuItems
+              .filter((item) => item.showDesktop !== false)
+              .map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.to}
+                  className="flex mb-[6px] pt-[8px] px-6 align-center justify-center mx-0 whitespace-nowrap text-gray-700 hover:text-gray-900 h-full"
+                >
+                  {item.name}
+                </Link>
+              ))}
           </div>
           <div className="flex items-center space-x-4">
             {showDashboard && (
@@ -97,7 +115,12 @@ const Navbar = () => {
               </Link>
             ) : (
               <Link to="/login" className="w-8 h-8">
-                <div className="w-full h-full"><User2 size={22} className="flex justify-center align-center"/></div>
+                <div className="w-full h-full flex align-middle justify-center pt-1">
+                  <User2
+                    size={22}
+                    className="flex justify-center align-center"
+                  />
+                </div>
               </Link>
             )}
           </div>
@@ -119,7 +142,7 @@ const Navbar = () => {
       {isOpen && (
         <div className="lg:hidden fixed inset-y-0 right-0 w-64 bg-white shadow-lg transition-transform duration-300 ease-in-out transform translate-x-0 z-[1003]">
           <div className="flex flex-col h-full">
-            <div className="p-4 border-b">
+            <div className="h-[64px] p-4 border-b">
               <button
                 onClick={toggleMenu}
                 className="p-2 rounded-md hover:bg-gray-300 float-right"
@@ -129,19 +152,21 @@ const Navbar = () => {
               </button>
             </div>
             <WrapperComponent>
-            <div className="flex-grow overflow-y-auto">
-              {menuItems.filter(item => item.showMobile).map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.to}
-                  className="px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center"
-                  onClick={toggleMenu}
-                >
-                  {item.logo}
-                  <span className="ml-2">{item.name}</span>
-                </Link>
-              ))}
-            </div>
+              <div className="flex-grow overflow-y-auto">
+                {menuItems
+                  .filter((item) => item.showMobile)
+                  .map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.to}
+                      className="px-4 py-4 text-gray-700 hover:bg-gray-100 flex items-center"
+                      onClick={toggleMenu}
+                    >
+                      {item.logo}
+                      <span className="ml-4">{item.name}</span>
+                    </Link>
+                  ))}
+              </div>
             </WrapperComponent>
           </div>
         </div>

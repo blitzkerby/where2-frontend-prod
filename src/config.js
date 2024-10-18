@@ -45,10 +45,13 @@ const config = {
   community: {
     createDiscussion: `${API_URL}/api/discussion`,
     getDiscussions: `${API_URL}/api/discussions`,
+    getUserDiscussions: (userId) =>
+      `${API_URL}/api/discussions/${userId}`,
     addComment: (discussionId, commentId) =>
       `${API_URL}/api/discussions/${discussionId}/comment/${commentId}`,
     getAllComments: (discussionId) =>
       `${API_URL}/api/discussions/${discussionId}/comments`,
+    deleteDiscussion: (discussionId) => `${API_URL}/api/discussion/${discussionId}`,
   },
   job: {
     getAllJob: `${API_URL}/api/jobs`,
@@ -83,6 +86,11 @@ const config = {
   chatbot: {
     sendMessage: `${API_URL}/api/ai/summary`,
   },
+  contentCreation : {
+    createUniversity : `${API_URL}/api/detail/university/create`,
+    createJob : `${API_URL}/api/jobs/addJob`,
+    createAccomodation : `${API_URL}`
+  },
   payment: {
     makePayment: `${API_URL}/api/bakong-payment`,
     createPaypalOrder: `${API_URL}/api/create-paypal-order`,
@@ -92,7 +100,22 @@ const config = {
   paypal: {
     clientID: CLIENT_ID,
   },
-};
-
+  dashboard: {
+    getDiscussionsPerDay: `${API_URL}/api/dashboard/discussions-per-day`,
+    getDeviceDistribution: `${API_URL}/api/dashboard/device-distribution`,
+    getActiveAndViews: `${API_URL}/api/dashboard/active-and-views`,
+    getUserCounts: `${API_URL}/api/dashboard/user-counts-by-city`,
+    getCommentsPerDay: `${API_URL}/api/dashboard/comments-by-day`,
+  },
+  health: {
+    getAllHealthArticles: `${API_URL}/api/health/health-articles`,
+    getHealthArticleById: (id) => `${API_URL}/api/health/health-articles/${id}`,
+  contentCreation : {
+    createUniversity : `${API_URL}/api/detail/university/create`,
+    createJob : `${API_URL}/api/jobs/addJob`,
+    createAccomodation : `${API_URL}`
+  }
+}
+}
 export default config;
 

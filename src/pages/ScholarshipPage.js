@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useQuery } from '../utils/useQuery';
+import { useQueryParams } from '../hooks/useQueryParams';
 
 import { fetchScholarships, searchScholarships } from '../features/slices/scholarshipsSlice';
 
@@ -19,9 +19,10 @@ import ListContainer from '../components/reusable/ListContainer';
 const isDebug = true;
 
 const ScholarshipPage = () => {
-    const urlParams = useQuery();
+    const urlParams = useQueryParams();
     const page = parseInt(urlParams.get('page')) || 1;
     const searchQuery = urlParams.get('q') || '';
+
     const dispatch = useDispatch();
     const { scholarships, loading, error } = useSelector((state) => state.scholarships);
     const { totalPage } = useSelector((state) => state.pagination);
@@ -39,10 +40,14 @@ const ScholarshipPage = () => {
      */
     useEffect(() => {
         if (searchQuery === "") {
-            (isDebug) ? console.log("ScholarshipPage says : fetchingScholarships...") : null
+            if (isDebug) {
+                console.log("ScholarshipPage says : fetchingScholarships...");
+            }
             dispatch(fetchScholarships({ page }));
         } else {
-            (isDebug) ? console.log("ScholarshipPage says : searching...") : null
+            if (isDebug) {
+                console.log("ScholarshipPage says : searching...");
+            }
             dispatch(searchScholarships({ page, query: searchQuery }));
         }
         if (isDebug) {

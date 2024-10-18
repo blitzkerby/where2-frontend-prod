@@ -22,7 +22,7 @@ const HealthArticleCard = ({ id, image, title, description, onClick }) => {
             variant="primary"
             size="medium"
             onClick={(e) => {
-              e.stopPropagation();
+              e.stopPropagation(); 
               onClick(id);
             }}
           >

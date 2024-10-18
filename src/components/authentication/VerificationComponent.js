@@ -126,7 +126,7 @@ const VerificationComponent = () => {
             variant="primary"
             className="mt-2 w-[197px] h-[38px] sm:w-[343px] sm:h-[50px]"
             type="submit"
-            disabled={status === "loading"}
+            disabled={status === "loading" || status === "succeeded"}
           >
             {status === "loading" ? <LoadingOverlay /> : "Verify"}
           </ButtonComponent>

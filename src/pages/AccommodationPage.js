@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useQuery } from '../utils/useQuery';
+import { useQueryParams } from '../hooks/useQueryParams';
 
 import { LoadingOverlay } from '../components/reusable/Loading';
 
@@ -15,7 +15,7 @@ import { fetchAllList } from '../features/slices/paginationSlice';
 const isDebug = true;
 
 const AccommodationPage = () => {
-    const urlParams = useQuery();
+    const urlParams = useQueryParams();
 
     const page = parseInt(urlParams.get('page')) || 1;
     const limit = parseInt(urlParams.get('limit')) || 10;
@@ -25,9 +25,8 @@ const AccommodationPage = () => {
     const { universities, loading, error } = useSelector((state) => state.universities);
     const { totalPage, data } = useSelector((state) => state.pagination);
 
-console.log("AccommodationList", data)
     useEffect(() => {
-        dispatch(fetchAllList({page,limit,model: 'Accommodation'}))
+        dispatch(fetchAllList({page,model: 'Accommodation'}))
     },[dispatch, page])
     return (
         <div>

@@ -4,7 +4,6 @@ import config from "../../config";
 import { LoadingOverlay } from "../reusable/Loading";
 import Navbar from "../reusable/Navbar";
 import Footer from "../reusable/Footer";
-import ContainerComponent from "../reusable/ContainerComponent";
 
 export const getAuthData = () => {
   const authData = localStorage.getItem("authData");

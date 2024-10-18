@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 
 // import Card from "./components/reusable/Card";
 // import SearchBar from "./components/reusable/SearchBar";
@@ -28,12 +28,17 @@ import AccommodationPage from "./pages/AccommodationPage";
 import AccommodationDetailPage from "./pages/AccommodationDetailPage";
 import ErrorPage from "./pages/ErrorPage";
 import UniversityDetailPage from "./pages/UniversityDetailPage";
+import LoggedInOnlyRoute from "./components/routes/LoggedInRoute";
+import HealthArticlePage from "./components/health/HealthArticlePage";
+
+
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
     path: '/',
+    element: <HomePage />,
     index: true,
     element: <HomePage />,
     errorElement: <ErrorPage />
@@ -41,11 +46,17 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <HomePage />,
+    path: '/home',
+    element: <Navigate to="/" replace />
   },
-  { path: "/login",element: <LoginPage />},
+  {
+    path: '/homepage',
+    element: <Navigate to="/" replace />
+  },
+  { path: "/login",element: <PublicOnlyROute><LoginPage /></PublicOnlyROute>},
   { path: "/signup",element: <PublicOnlyROute><RegisterPage /></PublicOnlyROute>},
   { path: "/forget-password", element: <PublicOnlyROute><ForgetPasswordPage /></PublicOnlyROute>},
-  { path: "/reset-password/:token", element: <ResetPasswordPage />},
+  { path: "/reset-password/:token", element: <PublicOnlyROute><ResetPasswordPage /></PublicOnlyROute>},
   { path: "/terms-and-conditions", element: <PublicOnlyROute><TermsAndConditionsPage/></PublicOnlyROute>},
   { path: "/signup/verification", element: <PublicOnlyROute><VerificationPage/></PublicOnlyROute> },
   { path: "/dashboard/:userName", element: <DashboardComponent/> },
@@ -54,14 +65,14 @@ const router = createBrowserRouter([
   { path: "/discussions/create", element: <CreateDiscussionPage/> },
   { path: "/health", element: <HealthPage/>},
   { path: "/user/:userId", element: <VisitProfile /> },
-  // {
-  //   path: "/universities",
-  //   element: <UniversityPage />,
-  //   children: [
-  //     { path: "search", element: <UniversityPage /> },
-  //     { path: ":id", element: <UniversityDetail/> }
-  //   ]
-  // },
+  {
+    path: "/universities",
+    element: <UniversityPage />,
+    children: [
+      { path: "search", element: <UniversityPage /> },
+      { path: ":id", element: <UniversityDetailPage /> }
+    ]
+  },
   {
     path: "/list",
     children: [
@@ -85,6 +96,16 @@ const router = createBrowserRouter([
   { path: "/signup",element: <RegisterPage />},
   { path: "/scholarships", element: <ScholarshipPage/>},
   { path: "/profile/:userName", element: <UserProfile /> },
+  // {
+  //   path: "/universities",
+  //   element: <UniversityPage />,
+  //   children: [
+  //     { path: "search", element: <UniversityPage /> },
+  //     { path: ":id", element: <UniversityDetail/> }
+  //   ]
+  // },
+  { path:"/livelihood", element: <LivelihoodPage />},
+  { path: "/jobs", element: <JobPage/> },
   { path: "/job-detail/:jobId", element: <JobDetailPage/> },
   { path: "/forget-password", element: <ForgetPasswordPage />},
   { path: "/signup/verification", element: <VerificationPage/> },
@@ -94,6 +115,7 @@ const router = createBrowserRouter([
   { path: "/scholarships", element: <ScholarshipPage /> },
   { path: "/scholarship/:id", element: <ScholarshipDetailPage /> },
   {path:"/accommodation-detail/:id",element:<AccommodationDetailPage />},
+  { path: "/health/article/:id", element: <HealthArticlePage />},
 
 ]);
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useFetchPhoto } from "./../../hooks/useFetchPhoto";
+import { useFetchPhoto } from "../../hooks/useFetchPhoto";
 import { LoadingSpinner } from "./Loading";
 import { User } from "lucide-react";
 

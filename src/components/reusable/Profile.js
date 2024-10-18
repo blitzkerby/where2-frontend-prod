@@ -1,6 +1,5 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import Sidebar from "../accountUtilities/Sidebar.js";
-import { useEffect } from "react";
 import UniversityListing from "../accountUtilities/sidebarComponents/Developer/UniversityListing.js";
 import AccommodationListing from "../accountUtilities/sidebarComponents/Developer/AccommodationListing.js";
 import UserListing from "../accountUtilities/sidebarComponents/Developer/UsersListing.js";
@@ -14,7 +13,6 @@ import AdminContent from "../accountUtilities/sidebarComponents/Admin/AdminConte
 import Logout from "./Logout.js";
 import CollectionPanel from "./CollectionPanel.js";
 
-
 export const SidebarContentContext = createContext();
 
 const contentComponents = {
@@ -26,10 +24,14 @@ const contentComponents = {
   adminDashboard: AdminDashboard,
   adminContent: AdminContent,
   logOut: Logout,
+  collectionPanel: CollectionPanel,
 };
 
 const Profile = ({ userData, isPublic }) => {
-  const [sidebarContent, setSidebarContent] = useState("account");
+  const [sidebarContent, setSidebarContent] = useState(() => {
+    
+    return localStorage.getItem("sidebarContent") || "account";
+  });
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const { role, loading } = useAuth();
@@ -38,7 +40,7 @@ const Profile = ({ userData, isPublic }) => {
     const checkScreenSize = () => {
       const newIsMobile = window.innerWidth < 980;
       setIsMobile(newIsMobile);
-      setSidebarOpen(!newIsMobile); // Sidebar open by default on large screens
+      setSidebarOpen(!newIsMobile); 
     };
 
     checkScreenSize();
@@ -46,6 +48,11 @@ const Profile = ({ userData, isPublic }) => {
 
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
+
+  useEffect(() => {
+    
+    localStorage.setItem("sidebarContent", sidebarContent);
+  }, [sidebarContent]);
 
   if (loading) {
     return <LoadingOverlay />;
@@ -85,8 +92,8 @@ const Profile = ({ userData, isPublic }) => {
         )}
 
         {/* Main Content */}
-        <div className={`flex-grow overflow-hidden ${isMobile ? "relative z-10" : ""}`}>
-          <div className="h-full overflow-y-auto">
+        <div className={`flex-grow max-h-[inherite] overflow-y-scroll ${isMobile ? "relative z-10" : ""}`}>
+          <div className="h-full">
             <div className="p-4">
               {isMobile && !sidebarOpen && (
                 <button
@@ -96,11 +103,10 @@ const Profile = ({ userData, isPublic }) => {
                   <ChevronRight size={24} />
                 </button>
               )}
-              {sidebarContent !== "account" && sidebarContent !== "setting" && sidebarContent !== "logOut"? (
+              {sidebarContent !== "account" && sidebarContent !== "setting" && sidebarContent !== "logOut" ? (
                 <CollectionPanel category={sidebarContent} />
               ) : (
-                <ContentComponent userInfo={userData} />
-              )}
+                <ContentComponent userInfo={userData} />)}
             </div>
           </div>
         </div>

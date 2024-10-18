@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useQuery } from '../utils/useQuery';
+import { useQueryParams } from '../hooks/useQueryParams';
 
 import { fetchUniversities, searchUniversities } from '../features/slices/universitySlice';
 
 import { LoadingOverlay } from '../components/reusable/Loading';
 
 import UniversityList from '../components/UniversityList';
-
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
 import SearchBar from '../components/reusable/SearchBar';
@@ -19,14 +18,14 @@ import ListContainer from '../components/reusable/ListContainer';
 const isDebug = true;
 
 const UniversityPage = () => {
-    const urlParams = useQuery();
+    const urlParams = useQueryParams();
     const page = parseInt(urlParams.get('page')) || 1;
     const searchQuery = urlParams.get('q') || '';
 
     const dispatch = useDispatch();
     const { universities, loading, error } = useSelector((state) => state.universities);
     const { totalPage } = useSelector((state) => state.pagination);
-
+    console.log(universities.filter(p => p.isApproved == false))
     /**
      * useEffect Hook
      *
@@ -40,16 +39,9 @@ const UniversityPage = () => {
      */
     useEffect(() => {
         if (searchQuery === "") {
-            (isDebug) ? console.log("UniversityPage says : fetchingUniversities...") : null
             dispatch(fetchUniversities({ page }));
         } else {
-            (isDebug) ? console.log("UniversityPage says : searching...") : null
             dispatch(searchUniversities({ page , query : searchQuery }));
-        }
-
-        if (isDebug) {
-            console.log("UniversityPage says: total page is ", totalPage);
-            console.log("UniversityPage says: search results are ", universities);
         }
     }, [dispatch, page, searchQuery]);
 
@@ -74,3 +66,4 @@ const UniversityPage = () => {
 };
 
 export default UniversityPage;
+
