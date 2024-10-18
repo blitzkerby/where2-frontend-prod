@@ -1,13 +1,8 @@
 
 import Card from "../reusable/Card";
 import { useDispatch, useSelector } from "react-redux";
-
 import { useEffect } from "react";
-import { getAuthData } from "../accountUtilities/UserProfile";
-
-
 import { getFavorite } from "../../features/slices/favoriteSlice";
-import { useLocation } from "react-router-dom";
 import { removedIsClicked } from "../../features/slices/favoriteSlice";
 
 const JobList = ({ jobs, page }) => {

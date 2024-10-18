@@ -22,7 +22,7 @@ export const getFavorite = createAsyncThunk("getFavorite", async ({ category, pa
     if (userId) {
          getAllFavorite = await axios.get(`${ config.favorite.getFavorite(userId, category) }?page=${ page }&limit=${ limit }`);
     }
-    console.log("getAllFavorite", getAllFavorite)
+    
     return getAllFavorite;
 });
 
@@ -61,8 +61,6 @@ const FavoriteSlices = createSlice({
                         };
                         state.favorites.map(fav => {
                             state.isClicked[`${ fav.university.id }`] = true
-                            console.log("this is university fav", fav.university.id)
-                            console.log("this is isclick fav",fav.university.id, state.isClicked)
                         });
                         
                     } else if (fav.categories === 'job') {
@@ -71,7 +69,6 @@ const FavoriteSlices = createSlice({
                         };
                         state.favorites.map(fav => {
                             state.isClicked[`${ fav.job.id }`] = true
-                            console.log("this is job fav",fav.job.id)
                         });
                      
                        
@@ -90,7 +87,6 @@ const FavoriteSlices = createSlice({
                         };
                         state.favorites.map(fav => {
                             state.isClicked[`${ fav.scholarship.id }`] = true
-                            console.log("this is scholarship fav",fav.scholarship.id)
                         });
                       
                     } else if (fav.categories === 'accommodation') {

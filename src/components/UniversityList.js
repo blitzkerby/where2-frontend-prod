@@ -43,8 +43,7 @@ const UniversityList = ({ universities, page }) => {
         fetchFavorites();
     }, [page, dispatch]);
 
-    console.log("isclicked university", isClicked)
-    console.log("isclicked university 235", isClicked)
+
     return (
         <>
         {
