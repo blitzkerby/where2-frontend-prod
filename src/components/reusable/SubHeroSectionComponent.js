@@ -1,20 +1,16 @@
-const SubpageHeroSection = () => {
+const SubpageHeroSection = ({ h1Text, subH1Text, pText }) => {
   return (
     <div className="bg-[#E6F3F9] w-full pt-[64px] min-h-[50vh] flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="lg:w-[60%] mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 py-12">
         <div className="lg:w-1/2 sm:w-[80%] space-y-6 tracking-tighter">
           <h1 className="w-full text-black lg:text-5xl sm:text-4xl font-bold leading-tight sm:text-center sm:tracking-tightest">
-            W2COMMUNITY
+            {h1Text}
             <br />
-            Dive into Anything
+            {subH1Text}
           </h1>
 
           <p className="text-black/90 text-lg sm:text-l max-w-lg text-justify tracking-tightest">
-            W2COMMUNITY is home to thousands of communities, students,
-            researchers, endless interactions, and genuine human interactions.
-            Whether you are a student, researcher, or an individual, W2COMMUNITY
-            has something for you. Feel free to start a disucssion and share
-            your thoughts with the world.
+           {pText}
           </p>
         </div>
 

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { LoadingSpinner } from '../reusable/Loading';
-import WrapperComponent from "../reusable/WrapperComponent";
+import { LoadingSpinner } from './../reusable/Loading';
+import WrapperComponent from "./../reusable/WrapperComponent";
 import { useNavigate } from "react-router-dom";
-import config from '../../config';
+import config from './../../config';
 import HealthArticleCard from './HealthArticleCard';
-import HealthArticlePage from "./HealthArticlePage";
 
 const HealthArticleList = () => {
   const [articles, setArticles] = useState([]);
@@ -42,7 +41,7 @@ const HealthArticleList = () => {
   return (
     <>
       <WrapperComponent>
-        <header className="lg:w-[70%] sm:w-[80%] mx-auto py-16 text-center tracking-tightest">
+        <header className="lg:w-[70%] h-[500px] sm:w-[80%] mx-auto py-16 text-center tracking-tightest">
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold mb-6 tracking-tighter">
             Mental Health and Health Services and Product Reviews
           </h1>

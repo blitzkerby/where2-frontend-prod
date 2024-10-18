@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 
 // import Card from "./components/reusable/Card";
 // import SearchBar from "./components/reusable/SearchBar";
@@ -37,16 +37,16 @@ const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: '/',
+    element: <HomePage />,
     index: true,
-    element: <HomePage />
   },
   {
-    path: "/home",
-    element: <HomePage />
+    path: '/home',
+    element: <Navigate to="/" replace />
   },
   {
-    path: "/homepage",
-    element: <HomePage />
+    path: '/homepage',
+    element: <Navigate to="/" replace />
   },
   { path: "/login",element: <PublicOnlyROute><LoginPage /></PublicOnlyROute>},
   { path: "/signup",element: <PublicOnlyROute><RegisterPage /></PublicOnlyROute>},
