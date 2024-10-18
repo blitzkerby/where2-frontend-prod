@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, {useEffect} from "react";
 import { Edit2 } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 import { useFetchPhoto, useUploadPhoto } from "./../../hooks/useFetchPhoto";
