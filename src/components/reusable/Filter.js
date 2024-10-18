@@ -6,13 +6,14 @@ import { LuX } from "react-icons/lu";
 import Accordion from "./Accordion";
 import DateRange from "./DateRange";
 // import { items } from "./data";
-function FilterComponent ({items,onUniversityFilterChange}){
+
+function FilterComponent ({ items , onUniversityFilterChange }){
 	const  [openFilter,setOpenFilter] = useState(false)
 
 	const handleModel = () => {
 		setOpenFilter(!openFilter);
-		
-};
+	};
+	
 	return(
 		<div className=" lg:w-[890px] mx-auto pt-1.5">
 			<div className="w-[103px] h-[51px] bg-white border flex items-center justify-center cursor-pointer rounded-md text-lg z-10  border-[#7CD1EB]"
@@ -37,7 +38,8 @@ function FilterComponent ({items,onUniversityFilterChange}){
 						<Accordion 
 						items={items} 
 						handlemodel={handleModel} 
-						onUniversityFilterChange={onUniversityFilterChange} />
+						onUniversityFilterChange={onUniversityFilterChange}
+						 />
 						<div>
 							{/* <DateRange/> */}
 						</div>	

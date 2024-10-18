@@ -16,6 +16,7 @@ import Button from './ButtonComponent';
 
 //slice
 import { addFavorite } from '../../features/slices/favoriteSlice';
+import { convertToHTML } from '../../utils/markdownConverter';
 
 // import { addFavorite,removeFavorite,setIsClicked } from "../../features/slices/favoriteSlice";
 
@@ -156,7 +157,7 @@ const Card = ({
         </div>
         <div className="flex flex-col lg:h-[78%] sm:h-[200px]">
           <div className="flex-1 text-clip overflow-hidden">
-            <p className="text-justify">{description}</p>
+            <p className="text-justify">{convertToHTML(description)}</p>
           </div>
           <div className="mt-auto text-center">
             <div className="mb-4 flex justify-around max-w-[200px]">

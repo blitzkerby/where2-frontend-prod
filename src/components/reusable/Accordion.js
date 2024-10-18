@@ -1,7 +1,12 @@
+
 import { useState } from "react";
 import { GoChevronDown, GoChevronUp } from "react-icons/go";
+import { useNavigate } from "react-router-dom";
 
-function Accordion({ items,handlemodel,onUniversityFilterChange }) {
+function Accordion({ items , handlemodel , 
+  // onUniversityFilterChange 
+}) {
+  const navigate = useNavigate()
   const [expandedIndex, setExpandedIndex] = useState(-1);
 
   const handleClick = (nextIndex) => {
@@ -11,6 +16,12 @@ function Accordion({ items,handlemodel,onUniversityFilterChange }) {
       setExpandedIndex(nextIndex);
     }
   };
+
+  
+  const applyFilter = (e) => {
+    e.preventDefault()
+    navigate(`/list/university?location=${encodeURIComponent("Chroy Changvar")}`)
+  }
 
   const renderItems = items.map((item, index) => {
     const isExpanded = index === expandedIndex;
@@ -29,11 +40,8 @@ function Accordion({ items,handlemodel,onUniversityFilterChange }) {
 					<div className="md:w-[300] flex flex-col md:flex-row p-2 overflow-x-auto">
 						{item.content.map((contentItem, contentIndex) => (
 							<div key={contentIndex} className="p-5">
-								<div onClick={() => {
-                  console.log("Clicked:", contentItem);
-                  handlemodel();
-                  onUniversityFilterChange(contentItem);
-                }} className="bg-[#A9EBFF] w-fit border rounded-full px-2 cursor-pointer drop-shadow-lg">
+								<div className="bg-[#A9EBFF] w-fit border rounded-full px-2 cursor-pointer drop-shadow-lg"
+                  onClick={applyFilter}>
                   {contentItem}
                 </div>        
 							</div>
@@ -50,4 +58,3 @@ function Accordion({ items,handlemodel,onUniversityFilterChange }) {
 }
 
 export default Accordion;
-// onClick={handlemodel}

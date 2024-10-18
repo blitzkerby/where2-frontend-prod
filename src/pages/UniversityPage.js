@@ -1,8 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useQueryParams } from '../hooks/useQueryParams';
-import { fetchUniversities, searchUniversities } from '../features/slices/universitySlice';
+
+import { filterByLocation } from '../features/slices/filterSlice';
+import { fetchUniversities, searchUniversities, setUniversities } from '../features/slices/universitySlice';
 
 import { LoadingOverlay } from '../components/reusable/Loading';
 
@@ -14,6 +17,7 @@ import Filter from '../components/reusable/Filter';
 import SearchBar from '../components/reusable/SearchBar';
 import Pagination from '../components/reusable/Pagination';
 import ListContainer from '../components/reusable/ListContainer';
+import { setTotalPage } from '../features/slices/paginationSlice';
 
 /** Enable for debugging */
 const isDebug = true;
@@ -27,10 +31,12 @@ const UniversityPage = () => {
     const { universities, loading, error } = useSelector((state) => state.universities);
     const { totalPage } = useSelector((state) => state.pagination);
 
-    const [currentFilterUni, setCurrentFilterUni] = useState('');
+    const navigate = useNavigate()
 
-    const handleUniversityFilterChange = (university) => {
-        setCurrentFilterUni(university);
+    const location = "Siem Reap"
+
+    const handleUniversityFilterChange = (e) => {
+
     };
 
     const items = [
@@ -46,6 +52,12 @@ const UniversityPage = () => {
         }
     ];
 
+    async function filterLocation(){
+        const { list , totalPages } = await filterByLocation({ page, location })
+        dispatch(setUniversities(list))
+        dispatch(setTotalPage(totalPages))
+    }
+
     /**
      * useEffect Hook
      *
@@ -58,12 +70,24 @@ const UniversityPage = () => {
      * @param {boolean} isDebug - Flag for enabling debug logs
      */
     useEffect(() => {
-        if (searchQuery === "") {
+        // if (searchQuery === "") {
+        //     (isDebug) ? console.log("UniversityPage says : fetchingUniversities...") : null
+        //     dispatch(fetchUniversities({ page }));
+        // } else {
+        //     (isDebug) ? console.log("UniversityPage says : searching...") : null
+        //     dispatch(searchUniversities({ page , query : searchQuery }));
+        // }
+
+        if (searchQuery !== "") {
+            (isDebug) ? console.log("UniversityPage says : searching...") : null
+            dispatch(searchUniversities({ page, query : searchQuery}));
+        } else if (location !== "") {
+            (isDebug) ? console.log("UniversityPage says : filtering by location...") : null
+            // dispatch(filterByLocation({ page, location }));
+            filterLocation()
+        } else {
             (isDebug) ? console.log("UniversityPage says : fetchingUniversities...") : null
             dispatch(fetchUniversities({ page }));
-        } else {
-            (isDebug) ? console.log("UniversityPage says : searching...") : null
-            dispatch(searchUniversities({ page , query : searchQuery }));
         }
 
         if (isDebug) {
