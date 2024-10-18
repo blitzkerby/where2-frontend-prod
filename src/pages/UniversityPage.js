@@ -25,7 +25,7 @@ const UniversityPage = () => {
     const dispatch = useDispatch();
     const { universities, loading, error } = useSelector((state) => state.universities);
     const { totalPage } = useSelector((state) => state.pagination);
-
+    console.log(universities.filter(p => p.isApproved == false))
     /**
      * useEffect Hook
      *
