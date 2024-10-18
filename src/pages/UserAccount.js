@@ -12,7 +12,7 @@ const UserAccount = ({ userInfo }) => {
   const { role, loading, isLoggedIn } = useAuth();
 
   if (loading) {
-    return <LoadingOverlay message="We are fetching your profile..."/>;
+    return <LoadingOverlay message="We are fetching your profile..." />;
   }
 
   if (!role || !isLoggedIn) {
@@ -25,7 +25,7 @@ const UserAccount = ({ userInfo }) => {
   );
 
   return (
-    <section className="w-full h-full bg-white rounded-3xl my-auto shadow-md border">
+    <section className="w-full min-h-screen bg-white rounded-3xl my-auto shadow-md border">
       <div className="lg:w-full lg:py-[32px] lg:px-[64px] lg:mx-auto h-full px-4 pb-6 pt-12 sm:px-6 lg:pb-0">
         <div className="flex items-center justify-center mb-3">
           <ProfilePictureUpload userId={userInfo.id} />
@@ -42,7 +42,7 @@ const UserAccount = ({ userInfo }) => {
           disabled
         />
 
-        <div className="space-y-4">
+        <div className="space-y-4 min-h-full">
           {userInfo.entity && (
             <FormInput
               label="Entity"
@@ -115,8 +115,8 @@ const UserAccount = ({ userInfo }) => {
             rounded
             className="p-3 sm:p-4"
           />
+          <VisitorTracker path={location.pathname} />
         </div>
-        <VisitorTracker path={location.pathname} />
       </div>
     </section>
   );

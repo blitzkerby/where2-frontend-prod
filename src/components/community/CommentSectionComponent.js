@@ -37,6 +37,7 @@ const CommentSectionComponent = ({
           setIsLoading(true);
           const updatedComments = [...prevComments];
           updatedComments[existingCommentIndex] = newComment;
+          window.location.reload();
           setIsLoading(false);
           return updatedComments;
         }
@@ -64,7 +65,7 @@ const CommentSectionComponent = ({
             className="hover:visible text-sm text-opacity-70"
             onClick={() => setShowReplyForm(true)}
           >
-            Add a reply
+            reply
           </ButtonComponent>
         </div>
       )}
@@ -79,21 +80,28 @@ const CommentSectionComponent = ({
 
       {error && <div className="text-red-500 text-sm">{error}</div>}
 
-      <div className="space-y-4">
-        {comments
-          .filter(comment => comment && comment.user) // Check for both comment and user
-          .map(comment => (
-            <div key={comment.id} className="bg-gray-50 p-4 rounded-lg">
-              <div className="flex items-center gap-2 mb-2">
-                <ProfilePicture userId={comment.user.id} size={6} />
-                <span className="text-sm text-gray-600">
-                  {comment.user.email}
-                </span>
-              </div>
-              <p className="text-gray-700">{comment.content}</p>
+      <div className="space-y-4 pl-8">
+      {comments
+        .filter(comment => comment && comment.user)
+        .map(comment => (
+          <div key={comment.id} className="bg-gray-50 p-4 rounded-lg">
+            <div className="flex items-center gap-2 mb-2">
+              <ProfilePicture userId={comment.user.id} size={6} />
+              <span className="text-sm text-gray-600 truncate max-w-[200px]">
+                {comment.user.email}
+              </span>
             </div>
-          ))}
-      </div>
+            <div className="text-gray-700 whitespace-pre-wrap break-all w-full">
+              {comment.content.split(' ').map((word, index) => (
+                <React.Fragment key={index}>
+                  <span className="break-all w-[90%] h-fit">{word}</span>
+                  {index !== comment.content.split(' ').length - 1 && ' '}
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+        ))}
+    </div>
     </div>
   );
 };

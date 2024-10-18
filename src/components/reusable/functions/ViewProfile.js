@@ -1,8 +1,7 @@
-import config from "../../../config";
+import config from "./../../../config";
 
 const FetchProfile = async (paramUserId, token) => {
     try {
-      console.log("Fetching profile" , paramUserId);
       const res = await fetch(config.profile.getMyProfile(paramUserId), {
         headers: {
           'Content-Type': 'application/json',

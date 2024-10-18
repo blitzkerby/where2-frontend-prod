@@ -14,7 +14,6 @@ import AdminContent from "../accountUtilities/sidebarComponents/Admin/AdminConte
 import Logout from "./Logout.js";
 import CollectionPanel from "./CollectionPanel.js";
 
-
 export const SidebarContentContext = createContext();
 
 const contentComponents = {
@@ -85,9 +84,13 @@ const Profile = ({ userData, isPublic }) => {
         )}
 
         {/* Main Content */}
-        <div className={`flex-grow overflow-hidden ${isMobile ? "relative z-10" : ""}`}>
+        <div
+          className={`flex-grow overflow-hidden ${
+            isMobile ? "relative z-10" : ""
+          }`}
+        >
           <div className="h-full overflow-y-auto">
-            <div className="p-4">
+            <div className="px-4 min-h-full sm:mb-[16px]">
               {isMobile && !sidebarOpen && (
                 <button
                   onClick={toggleSidebar}

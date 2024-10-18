@@ -1,15 +1,30 @@
+import React, { useState } from "react";
+import CreateDiscussionComponent from "./../components/community/CreateDiscussionComponent";
+import WrapperComponent from "./../components/reusable/WrapperComponent";
 import DiscussionsComponent from "./../components/DiscussionsComponent";
 import Footer from "./../components/reusable/Footer";
 import Navbar from "./../components/reusable/Navbar";
 
 const DiscussionPage = () => {
+    const [isCreatingDiscussion, setIsCreatingDiscussion] = useState(false);
+  
+    const toggleDiscussionView = () => {
+      setIsCreatingDiscussion((prev) => !prev);
+    };
+  
     return (
-        <>
-            <Navbar/>
+      <>
+        <Navbar />
+        <WrapperComponent>
+          {isCreatingDiscussion ? (
+            <CreateDiscussionComponent />
+          ) : (
             <DiscussionsComponent />
-            <Footer/>
-        </>
-    )
-}
-
-export default DiscussionPage;
+          )}
+        </WrapperComponent>
+        <Footer />
+      </>
+    );
+  };
+  
+  export default DiscussionPage;

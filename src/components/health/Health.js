@@ -1,17 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import ArticleList from "./ArticleList";
-import ArticlePage from "./ArticlePage";
+import HealthArticleList from "./HealthArticleList";
+import { Outlet } from 'react-router-dom';
 
 const Health = () => {
   return (
-    <>
-      <div className="w-full py-[64px] min-h-screen bg-slate-950 font-light tracking-[-0.08em] text-white">
-        <ArticleList />
-        <Link to="/article/:id" element={<ArticlePage />} />
-      </div>
-    </>
+    <div className="w-full py-[64px] min-h-screen bg-slate-950 font-light tracking-[-0.08em] text-white">
+      <HealthArticleList />
+      <Outlet />
+    </div>
   );
 };
 
 export default Health;
+

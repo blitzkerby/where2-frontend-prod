@@ -45,10 +45,13 @@ const config = {
   community: {
     createDiscussion: `${API_URL}/api/discussion`,
     getDiscussions: `${API_URL}/api/discussions`,
+    getUserDiscussions: (userId) =>
+      `${API_URL}/api/discussions/${userId}`,
     addComment: (discussionId, commentId) =>
       `${API_URL}/api/discussions/${discussionId}/comment/${commentId}`,
     getAllComments: (discussionId) =>
       `${API_URL}/api/discussions/${discussionId}/comments`,
+    deleteDiscussion: (discussionId) => `${API_URL}/api/discussion/${discussionId}`,
   },
   job: {
     getAllJob: `${API_URL}/api/jobs`,
@@ -92,6 +95,17 @@ const config = {
   paypal: {
     clientID: CLIENT_ID,
   },
+  dashboard: {
+    getDiscussionsPerDay: `${API_URL}/api/dashboard/discussions-per-day`,
+    getDeviceDistribution: `${API_URL}/api/dashboard/device-distribution`,
+    getActiveAndViews: `${API_URL}/api/dashboard/active-and-views`,
+    getUserCounts: `${API_URL}/api/dashboard/user-counts-by-city`,
+    getCommentsPerDay: `${API_URL}/api/dashboard/comments-by-day`,
+  },
+  health: {
+    getAllHealthArticles: `${API_URL}/api/health/health-articles`,
+    getHealthArticleById: (id) => `${API_URL}/api/health/health-articles/${id}`,
+  }
 };
 
 export default config;

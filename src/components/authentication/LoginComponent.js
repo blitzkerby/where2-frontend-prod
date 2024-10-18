@@ -6,7 +6,6 @@ import ButtonComponent from "./../reusable/Button";
 import ContainerComponent from "./../reusable/ContainerComponent";
 import { login, clearAuthState } from "./../../features/slices/authSlice";
 import { LoadingSpinner, LoadingOverlay } from "./../reusable/Loading.js";
-import useAuth from "./../../hooks/useAuth.js";
 
 // LOGIN COMPONENTS
 const LoginComponent = () => {
@@ -71,7 +70,7 @@ const LoginComponent = () => {
             variant={"primary"}
             className="mt-2 w-[197px] h-[38px] sm:w-[343px] sm:h-[50px]"
             type="submit"
-            disabled={status === "loading"}
+            disabled={status === "loading" || status === "succeded"}
           >
             {status === "loading" ? <LoadingSpinner /> : "Login"}
           </ButtonComponent>

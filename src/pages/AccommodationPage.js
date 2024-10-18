@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useQuery } from '../utils/useQuery';
+import { useQueryParams } from '../hooks/useQueryParams';
 
 import { LoadingOverlay } from '../components/reusable/Loading';
 
@@ -9,23 +9,25 @@ import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
 import Pagination from '../components/reusable/Pagination';
 import ListContainer from '../components/reusable/ListContainer';
+import { fetchAllList } from '../features/slices/paginationSlice';
+
+import DetailLayout from '../layouts/DetailLayout';
 
 /** Enable for debugging */
 const isDebug = true;
 
 const AccommodationPage = () => {
-    const urlParams = useQuery();
+    const urlParams = useQueryParams();
 
     const page = parseInt(urlParams.get('page')) || 1;
     const searchQuery = urlParams.get('q') || '';
 
     const dispatch = useDispatch();
-    const { universities, loading, error } = useSelector((state) => state.universities);
-    const { totalPage } = useSelector((state) => state.pagination);
+    // const { universities, loading, error } = useSelector((state) => state.universities);
+    const { data, loading, error, totalPage } = useSelector((state) => state.pagination);
 
-console.log("AccommodationList", data)
     useEffect(() => {
-        dispatch(fetchAllList({page,limit,model: 'Accommodation'}))
+        dispatch(fetchAllList({page,model: 'Accommodation'}))
     },[dispatch, page])
     return (
         <div>
@@ -33,7 +35,7 @@ console.log("AccommodationList", data)
             <ListContainer>
             {loading && <LoadingOverlay/>}
             {error && <p>{error}</p>}
-            <AccommodationList accommodations={data} />
+            <DetailLayout accommodations={data} />
             </ListContainer>
             <Pagination totalPage={totalPage} currentPage={page} category='accommodations'/>
             <Footer />

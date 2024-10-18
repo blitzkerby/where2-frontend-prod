@@ -8,6 +8,7 @@ import DetailLayout from '../layouts/DetailLayout';
 
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
+import { LoadingOverlay } from '../components/reusable/Loading';
 
 const UniversityDetailPage = () => {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const UniversityDetailPage = () => {
     }, [dispatch, id]);
 
     if (isLoading) {
-        return <LoadingOverlay />;
+        return <LoadingOverlay/>;
     }
 
     return (

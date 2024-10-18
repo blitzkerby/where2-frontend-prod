@@ -227,13 +227,7 @@ import config from "./../../config"
           resetToken: response.data.token,
         };
       } catch (error) {
-        if (config.isDevelopment) {
-          console.error("Forgot password error:", error.response?.data || error.message);
-          console.error("Forgot password error:", error);
-          console.error("Error response:", error.response);
-          console.error("Error message:", error.message);
-          console.error("Error config:", error.config);
-        }
+        console.log(error)
         return thunkAPI.rejectWithValue(
           handleAsyncError(
             error,

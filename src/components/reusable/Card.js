@@ -15,9 +15,7 @@ import { Facebook, Instagram, Twitter, Youtube, Chrome } from 'lucide-react';
 import Button from './ButtonComponent';
 
 //slice
-import { addFavorite } from '../../features/slices/favoriteSlice';
-
-// import { addFavorite,removeFavorite,setIsClicked } from "../../features/slices/favoriteSlice";
+import { addFavorite,removeFavorite,setIsClicked } from "../../features/slices/favoriteSlice";
 
 const user = JSON.parse(localStorage.getItem('authData'));
 
@@ -40,6 +38,10 @@ const Card = ({
   type,
   isHeartClicked = false, 
   id,
+  size,
+  price,
+  address,
+  FilledHeart
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();

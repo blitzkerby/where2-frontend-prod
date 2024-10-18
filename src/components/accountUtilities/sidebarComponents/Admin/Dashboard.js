@@ -14,7 +14,14 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import useAuth from "../../../../hooks/useAuth";
+import useAuth from "./../../../../hooks/useAuth";
+import PostsBarChart from "./../../../reusable/dashboardComponents/BarChart";
+import CustomedPieChart from "./../../../reusable/dashboardComponents/CustomedPieChart";
+import UsersStatusComponent from "./../../../reusable/dashboardComponents/UsersStatus";
+import TopPostsChart from "./../../../reusable/dashboardComponents/TopPostsChart";
+import axios from "axios";
+import config from "./../../../../config";
+
 
 const generateDummyData = (type, month, year) => {
   const getDaysInMonth = (month, year) => new Date(year, month, 0).getDate();
@@ -72,49 +79,6 @@ const ViewsChart = ({ data, timeFrame }) => (
   </ResponsiveContainer>
 );
 
-const TopPostsChart = ({ data }) => (
-  <ResponsiveContainer width="100%" height={300}>
-    <BarChart
-      data={data}
-      layout="vertical"
-      margin={{ top: 5, right: 30, left: 100, bottom: 5 }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis type="number" />
-      <YAxis dataKey="name" type="category" />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="views" fill="#E2F1E7" />
-    </BarChart>
-  </ResponsiveContainer>
-);
-
-const DeviceDistributionChart = ({ data }) => {
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28"];
-
-  return (
-    <ResponsiveContainer width="100%" height={300}>
-      <PieChart>
-        <Pie
-          data={data}
-          cx="50%"
-          cy="50%"
-          labelLine={false}
-          outerRadius={80}
-          fill="#8884d8"
-          dataKey="value"
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-        <Tooltip />
-        <Legend />
-      </PieChart>
-    </ResponsiveContainer>
-  );
-};
-
 const SummaryStatistics = ({ data }) => {
   const totalViews = data.reduce((sum, item) => sum + item.views, 0);
   const avgViews = Math.round(totalViews / data.length);
@@ -150,7 +114,23 @@ const PostViewsDashboard = () => {
   const [data, setData] = useState([]);
   const [topPosts, setTopPosts] = useState([]);
   const [deviceDistribution, setDeviceDistribution] = useState([]);
-  const { entity } = useAuth();
+  const [activeUsers, setActiveUsers] = useState([]);
+  const [viewsToday, setViewsToday] = useState([]);
+  const { username, entity } = useAuth();
+
+  useEffect(() => {
+    const fetchStatusData = async () => {
+      try {
+        const response = await axios.get(config.dashboard.getActiveAndViews);
+        setActiveUsers(response.data.activeUsers);
+        setViewsToday(response.data.viewsToday);
+      } catch (error) {
+        console.error('Error fetching status data:', error);
+      }
+    };
+
+    fetchStatusData();
+  }, []); // Empty dependency array means this will run once on mount
 
   useEffect(() => {
     setData(generateDummyData(timeFrame, selectedMonth + 1, selectedYear));
@@ -195,7 +175,7 @@ const PostViewsDashboard = () => {
   return (
     <div className="max-w-6xl mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6 text-right pb-[10.5px] tracking-tight">
-        Welcome to Dashboard, {entity}
+        Welcome to Dashboard, {username ? username : entity}
       </h1>
 
       <div className="mb-6 flex flex-wrap items-center">
@@ -272,26 +252,44 @@ const PostViewsDashboard = () => {
             <ViewsChart data={data} timeFrame={timeFrame} />
           </div>
         </div>
-        <div>
-          <h2 className="text-xl font-semibold mb-4">Top Customers</h2>
-          <TopPostsChart data={topPosts} />
-        </div>
       </div>
 
-      <div className="mb-6">
+      <div>
+          <h2 className="text-xl font-semibold mb-4">User counts based on City</h2>
+          <TopPostsChart fetchUrl={config.dashboard.getUserCounts} />
+      </div>
+
+      <div className="my-6">
+        <h2 className="text-xl font-semibold mb-4">User Status</h2>
+          <UsersStatusComponent activeUsers={activeUsers} viewsToday={viewsToday}/>
+      </div>
+
+
+      <div className="my-6">
         <h2 className="text-xl font-semibold mb-4">Device Distribution</h2>
-        <DeviceDistributionChart data={deviceDistribution} />
+          <CustomedPieChart fetchUrl={config.dashboard.getDeviceDistribution} />
       </div>
 
-      <div className="bg-gray-100 p-4 rounded">
-        <h2 className="text-xl font-semibold mb-4">Real-time Updates</h2>
-        <p className="text-lg">
-          Currently active users: <span className="font-bold">237</span>
-        </p>
-        <p className="text-lg">
-          Views in the last hour: <span className="font-bold">1,892</span>
-        </p>
+      <div className="p-6">
+      <div className="my-6">
+        <h2 className="text-xl font-semibold mb-4">Number of Posts</h2>
+        <PostsBarChart 
+          fetchUrl={config.dashboard.getDiscussionsPerDay} // Fetch URL for posts
+          title="Post(s) created per day"
+          isDataArray={false}
+        />
       </div>
+
+      <div className="my-6">
+        <h2 className="text-xl font-semibold mb-4">Number of Comment(s)</h2>
+        <PostsBarChart 
+          fetchUrl={config.dashboard.getCommentsPerDay} // Fetch URL for comments
+          title="Comment(s) created per day"
+          barColor="#82ca9d"
+          isDataArray={true}
+        />
+      </div>
+    </div>
     </div>
   );
 };
