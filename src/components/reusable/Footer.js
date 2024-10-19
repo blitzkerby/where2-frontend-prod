@@ -42,13 +42,13 @@ function Footer() {
                 style={{ color: "rgba(157, 160, 161, 1)" }}
               >
                 <li>
-                  <FooterLink href="/part-time-jobs">Part Time Job</FooterLink>
+                  <FooterLink href="/list/job">Part Time Job</FooterLink>
                 </li>
                 <li>
-                  <FooterLink href="/student-loans">Student Loan</FooterLink>
+                  <FooterLink href="/list/student-loan">Student Loan</FooterLink>
                 </li>
                 <li>
-                  <FooterLink href="/accommodations">Accommodation</FooterLink>
+                  <FooterLink href="/list/accommodation">Accommodation</FooterLink>
                 </li>
                 <li>
                   <FooterLink href="/health">W2Health</FooterLink>
