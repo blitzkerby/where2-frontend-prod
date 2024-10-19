@@ -1,31 +1,29 @@
 
 import Card from "../reusable/Card";
 import { useDispatch, useSelector } from "react-redux";
-
 import { useEffect } from "react";
-
-
-
 import { getFavorite } from "../../features/slices/favoriteSlice";
-import { useLocation } from "react-router-dom";
 import { removedIsClicked } from "../../features/slices/favoriteSlice";
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-} 
-const JobList = ({ jobs }) => {
-    const urlParams = useQuery();
 
-    const page = parseInt(urlParams.get('page')) || 1;
-    const limit = parseInt(urlParams.get('limit')) || 10;
+const JobList = ({ jobs, page }) => {
+
     const dispatch = useDispatch();
     const { isClicked } = useSelector((state) => state.favorites);
+
     useEffect(() => {
-        if (page === 1) {
-            dispatch(removedIsClicked());
-        }
-        dispatch(getFavorite({category:"job",page,limit}))
-    }, [page]);
-    
+        const fetchFavorites = async () => {
+            try {
+                if (page === 1) {
+                    dispatch(removedIsClicked());
+                }
+               await dispatch(getFavorite({ category: "job", page, limit: 10 }));
+            } catch (error) {
+                console.error("Error fetching favorites:", error);
+            }
+        };
+        fetchFavorites();
+    }, [page, dispatch]);
+
     return (
     <>
     {jobs.map(job => {
@@ -49,7 +47,7 @@ const JobList = ({ jobs }) => {
                 timeOut={job.salary}
                 type={"job"}
                 isHeartClicked = {isClicked[job.id]}
-                route={`/job-detail/${ job.id }`}
+                route={`/job-detail/${job.id}`}
             />)
         
     })}

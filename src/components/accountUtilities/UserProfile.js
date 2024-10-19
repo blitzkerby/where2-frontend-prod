@@ -5,7 +5,7 @@ import { LoadingOverlay } from "../reusable/Loading";
 import Navbar from "../reusable/Navbar";
 import Footer from "../reusable/Footer";
 
-const getAuthData = () => {
+export const getAuthData = () => {
   const authData = localStorage.getItem("authData");
   if (!authData) {
     throw new Error("No authentication data found");

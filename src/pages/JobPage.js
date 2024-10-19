@@ -29,9 +29,9 @@ const JobPage = () => {
             <ListContainer>
             {loading && <LoadingOverlay/>}
             {error && <p>{error}</p>}
-            <JobList jobs={data}/>
+            <JobList jobs={data} page={page}/>
             </ListContainer>
-            <Pagination totalPage={totalPage} currentPage={page} route={'jobs'}/>
+            <Pagination totalPage={totalPage} currentPage={page} route={'jobs'} category={"job"} />
             <Footer />
         </>
     )

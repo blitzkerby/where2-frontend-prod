@@ -103,7 +103,10 @@ const Profile = ({ userData, isPublic }) => {
                   <ChevronRight size={24} />
                 </button>
               )}
-                <ContentComponent userInfo={userData} />
+              {sidebarContent !== "account" && sidebarContent !== "setting" && sidebarContent !== "logOut" ? (
+                <CollectionPanel category={sidebarContent} />
+              ) : (
+                <ContentComponent userInfo={userData} />)}
             </div>
           </div>
         </div>

@@ -9,10 +9,8 @@ import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
 import Pagination from '../components/reusable/Pagination';
 import ListContainer from '../components/reusable/ListContainer';
+import AccommodationList from '../components/AccommodationList';
 import { fetchAllList } from '../features/slices/paginationSlice';
-
-import DetailLayout from '../layouts/DetailLayout';
-
 /** Enable for debugging */
 const isDebug = true;
 
@@ -20,11 +18,12 @@ const AccommodationPage = () => {
     const urlParams = useQueryParams();
 
     const page = parseInt(urlParams.get('page')) || 1;
+    const limit = parseInt(urlParams.get('limit')) || 10;
     const searchQuery = urlParams.get('q') || '';
 
     const dispatch = useDispatch();
-    // const { universities, loading, error } = useSelector((state) => state.universities);
-    const { data, loading, error, totalPage } = useSelector((state) => state.pagination);
+    const { universities, loading, error } = useSelector((state) => state.universities);
+    const { totalPage, data } = useSelector((state) => state.pagination);
 
     useEffect(() => {
         dispatch(fetchAllList({page,model: 'Accommodation'}))
@@ -35,9 +34,9 @@ const AccommodationPage = () => {
             <ListContainer>
             {loading && <LoadingOverlay/>}
             {error && <p>{error}</p>}
-            <DetailLayout accommodations={data} />
+                <AccommodationList accommodations={data} page={page} />
             </ListContainer>
-            <Pagination totalPage={totalPage} currentPage={page} category='accommodations'/>
+            <Pagination totalPage={totalPage} currentPage={page} category='accommodation'/>
             <Footer />
         </div>
     )

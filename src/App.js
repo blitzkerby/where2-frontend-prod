@@ -120,9 +120,9 @@ const router = createBrowserRouter([
   {
     path: "/list",
     children: [
-      { path: "job", element: <JobPage /> },
-      { path: "university", element: <UniversityPage /> },
+      { path: "university", element: <UniversityPage/>},
       { path: "scholarship", element: <ScholarshipPage /> },
+      { path: "job", element: <JobPage /> },
       { path: "student-loan", element: <StudentLoanPage /> },
       { path: "accommodation", element: <AccommodationPage /> },
     ],
@@ -132,13 +132,13 @@ const router = createBrowserRouter([
     children: [
       { path: "university/:id", element: <UniversityDetailPage /> },
       { path: "scholarship/:id", element: <ScholarshipDetailPage /> },
-      { path: "job/:id", element: <JobDetailPage /> },
-    ],
+      { path: "job/:id", element: < JobDetailPage/>}
+    ]
   },
-
-  { path: "/login", element: <LoginPage /> },
-  { path: "/signup", element: <RegisterPage /> },
-  { path: "/scholarships", element: <ScholarshipPage /> },
+ 
+  { path: "/login",element: <LoginPage />},
+  { path: "/signup",element: <RegisterPage />},
+  { path: "/scholarships", element: <ScholarshipPage/>},
   { path: "/profile/:userName", element: <UserProfile /> },
   // {
   //   path: "/universities",
@@ -158,10 +158,9 @@ const router = createBrowserRouter([
   { path: "/livelihood", element: <LivelihoodPage /> },
   { path: "/scholarships", element: <ScholarshipPage /> },
   { path: "/scholarship/:id", element: <ScholarshipDetailPage /> },
-  { path: "/student-loans", element: <StudentLoanPage /> },
-  { path: "/accommodations", element: <AccommodationPage /> },
-  { path: "/accommodation-detail/:id", element: <AccommodationDetailPage /> },
-  { path: "/health/article/:id", element: <HealthArticlePage /> },
+  {path:"/accommodation-detail/:id",element:<AccommodationDetailPage />},
+  { path: "/health/article/:id", element: <HealthArticlePage />},
+
 ]);
 
 function App() {

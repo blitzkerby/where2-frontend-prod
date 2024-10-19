@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import Card from "./reusable/Card";
 import { useEffect } from "react";
-import { removedIsClicked } from "../features/slices/favoriteSlice";
+import { removedIsClicked,getFavorite } from "../features/slices/favoriteSlice";
 
 const isDebug = true;  // Set to false to turn off console logging
 
@@ -11,7 +11,7 @@ const isDebug = true;  // Set to false to turn off console logging
  * @param {Array} scholarships - List of scholarships to display.
  * @returns {JSX.Element} The list of scholarship cards or a "No results found" message.
  */
-const ScholarshipList = ({ scholarships }) => {
+const ScholarshipList = ({ scholarships, page}) => {
     // Debugging
     if (isDebug) {
         console.log("ScholarshipList says: ", scholarships);
@@ -21,15 +21,22 @@ const ScholarshipList = ({ scholarships }) => {
         return <div style={{ textAlign: 'center', color: 'red', fontSize: '24px' }}>No results found :(</div>;
     }
 
-    // const dispatch = useDispatch();
-    // const { isClicked } = useSelector((state) => state.favorites);
+    const dispatch = useDispatch();
+    const { isClicked } = useSelector((state) => state.favorites);
 
-    // useEffect(() => {
-    //     if (page === 1) {
-    //         dispatch(removedIsClicked());
-    //     }
-    //     dispatch(getFavorite({ category: "scholarship", page, limit }));
-    // }, [page]);
+    useEffect(() => {
+        const fetchFavorites = async () => {
+            try {
+                if (page === 1) {
+                    dispatch(removedIsClicked());
+                }
+               await dispatch(getFavorite({ category: "scholarship", page, limit: 10 }));
+            } catch (error) {
+                console.error("Error fetching favorites:", error);
+            }
+        };
+        fetchFavorites();
+    }, [page, dispatch]);
 
     // if (scholarships[0] == "No results found") {
     //     return null;
@@ -49,8 +56,10 @@ const ScholarshipList = ({ scholarships }) => {
                     telegramLink={scholarship.telegram_url}
                     websiteLink={scholarship.website}
                     location={scholarship.location}
-                    route={`/detail/scholarship/${scholarship.id}`}
-                    // isHeartClicked={isClicked[scholarship.id]}
+                    route={`/detail/scholarship/${ scholarship.id }`}
+                    id={scholarship.id}
+                    type={"scholarship"}
+                    isHeartClicked={isClicked[scholarship.id]}
                 />
             ))}
         </>

@@ -33,17 +33,17 @@ export const fetchAccommodations = createAsyncThunk(
 export const fetchAccommodation = createAsyncThunk(
     'accommodation/fetchAccommodation',
     async (id) => {
-        const response = await axios.get(`${config.accommodation.getAccommodationById}/${id}`);
-        return response.data.list;
+        const response = await axios.get(`${ config.accommodation.getAccommodationById }/${ id }`);
+        return response.data.oneAccommodation;
     }
 );
 
 const accommodationSlice = createSlice({
     name: 'accommodation',
     initialState: {
-        loading: false,
+        loading: true,
         error: null,
-        accommodation: null,
+        accommodation: {},
     },
     reducers: {
         /**
