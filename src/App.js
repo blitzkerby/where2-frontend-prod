@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 
 // import Card from "./components/reusable/Card";
 // import SearchBar from "./components/reusable/SearchBar";
@@ -31,47 +35,87 @@ import UniversityDetailPage from "./pages/UniversityDetailPage";
 import LoggedInOnlyRoute from "./components/routes/LoggedInRoute";
 import HealthArticlePage from "./components/health/HealthArticlePage";
 
-
-
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <HomePage />,
     index: true,
     element: <HomePage />,
-    errorElement: <ErrorPage />
+    errorElement: <ErrorPage />,
   },
   {
     path: "/home",
     element: <HomePage />,
-    path: '/home',
-    element: <Navigate to="/" replace />
+    path: "/home",
+    element: <Navigate to="/" replace />,
   },
   {
-    path: '/homepage',
-    element: <Navigate to="/" replace />
+    path: "/homepage",
+    element: <Navigate to="/" replace />,
   },
-  { path: "/login",element: <PublicOnlyROute><LoginPage /></PublicOnlyROute>},
-  { path: "/signup",element: <PublicOnlyROute><RegisterPage /></PublicOnlyROute>},
-  { path: "/forget-password", element: <PublicOnlyROute><ForgetPasswordPage /></PublicOnlyROute>},
-  { path: "/reset-password/:token", element: <PublicOnlyROute><ResetPasswordPage /></PublicOnlyROute>},
-  { path: "/terms-and-conditions", element: <PublicOnlyROute><TermsAndConditionsPage/></PublicOnlyROute>},
-  { path: "/signup/verification", element: <PublicOnlyROute><VerificationPage/></PublicOnlyROute> },
-  { path: "/dashboard/:userName", element: <DashboardComponent/> },
-  { path: "/profile/:userName", element: <UserProfile/> },
-  { path: "/discussions", element: <DiscussionsPage/> },
-  { path: "/discussions/create", element: <CreateDiscussionPage/> },
-  { path: "/health", element: <HealthPage/>},
+  {
+    path: "/login",
+    element: (
+      <PublicOnlyROute>
+        <LoginPage />
+      </PublicOnlyROute>
+    ),
+  },
+  {
+    path: "/signup",
+    element: (
+      <PublicOnlyROute>
+        <RegisterPage />
+      </PublicOnlyROute>
+    ),
+  },
+  {
+    path: "/forget-password",
+    element: (
+      <PublicOnlyROute>
+        <ForgetPasswordPage />
+      </PublicOnlyROute>
+    ),
+  },
+  {
+    path: "/reset-password/:token",
+    element: (
+      <PublicOnlyROute>
+        <ResetPasswordPage />
+      </PublicOnlyROute>
+    ),
+  },
+  {
+    path: "/terms-and-conditions",
+    element: (
+      <PublicOnlyROute>
+        <TermsAndConditionsPage />
+      </PublicOnlyROute>
+    ),
+  },
+  {
+    path: "/signup/verification",
+    element: (
+      <PublicOnlyROute>
+        <VerificationPage />
+      </PublicOnlyROute>
+    ),
+  },
+  { path: "/dashboard/:userName", element: <DashboardComponent /> },
+  { path: "/profile/:userName", element: <UserProfile /> },
+  { path: "/discussions", element: <DiscussionsPage /> },
+  { path: "/discussions/create", element: <CreateDiscussionPage /> },
+  { path: "/health", element: <HealthPage /> },
   { path: "/user/:userId", element: <VisitProfile /> },
   {
     path: "/universities",
     element: <UniversityPage />,
     children: [
       { path: "search", element: <UniversityPage /> },
-      { path: ":id", element: <UniversityDetailPage /> }
-    ]
+      { path: ":id", element: <UniversityDetailPage /> },
+    ],
   },
   {
     path: "/list",
@@ -81,8 +125,8 @@ const router = createBrowserRouter([
       { path: "job", element: <JobPage /> },
       { path: "student-loan", element: <StudentLoanPage /> },
       { path: "accommodation", element: <AccommodationPage /> },
-    ]
-  },  
+    ],
+  },
   {
     path: "/detail",
     children: [
@@ -104,14 +148,14 @@ const router = createBrowserRouter([
   //     { path: ":id", element: <UniversityDetail/> }
   //   ]
   // },
-  { path:"/livelihood", element: <LivelihoodPage />},
-  { path: "/jobs", element: <JobPage/> },
-  { path: "/job-detail/:jobId", element: <JobDetailPage/> },
-  { path: "/forget-password", element: <ForgetPasswordPage />},
-  { path: "/signup/verification", element: <VerificationPage/> },
-  { path: "/dashboard/:userName", element: <DashboardComponent/> },
+  { path: "/livelihood", element: <LivelihoodPage /> },
+  { path: "/jobs", element: <JobPage /> },
+  { path: "/job-detail/:jobId", element: <JobDetailPage /> },
+  { path: "/forget-password", element: <ForgetPasswordPage /> },
+  { path: "/signup/verification", element: <VerificationPage /> },
+  { path: "/dashboard/:userName", element: <DashboardComponent /> },
   { path: "/profile/:userName", element: <UserProfile /> },
-  { path:"/livelihood", element: <LivelihoodPage />},
+  { path: "/livelihood", element: <LivelihoodPage /> },
   { path: "/scholarships", element: <ScholarshipPage /> },
   { path: "/scholarship/:id", element: <ScholarshipDetailPage /> },
   {path:"/accommodation-detail/:id",element:<AccommodationDetailPage />},
@@ -128,4 +172,3 @@ function App() {
 }
 
 export default App;
-
