@@ -10,7 +10,6 @@ export const fetchAllList = createAsyncThunk(
         
         // Dispatch actions to update pagination state
         dispatch(setTotalPage(response.data.pagination.totalPages));
-        console.log("fetch all list", response.data.list)
         return response.data.list;
     }
 );

@@ -45,7 +45,7 @@ const AccommodationList = ({ accommodations, page }) => {
                 // timeOut={accommodation.salary}
                 type={"accommodation"}
                 isHeartClicked = {isClicked[accommodation.id]}
-                route={`/accommodation-detail/${ accommodation.id }`}
+                route={`/detail/accommodation/${ accommodation.id }`}
             />)
         
     })}

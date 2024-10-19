@@ -47,7 +47,7 @@ const JobList = ({ jobs, page }) => {
                 timeOut={job.salary}
                 type={"job"}
                 isHeartClicked = {isClicked[job.id]}
-                route={`/job-detail/${job.id}`}
+                route={`/detail/job/${job.id}`}
             />)
         
     })}

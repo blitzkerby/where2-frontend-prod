@@ -21,7 +21,7 @@ const FavoriteList = ({ favorites, category }) => {
                 deadLine={job.deadline}
                 timeOut={job.work_hour}
                 type={"job"}
-                route={`/job-detail/${job.id}`}
+                route={`/detail/job/${job.id}`}
             />
         ));
             
@@ -110,7 +110,7 @@ const FavoriteList = ({ favorites, category }) => {
             // websiteLink={accommodation.createdAt}
             // deadLine={accommodation.deadline}
             // timeOut={accommodation.salary}
-            route={`/accommodation-detail/${ accommodation.id }`}
+            route={`/detail/accommodation/${ accommodation.id }`}
             />
         ))
     }
