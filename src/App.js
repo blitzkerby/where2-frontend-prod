@@ -6,7 +6,7 @@ import {
 
 // import Card from "./components/reusable/Card";
 // import SearchBar from "./components/reusable/SearchBar";
-import HomePage from "./pages/HomePage";
+// import HomePage from "./pages/HomePage";
 import UserProfile from "./components/accountUtilities/UserProfile";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -38,23 +38,23 @@ import HealthArticlePage from "./components/health/HealthArticlePage";
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomePage />,
-    index: true,
-    element: <HomePage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/home",
-    element: <HomePage />,
-    path: "/home",
-    element: <Navigate to="/" replace />,
-  },
-  {
-    path: "/homepage",
-    element: <Navigate to="/" replace />,
-  },
+  // {
+  //   path: "/",
+  //   element: <HomePage />,
+  //   index: true,
+  //   element: <HomePage />,
+  //   errorElement: <ErrorPage />,
+  // },
+  // {
+  //   path: "/home",
+  //   element: <HomePage />,
+  //   path: "/home",
+  //   element: <Navigate to="/" replace />,
+  // },
+  // {
+  //   path: "/homepage",
+  //   element: <Navigate to="/" replace />,
+  // },
   {
     path: "/login",
     element: (

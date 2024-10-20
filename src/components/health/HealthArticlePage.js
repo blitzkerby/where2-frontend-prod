@@ -8,7 +8,7 @@ import WrapperComponent from "./../reusable/WrapperComponent";
 import ButtonComponent from "./../reusable/Button";
 import HealthNavbar from "./HealthNavbar";
 import Footer from "./../reusable/Footer";
-import TextSummary from "./../reusable/TextSummary"
+import TextSummary from "./../reusable/TextSummary";
 import config from "./../../config";
 
 const HealthArticlePage = () => {
@@ -25,15 +25,17 @@ const HealthArticlePage = () => {
         const apiUrl = config.health.getHealthArticleById(id);
         const response = await axios.get(apiUrl);
 
-        if (response.data.status === 'success' && response.data.data) {
+        if (response.data.status === "success" && response.data.data) {
           setArticle(response.data.data.healthArticle);
           console.log("Article set:", response.data.data.healthArticle);
         } else {
-          throw new Error('Invalid data format received from the server');
+          throw new Error("Invalid data format received from the server");
         }
       } catch (err) {
         console.error("Error fetching article:", err);
-        setError(err.message || 'Failed to fetch article. Please try again later.');
+        setError(
+          err.message || "Failed to fetch article. Please try again later."
+        );
       } finally {
         setLoading(false);
       }
@@ -41,10 +43,16 @@ const HealthArticlePage = () => {
     fetchArticle();
   }, [id]);
 
-  if (loading) return <LoadingSpinner className="h-screen" />;
+  if (loading)
+    return (
+      <LoadingSpinner
+        className="h-screen"
+        message="We are creating the health article for you..."
+      />
+    );
 
   if (error) {
-    navigate('/health');
+    navigate("/health");
     return null;
   }
 
@@ -52,7 +60,9 @@ const HealthArticlePage = () => {
     return (
       <WrapperComponent>
         <div className="text-center py-16">
-          <h1 className="text-3xl font-bold mb-4 text-white">Article Not Found</h1>
+          <h1 className="text-3xl font-bold mb-4 text-white">
+            Article Not Found
+          </h1>
           <ButtonComponent
             variant="primary"
             size="lg"
@@ -66,20 +76,20 @@ const HealthArticlePage = () => {
   }
 
   const formattedDate = article.date
-    ? format(new Date(article.date), 'MMMM d, yyyy')
-    : 'Publication date unavailable';
+    ? format(new Date(article.date), "MMMM d, yyyy")
+    : "Publication date unavailable";
 
   return (
     <>
       <HealthNavbar />
       <div className="bg-black min-h-screen text-white">
-        <div className="lg:w-[85%] sm:w-[95%] mx-auto py-8 px-4 sm:px-6 lg:px-8 mt-[64px]">
+        <div className="lg:w-[90%] sm:w-[99%] mx-auto py-8 px-4 sm:px-6 lg:px-8 mt-[64px]">
           <div className="lg:flex lg:space-x-8">
-            <div className="lg:w-full mb-8 lg:mb-0">
+            <div className="lg:w-full sm:w-full mb-8 lg:mb-0">
               <WrapperComponent>
                 <div className="bg-gray-900 w-full h-full rounded-xl shadow-lg">
                   <img
-                    src={article.image || 'default-image-url.jpg'}
+                    src={article.image || "default-image-url.jpg"}
                     alt={article.title}
                     className="w-full  h-[400px] object-cover rounded-xl shadow-lg mb-6"
                   />
@@ -103,7 +113,7 @@ const HealthArticlePage = () => {
                 <div className="bg-gray-900 rounded-xl p-6 shadow-lg">
                   <TextSummary textToSummarize={article.content} />
                 </div>
-                  <VisitTracker path={location.pathname}/>
+                <VisitTracker path={location.pathname} />
               </WrapperComponent>
             </div>
           </div>

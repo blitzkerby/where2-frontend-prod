@@ -38,16 +38,34 @@ const Navbar = () => {
   };
 
   const menuItems = [
+    // {
+    //   logo: <School />,
+    //   name: "Universities",
+    //   to: "/universities",
+    //   showMobile: true,
+    // },
+    // {
+    //   logo: <BookOpenTextIcon />,
+    //   name: "Scholarships",
+    //   to: "/scholarships",
+    //   showMobile: true,
+    // },
+    // {
+    //   logo: <LucideBriefcaseBusiness />,
+    //   name: "Livelihood",
+    //   to: "/livelihood",
+    //   showMobile: true,
+    // },
     {
       logo: <School />,
       name: "Universities",
-      to: "/universities",
+      to: "/list/university",
       showMobile: true,
     },
     {
       logo: <BookOpenTextIcon />,
       name: "Scholarships",
-      to: "/scholarships",
+      to: "/list/scholarship",
       showMobile: true,
     },
     {
@@ -56,9 +74,6 @@ const Navbar = () => {
       to: "/livelihood",
       showMobile: true,
     },
-    { logo: <School />, name: "Universities", to: "/list/university", showMobile: true },
-    { logo: <BookOpenTextIcon />, name: "Scholarships", to: "/list/scholarship", showMobile: true },
-    { logo: <LucideBriefcaseBusiness />, name: "Livelihood", to: "/livelihood", showMobile: true },
     { logo: <Activity />, name: "Health", to: "/health", showMobile: true },
     {
       logo: <User2 />,
