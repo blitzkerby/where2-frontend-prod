@@ -1,13 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from "recharts";
 
 const PostsBarChart = ({
   fetchUrl,
-  dataKey = 'count',
-  dateKey = 'date',
-  barColor = '#82ca9d',
-  title = 'Posts',
+  dataKey = "count",
+  dateKey = "date",
+  barColor = "#82ca9d",
+  title = "Posts",
   height = 300,
   isDataArray = true,
 }) => {
@@ -23,7 +32,7 @@ const PostsBarChart = ({
 
         const fetchedData = isDataArray ? response.data.data : response.data;
 
-        setData(fetchedData); 
+        setData(fetchedData);
         setError(null);
       } catch (error) {
         console.error(`Error fetching ${title} data:`, error);
