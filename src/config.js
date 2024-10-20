@@ -57,7 +57,7 @@ const config = {
     deleteComment: (commentId) => `${API_URL}/api/discussion/comment/${commentId}`,
   },
   job: {
-    getAllJob: `${API_URL}/api/jobs`,
+    getAllJob: `${API_URL}/api/jobs/job-list`,
     getAssociatedCompany: (jobId) =>
       `${API_URL}/api/jobs/associatedCompany/${jobId}`,
   },
@@ -114,11 +114,11 @@ const config = {
   health: {
     getAllHealthArticles: `${API_URL}/api/health/health-articles`,
     getHealthArticleById: (id) => `${API_URL}/api/health/health-articles/${id}`,
-    contentCreation: {
-      createUniversity: `${API_URL}/api/detail/university/create`,
-      createJob: `${API_URL}/api/jobs/addJob`,
-      createAccomodation: `${API_URL}`,
-    },
-  },
-};
+  contentCreation : {
+    createUniversity : `${API_URL}/api/detail/university/addUniversity`,
+    createJob : `${API_URL}/api/jobs/addJob`,
+    createAccomodation : `${API_URL}`
+  }
+}
+}
 export default config;

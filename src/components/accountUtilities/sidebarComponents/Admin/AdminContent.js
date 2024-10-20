@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { PlusCircle, Save, Image, Link, FileText, MapPin } from 'lucide-react';
+import { PlusCircle, Save, Image, Link, FileText } from 'lucide-react';
 import ButtonComComponent from '../../../reusable/ButtonComponent';
 import axios from 'axios';
 import config from '../../../../config';
 import DropdownComponent from '../../../reusable/DropdownComponent';
+import useAuth from '../../../../hooks/useAuth';
 
 const dropdownItems = [
   { label: 'University' },
@@ -26,13 +27,13 @@ const entityConfig = {
     createEndpoint: config.contentCreation.createJob,
     fields: [
       { name: 'job_title', label: 'Job Title', type: 'text' },
-      { name: 'job_description', label: 'Job Description', type: 'textarea' },
+      { name: 'job_desc', label: 'Job Description', type: 'textarea' },
       { name: 'company_name', label: 'Company Name', type: 'text' },
-      { name: 'job_requirements', label: 'Job Requirements', type: 'textarea' },
+      { name: 'job_require', label: 'Job Requirements', type: 'textarea' },
       { name: 'salary', label: 'Salary', type: 'number' },
       { name: 'position', label: 'Position', type: 'text' },
-      { name: 'application_deadline', label: 'Application Deadline', type: 'date' },
-      { name: 'work_hours', label: 'Work Hours', type: 'text' },
+      { name: 'deadline', label: 'Application Deadline', type: 'date' },
+      { name: 'work_hour', label: 'Work Hours', type: 'text' },
       { name: 'location', label: 'Location', type: 'text' },
     ],
   },
@@ -54,6 +55,7 @@ const entityConfig = {
 };
 
 const AdminEditor = () => {
+  const { username, userId } = useAuth();
   const [entity, setEntity] = useState(localStorage.getItem('businessEntity') || 'University');
   const [imageUrl, setImageUrl] = useState('');
   const [formData, setFormData] = useState({});
@@ -78,17 +80,18 @@ const AdminEditor = () => {
         { title: 'Website', url: '' },
       ]);
     } else {
-      // Initialize formData with empty values for all fields
       const initialFormData = {};
       entityConfig[entity].fields.forEach(field => {
         initialFormData[field.name] = '';
       });
+      if (entity === 'Job offer') {
+        initialFormData.company_id = userId;
+      }
       setFormData(initialFormData);
     }
-  }, [entity, entityDataKey]);
+  }, [entity, entityDataKey, userId]);
 
   const selectEntity = (selectedEntity) => {
-    console.log(selectedEntity.label);
     localStorage.setItem('businessEntity', selectedEntity.label);
     setEntity(selectedEntity.label);
     setFormData({});
@@ -108,15 +111,29 @@ const AdminEditor = () => {
     handleSaveChanges();
     alert('Changes saved successfully');
 
-    const data = {
+    let data = {
       ...formData,
       facebook_url: links.find(link => link.title === 'Facebook')?.url || '',
       instagram_url: links.find(link => link.title === 'Instagram')?.url || '',
       telegram_url: links.find(link => link.title === 'Telegram')?.url || '',
       website: links.find(link => link.title === 'Website')?.url || '',
       image_url: imageUrl,
-      image_alt: formData[entityConfig[entity].fields[0].name], // Use the first field as image alt
+      image_alt: formData[entityConfig[entity].fields[0].name],
     };
+
+    if (entity === 'Job offer') {
+      data = {
+        company_id: parseInt(userId),
+        company_name: data.company_name,
+        job_desc: data.job_desc,
+        job_require: data.job_require,
+        location: data.location,
+        salary: parseFloat(data.salary),
+        position: data.position,
+        deadline: data.deadline,
+        work_hour: data.work_hour,
+      };
+    }
 
     console.log(`Sending the following ${entity} data to the server:`, data);
 
@@ -166,6 +183,17 @@ const AdminEditor = () => {
             <FileText size={24} className="mr-2" />
             {entity} Details
           </h2>
+          {entity === 'Job offer' && (
+            <div className="mb-4">
+              <h2>Company ID (Read-only)</h2>
+              <input
+                type="text"
+                value={userId}
+                readOnly
+                className="w-full p-2 border border-gray-300 rounded mb-4 bg-gray-100"
+              />
+            </div>
+          )}
           {entityConfig[entity].fields.map((field) => (
             <div key={field.name} className="mb-4">
               <h2>{field.label}</h2>

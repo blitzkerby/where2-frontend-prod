@@ -25,7 +25,7 @@ const ListingComponent = ({
   };
 
   const navigate = useNavigate();
-  const handleViewProfile = (id) => {
+  const handleView = (id) => {
     navigate(`/user/${id}`);
   };
 
@@ -141,7 +141,7 @@ const ListingComponent = ({
                   )}
                   <ButtonComponent
                     variant="ghost"
-                    onClick={() => handleViewProfile(item.id)}
+                    onClick={() => handleView(item.id)}
                   >
                     View
                   </ButtonComponent>
