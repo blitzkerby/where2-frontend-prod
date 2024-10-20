@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { X } from "lucide-react";
-import { MessageCircleMore } from "lucide-react";
+import { MessageCircleMore, LucideMessageCircleQuestion } from "lucide-react";
 import Menu from "./../../assets/svg/menu.svg";
 import useAuth from "./../../hooks/useAuth";
 import ProfilePicture from "./PictureUpload";
@@ -61,7 +61,7 @@ const Navbar = () => {
     // { logo: <BookMarked/>, name: "Bookmarks", to: "/bookmarks" },
     // { logo: <ChartColumnIcon/>, name: "Dashboard", to: `/dashboard/${encodeURIComponent(username || entity)}` },
     // { logo: <User2/>, name: "Profile", to: `/profile/${encodeURIComponent(username || entity)}` },
-    // { logo: <LucideMessageCircleQuestion/>, name: "About Us", to: "/about-us" },
+    { logo: <LucideMessageCircleQuestion/>, name: "About Us", to: "/about-us" },
   ];
 
   const identifier = username || entity;

@@ -152,7 +152,7 @@ const Card = ({
               </p>
             </div> : null}
         </div>
-        <div className="flex flex-col lg:h-[78%] sm:h-[200px]">
+        <div className="flex flex-col lg:h-[62%] sm:h-[200px]">
           <div className="flex-1 text-clip overflow-hidden">
             <p className="text-justify">{description}</p>
           </div>
