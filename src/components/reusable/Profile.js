@@ -12,6 +12,7 @@ import AdminDashboard from "../accountUtilities/sidebarComponents/Admin/Dashboar
 import AdminContent from "../accountUtilities/sidebarComponents/Admin/AdminContent.js";
 import Logout from "./Logout.js";
 import CollectionPanel from "./CollectionPanel.js";
+import SettingPanel from "../SettingPanel.js";
 
 export const SidebarContentContext = createContext();
 
@@ -25,6 +26,7 @@ const contentComponents = {
   adminContent: AdminContent,
   logOut: Logout,
   collectionPanel: CollectionPanel,
+  setting: SettingPanel,
 };
 
 const Profile = ({ userData, isPublic }) => {
