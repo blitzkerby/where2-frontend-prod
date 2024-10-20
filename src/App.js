@@ -34,6 +34,7 @@ import ErrorPage from "./pages/ErrorPage";
 import UniversityDetailPage from "./pages/UniversityDetailPage";
 import LoggedInOnlyRoute from "./components/routes/LoggedInRoute";
 import HealthArticlePage from "./components/health/HealthArticlePage";
+import AboutUsPage from "./pages/AboutUsPage";
 
 const queryClient = new QueryClient();
 
@@ -156,7 +157,8 @@ const router = createBrowserRouter([
   { path: "/livelihood", element: <LivelihoodPage /> },
   { path: "/scholarships", element: <ScholarshipPage /> },
   { path: "/scholarship/:id", element: <ScholarshipDetailPage /> },
-  { path: "/health/article/:id", element: <HealthArticlePage />},
+  { path: "/health/article/:id", element: <HealthArticlePage /> },
+  { path: "/about-us", element: <AboutUsPage />},
 
 ]);
 

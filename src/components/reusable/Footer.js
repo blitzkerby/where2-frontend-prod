@@ -72,13 +72,13 @@ function Footer() {
                 <span className="mr-2">
                   <BiTargetLock />
                 </span>
-                <FooterLink href="/our-vision">Our Vision</FooterLink>
+                <FooterLink href="/about-us">Our Vision</FooterLink>
               </li>
               <li className="flex items-center">
                 <span className="mr-2">
                   <PiPersonSimpleHike />
                 </span>
-                <FooterLink href="/our-mission">Our Mission</FooterLink>
+                <FooterLink href="/about-us">Our Mission</FooterLink>
               </li>
             </ul>
           </div>
