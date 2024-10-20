@@ -45,7 +45,7 @@ const HealthNavbar = () => {
     <>
       <nav className="bg-[#E6F3F9] h-[64px] w-full fixed top-0 left-0 right-0 z-[1002]">
         <div className="sm:hidden flex justify-between gap-x-10 items-center px-4 py-3 h-full m-auto lg:w-9/12">
-          <Link to="/" className="text-xl font-bold tracking-tightest">
+          <Link to="/health" className="text-xl font-bold tracking-tightest">
             W2HEALTH
           </Link>
           <div className="flex align-center justify-between h-full lg:w-9/12">
@@ -83,7 +83,7 @@ const HealthNavbar = () => {
         </div>
 
         <div className="lg:hidden sm:flex justify-between items-center px-4 py-3 h-full w-full">
-          <Link to="/" className="text-xl font-bold tracking-tighter">
+          <Link to="/health" className="text-xl font-bold tracking-tighter">
             W2HEALTH
           </Link>
           <button

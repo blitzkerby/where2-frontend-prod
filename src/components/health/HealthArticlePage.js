@@ -83,7 +83,7 @@ const HealthArticlePage = () => {
     <>
       <HealthNavbar />
       <div className="bg-black min-h-screen text-white">
-        <div className="lg:w-[90%] sm:w-[99%] mx-auto py-8 px-4 sm:px-6 lg:px-8 mt-[64px]">
+        <div className="lg:w-[90%] sm:w-[99%] mx-auto lg:py-8 sm:py-3 px-4 sm:px-1 lg:px-8 mt-[64px]">
           <div className="lg:flex lg:space-x-8">
             <div className="lg:w-full sm:w-full mb-8 lg:mb-0">
               <WrapperComponent>
@@ -91,7 +91,7 @@ const HealthArticlePage = () => {
                   <img
                     src={article.image || "default-image-url.jpg"}
                     alt={article.title}
-                    className="w-full  h-[400px] object-cover rounded-xl shadow-lg mb-6"
+                    className="w-full h-[400px] object-cover lg:rounded-xl sm:rounded-md shadow-lg mb-6"
                   />
                   <h1 className="text-3xl font-extrabold text-white mb-4 leading-tight tracking-tight p-4">
                     {article.title}
