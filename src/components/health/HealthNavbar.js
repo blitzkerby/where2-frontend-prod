@@ -83,7 +83,7 @@ const HealthNavbar = () => {
         </div>
 
         <div className="lg:hidden sm:flex justify-between items-center px-4 py-3 h-full w-full">
-          <Link to="/health" className="text-xl font-bold tracking-tighter">
+          <Link to="/health" className="text-xl font-bold tracking-tightest">
             W2HEALTH
           </Link>
           <button
