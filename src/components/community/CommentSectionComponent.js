@@ -7,7 +7,6 @@ import { Reply } from "lucide-react";
 import config from "./../../config";
 import axios from "axios";
 
-
 const CommentSectionComponent = ({
   discussionId,
   comments,
@@ -18,6 +17,7 @@ const CommentSectionComponent = ({
   const [error, setError] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [deletingComments, setDeletingComments] = useState({});
 
   const fetchComments = async (discussionId) => {
     try {
@@ -51,11 +51,11 @@ const CommentSectionComponent = ({
 
   const handleDelete = useCallback(async (commentId) => {
     try {
-      setIsLoading(true);
+      setDeletingComments(prev => ({ ...prev, [commentId]: true }));
       await axios.delete(config.community.deleteComment(commentId), {
         headers: {
           Authorization: `Bearer ${token}`,
-          role: role,
+          'X-User-Role': role,
         },
       });
       onCommentAdded((prevComments) => prevComments.filter((comment) => comment.id !== commentId));
@@ -64,9 +64,9 @@ const CommentSectionComponent = ({
       console.error("Error deleting comment:", err);
       setError("Error deleting comment");
     } finally {
-      setIsLoading(false);
+      setDeletingComments(prev => ({ ...prev, [commentId]: false }));
     }
-  }, [onCommentAdded, token]);
+  }, [onCommentAdded, token, role]);
 
   const canDeleteComment = (comment) => {
     return comment.user && (userId === comment.user.id || role === 'developer');
@@ -76,10 +76,9 @@ const CommentSectionComponent = ({
     fetchComments(discussionId);
   }, [discussionId]);
 
-
   return (
     <div className="mt-6 space-y-8">
-      <h2 className="text-sm">Comments ({comments.length})</h2>
+      <h2 className="text-sm tracking-tighter">Comments ({comments.length})</h2>
       {isLoggedIn && !showReplyForm && (
         <div className="w-full flex justify-end">
           <ButtonComponent
@@ -122,9 +121,9 @@ const CommentSectionComponent = ({
                     variant="danger"
                     size="small"
                     onClick={() => handleDelete(comment.id)}
-                    disabled={isLoading}
+                    disabled={deletingComments[comment.id]}
                   >
-                    {isLoading ? 'Deleting...' : 'Delete'}
+                    {deletingComments[comment.id] ? 'Deleting...' : 'Delete'}
                   </ButtonComponent>
                 </div>
               )}

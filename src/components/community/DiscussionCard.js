@@ -75,13 +75,13 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
       } rounded-lg shadow hover:shadow-lg cursor-pointer relative`}
       onClick={toggleExpand}
     >
-      <h3 className="text-xl font-semibold mb-2 truncate">
+      <h3 className="text-2xl font-semibold mb-2 truncate">
         {discussion.title}
       </h3>
 
       {discussion.location && (
-        <div className="text-sm text-gray-500 mt-2 mb-4">
-          <span className="font-semibold">Location:</span> {discussion.location ? discussion.location : "N/A"}
+        <div className="text-sm text-gray-500 my-4 underline">
+          <span className="font-semibold tracking-tighter">Location:</span> {discussion.location ? discussion.location : "N/A"}
         </div>
       )}
 
