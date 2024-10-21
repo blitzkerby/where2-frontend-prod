@@ -31,6 +31,12 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
     setLocalComments((prevComments) => [newComment, ...prevComments]);
   };
 
+  const handleCommentDeleted = (commentId) => {
+    setLocalComments((prevComments) =>
+      prevComments.filter((comment) => comment.id !== commentId)
+    );
+  };
+
   const handleUserClick = (userId) => (e) => {
     e.stopPropagation();
     navigate(`/user/${userId}`);
@@ -54,7 +60,7 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        onDeleteSuccess(discussion.id);
+        onDeleteSuccess(discussion.id); // Notify parent component to remove discussion
       } catch (error) {
         console.error("Error deleting discussion:", error);
         alert("Failed to delete discussion");
@@ -121,6 +127,7 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
             discussionId={discussion.id}
             comments={localComments}
             onCommentAdded={handleCommentAdded}
+            onCommentDeleted={handleCommentDeleted} // Pass delete handler
             photoUrls={photoUrls}
           />
         </div>
@@ -142,4 +149,3 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
 };
 
 export default DiscussionCard;
-

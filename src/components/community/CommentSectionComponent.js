@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import ButtonComponent from "../reusable/Button";
+import useComments from "./../../hooks/useComments";  
 import useAuth from "../../hooks/useAuth";
 import ProfilePicture from "../reusable/PictureUpload";
 import ReplyForm from "../reusable/ReplyForm";
@@ -7,42 +8,22 @@ import { Reply } from "lucide-react";
 import config from "./../../config";
 import axios from "axios";
 
-const CommentSectionComponent = ({ discussionId, comments, onCommentAdded }) => {
+const CommentSectionComponent = ({ discussionId, onCommentAdded }) => {
   const { isLoggedIn, userId, role, token } = useAuth();
+  const { comments: fetchedComments, isLoading, error, refetch } = useComments(discussionId);
+  
   const [showReplyForm, setShowReplyForm] = useState(false);
-  const [error, setError] = useState("");
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [deletingComments, setDeletingComments] = useState({});
-  const [localComments, setLocalComments] = useState(comments);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  const fetchComments = async (discussionId) => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get(config.community.getAllComments(discussionId));
-      setLocalComments(response.data.data);
-      onCommentAdded(response.data.data);
-    } catch (err) {
-      console.error("Error fetching comments:", err);
-      setError("Error fetching comments");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-  
-
-  const handleReplySubmitted = useCallback(
-    (newComment) => {
-      setLocalComments((prevComments) => [newComment, ...prevComments]);
-      onCommentAdded((prevComments) => [newComment, ...prevComments]);
-      setShowReplyForm(false);
-      setIsSuccess(true);
-      setTimeout(() => setIsSuccess(false), 1000);
-      fetchComments(discussionId);
-    },
-    [onCommentAdded, discussionId]
-  );
-  
+  const handleReplySubmitted = useCallback((newComment) => {
+    // Instead of managing local comments, just refetch
+    onCommentAdded(newComment); // If you need to notify the parent
+    setShowReplyForm(false);
+    setIsSuccess(true);
+    setTimeout(() => setIsSuccess(false), 1000);
+    refetch(); // Refetch to get the updated comments
+  }, [onCommentAdded, refetch]);
 
   const handleDelete = useCallback(async (commentId) => {
     try {
@@ -53,34 +34,21 @@ const CommentSectionComponent = ({ discussionId, comments, onCommentAdded }) => 
           'X-User-Role': role,
         },
       });
-      setLocalComments((prevComments) => prevComments.filter((comment) => comment.id !== commentId));
-      setIsSuccess(true);
-      setTimeout(() => setIsSuccess(false), 1000);
+      refetch(); // Refetch comments after deletion
     } catch (err) {
       console.error("Error deleting comment:", err);
-      setError("Error deleting comment");
-      setTimeout(() => setError(""), 1000);
     } finally {
       setDeletingComments((prev) => ({ ...prev, [commentId]: false }));
     }
-  }, [token, role]);
+  }, [token, role, refetch]);
 
   const canDeleteComment = (comment) => {
     return comment.user && (userId === comment.user.id || role === 'developer');
   };
 
-  useEffect(() => {
-    fetchComments(discussionId);
-  }, [discussionId]);
-
-  useEffect(() => {
-    setLocalComments(comments);
-  }, [comments]);
-
-
   return (
     <div className="mt-6 space-y-8">
-      <h2 className="text-sm tracking-tighter">Comments ({localComments.length})</h2>
+      <h2 className="text-sm tracking-tighter">Comments ({fetchedComments ? fetchedComments.length : 0})</h2>
       {isLoggedIn && !showReplyForm && (
         <div className="w-full flex justify-end">
           <ButtonComponent
@@ -88,7 +56,7 @@ const CommentSectionComponent = ({ discussionId, comments, onCommentAdded }) => 
             className="hover:visible text-sm text-gray-500 text-opacity-70 flex"
             onClick={() => setShowReplyForm(true)}
           >
-            <Reply className="mt-1" size={18}/>
+            <Reply className="mt-1" size={18} />
             <span className="mt-1 ml-1">reply</span>
           </ButtonComponent>
         </div>
@@ -107,7 +75,7 @@ const CommentSectionComponent = ({ discussionId, comments, onCommentAdded }) => 
       {isLoading && <div className="text-gray-500 text-sm">Loading comments...</div>}
 
       <div className="space-y-4 pl-8">
-        {localComments
+        {fetchedComments && fetchedComments
           .filter((comment) => comment && comment.user)
           .map((comment) => (
             <div key={comment.id} className="bg-gray-50 p-4 rounded-lg relative">

@@ -10,16 +10,20 @@ import useAuth from "./../../hooks/useAuth";
 
 const DiscussionList = ({ isCreatingDiscussion, toggleDiscussionView }) => {
   const location = useLocation();
-  const { discussions, loading, error, setDiscussions } = useDiscussions(location.pathname);
+  const { discussions, loading, error, setDiscussions, refetch } = useDiscussions(location.pathname);
   const { role } = useAuth();
-
   const isDiscussionsPath = location.pathname === "/discussions";
 
   const handleDeleteSuccess = async (deletedDiscussionId) => {
-    setDiscussions((prevDiscussions) =>
-      prevDiscussions.filter((disc) => disc.id !== deletedDiscussionId)
-    );
-  };
+    setDiscussions((prevDiscussions) => prevDiscussions.filter((disc) => disc.id !== deletedDiscussionId));
+    await refetch();
+};
+
+  // Debug logs
+  console.log('Location pathname:', location.pathname);
+  console.log('Discussions:', discussions);
+  console.log('Loading:', loading);
+  console.log('Error:', error);
 
   if (loading) {
     return <LoadingOverlay className="min-h-screen" message="We are fetching posts..." />;
@@ -28,7 +32,6 @@ const DiscussionList = ({ isCreatingDiscussion, toggleDiscussionView }) => {
   if (error) {
     return <div className="text-red-500">Error: {error}</div>;
   }
-
   return (
     <div className="w-[90%] py-4 mx-auto min-h-full mt-[128px] mb-[64px]">
       <div className="flex justify-between h-full items-center">

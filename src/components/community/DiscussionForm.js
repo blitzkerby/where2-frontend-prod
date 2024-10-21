@@ -7,6 +7,8 @@ import ButtonComponent from "./../reusable/Button";
 import { MapPin } from "lucide-react";
 import { LoadingSpinner } from "./../reusable/Loading";
 import { v4 as uuidv4 } from "uuid";
+import config from "./../../config";
+
 
 const DiscussionForm = ({ formData, handleChange, handleLocationChange, handleSubmit, isSubmitting, error }) => {
     const navigate = useNavigate();

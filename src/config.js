@@ -5,6 +5,7 @@ const CLIENT_ID = process.env.REACT_APP_CLIENT_ID || "clientId";
 const config = {
   apiUrl: API_URL,
   env: ENV,
+  socketServer: 'ws://localhost:4000',
   isDevelopment: ENV === "development",
   isProduction: ENV === "production",
   auth: {

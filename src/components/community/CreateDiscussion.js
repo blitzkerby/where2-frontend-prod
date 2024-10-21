@@ -8,7 +8,7 @@ import useGeolocation from "./../../hooks/useGeolocation";
 import { LoadingSpinner } from "./../reusable/Loading";
 import DiscussionForm from "./DiscussionForm";
 import DiscussionList from "./DiscussionList";
-import useDiscussions from "../../hooks/useDiscussions";
+import useDiscussions from "./../../hooks/useDiscussions";
 
 const CreateDiscussion = ({ showForm }) => {
     const navigate = useNavigate();
@@ -16,20 +16,29 @@ const CreateDiscussion = ({ showForm }) => {
     const { username, entity, userId } = useAuth();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState("");
-    const { isGettingLocation, getLocation, error: locationError } = useGeolocation();
+    const { isGettingLocation, error: locationError } = useGeolocation();
+  
     const [formData, setFormData] = useState({
       title: "",
+      userId: userId || "", // Ensure userId is set
       content: "",
       location: "",
       pathname: location.pathname,
     });
-    const { discussions, loading: discussionsLoading, error: discussionsError } = useDiscussions(location.pathname);
+  
+    // Use the updated useDiscussions hook
+    const { data: discussions = [], isLoading: discussionsLoading, isError: discussionsError, refetch } = useDiscussions(location.pathname);
   
     useEffect(() => {
       if (locationError) {
         setError(locationError);
       }
     }, [locationError]);
+  
+    useEffect(() => {
+      // Update formData with userId if it changes
+      setFormData((prev) => ({ ...prev, userId }));
+    }, [userId]);
   
     const handleChange = (e) => {
       const { name, value } = e.target;
@@ -49,24 +58,34 @@ const CreateDiscussion = ({ showForm }) => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       setError("");
+  
+      // Validation check for title, content, and userId
       if (!formData.title.trim() || !formData.content.trim()) {
         setError("Title and content are required");
         return;
       }
+  
+      if (!formData.userId) {
+        setError("User ID is required.");
+        return;
+      }
+  
       setIsSubmitting(true);
+  
       try {
         const newDiscussion = {
           id: uuidv4(),
           ...formData,
           author: username ? username : entity,
-          userId: userId,
           createdAt: new Date().toISOString(),
           comments: [],
         };
+  
         const response = await axios.post(config.community.createDiscussion, newDiscussion);
+  
         if (response.data.status === "success") {
-          setFormData({ title: "", content: "", location: "", pathname: location.pathname });
-          navigate(location.pathname);
+          refetch();
+          setFormData({ title: "", content: "", location: "", pathname: location.pathname, userId });
         }
       } catch (err) {
         console.error("Error creating discussion:", err);
@@ -99,12 +118,14 @@ const CreateDiscussion = ({ showForm }) => {
             {discussionsLoading ? (
               <LoadingSpinner message="Loading discussions..." />
             ) : discussionsError ? (
-              <div className="text-red-500">{discussionsError}</div>
-            ) : (
+              <div className="text-red-500">{discussionsError.message}</div>
+            ) : Array.isArray(discussions) && discussions.length > 0 ? (
               <DiscussionList
                 discussions={discussions}
                 title={location.pathname === '/discussions' ? 'All Discussions' : 'Related Discussions'}
               />
+            ) : (
+              <div>No discussions available.</div>
             )}
           </div>
         </div>
