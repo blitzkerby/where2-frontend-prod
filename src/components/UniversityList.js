@@ -5,7 +5,7 @@ import Card from "./reusable/Card";
 import { useEffect } from "react";
 import { removedIsClicked,getFavorite } from "../features/slices/favoriteSlice";
 
-const isDebug = true;  // Set to false to turn off console logging
+const isDebug = false;  // Set to false to turn off console logging
 
 /**
  * UniversityList component

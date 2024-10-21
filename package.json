@@ -19,6 +19,7 @@
     "cross-env": "^7.0.3",
     "crypto": "^1.0.1",
     "date-fns": "^4.1.0",
+    "dompurify": "^3.1.7",
     "dotenv": "^16.4.5",
     "lucide-react": "^0.439.0",
     "paypal": "^1.0.1",

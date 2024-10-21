@@ -1,31 +1,53 @@
-import React, { useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useQueryParams } from '../hooks/useQueryParams';
 
-import { fetchUniversities, searchUniversities } from '../features/slices/universitySlice';
+import { setTotalPage } from '../features/slices/paginationSlice';
+import { filterByLocation } from '../features/slices/filterSlice';
+
+import { fetchUniversities, searchUniversities, setUniversities } from '../features/slices/universitySlice';
 
 import { LoadingOverlay } from '../components/reusable/Loading';
 
 import UniversityList from '../components/UniversityList';
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
+import Filter from '../components/reusable/Filter';
 import SearchBar from '../components/reusable/SearchBar';
 import Pagination from '../components/reusable/Pagination';
 import ListContainer from '../components/reusable/ListContainer';
 
 /** Enable for debugging */
-const isDebug = true;
+const isDebug = false;
 
 const UniversityPage = () => {
     const urlParams = useQueryParams();
+
     const page = parseInt(urlParams.get('page')) || 1;
+    const location = urlParams.get('location') || '';
     const searchQuery = urlParams.get('q') || '';
 
     const dispatch = useDispatch();
     const { universities, loading, error } = useSelector((state) => state.universities);
     const { totalPage } = useSelector((state) => state.pagination);
-    console.log(universities.filter(p => p.isApproved == false))
+
+    // university filter options
+    const items = [
+        {
+            id: '2eqsa',
+            label: 'Location',
+            content: ['Phnom Penh', 'Siem Reap']
+        },
+    ];
+
+    async function filterLocation(){
+        const { list , totalPages } = await filterByLocation({ page, location })
+        dispatch(setUniversities(list))
+        dispatch(setTotalPage(totalPages))
+    }
+
     /**
      * useEffect Hook
      *
@@ -38,12 +60,15 @@ const UniversityPage = () => {
      * @param {boolean} isDebug - Flag for enabling debug logs
      */
     useEffect(() => {
-        if (searchQuery === "") {
-            dispatch(fetchUniversities({ page }));
+        if (searchQuery !== "") {
+            dispatch(searchUniversities({ page, query : searchQuery}));
+        } else if (location !== "") {
+            // dispatch(filterByLocation({ page, location }));
+            filterLocation()
         } else {
-            dispatch(searchUniversities({ page , query : searchQuery }));
+            dispatch(fetchUniversities({ page }));
         }
-    }, [dispatch, page, searchQuery]);
+    }, [dispatch, page, searchQuery, location]);
 
     return (
         <>
@@ -53,7 +78,8 @@ const UniversityPage = () => {
                 {/* {error && <p>{error}</p>} */}
                 
                 <SearchBar handleSearch={searchUniversities} searchPlaceholder="Search universities..." category="university"/>
-                <UniversityList universities={universities} page={ page} />
+                <Filter items={items}/>
+                <UniversityList universities={universities} />
                 <Pagination 
                     totalPage={totalPage} 
                     currentPage={page}

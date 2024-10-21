@@ -16,6 +16,8 @@ const UniversityDetailPage = () => {
 
     const university = useSelector((state) => state.universities.university);
     const isLoading = useSelector((state) => state.universities.isLoading);
+    
+    console.log(university.description)
 
     useEffect(() => {
         dispatch(fetchUniversity(id));

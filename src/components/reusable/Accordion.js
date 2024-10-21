@@ -1,21 +1,17 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { GoChevronDown, GoChevronUp } from "react-icons/go";
+import AccordionButton from "./AccordionButton";
 
-function Accordion({ items,handlemodel,onUniversityFilterChange }) {
+function Accordion({ items, applyFilter }) {
   const [expandedIndex, setExpandedIndex] = useState(-1);
 
   const handleClick = (nextIndex) => {
-    if (expandedIndex === nextIndex) {
-      setExpandedIndex(-1);
-    } else {
-      setExpandedIndex(nextIndex);
-    }
+    setExpandedIndex(expandedIndex === nextIndex ? -1 : nextIndex);
   };
 
   const renderItems = items.map((item, index) => {
     const isExpanded = index === expandedIndex;
-    const icon = <span>{isExpanded ? <GoChevronUp /> : <GoChevronDown />}</span>;
-
+    const icon = isExpanded ? <GoChevronUp /> : <GoChevronDown />;
     return (
       <div key={item.id}>
         <div
@@ -23,25 +19,19 @@ function Accordion({ items,handlemodel,onUniversityFilterChange }) {
           onClick={() => handleClick(index)}
         >
           {item.label}
-          {icon}
+          <span>{icon}</span>
         </div>
-        {isExpanded && Array.isArray(item.content) &&(
-					<div className="md:w-[300] flex flex-col md:flex-row p-2 overflow-x-auto">
-						{item.content.map((contentItem, contentIndex) => (
-							<div key={contentIndex} className="p-5">
-								<div onClick={() => {
-                  console.log("Clicked:", contentItem);
-                  handlemodel();
-                  onUniversityFilterChange(contentItem);
-                }} className="bg-[#A9EBFF] w-fit border rounded-full px-2 cursor-pointer drop-shadow-lg">
-                  {contentItem}
-                </div>        
-							</div>
-						))}
-					</div>
-				)
-          
-        }
+        {isExpanded && Array.isArray(item.content) && (
+          <div className="md:w-[300px] flex flex-col md:flex-row p-2 overflow-x-auto">
+            {item.content.map((contentItem, contentIndex) => (
+              <AccordionButton
+                key={contentIndex}
+                contentItem={contentItem}
+                applyFilter={() => applyFilter({ location: contentItem })}
+              />
+            ))}
+          </div>
+        )}
       </div>
     );
   });
@@ -50,4 +40,3 @@ function Accordion({ items,handlemodel,onUniversityFilterChange }) {
 }
 
 export default Accordion;
-// onClick={handlemodel}

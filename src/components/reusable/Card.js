@@ -99,8 +99,19 @@ const Card = ({
       <div className="bg-cover bg-center rounded-xl flex-shrink-0
           lg:w-[398px]
           sm:w-[100%] sm:max-h-[348px]">
-        {image && (
-          <img className="top-0 left-0 w-full h-full object-cover -z-10" src={image} alt={imageAlt} onError={handleError} />
+        {image ? (
+          <img
+            className="top-0 left-0 w-full h-full object-cover -z-10"
+            src={image}
+            alt={imageAlt}
+            onError={handleError}
+          />
+        ) : (
+          <img
+            className="top-0 left-0 w-full h-full object-cover -z-10"
+            src="https://i.pinimg.com/564x/1b/b6/95/1bb69534ae81c183c82154062df5d94f.jpg"
+            alt="Bill is a wonderful pup!"
+          />
         )}
       </div>
       <div className="flex-1 lg:pl-9 lg:pr-5 lg:py-3 sm:px-5 sm:py-5">
@@ -154,7 +165,7 @@ const Card = ({
         </div>
         <div className="flex flex-col lg:h-[62%] sm:h-[200px]">
           <div className="flex-1 text-clip overflow-hidden">
-            <p className="text-justify">{description}</p>
+            <p className="text-justify">{convertToHTML(description)}</p>
           </div>
           <div className="mt-auto text-center">
             <div className="mb-4 flex justify-around max-w-[200px]">

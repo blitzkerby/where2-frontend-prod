@@ -11,6 +11,7 @@ import ScholarshipList from '../components/ScholarshipList';
 
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
+import Filter from '../components/reusable/Filter';
 import SearchBar from '../components/reusable/SearchBar';
 import Pagination from '../components/reusable/Pagination';
 import ListContainer from '../components/reusable/ListContainer';
@@ -20,12 +21,22 @@ const isDebug = true;
 
 const ScholarshipPage = () => {
     const urlParams = useQueryParams();
+
     const page = parseInt(urlParams.get('page')) || 1;
     const searchQuery = urlParams.get('q') || '';
-
+    
     const dispatch = useDispatch();
     const { scholarships, loading, error } = useSelector((state) => state.scholarships);
     const { totalPage } = useSelector((state) => state.pagination);
+
+    // scholarship filter options
+    const items = [
+        {
+            id: '2eqsa',
+            label: 'Location',
+            content: ['Phnom Penh', 'Siem Reap']
+        },
+    ];
 
     /**
      * useEffect Hook
@@ -62,7 +73,7 @@ const ScholarshipPage = () => {
             <ListContainer>
                 {loading && <LoadingOverlay />}
                 {/* {error && <p>{error}</p>} */}
-                
+                <Filter items={items}/>
                 <SearchBar handleSearch={searchScholarships} searchPlaceholder="Search scholarships..." category="scholarship" />
                 <ScholarshipList scholarships={scholarships} page={page} />
                 <Pagination totalPage={totalPage} currentPage={page} category="scholarship" searchQuery={searchQuery} />

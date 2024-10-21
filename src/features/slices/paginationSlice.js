@@ -28,9 +28,9 @@ const paginationSlice = createSlice({
     extraReducers: (builder)=>{
         builder
             .addCase(fetchAllList.pending, (state, action) => {
-            state.loading = true;
-            state.error = null;
-        })
+                state.loading = true;
+                state.error = null;
+            })
             .addCase(fetchAllList.fulfilled, (state, action) => {
                 state.loading = false;
                 state.data = action.payload;
