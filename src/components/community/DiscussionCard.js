@@ -123,7 +123,7 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
             />
           </div>
         )}
-        {isCurrentUserPost || role === "developer" && (
+        {isCurrentUserPost && role === "developer" && (
           <div className="absolute top-2 right-2" onClick={(e) => e.stopPropagation()}>
             <ButtonComponent
               variant="danger"

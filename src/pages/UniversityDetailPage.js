@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchUniversity } from '../features/slices/universitySlice';
+import { fetchUniversity } from './../features/slices/universitySlice';
 
-import DetailLayout from '../layouts/DetailLayout';
+import DetailLayout from './../layouts/DetailLayout';
 
-import Navbar from '../components/reusable/Navbar';
-import Footer from '../components/reusable/Footer';
-import { LoadingOverlay } from '../components/reusable/Loading';
+import Navbar from './../components/reusable/Navbar';
+import Footer from './../components/reusable/Footer';
+import { LoadingOverlay } from './../components/reusable/Loading';
 
 const UniversityDetailPage = () => {
     const dispatch = useDispatch();
