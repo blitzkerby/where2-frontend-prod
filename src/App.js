@@ -6,7 +6,7 @@ import {
 
 // import Card from "./components/reusable/Card";
 // import SearchBar from "./components/reusable/SearchBar";
-// import HomePage from "./pages/HomePage";
+import HomePage from "./pages/HomePage";
 import UserProfile from "./components/accountUtilities/UserProfile";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";

@@ -1,10 +1,10 @@
 import React from "react";
-import BioCard from "../components/reusable/BioCard";
-import NavBar from "../components/reusable/Navbar";
-import vision from "../assets/images/Vision.png";
-import mission from "../assets/images/Mission.png";
-import coreValue from "../assets/images/core values.png";
-import Footer from "../components/reusable/Footer";
+import BioCard from "./../components/reusable/BioCard";
+import NavBar from "./../components/reusable/Navbar";
+import vision from "./../assets/images/Vision.png";
+import mission from "./../assets/images/Mission.png";
+import coreValue from "./../assets/images/core values.png";
+import Footer from "./../components/reusable/Footer";
 
 const bioCard = [
   {
@@ -32,8 +32,8 @@ const AboutUsPage = () => {
     <>
           <NavBar />
           <div className="max-w-[1440px] mx-auto mt-[100px]">
-      {bioCard.map((card, index) => (
-        <div key={index}>
+          {bioCard.map((card, index) => (
+          <div key={index}>
           {index === 1 ? (
             <BioCard variant={"right"} bioCard={card} />
           ) : (
