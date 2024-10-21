@@ -70,9 +70,9 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
     }
   };
 
-  useEffect(() => {
-    console.log("Comment updated: ", localComments)
-  }, [localComments])
+  // useEffect(() => {
+  //   console.log("Comment updated: ", localComments)
+  // }, [localComments])
 
   const isCurrentUserPost = discussion.user?.id === userId;
 
@@ -128,7 +128,7 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
           </div>
         )}
         {isCurrentUserPost && role === "developer" && (
-          <div className="absolute top-4 right-4" onClick={(e) => e.stopPropagation()}>
+          <div className="absolute lg:top-4 lg:right-4 sm:top-2 sm:right-2" onClick={(e) => e.stopPropagation()}>
             <ButtonComponent
               variant="danger"
               size="small"
