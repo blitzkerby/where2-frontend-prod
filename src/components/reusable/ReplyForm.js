@@ -11,16 +11,13 @@ const ReplyForm = ({ discussionId, onReplySubmitted, onCancel }) => {
   const [content, setContent] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
-
   const { userId } = useAuth();
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
-    if (!content.trim()) return; 
-
+    e.preventDefault();
+    if (!content.trim()) return;
     setIsSubmitting(true);
     setError('');
-
     const newCommentId = uuidv4();
 
     try {
@@ -28,12 +25,12 @@ const ReplyForm = ({ discussionId, onReplySubmitted, onCancel }) => {
         content: content.trim(),
         userId: userId,
       });
-      
+
       if (response.data.data?.comment) {
         onReplySubmitted(response.data.data.comment);
         setContent('');
         if (onCancel) {
-          onCancel(); 
+          onCancel();
         }
       }
     } catch (error) {
@@ -65,13 +62,11 @@ const ReplyForm = ({ discussionId, onReplySubmitted, onCancel }) => {
           {content.length}/100 characters
         </div>
       </div>
-
       {error && (
         <div className="text-red-500 text-sm">
           {error}
         </div>
       )}
-
       <div className="flex justify-end gap-2">
         <ButtonComponent
           variant="ghost"

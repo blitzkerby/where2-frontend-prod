@@ -7,22 +7,20 @@ import { Reply } from "lucide-react";
 import config from "./../../config";
 import axios from "axios";
 
-const CommentSectionComponent = ({
-  discussionId,
-  comments,
-  onCommentAdded,
-}) => {
+const CommentSectionComponent = ({ discussionId, comments, onCommentAdded }) => {
   const { isLoggedIn, userId, role, token } = useAuth();
   const [showReplyForm, setShowReplyForm] = useState(false);
   const [error, setError] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [deletingComments, setDeletingComments] = useState({});
+  const [localComments, setLocalComments] = useState(comments);
 
   const fetchComments = async (discussionId) => {
     try {
       setIsLoading(true);
       const response = await axios.get(config.community.getAllComments(discussionId));
+      setLocalComments(response.data.data);
       onCommentAdded(response.data.data);
     } catch (err) {
       console.error("Error fetching comments:", err);
@@ -31,42 +29,41 @@ const CommentSectionComponent = ({
       setIsLoading(false);
     }
   };
+  
 
   const handleReplySubmitted = useCallback(
     (newComment) => {
-      onCommentAdded((prevComments) => {
-        const existingCommentIndex = prevComments.findIndex((comment) => comment.id === newComment.id);
-        if (existingCommentIndex !== -1) {
-          const updatedComments = [...prevComments];
-          updatedComments[existingCommentIndex] = newComment;
-          return updatedComments;
-        }
-        return [newComment, ...prevComments];
-      });
-      setIsSuccess(true);
+      setLocalComments((prevComments) => [newComment, ...prevComments]);
+      onCommentAdded((prevComments) => [newComment, ...prevComments]);
       setShowReplyForm(false);
+      setIsSuccess(true);
+      setTimeout(() => setIsSuccess(false), 1000);
+      fetchComments(discussionId);
     },
-    [onCommentAdded]
+    [onCommentAdded, discussionId]
   );
+  
 
   const handleDelete = useCallback(async (commentId) => {
     try {
-      setDeletingComments(prev => ({ ...prev, [commentId]: true }));
+      setDeletingComments((prev) => ({ ...prev, [commentId]: true }));
       await axios.delete(config.community.deleteComment(commentId), {
         headers: {
           Authorization: `Bearer ${token}`,
           'X-User-Role': role,
         },
       });
-      onCommentAdded((prevComments) => prevComments.filter((comment) => comment.id !== commentId));
+      setLocalComments((prevComments) => prevComments.filter((comment) => comment.id !== commentId));
       setIsSuccess(true);
+      setTimeout(() => setIsSuccess(false), 1000);
     } catch (err) {
       console.error("Error deleting comment:", err);
       setError("Error deleting comment");
+      setTimeout(() => setError(""), 1000);
     } finally {
-      setDeletingComments(prev => ({ ...prev, [commentId]: false }));
+      setDeletingComments((prev) => ({ ...prev, [commentId]: false }));
     }
-  }, [onCommentAdded, token, role]);
+  }, [token, role]);
 
   const canDeleteComment = (comment) => {
     return comment.user && (userId === comment.user.id || role === 'developer');
@@ -76,9 +73,14 @@ const CommentSectionComponent = ({
     fetchComments(discussionId);
   }, [discussionId]);
 
+  useEffect(() => {
+    setLocalComments(comments);
+  }, [comments]);
+
+
   return (
     <div className="mt-6 space-y-8">
-      <h2 className="text-sm tracking-tighter">Comments ({comments.length})</h2>
+      <h2 className="text-sm tracking-tighter">Comments ({localComments.length})</h2>
       {isLoggedIn && !showReplyForm && (
         <div className="w-full flex justify-end">
           <ButtonComponent
@@ -101,11 +103,11 @@ const CommentSectionComponent = ({
       )}
 
       {error && <div className="text-red-500 text-sm">{error}</div>}
-      {isSuccess && <div className="text-green-500 text-sm">Operation successful!</div>}
-      {isLoading && <div className="text-gray-500 text-sm">Loading...</div>}
+      {isSuccess && <div className="text-green-500 text-sm">Reply deletion was successful!</div>}
+      {isLoading && <div className="text-gray-500 text-sm">Loading comments...</div>}
 
       <div className="space-y-4 pl-8">
-        {comments
+        {localComments
           .filter((comment) => comment && comment.user)
           .map((comment) => (
             <div key={comment.id} className="bg-gray-50 p-4 rounded-lg relative">
