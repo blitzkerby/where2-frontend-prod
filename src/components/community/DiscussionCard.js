@@ -17,10 +17,8 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const navigate = useNavigate();
 
-  // CURRENT USERID
   const { userId, token, role } = useAuth();
 
-  // MEMOIZED USER IDS
   const userIds = useMemo(() => {
     return [
       discussion.user?.id,
@@ -28,13 +26,11 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
     ].filter(Boolean);
   }, [discussion.user?.id, localComments]);
 
-  // Fetch batch photos only when userIds change
   const { photoUrls, isLoading, error } = useFetchBatchPhotos(userIds);
 
   const handleCommentAdded = (newComment) => {
     setLocalComments((prevComments) => [newComment, ...prevComments]);
   };
-
 
   const handleUserClick = (userId) => (e) => {
     e.stopPropagation();
@@ -53,93 +49,97 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
     e.stopPropagation();
     if (window.confirm('Are you sure you want to delete this discussion?')) {
       setIsDeleting(true);
-    }
-    try {
-      await axios.delete(config.community.deleteDiscussion(discussion.id), {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      onDeleteSuccess(discussion.id)
-      window.location.reload();
-    } catch (error) {
-      console.error("Error deleting discussion:", error);
-      alert("Failed to delete discussion")
-    } finally {
-      setIsDeleting(false);
+      try {
+        await axios.delete(config.community.deleteDiscussion(discussion.id), {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        onDeleteSuccess(discussion.id);
+        window.location.reload();
+      } catch (error) {
+        console.error("Error deleting discussion:", error);
+        alert("Failed to delete discussion");
+      } finally {
+        setIsDeleting(false);
+      }
     }
   };
-
-  // useEffect(() => {
-  //   console.log("Comment updated: ", localComments)
-  // }, [localComments])
 
   const isCurrentUserPost = discussion.user?.id === userId;
 
   return (
-            <div
-              className={`lg:p-5 sm:p-1 bg-white hover:scale-100 ${
-                isExpanded ? "min-h-fit" : ""
-              } rounded-lg shadow hover:shadow-lg cursor-pointer relative`}
-              onClick={toggleExpand}
-            >
-              <h3 className="text-xl font-semibold mb-2 truncate">
-                {discussion.title}
-              </h3>
-              <p
-          className={`text-gray-600 mb-4 text-justify ${
-            isExpanded
-              ? "whitespace-normal" 
-              : "overflow-hidden whitespace-nowrap text-ellipsis"
-          }`}
-        >
-          {discussion.content}
-        </p>
+    <div
+      className={`lg:p-5 sm:p-1 bg-white hover:scale-100 ${
+        isExpanded ? "min-h-fit" : ""
+      } rounded-lg shadow hover:shadow-lg cursor-pointer relative`}
+      onClick={toggleExpand}
+    >
+      <h3 className="text-xl font-semibold mb-2 truncate">
+        {discussion.title}
+      </h3>
 
-        <div className="flex justify-between items-center text-sm text-gray-500">
-        {discussion.user && (
-        <div
-          className="flex items-center gap-2 cursor-pointer hover:text-gray-700"
-          onClick={handleUserClick(discussion.user.id)}
-        >
-          { isMobile ? <span>By </span> : <span>Posted by </span>}
-          <ProfilePicture
-            userId={discussion.user.id}
-            photoUrl={photoUrls[discussion.user.id]}
-            size={20}
-          />
-          <span>
-            {discussion.user?.profile?.entity 
-              ? discussion.user.profile.entity 
-              : discussion.user?.profile?.userName}
-          </span>
+      {discussion.location && (
+        <div className="text-sm text-gray-500 mt-2 mb-4">
+          <span className="font-semibold">Location:</span> {discussion.location ? discussion.location : "N/A"}
         </div>
       )}
-          <span>{localComments.length} replies</span>
-        </div>
-        {isExpanded && (
-          <div onClick={handleCommentSectionClick}>
-            <CommentSectionComponent
-              discussionId={discussion.id}
-              comments={localComments}
-              onCommentAdded={handleCommentAdded}
-              photoUrls={photoUrls}
+
+      <p
+        className={`text-gray-600 mb-4 text-justify ${
+          isExpanded
+            ? "whitespace-normal" 
+            : "overflow-hidden whitespace-nowrap text-ellipsis"
+        }`}
+      >
+        {discussion.content}
+      </p>
+
+      <div className="flex justify-between items-center text-sm text-gray-500 mb-2">
+        {discussion.user && (
+          <div
+            className="flex items-center gap-2 cursor-pointer hover:text-gray-700"
+            onClick={handleUserClick(discussion.user.id)}
+          >
+            {isMobile ? <span>By </span> : <span>Posted by </span>}
+            <ProfilePicture
+              userId={discussion.user.id}
+              photoUrl={photoUrls[discussion.user.id]}
+              size={20}
             />
+            <span>
+              {discussion.user?.profile?.entity 
+                ? discussion.user.profile.entity 
+                : discussion.user?.profile?.userName}
+            </span>
           </div>
         )}
-        {isCurrentUserPost && role === "developer" && (
-          <div className="absolute lg:top-4 lg:right-4 sm:top-2 sm:right-2" onClick={(e) => e.stopPropagation()}>
-            <ButtonComponent
-              variant="danger"
-              size="small"
-              onClick={handleDelete}
-              disabled={isDeleting}
-            >
-              {isDeleting ? 'Deleting...' : 'Delete'}
-            </ButtonComponent>
-          </div>
-        )}
+        <span>{localComments.length} replies</span>
       </div>
+
+      {isExpanded && (
+        <div onClick={handleCommentSectionClick}>
+          <CommentSectionComponent
+            discussionId={discussion.id}
+            comments={localComments}
+            onCommentAdded={handleCommentAdded}
+            photoUrls={photoUrls}
+          />
+        </div>
+      )}
+      {isCurrentUserPost && role === "developer" && (
+        <div className="absolute lg:top-4 lg:right-4 sm:top-2 sm:right-2" onClick={(e) => e.stopPropagation()}>
+          <ButtonComponent
+            variant="danger"
+            size="small"
+            onClick={handleDelete}
+            disabled={isDeleting}
+          >
+            {isDeleting ? 'Deleting...' : 'Delete'}
+          </ButtonComponent>
+        </div>
+      )}
+    </div>
   );
 };
 
