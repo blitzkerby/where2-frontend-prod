@@ -32,6 +32,13 @@ const HealthNavbar = () => {
 
   const menuItems = [
     {
+      logo: <Home />,
+      name: "Home",
+      to: "/",
+      showMobile: true,
+      showDesktop: false,
+    },
+    {
       logo: <User2 />,
       name: "Profile",
       to: `/profile/${encodeURIComponent(username || entity)}`,
@@ -103,7 +110,7 @@ const HealthNavbar = () => {
                   <Link
                     key={item.name}
                     to={item.to}
-                    className="block px-4 py-2 text-gray-700 hover:scale-105 hover:bg-black flex items-center"
+                    className="block px-4 py-4 text-gray-700 hover:scale-105 hover:bg-black flex items-center"
                     onClick={toggleMenu}
                   >
                     {item.logo}
