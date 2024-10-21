@@ -4,21 +4,28 @@ import config from "./../config";
 
 const useDiscussions = (pathname) => {
     const [discussions, setDiscussions] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState(null);
   
     const fetchDiscussions = async () => {
-      try {
-        setIsLoading(true);
-        const response = await axios.get(`${config.community.getDiscussions}?pathname=${pathname}`);
-        setDiscussions(response.data.data.discussions);
-      } catch (error) {
-        setError("Failed to fetch discussions");
-        console.error("Error fetching discussions:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+        try {
+          setLoading(true);
+          let url = config.community.getDiscussions;
+          
+          // If not on the main discussions page, fetch discussions for the specific pathname
+          if (pathname !== '/discussions') {
+            url += `?pathname=${encodeURIComponent(pathname)}`;
+          }
+          
+          const response = await axios.get(url);
+          setDiscussions(response.data.data.discussions);
+        } catch (err) {
+          setError('Failed to fetch discussions');
+          console.error('Error fetching discussions:', err);
+        } finally {
+          setLoading(false);
+        }
+      };
   
     useEffect(() => {
       fetchDiscussions();

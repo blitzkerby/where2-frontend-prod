@@ -20,6 +20,8 @@ const HealthArticlePage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const currentPath = location.pathname;
+
   useEffect(() => {
     const fetchArticle = async () => {
       try {
@@ -120,11 +122,11 @@ const HealthArticlePage = () => {
               </div>
             </div>
             {/* Add the CreateDiscussion component here */}
-            {/* <div className="lg:flex lg:gap-6 mt-8">
-              <div className="lg:w-2/3 mb-6 lg:mb-0">
-                <CreateDiscussion />
+            <div className="lg:flex lg:gap-6 mt-8">
+              <div className="lg:w-2/3 mb-6 lg:mb-0 text-black">
+                <CreateDiscussion className="text-black" showForm={true} previousPath={currentPath}/>
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
         <Footer />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useHistory } from "react-router-dom";
 import useAuth from "./../../hooks/useAuth";
 import config from "./../../config";
 import axios from "axios";
@@ -7,7 +7,6 @@ import { v4 as uuidv4 } from "uuid";
 import useGeolocation from "./../../hooks/useGeolocation";
 import { LoadingSpinner } from "./../reusable/Loading";
 import DiscussionForm from "./DiscussionForm";
-import UserDiscussions from "./UserDiscussion";
 import DiscussionList from "./DiscussionList";
 import useDiscussions from "../../hooks/useDiscussions";
 
@@ -24,7 +23,6 @@ const CreateDiscussion = ({ showForm }) => {
       location: "",
       pathname: location.pathname,
     });
-  
     const { discussions, loading: discussionsLoading, error: discussionsError } = useDiscussions(location.pathname);
   
     useEffect(() => {
@@ -32,10 +30,6 @@ const CreateDiscussion = ({ showForm }) => {
         setError(locationError);
       }
     }, [locationError]);
-  
-    useEffect(() => {
-      setFormData(prev => ({ ...prev, pathname: location.pathname }));
-    }, [location]);
   
     const handleChange = (e) => {
       const { name, value } = e.target;
@@ -72,14 +66,11 @@ const CreateDiscussion = ({ showForm }) => {
         const response = await axios.post(config.community.createDiscussion, newDiscussion);
         if (response.data.status === "success") {
           setFormData({ title: "", content: "", location: "", pathname: location.pathname });
-          navigate("/discussions");
+          navigate(location.pathname);
         }
       } catch (err) {
         console.error("Error creating discussion:", err);
-        setError(
-          err.response?.data?.message ||
-          "An error occurred while creating the discussion."
-        );
+        setError(err.response?.data?.message || "An error occurred while creating the discussion.");
       } finally {
         setIsSubmitting(false);
       }
@@ -106,11 +97,14 @@ const CreateDiscussion = ({ showForm }) => {
         <div className="lg:w-1/3 lg:mt-[80px] lg:mb-[16px]">
           <div className="bg-white shadow-md rounded-lg shadow p-6 h-full">
             {discussionsLoading ? (
-              <LoadingSpinner message="Loading posts..." />
+              <LoadingSpinner message="Loading discussions..." />
             ) : discussionsError ? (
               <div className="text-red-500">{discussionsError}</div>
             ) : (
-              <DiscussionList discussions={discussions} />
+              <DiscussionList
+                discussions={discussions}
+                title={location.pathname === '/discussions' ? 'All Discussions' : 'Related Discussions'}
+              />
             )}
           </div>
         </div>
