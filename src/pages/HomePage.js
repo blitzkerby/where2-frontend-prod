@@ -7,6 +7,8 @@ import WrapperComponent from "../components/reusable/WrapperComponent";
 import CardFeatureSlider from "../components/reusable/CardFeatureSlider";
 import SaveSection from "../components/reusable/Saves";
 import JoinUs from "../components/reusable/JoinUs";
+import Content_Hero2 from "../assets/images/content-module-hero2.png";
+import Conten_Hero1 from "../assets/images/home-banner-neo.png";
 // import Card from "../components/reusable/Card";
 
 // assets
@@ -21,7 +23,7 @@ const hero1 = {
   backgroundGradient: "bg-gray-primary",
   titleColor: "text-blue-900",
   subtitleColor: "text-blue-600",
-  mainImageSrc: "https://opendevelopmentcambodia.net/wp-content/uploads/2020/03/87437796_3033155613385703_1957382099056984064_o.jpg",
+  mainImageSrc: Conten_Hero1,
   mainImageAlt: "University building",
   onSearch: () => {},
 };
@@ -34,7 +36,7 @@ const hero2 = {
   backgroundGradient: "from-blue-100",
   titleColor: "text-blue-900",
   subtitleColor: "text-blue-600",
-  mainImageSrc: "https://opendevelopmentcambodia.net/wp-content/uploads/2020/03/87437796_3033155613385703_1957382099056984064_o.jpg",
+  mainImageSrc: Content_Hero2,
   mainImageAlt: "University building",
   button:"Find part time jobs",
   onSearch: () => {},
