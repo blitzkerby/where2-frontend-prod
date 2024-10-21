@@ -8,11 +8,11 @@ const SubpageHeroSection = ({ h1Text, subH1Text, pText }) => {
           <h1 className="w-full text-black lg:text-5xl sm:text-4xl font-bold leading-tight sm:text-center sm:tracking-tightest">
             <TypewriterEffect text={h1Text} speed={150} />
             <br />
-            <TypewriterEffect text={subH1Text} speed={500} />
+            <TypewriterEffect text={subH1Text} speed={300} />
           </h1>
 
           <p className="text-black/90 text-lg sm:text-l max-w-lg text-justify tracking-tightest">
-            <TypewriterEffect text={pText} speed={40} />
+            {pText}
           </p>
         </div>
 
