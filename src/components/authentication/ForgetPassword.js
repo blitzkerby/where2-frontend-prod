@@ -30,7 +30,7 @@ const ForgetPasswordComponent = () => {
   };
 
   if (status === "loading") {
-    return <LoadingOverlay message="We are sending a password reset link..."/>
+    return <LoadingOverlay className="h-screen" message="We are sending a password reset link..."/>
   }
 
   return (

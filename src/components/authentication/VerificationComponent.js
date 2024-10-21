@@ -89,7 +89,7 @@ const VerificationComponent = () => {
 
   // SHOWING THE LOADING OVERLAY COMPONENT WHEN THE USER IS SIGNING UP
   if (status === "loading") {
-    return <LoadingOverlay message="Verifying account..." />;
+    return <LoadingOverlay className="h-screen" message="Verifying account..." />;
   }
 
   if (!email) {

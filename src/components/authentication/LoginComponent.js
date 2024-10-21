@@ -38,7 +38,7 @@ const LoginComponent = () => {
   };
 
   if (status === "loading") {
-    return <LoadingOverlay message="We are logging you in..." />;
+    return <LoadingOverlay className="h-screen" message="We are logging you in..." />;
   }
 
   return (
