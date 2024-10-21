@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import CreateDiscussionComponent from "./../components/community/CreateDiscussionComponent";
 import WrapperComponent from "./../components/reusable/WrapperComponent";
-import DiscussionsComponent from "./../components/DiscussionsComponent";
 import Footer from "./../components/reusable/Footer";
 import Navbar from "./../components/reusable/Navbar";
+import CreateDiscussion from "./../components/community/CreateDiscussionComponent";
+import DiscussionList from "./../components/community/DiscussionList";
+import SubpageHeroSection from "../components/reusable/SubHeroSectionComponent";
 
 const DiscussionPage = () => {
     const [isCreatingDiscussion, setIsCreatingDiscussion] = useState(false);
@@ -17,9 +19,9 @@ const DiscussionPage = () => {
         <Navbar />
         <WrapperComponent>
           {isCreatingDiscussion ? (
-            <CreateDiscussionComponent />
+            <CreateDiscussion />
           ) : (
-            <DiscussionsComponent />
+            <DiscussionList />
           )}
         </WrapperComponent>
         <Footer />

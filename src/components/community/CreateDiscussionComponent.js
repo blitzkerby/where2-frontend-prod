@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import ButtonComponent from "./../reusable/Button";
-import FormInput from "./../reusable/InputField";
 import ContainerComponent from "./../reusable/ContainerComponent";
 import useAuth from "./../../hooks/useAuth";
 import config from "./../../config";
@@ -11,6 +9,7 @@ import useGeolocation from "./../../hooks/useGeolocation";
 import { v4 as uuidv4 } from "uuid";
 import UserDiscussions from "./UserDiscussion"
 import { LoadingSpinner } from "./../reusable/Loading";
+import DiscussionForm from "./DiscussionForm";
 
 const CreateDiscussion = () => {
   const navigate = useNavigate();
@@ -92,90 +91,14 @@ const CreateDiscussion = () => {
   return (
     <div className="lg:flex lg:gap-6">
       <div className="lg:w-2/3 mb-6 lg:mb-0">
-        <ContainerComponent className="w-[80%] rounded-md" title="Create New Discussion">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {error && (
-              <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-md">
-                {error}
-              </div>
-            )}
-
-            <FormInput
-              label="Title"
-              name="title"
-              type="text"
-              value={formData.title}
-              onChange={handleChange}
-              placeholder="Title needs to be at least 10 characters long."
-              required
-            />
-
-            <div className="relative">
-              <FormInput
-                name="location"
-                label="Location"
-                placeholder="Click on the pin button to automatically fill in the location."
-                type="text"
-                value={formData.location}
-                onChange={handleChange}
-                required
-                autoComplete="off"
-              />
-              <ButtonComponent
-                variant="ghost"
-                size="small"
-                onClick={() => {
-                  getLocation().then((location) => handleLocationChange(location));
-                }}
-                disabled={isGettingLocation}
-                className="absolute right-2 bottom-0 transform -translate-y-1/2"
-              >
-                {isGettingLocation ? (
-                  <LoadingSpinner size={16} />
-                ) : (
-                  <MapPin size={20} />
-                )}
-              </ButtonComponent>
-            </div>
-
-            <div className="flex-1">
-              <label
-                htmlFor="content"
-                className="block text-sm font-medium text-gray-700 whitespace-nowrap"
-              >
-                Content
-              </label>
-              <textarea
-                id="content"
-                name="content"
-                value={formData.content}
-                onChange={handleChange}
-                placeholder="Content needs to be at least 10 characters long."
-                required
-                className="mt-3 p-2 block w-full text-justify rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border-[2px] min-h-[200px] p-2 resize-none"
-              />
-            </div>
-
-            <div className="flex gap-4 justify-end">
-              <ButtonComponent
-                variant="outline"
-                onClick={() => navigate("/discussions")}
-                className={"mt-12 w-[197px] h-[38px] sm:w-[343px] sm:h-[50px]"}
-                disabled={isSubmitting}
-              >
-                Cancel
-              </ButtonComponent>
-              <ButtonComponent
-                variant="primary"
-                type="submit"
-                className={"mt-12 w-[197px] h-[38px] sm:w-[343px] sm:h-[50px]"}
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Creating..." : "Create Discussion"}
-              </ButtonComponent>
-            </div>
-          </form>
-        </ContainerComponent>
+        <DiscussionForm
+          formData={formData}
+          handleChange={handleChange}
+          handleLocationChange={handleLocationChange}
+          handleSubmit={handleSubmit}
+          isSubmitting={isSubmitting}
+          error={error}
+        />
       </div>
       <div className="lg:w-1/3 lg:mt-[80px] lg:mb-[16px]">
         <div className="bg-white shadow-md rounded-lg shadow p-6 h-full">
