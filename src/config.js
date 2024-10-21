@@ -52,6 +52,7 @@ const config = {
       `${API_URL}/api/discussions/${discussionId}/comments`,
     deleteDiscussion: (discussionId) =>
       `${API_URL}/api/discussion/${discussionId}`,
+    deleteComment: (commentId) => `${API_URL}/api/discussion/comment/${commentId}`,
   },
   job: {
     getAllJob: `${API_URL}/api/jobs`,

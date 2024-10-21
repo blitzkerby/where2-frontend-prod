@@ -97,20 +97,24 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
         </p>
 
         <div className="flex justify-between items-center text-sm text-gray-500">
-          {discussion.user && (
-            <div
-              className="flex items-center gap-2 cursor-pointer hover:text-gray-700"
-              onClick={handleUserClick(discussion.user.id)}
-            >
-              { isMobile ? <span>By </span> : <span>Posted by </span>}
-              <ProfilePicture
-                userId={discussion.user.id}
-                photoUrl={photoUrls[discussion.user.id]}
-                size={20}
-              />
-              <span>{discussion.user.email}</span>
-            </div>
-          )}
+        {discussion.user && (
+        <div
+          className="flex items-center gap-2 cursor-pointer hover:text-gray-700"
+          onClick={handleUserClick(discussion.user.id)}
+        >
+          { isMobile ? <span>By </span> : <span>Posted by </span>}
+          <ProfilePicture
+            userId={discussion.user.id}
+            photoUrl={photoUrls[discussion.user.id]}
+            size={20}
+          />
+          <span>
+            {discussion.user?.profile?.entity 
+              ? discussion.user.profile.entity 
+              : discussion.user?.profile?.userName}
+          </span>
+        </div>
+      )}
           <span>{localComments.length} replies</span>
         </div>
         {isExpanded && (
@@ -124,7 +128,7 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
           </div>
         )}
         {isCurrentUserPost && role === "developer" && (
-          <div className="absolute top-2 right-2" onClick={(e) => e.stopPropagation()}>
+          <div className="absolute top-4 right-4" onClick={(e) => e.stopPropagation()}>
             <ButtonComponent
               variant="danger"
               size="small"
