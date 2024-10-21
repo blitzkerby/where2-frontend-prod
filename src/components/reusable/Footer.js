@@ -42,13 +42,13 @@ function Footer() {
                 style={{ color: "rgba(157, 160, 161, 1)" }}
               >
                 <li>
-                  <FooterLink href="/part-time-job">Part Time Job</FooterLink>
+                  <FooterLink href="/list/job">Part Time Job</FooterLink>
                 </li>
                 <li>
-                  <FooterLink href="/student-loan">Student Loan</FooterLink>
+                  <FooterLink href="/list/student-loan">Student Loan</FooterLink>
                 </li>
                 <li>
-                  <FooterLink href="/accommodation">Accommodation</FooterLink>
+                  <FooterLink href="/list/accommodation">Accommodation</FooterLink>
                 </li>
                 <li>
                   <FooterLink href="/health">W2Health</FooterLink>
@@ -72,13 +72,13 @@ function Footer() {
                 <span className="mr-2">
                   <BiTargetLock />
                 </span>
-                <FooterLink href="/our-vision">Our Vision</FooterLink>
+                <FooterLink href="/about-us">Our Vision</FooterLink>
               </li>
               <li className="flex items-center">
                 <span className="mr-2">
                   <PiPersonSimpleHike />
                 </span>
-                <FooterLink href="/our-mission">Our Mission</FooterLink>
+                <FooterLink href="/about-us">Our Mission</FooterLink>
               </li>
             </ul>
           </div>

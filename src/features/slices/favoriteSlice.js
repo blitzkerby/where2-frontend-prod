@@ -1,14 +1,15 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import config from "../../config";
+import { getAuthData } from "../../components/accountUtilities/UserProfile";
 
-const user = JSON.parse(localStorage.getItem('authData'));
-
+let getAllFavorite;
 export const addFavorite = async (cardId, category) => {
+    const  { userId } = getAuthData();
         const addFavorite =  await axios.post(
             config.favorite.addFavorite,
             {
-                user_id: user.id,
+                user_id: userId,
                 card: cardId,
                 categories: category
             }
@@ -17,7 +18,11 @@ export const addFavorite = async (cardId, category) => {
 };
 
 export const getFavorite = createAsyncThunk("getFavorite", async ({ category, page, limit }) => {
-    const getAllFavorite = await axios.get(`${ config.favorite.getFavorite(user.id, category) }?page=${ page }&limit=${ limit }`);
+  const  { userId } = getAuthData();
+    if (userId) {
+         getAllFavorite = await axios.get(`${ config.favorite.getFavorite(userId, category) }?page=${ page }&limit=${ limit }`);
+    }
+    
     return getAllFavorite;
 });
 
@@ -99,6 +104,8 @@ const FavoriteSlices = createSlice({
             .addCase(getFavorite.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.error.message;
+
+                
             })
             ;
       

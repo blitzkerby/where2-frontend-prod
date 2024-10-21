@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { X } from "lucide-react";
-import { MessageCircleMore } from "lucide-react";
+import { MessageCircleMore, LucideMessageCircleQuestion } from "lucide-react";
 import Menu from "./../../assets/svg/menu.svg";
 import useAuth from "./../../hooks/useAuth";
 import ProfilePicture from "./PictureUpload";
@@ -38,42 +38,9 @@ const Navbar = () => {
   };
 
   const menuItems = [
-    // {
-    //   logo: <School />,
-    //   name: "Universities",
-    //   to: "/universities",
-    //   showMobile: true,
-    // },
-    // {
-    //   logo: <BookOpenTextIcon />,
-    //   name: "Scholarships",
-    //   to: "/scholarships",
-    //   showMobile: true,
-    // },
-    // {
-    //   logo: <LucideBriefcaseBusiness />,
-    //   name: "Livelihood",
-    //   to: "/livelihood",
-    //   showMobile: true,
-    // },
-    {
-      logo: <School />,
-      name: "Universities",
-      to: "/list/university",
-      showMobile: true,
-    },
-    {
-      logo: <BookOpenTextIcon />,
-      name: "Scholarships",
-      to: "/list/scholarship",
-      showMobile: true,
-    },
-    {
-      logo: <LucideBriefcaseBusiness />,
-      name: "Livelihood",
-      to: "/livelihood",
-      showMobile: true,
-    },
+    { logo: <School />, name: "Universities", to: "/list/university", showMobile: true },
+    { logo: <BookOpenTextIcon />, name: "Scholarships", to: "/list/scholarship", showMobile: true },
+    { logo: <LucideBriefcaseBusiness />, name: "Livelihood", to: "/livelihood", showMobile: true },
     { logo: <Activity />, name: "Health", to: "/health", showMobile: true },
     {
       logo: <User2 />,
@@ -94,7 +61,7 @@ const Navbar = () => {
     // { logo: <BookMarked/>, name: "Bookmarks", to: "/bookmarks" },
     // { logo: <ChartColumnIcon/>, name: "Dashboard", to: `/dashboard/${encodeURIComponent(username || entity)}` },
     // { logo: <User2/>, name: "Profile", to: `/profile/${encodeURIComponent(username || entity)}` },
-    // { logo: <LucideMessageCircleQuestion/>, name: "About Us", to: "/about-us" },
+    { logo: <LucideMessageCircleQuestion/>, name: "About Us", to: "/about-us" },
   ];
 
   const identifier = username || entity;

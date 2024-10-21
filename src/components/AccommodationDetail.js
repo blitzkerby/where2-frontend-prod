@@ -8,11 +8,12 @@ const AccommodationDetail = () => {
     const param = useParams();
     const dispatch = useDispatch();
     const { loading, error, accommodation } = useSelector(state => state.accommodations);
-    
+
     useEffect(() => {
         dispatch(fetchAccommodation(param.id))
+ 
     }, []);
-  
+
     return (
         <>       
             {loading && <LoadingOverlay />}

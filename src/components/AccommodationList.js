@@ -4,22 +4,23 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { removedIsClicked,getFavorite } from "../features/slices/favoriteSlice";
 import Card from "./reusable/Card";
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-} 
-const AccommodationList = ({ accommodations }) => {
-    const urlParams = useQuery();
 
-    const page = parseInt(urlParams.get('page')) || 1;
-    const limit = parseInt(urlParams.get('limit')) || 10;
+const AccommodationList = ({ accommodations, page }) => {
     const dispatch = useDispatch();
     const { isClicked } = useSelector((state) => state.favorites);
     useEffect(() => {
-        if (page === 1) {
-            dispatch(removedIsClicked());
-        }
-        dispatch(getFavorite({category:"accommodation",page,limit}))
-    }, [page]);
+        const fetchFavorites = async () => {
+            try {
+                if (page === 1) {
+                    dispatch(removedIsClicked());
+                }
+               await dispatch(getFavorite({ category: "accommodation", page, limit: 10 }));
+            } catch (error) {
+                console.error("Error fetching favorites:", error);
+            }
+        };
+        fetchFavorites();
+    }, [page, dispatch]);
     
     return (
     <>
@@ -44,7 +45,7 @@ const AccommodationList = ({ accommodations }) => {
                 // timeOut={accommodation.salary}
                 type={"accommodation"}
                 isHeartClicked = {isClicked[accommodation.id]}
-                route={`/accommodation-detail/${ accommodation.id }`}
+                route={`/detail/accommodation/${ accommodation.id }`}
             />)
         
     })}

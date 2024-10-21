@@ -14,7 +14,7 @@ function ScholarDetail() {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const scholarship = useSelector((state) => state.scholarships.scholarships);
+  const scholarship = useSelector((state) => state.scholarships.scholarship);
   const isLoading = useSelector((state) => state.scholarships.isLoading);
 		
   useEffect(() => {
@@ -24,7 +24,7 @@ function ScholarDetail() {
   if (isLoading) {
     return <LoadingOverlay />;
   }
-
+console.log("this is scholarship detail",scholarship)
   return (
     <>
       <Navbar /> 

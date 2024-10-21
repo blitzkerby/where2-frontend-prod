@@ -34,27 +34,27 @@ import ErrorPage from "./pages/ErrorPage";
 import UniversityDetailPage from "./pages/UniversityDetailPage";
 import LoggedInOnlyRoute from "./components/routes/LoggedInRoute";
 import HealthArticlePage from "./components/health/HealthArticlePage";
+import AboutUsPage from "./pages/AboutUsPage";
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
-  // {
-  //   path: "/",
-  //   element: <HomePage />,
-  //   index: true,
-  //   element: <HomePage />,
-  //   errorElement: <ErrorPage />,
-  // },
-  // {
-  //   path: "/home",
-  //   element: <HomePage />,
-  //   path: "/home",
-  //   element: <Navigate to="/" replace />,
-  // },
-  // {
-  //   path: "/homepage",
-  //   element: <Navigate to="/" replace />,
-  // },
+  {
+    path: "/",
+    element: <HomePage />,
+    index: true,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/home",
+    element: <HomePage />,
+    path: "/home",
+    element: <Navigate to="/" replace />,
+  },
+  {
+    path: "/homepage",
+    element: <Navigate to="/" replace />,
+  },
   {
     path: "/login",
     element: (
@@ -120,9 +120,9 @@ const router = createBrowserRouter([
   {
     path: "/list",
     children: [
-      { path: "job", element: <JobPage /> },
-      { path: "university", element: <UniversityPage /> },
+      { path: "university", element: <UniversityPage/>},
       { path: "scholarship", element: <ScholarshipPage /> },
+      { path: "job", element: <JobPage /> },
       { path: "student-loan", element: <StudentLoanPage /> },
       { path: "accommodation", element: <AccommodationPage /> },
     ],
@@ -132,13 +132,14 @@ const router = createBrowserRouter([
     children: [
       { path: "university/:id", element: <UniversityDetailPage /> },
       { path: "scholarship/:id", element: <ScholarshipDetailPage /> },
-      { path: "job/:id", element: <JobDetailPage /> },
-    ],
+      { path: "accommodation/:id", element: <AccommodationDetailPage /> },
+      { path: "job/:jobId", element: <JobDetailPage /> },
+    ]
   },
-
-  { path: "/login", element: <LoginPage /> },
-  { path: "/signup", element: <RegisterPage /> },
-  { path: "/scholarships", element: <ScholarshipPage /> },
+ 
+  { path: "/login",element: <LoginPage />},
+  { path: "/signup",element: <RegisterPage />},
+  { path: "/scholarships", element: <ScholarshipPage/>},
   { path: "/profile/:userName", element: <UserProfile /> },
   // {
   //   path: "/universities",
@@ -149,8 +150,6 @@ const router = createBrowserRouter([
   //   ]
   // },
   { path: "/livelihood", element: <LivelihoodPage /> },
-  { path: "/jobs", element: <JobPage /> },
-  { path: "/job-detail/:jobId", element: <JobDetailPage /> },
   { path: "/forget-password", element: <ForgetPasswordPage /> },
   { path: "/signup/verification", element: <VerificationPage /> },
   { path: "/dashboard/:userName", element: <DashboardComponent /> },
@@ -158,10 +157,9 @@ const router = createBrowserRouter([
   { path: "/livelihood", element: <LivelihoodPage /> },
   { path: "/scholarships", element: <ScholarshipPage /> },
   { path: "/scholarship/:id", element: <ScholarshipDetailPage /> },
-  { path: "/student-loans", element: <StudentLoanPage /> },
-  { path: "/accommodations", element: <AccommodationPage /> },
-  { path: "/accommodation-detail/:id", element: <AccommodationDetailPage /> },
   { path: "/health/article/:id", element: <HealthArticlePage /> },
+  { path: "/about-us", element: <AboutUsPage />},
+
 ]);
 
 function App() {

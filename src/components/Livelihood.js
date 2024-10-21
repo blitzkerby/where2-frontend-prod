@@ -22,17 +22,17 @@ const Livelihood = () => {
         {
             title: "Part-time Job",
             image: PartTimeJob,
-            path: "/jobs"
+            path: "/list/job"
         },
         {
             title: "Student Loan",
             image: StudentLoan,
-            path: "/student-loans"
+            path: "/list/student-loan"
         },
         {
             title: "Accommodation",
             image: Accommodation,
-            path: "/accommodations"
+            path: "/list/accommodation"
         },
     ];
     return (

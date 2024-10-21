@@ -1,6 +1,6 @@
 // dependencies
-import React from 'react';
-import { useDispatch } from "react-redux";
+import React, { useState,useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
 
 //assets
@@ -10,14 +10,16 @@ import BookMark from '../../assets/svg/bookmark.svg';
 import Calender from '../../assets/svg/calender.svg';
 import MiniClock from '../../assets/svg/miniClock.svg';
 import { Facebook, Instagram, Twitter, Youtube, Chrome } from 'lucide-react';
+import FilledHeart from '../../assets/svg/filled-heart.svg'
 
 //components
 import Button from './ButtonComponent';
 
 //slice
-import { addFavorite,removeFavorite,setIsClicked } from "../../features/slices/favoriteSlice";
+import { addFavorite, removeFavorite } from "../../features/slices/favoriteSlice";
+import  {setIsClicked}  from '../../features/slices/favoriteSlice';
 
-const user = JSON.parse(localStorage.getItem('authData'));
+
 
 const Card = ({
   image = '',
@@ -36,33 +38,39 @@ const Card = ({
   timeOut = '',
   route,
   type,
-  isHeartClicked = false, 
+  isHeartClicked, 
   id,
   size,
   price,
-  address,
-  FilledHeart
+  address
 }) => {
+  const user = JSON.parse(localStorage.getItem('authData'));
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [heartClicked, setHeartClicked] = useState()
+
+  useEffect(() => {
+    setHeartClicked(isHeartClicked)
+  },[isHeartClicked])
 
   const handleReadMoreClick = () => {
     navigate(route);
   };
   
   const handleHeartClick = async () => {
+    setHeartClicked(false)
       await removeFavorite(id, type);
-      dispatch(setIsClicked({ id: id }))
-  
+    dispatch(setIsClicked({ id: id }))
+
     };
     
   const handleRemoveHeartClick = async () => {
-    if (!user) {
-      alert("Please Log in or Sing up to add your COLLECTION!");
-      navigate('/login');
-    } else {
+    if (user) {
+      setHeartClicked(true)
       await addFavorite(id, type);
       dispatch(setIsClicked({ id: id }))
+    } else if(window.confirm('Please login or Sign up to Add your Collection!') === true) {
+      navigate('/login');
     }
   };
 
@@ -144,7 +152,7 @@ const Card = ({
               </p>
             </div> : null}
         </div>
-        <div className="flex flex-col lg:h-[78%] sm:h-[200px]">
+        <div className="flex flex-col lg:h-[62%] sm:h-[200px]">
           <div className="flex-1 text-clip overflow-hidden">
             <p className="text-justify">{description}</p>
           </div>
@@ -167,7 +175,7 @@ const Card = ({
             <div className="flex justify-between cursor-pointer">
               <div className="w-[100px] flex justify-around">
                 <div>
-                  {isHeartClicked ? 
+                  {heartClicked ? 
                     <div>
                       <img className="w-9" src={FilledHeart} alt="Bookmark" onClick={handleHeartClick} />
                     </div> : 

@@ -9,14 +9,15 @@ export const fetchAllList = createAsyncThunk(
         const response = await axios.get(`${ config.list.getAllList(model)}?page=${page}&limit=${limit}`);
         
         // Dispatch actions to update pagination state
-        dispatch(setTotalPage(response.data.pagination.totalPages));       
-        return response.list;
+        dispatch(setTotalPage(response.data.pagination.totalPages));
+        return response.data.list;
     }
 );
 
 const paginationSlice = createSlice({
     name: 'pagination',
     initialState: {
+        data:[],
         totalPage: 1,
     },
     reducers: {
@@ -32,7 +33,7 @@ const paginationSlice = createSlice({
         })
             .addCase(fetchAllList.fulfilled, (state, action) => {
                 state.loading = false;
-                state.data = action.payload.data;
+                state.data = action.payload;
 
             })
             .addCase(fetchAllList.rejected, (state, action) => {

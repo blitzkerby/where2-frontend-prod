@@ -21,7 +21,7 @@ const FavoriteList = ({ favorites, category }) => {
                 deadLine={job.deadline}
                 timeOut={job.work_hour}
                 type={"job"}
-                route={`/job-detail/${job.id}`}
+                route={`/detail/job/${job.id}`}
             />
         ));
             
@@ -40,7 +40,7 @@ const FavoriteList = ({ favorites, category }) => {
                 //   youtubeLink={university.youtubeLink}
                 websiteLink={university.website_url}
                 location={university.location}
-                route={'university'}
+                route={`/detail/university/${university.id}`}
             // deadLine={university.deadLine}
             // timeOut={university.salary}
             />
@@ -86,7 +86,7 @@ const FavoriteList = ({ favorites, category }) => {
             deadLine={scholarship.deadLine}
             id={scholarship.id}
             type={'scholarship'}
-            route={`/scholarship/${ scholarship.id }`}
+            route={`/detail/scholarship/${ scholarship.id }`}
 
             />
         ))
@@ -110,7 +110,7 @@ const FavoriteList = ({ favorites, category }) => {
             // websiteLink={accommodation.createdAt}
             // deadLine={accommodation.deadline}
             // timeOut={accommodation.salary}
-            route={`/accommodation-detail/${ accommodation.id }`}
+            route={`/detail/accommodation/${ accommodation.id }`}
             />
         ))
     }
