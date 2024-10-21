@@ -52,7 +52,7 @@ const HealthArticleList = () => {
               speed={30}
             />
           </h1>
-          <p className="text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto text-balance tracking-tightest">
+          <p className="text-lg sm:text-xl h-full lg:text-2xl max-w-3xl mx-auto text-balance tracking-tightest">
             Our mission is to provide exceptional health and wellness
             information to our users, community, and nation. We only publish
             trustworthy articles and publications, translated from reliable

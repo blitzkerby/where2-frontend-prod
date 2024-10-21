@@ -72,7 +72,7 @@ const Navbar = () => {
     <>
       <nav className="bg-gray-100 h-[64px] w-full fixed top-0 left-0 right-0 z-[1002]">
         <div className="sm:hidden flex justify-between gap-x-10 items-center px-4 py-3 h-full m-auto lg:w-9/12">
-          <Link to="/" className="text-xl font-bold tracking-tighter">
+          <Link to="/" className="text-xl font-bold hover:scale-105 tracking-tighter">
             WHERE2
           </Link>
           <div className="flex align-center justify-between h-full mx-auto lg:w-[800px] tracking-tighter">
@@ -82,7 +82,7 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.to}
-                  className="flex mb-[6px] pt-[8px] px-6 align-center justify-center mx-0 whitespace-nowrap text-gray-700 hover:text-gray-900 h-full"
+                  className="flex mb-[6px] pt-[8px] px-6 align-center justify-center mx-0 whitespace-nowrap text-gray-700 hover:text-black hover:scale-105 h-full"
                 >
                   {item.name}
                 </Link>
@@ -98,7 +98,7 @@ const Navbar = () => {
               </Link>
             ) : (
               <Link to="/login" className="relative w-8 h-8 r-4">
-                <ButtonComponent className={"pb-2 hover:scale-105 rounded-lg"}>
+                <ButtonComponent className={"pb-2 hover:scale-105"}>
                   Login
                 </ButtonComponent>
               </Link>
@@ -139,7 +139,7 @@ const Navbar = () => {
                     <Link
                       key={item.name}
                       to={item.to}
-                      className="px-4 py-4 text-gray-700 hover:bg-gray-100 flex items-center"
+                      className="px-4 py-4 text-gray-700 hover:bg-black hover:scale-105 flex items-center"
                       onClick={toggleMenu}
                     >
                       {item.logo}

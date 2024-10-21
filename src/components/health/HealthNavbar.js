@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { X } from "lucide-react";
 import Dashboard from "./../../assets/svg/dashboard.svg";
 import Menu from "./../../assets/svg/menu.svg";
-import useAuth from "../../hooks/useAuth";
-import ProfilePicture from "../reusable/PictureUpload";
+import useAuth from "./../../hooks/useAuth";
+import ButtonComponent from "./../reusable/Button";
+import ProfilePicture from "./../reusable/PictureUpload";
+import { Home } from "lucide-react";
 import { User2 } from "lucide-react";
 
 const MenuIcon = <img src={Menu} alt="Menu" />;
@@ -45,22 +47,12 @@ const HealthNavbar = () => {
     <>
       <nav className="bg-[#E6F3F9] h-[64px] w-full fixed top-0 left-0 right-0 z-[1002]">
         <div className="sm:hidden flex justify-between gap-x-10 items-center px-4 py-3 h-full m-auto lg:w-9/12">
-          <Link to="/health" className="text-xl font-bold tracking-tightest">
+        <Link to="/" className="text-xl hover:scale-105 font-bold tracking-tightest">
+            <Home size={20}/>
+          </Link>
+          <Link to="/health" className="text-xl hover:scale-105 font-bold tracking-tightest">
             W2HEALTH
           </Link>
-          <div className="flex align-center justify-between h-full lg:w-9/12">
-            {menuItems
-              .filter((item) => item.showDesktop !== false)
-              .map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.to}
-                  className="flex my-[6px] mx-0 whitespace-nowrap text-gray-700 hover:text-gray-900 h-full"
-                >
-                  {item.name}
-                </Link>
-              ))}
-          </div>
           <div className="flex items-center space-x-4">
             {showDashboard && (
               <DashboardIcon username={username} entity={entity} />
@@ -70,20 +62,17 @@ const HealthNavbar = () => {
                 <ProfilePicture userId={userId} />
               </Link>
             ) : (
-              <Link to="/login" className="w-8 h-8">
-                <div className="w-full h-full">
-                  <User2
-                    size={22}
-                    className="flex justify-center align-center"
-                  />
-                </div>
+              <Link to="/login" className="relative w-8 h-8 r-4">
+                <ButtonComponent className={"pb-2 hover:scale-105"}>
+                  Login
+                </ButtonComponent>
               </Link>
             )}
           </div>
         </div>
 
         <div className="lg:hidden sm:flex justify-between items-center px-4 py-3 h-full w-full">
-          <Link to="/health" className="text-xl font-bold tracking-tightest">
+          <Link to="/health" className="text-xl hover:scale-105 font-bold tracking-tightest">
             W2HEALTH
           </Link>
           <button
@@ -114,7 +103,7 @@ const HealthNavbar = () => {
                   <Link
                     key={item.name}
                     to={item.to}
-                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center"
+                    className="block px-4 py-2 text-gray-700 hover:scale-105 hover:bg-black flex items-center"
                     onClick={toggleMenu}
                   >
                     {item.logo}
