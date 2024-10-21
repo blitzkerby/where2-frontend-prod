@@ -18,7 +18,7 @@ const StudentLoanList = ({ studentLoans, page }) => {
                 if (page === 1) {
                     dispatch(removedIsClicked());
                 }
-               await dispatch(getFavorite({ category: "loan", page, limit: 10 }));
+               await dispatch(getFavorite({ category: "loan", limit: 10 }));
             } catch (error) {
                 console.error("Error fetching favorites:", error);
             }

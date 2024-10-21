@@ -30,7 +30,7 @@ const ScholarshipList = ({ scholarships, page}) => {
                 if (page === 1) {
                     dispatch(removedIsClicked());
                 }
-               await dispatch(getFavorite({ category: "scholarship", page, limit: 10 }));
+               await dispatch(getFavorite({ category: "scholarship", limit: 10 }));
             } catch (error) {
                 console.error("Error fetching favorites:", error);
             }

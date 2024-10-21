@@ -2,6 +2,7 @@ import {
   createSlice,
   createAsyncThunk,
   createEntityAdapter,
+  current,
 } from "@reduxjs/toolkit";
 import axios from "axios";
 import config from "./../../config"
@@ -273,7 +274,27 @@ import config from "./../../config"
       }
     }
   );
-  
+
+  //Update Password
+export const updatePassword = createAsyncThunk(
+  "auth/updatePassword",
+  async ({ id, passwordCurrent, password, passwordConfirm }, thunkAPI) => {
+    try {
+      const response = await axios.patch(config.auth.updatePassword(id),
+      {
+        passwordCurrent,
+        password,
+        passwordConfirm
+      });
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        handleAsyncError(error, "Failed to Update password. Please try again.")
+      );
+    }
+  }
+);
+
   const authAdapter = createEntityAdapter();
   
   const authSlice = createSlice({
@@ -453,6 +474,20 @@ import config from "./../../config"
         .addCase(refreshToken.rejected, (state) => {
           state.isAuthenticated = false;
           authAdapter.removeAll(state);
+        })
+        // Update Password
+        .addCase(updatePassword.pending, (state) => {
+          state.status = "loading";
+          state.error = null;
+          state.message = null;
+        })
+        .addCase(updatePassword.fulfilled, (state, action) => {
+          state.status = "succeeded";
+          state.message = action.payload;
+        })
+        .addCase(updatePassword.rejected, (state, action) => {
+          state.status = "failed";
+          state.error = action.payload;
         });
     },
   });

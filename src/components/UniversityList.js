@@ -35,14 +35,14 @@ const UniversityList = ({ universities, page }) => {
                 if (page === 1) {
                     dispatch(removedIsClicked());
                 }
-               await dispatch(getFavorite({ category: "university", page, limit: 10 }));
+               await dispatch(getFavorite({ category: "university", limit: 10 }));
             } catch (error) {
                 console.error("Error fetching favorites:", error);
             }
         };
         fetchFavorites();
     }, [page, dispatch]);
-
+console.log("this is University page", page)
 
     return (
         <>

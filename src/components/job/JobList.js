@@ -16,14 +16,14 @@ const JobList = ({ jobs, page }) => {
                 if (page === 1) {
                     dispatch(removedIsClicked());
                 }
-               await dispatch(getFavorite({ category: "job", page, limit: 10 }));
+               await dispatch(getFavorite({ category: "job", limit: 10 }));
             } catch (error) {
                 console.error("Error fetching favorites:", error);
             }
         };
         fetchFavorites();
     }, [page, dispatch]);
-
+console.log("this number of page in JobList",page)
     return (
     <>
     {jobs.map(job => {
