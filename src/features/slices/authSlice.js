@@ -278,9 +278,9 @@ import config from "./../../config"
   //Update Password
 export const updatePassword = createAsyncThunk(
   "auth/updatePassword",
-  async ({ id, passwordCurrent, password, passwordConfirm }, thunkAPI) => {
+  async ({ userId, passwordCurrent, password, passwordConfirm }, thunkAPI) => {
     try {
-      const response = await axios.patch(config.auth.updatePassword(id),
+      const response = await axios.patch(config.auth.updatePassword(userId),
       {
         passwordCurrent,
         password,
