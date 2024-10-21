@@ -1,5 +1,5 @@
 import React from "react";
-import CreateDiscussionComponent from "../components/community/CreateDiscussionComponent";
+import CreateDiscussion from "./../components/community/CreateDiscussion";
 import Navbar from "./../components/reusable/Navbar";
 import Footer from "./../components/reusable/Footer";
 import WrapperComponent from "../components/reusable/WrapperComponent";
@@ -9,7 +9,7 @@ const CreateDiscussionPage = () => {
     <>
       <Navbar />
       <WrapperComponent>
-        <CreateDiscussionComponent />
+        <CreateDiscussion showForm={true}/>
       </WrapperComponent>
       <Footer />
     </>

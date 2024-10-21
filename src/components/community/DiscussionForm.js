@@ -13,7 +13,7 @@ const DiscussionForm = ({ formData, handleChange, handleLocationChange, handleSu
     const { isGettingLocation, getLocation, error: locationError } = useGeolocation();
   
     return (
-      <ContainerComponent className="w-[80%] rounded-md" title="Create New Discussion">
+      <ContainerComponent className="w-[80%] rounded-md" title="Create New Post">
         <form onSubmit={handleSubmit} className="space-y-6">
           {error && (
             <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-md">
@@ -73,6 +73,12 @@ const DiscussionForm = ({ formData, handleChange, handleLocationChange, handleSu
               className="mt-3 p-2 block w-full text-justify rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border-[2px] min-h-[200px] p-2 resize-none"
             />
           </div>
+          {/* Hidden input for pathname */}
+          <input
+            type="hidden"
+            name="pathname"
+            value={formData.pathname}
+          />
           <div className="flex gap-4 justify-end">
             <ButtonComponent
               variant="outline"
@@ -88,12 +94,12 @@ const DiscussionForm = ({ formData, handleChange, handleLocationChange, handleSu
               className={"mt-12 w-[197px] h-[38px] sm:w-[343px] sm:h-[50px]"}
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Creating..." : "Create Discussion"}
+              {isSubmitting ? "Creating your post..." : "Post"}
             </ButtonComponent>
           </div>
         </form>
       </ContainerComponent>
     );
   };
-
-export default DiscussionForm;
+  
+  export default DiscussionForm;

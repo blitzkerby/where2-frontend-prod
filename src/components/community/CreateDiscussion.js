@@ -8,6 +8,8 @@ import useGeolocation from "./../../hooks/useGeolocation";
 import { LoadingSpinner } from "./../reusable/Loading";
 import DiscussionForm from "./DiscussionForm";
 import UserDiscussions from "./UserDiscussion";
+import DiscussionList from "./DiscussionList";
+import useDiscussions from "../../hooks/useDiscussions";
 
 const CreateDiscussion = ({ showForm }) => {
     const navigate = useNavigate();
@@ -23,11 +25,17 @@ const CreateDiscussion = ({ showForm }) => {
       pathname: location.pathname,
     });
   
+    const { discussions, loading: discussionsLoading, error: discussionsError } = useDiscussions(location.pathname);
+  
     useEffect(() => {
       if (locationError) {
         setError(locationError);
       }
     }, [locationError]);
+  
+    useEffect(() => {
+      setFormData(prev => ({ ...prev, pathname: location.pathname }));
+    }, [location]);
   
     const handleChange = (e) => {
       const { name, value } = e.target;
@@ -97,11 +105,17 @@ const CreateDiscussion = ({ showForm }) => {
         )}
         <div className="lg:w-1/3 lg:mt-[80px] lg:mb-[16px]">
           <div className="bg-white shadow-md rounded-lg shadow p-6 h-full">
-            <UserDiscussions userId={userId} />
+            {discussionsLoading ? (
+              <LoadingSpinner message="Loading posts..." />
+            ) : discussionsError ? (
+              <div className="text-red-500">{discussionsError}</div>
+            ) : (
+              <DiscussionList discussions={discussions} />
+            )}
           </div>
         </div>
       </div>
     );
   };
   
-  export default CreateDiscussion
+  export default CreateDiscussion;

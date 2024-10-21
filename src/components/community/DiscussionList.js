@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate, useLocation } from "react-router-dom";
+
 import ButtonComponent from "./../reusable/Button";
 import { LoadingOverlay } from "./../reusable/Loading";
 import DiscussionCard from "./DiscussionCard";
@@ -10,8 +10,11 @@ import useAuth from "./../../hooks/useAuth";
 
 const DiscussionList = () => {
   const navigate = useNavigate();
-  const { discussions, isLoading, fetchDiscussions, setDiscussions } = useDiscussions();
+  const location = useLocation();
+  const { discussions, isLoading, setDiscussions } = useDiscussions();
   const { role } = useAuth();
+
+  const isPostCreate = location.pathname === "/discussions/create";
 
   const handleDeleteSuccess = async (deletedDiscussionId) => {
     setDiscussions((prevDiscussions) =>
@@ -26,14 +29,14 @@ const DiscussionList = () => {
   return (
     <div className="w-[90%] py-4 mx-auto min-h-full mt-[64px]">
       <div className="flex justify-between h-full items-center">
-        <h2 className="text-xl sm:hidden">Community Discussions</h2>
-        {role === "admin" || role === "developer" && (
+        <h2 className="text-xl font-semibold mt-4 sm:hidden">Your Posts</h2>
+        {!(isPostCreate) && (role === "admin" || role === "developer") && (
           <ButtonComponent
             variant="primary"
             className="mt-2 w-[197px] sm:w-full h-[38px] lg:w-[343px] sm:h-[50px]"
             onClick={() => navigate("/discussions/create")}
           >
-            New Discussion
+            New Post
           </ButtonComponent>
         )}
       </div>
@@ -51,5 +54,6 @@ const DiscussionList = () => {
     </div>
   );
 };
+
 
 export default DiscussionList;
