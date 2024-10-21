@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import DiscussionCard from "./DiscussionCard";
 import useAuth from "./../../hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import config from "./../../config";
 
 const UserDiscussions = ({ userId }) => {

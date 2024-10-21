@@ -8,7 +8,7 @@ import WrapperComponent from "./../reusable/WrapperComponent";
 import useDiscussions from "./../../hooks/useDiscussions";
 import useAuth from "./../../hooks/useAuth";
 
-const DiscussionList = ({}) => {
+const DiscussionList = () => {
   const navigate = useNavigate();
   const { discussions, isLoading, fetchDiscussions, setDiscussions } = useDiscussions();
   const { role } = useAuth();
@@ -20,11 +20,11 @@ const DiscussionList = ({}) => {
   };
 
   if (isLoading) {
-    return <LoadingOverlay />;
+    return <LoadingOverlay className="h-screen"/>;
   }
 
   return (
-    <div className="w-[90%] py-4 mx-auto min-h-full">
+    <div className="w-[90%] py-4 mx-auto min-h-full mt-[64px]">
       <div className="flex justify-between h-full items-center">
         <h2 className="text-xl sm:hidden">Community Discussions</h2>
         {role === "admin" || role === "developer" && (

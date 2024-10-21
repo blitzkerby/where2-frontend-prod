@@ -10,6 +10,7 @@ import HealthNavbar from "./HealthNavbar";
 import Footer from "./../reusable/Footer";
 import TextSummary from "./../reusable/TextSummary";
 import config from "./../../config";
+import CreateDiscussion from "./../community/CreateDiscussion";
 
 const HealthArticlePage = () => {
   const [article, setArticle] = useState(null);
@@ -79,49 +80,56 @@ const HealthArticlePage = () => {
     ? format(new Date(article.date), "MMMM d, yyyy")
     : "Publication date unavailable";
 
-  return (
-    <>
-      <HealthNavbar />
-      <div className="bg-black min-h-screen text-white">
-        <div className="lg:w-[90%] sm:w-[99%] mx-auto lg:py-8 sm:py-3 px-4 sm:px-1 lg:px-8 mt-[64px]">
-          <div className="lg:flex lg:space-x-8">
-            <div className="lg:w-full sm:w-full mb-8 lg:mb-0">
-              <WrapperComponent>
-                <div className="bg-gray-900 w-full h-full rounded-xl shadow-lg">
-                  <img
-                    src={article.image || "default-image-url.jpg"}
-                    alt={article.title}
-                    className="w-full h-[400px] object-cover lg:rounded-xl sm:rounded-md shadow-lg mb-6"
-                  />
-                  <h1 className="text-3xl font-extrabold text-white mb-4 leading-tight tracking-tight p-4">
-                    {article.title}
-                  </h1>
-                  <div className="flex items-center text-sm text-gray-400 mb-6 tracking-tighter p-4">
-                    <span className="font-medium">{article.author}</span>
-                    <span className="mx-2">•</span>
-                    <span>{formattedDate}</span>
-                  </div>
-                  <div className="prose prose-lg max-w-none text-gray-300 tracking-tighter text-justify p-4">
-                    {article.content}
-                  </div>
-                </div>
-              </WrapperComponent>
-            </div>
+    ;
 
-            <div className="lg:w-[35%]">
-              <WrapperComponent>
-                <div className="bg-gray-900 rounded-xl p-6 shadow-lg">
-                  <TextSummary textToSummarize={article.content} />
-                </div>
-                <VisitTracker path={location.pathname} />
-              </WrapperComponent>
+    return (
+      <>
+        <HealthNavbar />
+        <div className="bg-black min-h-screen text-white">
+          <div className="lg:w-[90%] sm:w-[99%] mx-auto lg:py-8 sm:py-3 px-4 sm:px-1 lg:px-8 mt-[64px]">
+            <div className="lg:flex lg:space-x-8">
+              <div className="lg:w-full sm:w-full mb-8 lg:mb-0">
+                <WrapperComponent>
+                  <div className="bg-gray-900 w-full h-full rounded-xl shadow-lg">
+                    <img
+                      src={article.image || "default-image-url.jpg"}
+                      alt={article.title}
+                      className="w-full h-[400px] object-cover lg:rounded-xl sm:rounded-md shadow-lg mb-6"
+                    />
+                    <h1 className="text-3xl font-extrabold text-white mb-4 leading-tight tracking-tight p-4">
+                      {article.title}
+                    </h1>
+                    <div className="flex items-center text-sm text-gray-400 mb-6 tracking-tighter p-4">
+                      <span className="font-medium">{article.author}</span>
+                      <span className="mx-2">•</span>
+                      <span>{formattedDate}</span>
+                    </div>
+                    <div className="prose prose-lg max-w-none text-gray-300 tracking-tighter text-justify p-4">
+                      {article.content}
+                    </div>
+                  </div>
+                </WrapperComponent>
+              </div>
+              <div className="lg:w-[35%]">
+                <WrapperComponent>
+                  <div className="bg-gray-900 rounded-xl p-6 shadow-lg">
+                    <TextSummary textToSummarize={article.content} />
+                  </div>
+                  <VisitTracker path={location.pathname} />
+                </WrapperComponent>
+              </div>
             </div>
+            {/* Add the CreateDiscussion component here */}
+            {/* <div className="lg:flex lg:gap-6 mt-8">
+              <div className="lg:w-2/3 mb-6 lg:mb-0">
+                <CreateDiscussion />
+              </div>
+            </div> */}
           </div>
         </div>
-      </div>
-      <Footer />
-    </>
-  );
-};
-
-export default HealthArticlePage;
+        <Footer />
+      </>
+    );
+  };
+  
+  export default HealthArticlePage

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import CommentSectionComponent from "./CommentSectionComponent";
 import ProfilePicture from "../reusable/PictureUpload";
 import { useFetchBatchPhotos } from "./../../hooks/useFetchPhoto";
-import WrapperComponent from "./../reusable/WrapperComponent";
 import useIsMobile from "./../../hooks/useIsMobile";
 import useAuth from "./../../hooks/useAuth";
 import ButtonComponent from "./../reusable/Button";

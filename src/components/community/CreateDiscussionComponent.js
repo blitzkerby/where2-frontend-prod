@@ -88,6 +88,10 @@ const CreateDiscussion = () => {
     }
   };
 
+  if (isGettingLocation) {
+    return <LoadingSpinner className="h-screen" message="Getting Location..." />;
+  }
+
   return (
     <div className="lg:flex lg:gap-6">
       <div className="lg:w-2/3 mb-6 lg:mb-0">
