@@ -92,7 +92,7 @@ const CreateDiscussion = () => {
   return (
     <div className="lg:flex lg:gap-6">
       <div className="lg:w-2/3 mb-6 lg:mb-0">
-        <ContainerComponent title="Create New Discussion">
+        <ContainerComponent className="w-[80%] rounded-md" title="Create New Discussion">
           <form onSubmit={handleSubmit} className="space-y-6">
             {error && (
               <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-md">
@@ -160,6 +160,7 @@ const CreateDiscussion = () => {
               <ButtonComponent
                 variant="outline"
                 onClick={() => navigate("/discussions")}
+                className={"mt-12 w-[197px] h-[38px] sm:w-[343px] sm:h-[50px]"}
                 disabled={isSubmitting}
               >
                 Cancel
@@ -167,6 +168,7 @@ const CreateDiscussion = () => {
               <ButtonComponent
                 variant="primary"
                 type="submit"
+                className={"mt-12 w-[197px] h-[38px] sm:w-[343px] sm:h-[50px]"}
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Creating..." : "Create Discussion"}

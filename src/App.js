@@ -106,6 +106,12 @@ const router = createBrowserRouter([
   { path: "/dashboard/:userName", element: <DashboardComponent /> },
   { path: "/profile/:userName", element: <UserProfile /> },
   { path: "/discussions", element: <DiscussionsPage /> },
+  {
+    path: "/community",
+    element: <DiscussionsPage />,
+    path: "/community",
+    element: <Navigate to="/discussions" replace />,
+  },
   { path: "/discussions/create", element: <CreateDiscussionPage /> },
   { path: "/health", element: <HealthPage /> },
   { path: "/user/:userId", element: <VisitProfile /> },
@@ -116,6 +122,12 @@ const router = createBrowserRouter([
       { path: "search", element: <UniversityPage /> },
       { path: ":id", element: <UniversityDetailPage /> },
     ],
+  },
+  {
+    path: "/discussion",
+    element: <DiscussionsPage />,
+    path: "/discussion",
+    element: <Navigate to="/discussions" replace />,
   },
   {
     path: "/list",
