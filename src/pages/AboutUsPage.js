@@ -5,7 +5,7 @@ import vision from "../assets/images/Vision.png";
 import mission from "../assets/images/Mission.png";
 import coreValue from "../assets/images/core values.png";
 import Footer from "../components/reusable/Footer";
-
+import WrapperComponent from "../components/reusable/WrapperComponent";
 const bioCard = [
   {
     image: vision,
@@ -34,11 +34,12 @@ const AboutUsPage = () => {
           <div className="max-w-[1440px] mx-auto mt-[100px]">
       {bioCard.map((card, index) => (
         <div key={index}>
-          {index === 1 ? (
+          {index === 1 ?
+          (  <WrapperComponent>
             <BioCard variant={"right"} bioCard={card} />
-          ) : (
+           </WrapperComponent>): (<WrapperComponent> 
             <BioCard variant={"left"} bioCard={card} />
-          )}
+          </WrapperComponent>)}
         </div>
       ))}
     </div>

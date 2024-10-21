@@ -32,10 +32,9 @@ const AccommodationList = ({ accommodations, page }) => {
                 image={'https://th.bing.com/th/id/R.5a8394ded8bc846fa7be1d13d7ff568b?rik=eAfE14B5fVvw4A&pid=ImgRaw&r=0'}
                 imageAlt={"room"}
                 title={accommodation.name}
-                size={accommodation.size}
                 price = {accommodation.price}
-                address = {accommodation.location}
-                // description={accommodation.accommodation_desc}
+                location={accommodation.location}
+                description={accommodation.description}
                 // facebookLink={accommodation.updatedAt}
                 // instagramLink={accommodation.updatedAt}
                 // twitterLink={accommodation.createdAt}

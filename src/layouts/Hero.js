@@ -55,7 +55,7 @@ const Hero = ({ props, children }) => {
           <p className={`${styles.subtitle} ${subtitleColor}`}>{subtitle}</p>
 
           {button && (
-            <Link to="jobs">
+            <Link to="/list/job">
               <button className={`${styles.button}`}>{button}</button>
             </Link>
           )}

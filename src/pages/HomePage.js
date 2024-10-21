@@ -44,11 +44,12 @@ const header =[
     suggested: "SUGGESTED FOR YOU"
   }
 ]
-const headerCardFeature =[
+header.map(head => console.log(head.suggested))
+const headerCardFeature = [
   {
     suggested: "OUR FEATURE"
   }
-]
+];
 const cards = [
   {
     title: "Scholarships",
@@ -110,13 +111,13 @@ const HomePage = () => {
         </Hero>
       </WrapperComponent>
       <WrapperComponent>
-        <CardSlider cards={cards} header={header} />
+        <CardFeatureSlider cardFeature={cards} header={"OUR FEATURE"} />
       </WrapperComponent>
       <WrapperComponent>
         <Hero props={hero2} />
       </WrapperComponent>
       <WrapperComponent>
-        <CardFeatureSlider cardFeature={cardFeature} header={headerCardFeature} />
+        <CardSlider cards={cards} header={ "SUGGESTED FOR YOU"} />
       </WrapperComponent>
       <WrapperComponent>
         <SaveSection/>

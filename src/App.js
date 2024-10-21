@@ -66,9 +66,9 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: (
-      <PublicOnlyROute>
+     
         <RegisterPage />
-      </PublicOnlyROute>
+   
     ),
   },
   {
@@ -82,9 +82,7 @@ const router = createBrowserRouter([
   {
     path: "/reset-password/:token",
     element: (
-      <PublicOnlyROute>
         <ResetPasswordPage />
-      </PublicOnlyROute>
     ),
   },
   {

@@ -11,7 +11,7 @@ import Calender from '../../assets/svg/calender.svg';
 import MiniClock from '../../assets/svg/miniClock.svg';
 import { Facebook, Instagram, Twitter, Youtube, Chrome } from 'lucide-react';
 import FilledHeart from '../../assets/svg/filled-heart.svg'
-
+import  {convertToHTML}  from '../../utility/markdownConverter';
 //components
 import Button from './ButtonComponent';
 
@@ -29,7 +29,6 @@ const Card = ({
   socialLinks: { facebookLink = '', instagramLink = '', twitterLink = '', youtubeLink = '', websiteLink = '' } = {},
   position,
   salary,
-  currency,
   term,
   loan_size,
   interest,
@@ -42,7 +41,6 @@ const Card = ({
   id,
   size,
   price,
-  address
 }) => {
   const user = JSON.parse(localStorage.getItem('authData'));
   const navigate = useNavigate();
@@ -139,13 +137,7 @@ const Card = ({
             </div> : null}
             {type === "loan"? <div className="py-2">
               <p>
-                Currency :<span> {currency}</span>
-              </p>
-              <p>
                 Term:<span> {term}</span>
-              </p>
-              <p>
-                Loan Size:<span> {loan_size}</span>
               </p>
               <p>
                 Interest Rate:<span> {interest}</span>
@@ -158,13 +150,10 @@ const Card = ({
               <p>
                 Price:<span> {price}</span>
               </p>
-              <p>
-                Location:<span> {address}</span>
-              </p>
             </div> : null}
         </div>
         <div className="flex flex-col lg:h-[62%] sm:h-[200px]">
-          <div className="flex-1 text-clip overflow-hidden">
+          <div className="flex-1 text-clip overflow-hidden h-[10px]">
             <p className="text-justify">{convertToHTML(description)}</p>
           </div>
           <div className="mt-auto text-center">

@@ -1,6 +1,6 @@
 import { Facebook, Twitter, Instagram } from "lucide-react";
-import { convertToHTML } from "../utils/markdownConverter";
-
+// import { convertToHTML } from "../utils/markdownConverter";
+import {convertToHTML} from "../utility/markdownConverter"
 
 function DetailLayout({ image, description, title, websiteLink, facebookLink, instagramLink, twitterLink, telegramLink }) {
     const socialMediaIcons = [

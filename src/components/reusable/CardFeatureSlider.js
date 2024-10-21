@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import DefaultCardToptitle from './DefaultCardTopTiltle';
 
-const CardFeatureSlider = ({ cardFeature = [], header = [] }) => {
+const CardFeatureSlider = ({ cardFeature, header  }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -51,11 +51,12 @@ const CardFeatureSlider = ({ cardFeature = [], header = [] }) => {
     <div className="relative w-full max-w-6xl mx-auto">
       <div className="overflow-hidden w-full">
         <div className="p-5 text-blue-900 text-[38px] sm:text-[35.8px]">
-          {header.length > 0 ? (
+          {header}
+          {/* {header.length > 0 ? (
             header.map((item, index) => <b key={index}>{item.suggested}</b>)
           ) : (
             <b>No header available</b>
-          )}
+          )} */}
         </div>
         <div
           ref={containerRef}

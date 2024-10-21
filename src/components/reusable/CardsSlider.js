@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import DefaultCard from './DefaultCard';
 
-const CardSlider = ({ cards = [], header = [] }) => {
+const CardSlider = ({ cards = [], header  }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(true);
   const containerRef = useRef(null);
