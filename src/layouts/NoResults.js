@@ -3,8 +3,7 @@ const NoResults = () => {
         <div 
             className="flex flex-col items-center"
             style={{ 
-                // backgroundColor: 'rgba(139, 237, 242, 0.3)',
-                height: '100vh',
+                width: '100%',
                 marginTop: '6.9rem'
             }}
         >

@@ -7,8 +7,10 @@ import { fetchScholarships, searchScholarships } from '../features/slices/schola
 
 import { LoadingOverlay } from '../components/reusable/Loading';
 
-import ScholarshipList from '../components/ScholarshipList';
+//layouts
+import ListLayout from '../layouts/ListLayout';
 
+//reusable
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
 import Filter from '../components/reusable/Filter';
@@ -72,10 +74,9 @@ const ScholarshipPage = () => {
             <Navbar />
             <ListContainer>
                 {loading && <LoadingOverlay />}
-                {/* {error && <p>{error}</p>} */}
-                <Filter items={items}/>
                 <SearchBar handleSearch={searchScholarships} searchPlaceholder="Search scholarships..." category="scholarship" />
-                <ScholarshipList scholarships={scholarships} page={page} />
+                <Filter items={items}/>
+                <ListLayout items={scholarships} category="scholarship" page={page} />
                 <Pagination totalPage={totalPage} currentPage={page} category="scholarship" searchQuery={searchQuery} />
             </ListContainer>
             <Footer />
