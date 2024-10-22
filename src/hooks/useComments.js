@@ -21,7 +21,7 @@ const useComments = (discussionId) => {
       return comments; // Return the comments directly
     } catch (err) {
       console.error("Error fetching comments:", err);
-      throw err; // Rethrow the error for handling in the component
+      throw err;
     }
   };
 

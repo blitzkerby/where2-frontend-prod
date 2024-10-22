@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import ButtonComponent from "../reusable/Button";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import useComments from "./../../hooks/useComments";
 import useAuth from "../../hooks/useAuth";
 import ProfilePicture from "../reusable/PictureUpload";
@@ -11,9 +12,9 @@ import axios from "axios";
 const CommentSectionComponent = ({ discussionId, onCommentAdded }) => {
   const { isLoggedIn, userId, role, token } = useAuth();
   const {
-    comments: fetchedComments,
-    isLoading,
-    error,
+    comments,
+    loading: isLoading,
+    error: fetchError,
     refetch,
   } = useComments(discussionId);
 
@@ -21,44 +22,54 @@ const CommentSectionComponent = ({ discussionId, onCommentAdded }) => {
   const [deletingComments, setDeletingComments] = useState({});
   const [isSuccess, setIsSuccess] = useState(false);
 
+  const queryClient = useQueryClient(); // Get QueryClient from React Query
+
   const handleReplySubmitted = useCallback(
     (newComment) => {
-      // Log the new comment to ensure it's coming through
-      console.log("New comment submitted:", newComment);
+      if (newComment && newComment.id && newComment.content) {
+        // Optimistically update the cache
+        queryClient.setQueryData(["comments", discussionId], (oldData) => {
+          const updatedComments = oldData ? [...oldData, newComment] : [newComment];
+          return updatedComments;
+        });
 
-      // Immediately update local comments in DiscussionCard
-      onCommentAdded(newComment); // Notify the parent component
-
-      setShowReplyForm(false);
-      setIsSuccess(true);
-
-      // Optional: clear success state after a timeout
-      setTimeout(() => setIsSuccess(false), 500);
-
-      // Refetch is generally not needed if you're updating the local state
-      // refetch();
+        onCommentAdded(newComment);
+        setShowReplyForm(false);
+        setIsSuccess(true);
+        
+        setTimeout(() => {
+          setIsSuccess(false);
+        }, 3000);
+      }
     },
-    [onCommentAdded]
+    [queryClient, discussionId, onCommentAdded]
   );
 
   const handleDelete = useCallback(
     async (commentId) => {
       try {
         setDeletingComments((prev) => ({ ...prev, [commentId]: true }));
+        
         await axios.delete(config.community.deleteComment(commentId), {
           headers: {
             Authorization: `Bearer ${token}`,
             "X-User-Role": role,
           },
         });
-        refetch(); // Refetch comments after deletion
+
+        // Optimistically remove the comment from cache
+        queryClient.setQueryData(["comments", discussionId], (oldData) => {
+          return oldData ? oldData.filter(comment => comment.id !== commentId) : [];
+        });
       } catch (err) {
         console.error("Error deleting comment:", err);
+        // Revert cache on error
+        queryClient.invalidateQueries(["comments", discussionId]);
       } finally {
         setDeletingComments((prev) => ({ ...prev, [commentId]: false }));
       }
     },
-    [token, role, refetch]
+    [queryClient, discussionId, token, role]
   );
 
   const canDeleteComment = (comment) => {
@@ -68,7 +79,7 @@ const CommentSectionComponent = ({ discussionId, onCommentAdded }) => {
   return (
     <div className="mt-6 space-y-8">
       <h2 className="text-sm tracking-tighter">
-        Comments ({fetchedComments ? fetchedComments.length : 0})
+        Comments ({comments ? comments.length : 0})
       </h2>
       {isLoggedIn && !showReplyForm && (
         <div className="w-full flex justify-end">
@@ -91,10 +102,14 @@ const CommentSectionComponent = ({ discussionId, onCommentAdded }) => {
         />
       )}
 
-      {error && <div className="text-red-500 text-sm">{error}</div>}
+      {fetchError && (
+        <div className="text-red-500 text-sm">
+          Error loading comments. Please try again.
+        </div>
+      )}
       {isSuccess && (
         <div className="text-green-500 text-sm">
-          Reply deletion was successful!
+          Comment posted successfully!
         </div>
       )}
       {isLoading && (
@@ -102,8 +117,8 @@ const CommentSectionComponent = ({ discussionId, onCommentAdded }) => {
       )}
 
       <div className="space-y-4 pl-8">
-        {fetchedComments &&
-          fetchedComments
+        {comments &&
+          comments
             .filter((comment) => comment && comment.user)
             .map((comment) => (
               <div
@@ -113,8 +128,7 @@ const CommentSectionComponent = ({ discussionId, onCommentAdded }) => {
                 <div className="flex items-center gap-2 mb-2">
                   <ProfilePicture userId={comment.user.id} size={6} />
                   <span className="text-sm text-gray-600 truncate max-w-[200px]">
-                    {comment.user.profile?.entity ||
-                      comment.user.profile?.userName}
+                    {comment.user.email}
                   </span>
                 </div>
                 {canDeleteComment(comment) && (

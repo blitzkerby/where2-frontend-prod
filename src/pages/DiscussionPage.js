@@ -4,25 +4,15 @@ import Footer from "./../components/reusable/Footer";
 import Navbar from "./../components/reusable/Navbar";
 import CreateDiscussion from "./../components/community/CreateDiscussion";
 import DiscussionList from "./../components/community/DiscussionList";
+import DiscussionContainer from "./../components/reusable/DiscussionContainer";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const DiscussionPage = () => {
-  const location = useLocation();
-  const [isCreatingDiscussion, setIsCreatingDiscussion] = useState(false);
-
-  const toggleDiscussionView = () => {
-    setIsCreatingDiscussion((prev) => !prev);
-  };
-
   return (
     <>
       <Navbar />
       <WrapperComponent>
-        {isCreatingDiscussion ? (
-          <CreateDiscussion showForm={isCreatingDiscussion} />
-        ) : (
-          <DiscussionList isCreatingDiscussion={isCreatingDiscussion} toggleDiscussionView={toggleDiscussionView} />
-        )}
+        <DiscussionContainer />
       </WrapperComponent>
       <Footer />
     </>

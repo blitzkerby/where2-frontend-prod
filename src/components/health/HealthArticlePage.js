@@ -8,9 +8,9 @@ import WrapperComponent from "./../reusable/WrapperComponent";
 import ButtonComponent from "./../reusable/Button";
 import HealthNavbar from "./HealthNavbar";
 import Footer from "./../reusable/Footer";
+import DiscussionContainer from "./../reusable/DiscussionContainer";
 import TextSummary from "./../reusable/TextSummary";
 import config from "./../../config";
-import CreateDiscussion from "./../community/CreateDiscussion";
 
 const HealthArticlePage = () => {
   const [article, setArticle] = useState(null);
@@ -90,7 +90,8 @@ const HealthArticlePage = () => {
         <div className="bg-black min-h-screen text-white">
           <div className="lg:w-[90%] sm:w-[99%] mx-auto lg:py-8 sm:py-3 px-4 sm:px-1 lg:px-8 mt-[64px]">
             <div className="lg:flex lg:space-x-8">
-              <div className="lg:w-full sm:w-full mb-8 lg:mb-0">
+              {/* Main Article Content - Left Side */}
+              <div className="lg:w-[65%] sm:w-full mb-8 lg:mb-0">
                 <WrapperComponent>
                   <div className="bg-gray-900 w-full h-full rounded-xl shadow-lg">
                     <img
@@ -112,26 +113,28 @@ const HealthArticlePage = () => {
                   </div>
                 </WrapperComponent>
               </div>
-              <div className="lg:w-[35%]">
+    
+              {/* Right Side Column - TextSummary and Discussion */}
+              <div className="lg:w-[35%] space-y-6">
                 <WrapperComponent>
                   <div className="bg-gray-900 rounded-xl p-6 shadow-lg">
                     <TextSummary textToSummarize={article.content} />
                   </div>
-                  <VisitTracker path={location.pathname} />
                 </WrapperComponent>
+                
+                {/* Discussion Container below TextSummary */}
+                <div className="text-black">
+                  <WrapperComponent>
+                  <DiscussionContainer />
+                  </WrapperComponent>
+                </div>
               </div>
             </div>
-            {/* Add the CreateDiscussion component here */}
-            <div className="lg:flex lg:gap-6 mt-8">
-              <div className="lg:w-2/3 mb-6 lg:mb-0 text-black">
-                <CreateDiscussion className="text-black" showForm={true} previousPath={currentPath}/>
-              </div>
-            </div>
+            <VisitTracker path={location.pathname} />
           </div>
         </div>
         <Footer />
       </>
-    );
-  };
+    )};
   
   export default HealthArticlePage
