@@ -1,4 +1,5 @@
 import React from "react";
+import WrapperComponent from "./WrapperComponent";
 
 const BioCard = ({ children, variant = "left", bioCard, className = "" }) => {
   const baseStyle = `flex items-center justify-center  sm:w-full sm:flex-col m-auto p-6 gap-6`;
@@ -11,7 +12,8 @@ const BioCard = ({ children, variant = "left", bioCard, className = "" }) => {
   const componentStyle = `${className} ${baseStyle} ${variants[variant]}`;
 
   return (
-    <div className={componentStyle}>
+    <WrapperComponent>
+          <div className={componentStyle}>
       <div className="w-[50%] h-[50%] lg:h-full sm:h-auto">
         <img
           src={bioCard.image}
@@ -33,6 +35,7 @@ const BioCard = ({ children, variant = "left", bioCard, className = "" }) => {
         </div>
       </div>
     </div>
+    </WrapperComponent>
   );
 };
 

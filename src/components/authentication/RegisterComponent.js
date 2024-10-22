@@ -106,7 +106,7 @@ const RegisterComponent = () => {
   };
 
   if (status === "loading") {
-    return <LoadingOverlay message="We are creating your account..."/>
+    return <LoadingOverlay className="h-screen" message="We are creating your account..."/>
   }
 
   const handleSubmit = async (e) => {
@@ -146,11 +146,11 @@ const RegisterComponent = () => {
 
   return (
     <ContainerComponent title="CREATE ACCOUNT">
-      <div className="flex justify-center mb-6">
+      <div className="flex justify-center mb-6 w-full">
         <button
           className={`mr-4 pb-2 ${
             accountType === "personal"
-              ? "border-b-2 border-black font-medium"
+              ? "border-b-4 border-[#E6F3F9] font-medium"
               : "text-gray-500"
           }`}
           onClick={() => setAccountType("personal")}
@@ -160,7 +160,7 @@ const RegisterComponent = () => {
         <button
           className={`ml-4 pb-2 ${
             accountType === "business"
-              ? "border-b-4 border-black font-medium"
+              ? "border-b-4 border-[#E6F3F9] font-medium"
               : "text-gray-500"
           }`}
           onClick={() => setAccountType("business")}
@@ -183,7 +183,7 @@ const RegisterComponent = () => {
             autoCorrect="off"
           />
         )}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-1">
           <FormInput
             name="firstName"
             label="First Name"
@@ -287,7 +287,7 @@ const RegisterComponent = () => {
             autoCapitalize="off"
           />
         )}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-1">
           <FormInput
             name="password"
             label="Password"

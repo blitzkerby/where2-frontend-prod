@@ -8,7 +8,8 @@ import WrapperComponent from "./../reusable/WrapperComponent";
 import ButtonComponent from "./../reusable/Button";
 import HealthNavbar from "./HealthNavbar";
 import Footer from "./../reusable/Footer";
-import TextSummary from "./../reusable/TextSummary"
+import DiscussionContainer from "./../reusable/DiscussionContainer";
+import TextSummary from "./../reusable/TextSummary";
 import config from "./../../config";
 
 const HealthArticlePage = () => {
@@ -19,21 +20,24 @@ const HealthArticlePage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const currentPath = location.pathname;
+
   useEffect(() => {
     const fetchArticle = async () => {
       try {
+        setLoading(true);
         const apiUrl = config.health.getHealthArticleById(id);
         const response = await axios.get(apiUrl);
 
-        if (response.data.status === 'success' && response.data.data) {
+        if (response.data.status === "success" && response.data.data) {
           setArticle(response.data.data.healthArticle);
-          console.log("Article set:", response.data.data.healthArticle);
         } else {
-          throw new Error('Invalid data format received from the server');
+          throw new Error("Invalid data format received from the server");
         }
       } catch (err) {
-        console.error("Error fetching article:", err);
-        setError(err.message || 'Failed to fetch article. Please try again later.');
+        setError(
+          err.message || "Failed to fetch article. Please try again later."
+        );
       } finally {
         setLoading(false);
       }
@@ -41,10 +45,16 @@ const HealthArticlePage = () => {
     fetchArticle();
   }, [id]);
 
-  if (loading) return <LoadingSpinner className="h-screen" />;
+  if (loading)
+    return (
+      <LoadingSpinner
+        className="w-screen h-screen"
+        message="We are fetching the health article for you..."
+      />
+    );
 
   if (error) {
-    navigate('/health');
+    navigate("/health");
     return null;
   }
 
@@ -52,7 +62,9 @@ const HealthArticlePage = () => {
     return (
       <WrapperComponent>
         <div className="text-center py-16">
-          <h1 className="text-3xl font-bold mb-4 text-white">Article Not Found</h1>
+          <h1 className="text-3xl font-bold mb-4 text-white">
+            Article Not Found
+          </h1>
           <ButtonComponent
             variant="primary"
             size="lg"
@@ -66,52 +78,77 @@ const HealthArticlePage = () => {
   }
 
   const formattedDate = article.date
-    ? format(new Date(article.date), 'MMMM d, yyyy')
-    : 'Publication date unavailable';
+    ? format(new Date(article.date), "MMMM d, yyyy")
+    : "Publication date unavailable";
 
-  return (
-    <>
-      <HealthNavbar />
-      <div className="bg-black min-h-screen text-white">
-        <div className="lg:w-[85%] sm:w-[95%] mx-auto py-8 px-4 sm:px-6 lg:px-8 mt-[64px]">
-          <div className="lg:flex lg:space-x-8">
-            <div className="lg:w-full mb-8 lg:mb-0">
-              <WrapperComponent>
-                <div className="bg-gray-900 w-full h-full rounded-xl shadow-lg">
-                  <img
-                    src={article.image || 'default-image-url.jpg'}
-                    alt={article.title}
-                    className="w-full  h-[400px] object-cover rounded-xl shadow-lg mb-6"
-                  />
-                  <h1 className="text-3xl font-extrabold text-white mb-4 leading-tight tracking-tight p-4">
-                    {article.title}
-                  </h1>
-                  <div className="flex items-center text-sm text-gray-400 mb-6 tracking-tighter p-4">
-                    <span className="font-medium">{article.author}</span>
-                    <span className="mx-2">•</span>
-                    <span>{formattedDate}</span>
-                  </div>
-                  <div className="prose prose-lg max-w-none text-gray-300 tracking-tighter text-justify p-4">
-                    {article.content}
-                  </div>
-                </div>
-              </WrapperComponent>
-            </div>
+    ;
 
-            <div className="lg:w-[35%]">
-              <WrapperComponent>
-                <div className="bg-gray-900 rounded-xl p-6 shadow-lg">
-                  <TextSummary textToSummarize={article.content} />
+    return (
+      <>
+        <HealthNavbar />
+        <div className="bg-gradient-to-b from-black to-gray-900 min-h-screen text-white">
+          <div className="lg:w-[90%] sm:w-full mx-auto lg:py-12 sm:py-6 px-4 sm:px-2 lg:px-8 mt-[64px]">
+            <div className="lg:flex lg:gap-8">
+              {/* Main Article Content - Left Side */}
+              <div className="lg:w-[65%] sm:w-full mb-8 lg:mb-0">
+                <WrapperComponent>
+                  <div className="bg-gray-900/50 backdrop-blur-sm w-full h-full rounded-xl shadow-xl overflow-hidden">
+                    <div className="relative">
+                      <img
+                        src={article.image || "default-image-url.jpg"}
+                        alt={article.title}
+                        className="w-full h-[450px] object-cover shadow-lg"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-gray-900 to-transparent" />
+                    </div>
+                    
+                    <div className="p-8">
+                      <h1 className="text-4xl font-bold text-white mb-4 leading-tight">
+                        {article.title}
+                      </h1>
+                      
+                      <div className="flex items-center space-x-4 text-sm text-gray-300 mb-8">
+                        <div className="flex items-center">
+                          <span className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-2">
+                            {article.author[0]}
+                          </span>
+                          <span className="font-medium">{article.author}</span>
+                        </div>
+                        <span>•</span>
+                        <span>{formattedDate}</span>
+                      </div>
+                      
+                      <div className="prose prose-lg max-w-none text-gray-200 leading-relaxed text-justify">
+                        {article.content}
+                      </div>
+                    </div>
+                  </div>
+                </WrapperComponent>
+              </div>
+    
+              {/* Right Side Column - TextSummary and Discussion */}
+              <div className="lg:w-[35%] space-y-6 lg:sticky lg:top-24">
+                <WrapperComponent>
+                  <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl shadow-xl p-6">
+                    <h2 className="text-xl font-semibold mb-4 text-white">Quick Summary</h2>
+                    <TextSummary textToSummarize={article.content} />
+                  </div>
+                  
+                  <div className="mt-6 bg-gray-900/50 backdrop-blur-sm rounded-2xl p-4">
+                    <VisitTracker path={location.pathname} />
+                  </div>
+                </WrapperComponent>
+                
+                {/* Discussion Container */}
+                <div className="text-black">
+                  <DiscussionContainer />
                 </div>
-                  <VisitTracker path={location.pathname}/>
-              </WrapperComponent>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <Footer />
-    </>
-  );
-};
-
-export default HealthArticlePage;
+        <Footer />
+      </>
+    )};
+  
+  export default HealthArticlePage

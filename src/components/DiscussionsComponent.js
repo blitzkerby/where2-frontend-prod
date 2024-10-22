@@ -13,12 +13,10 @@ const DiscussionsComponent = () => {
     setShowCreateForm(false);
   };
   
-
-
   return (
     <div className="bg-gray-100 min-h-screen">
       <SubpageHeroSection h1Text={"W2COMMUNITY"} subH1Text={"Dive into Anything"} pText={"W2COMMUNITY is home to thousands of communities, students, researchers, endless interactions, and genuine human interactions. Whether you are a student, researcher, or an individual, W2COMMUNITY has something for you. Feel free to start a disucssion and share your thoughts with the world."}/>
-      <div className="w-full mx-auto px-4 sm:px-6 lg:px-4 py-8 h-full">
+      <div className="w-full mx-auto px-4 sm:px-3 lg:px-4 py-4 h-full">
         {showCreateForm && isLoggedIn && allowedRoles.includes(role) ? (
           <div className="bg-white shadow-md rounded-lg p-6">
             <CreateDiscussionComponent

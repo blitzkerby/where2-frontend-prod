@@ -26,7 +26,6 @@ const UniversityList = ({ universities, page }) => {
     }
 
     if (universities.length === 0) {
-        // return <div style={{ textAlign: 'center', color: 'red', fontSize: '24px' }}>No results found :(</div>;
         return <NoResults />
     }
 

@@ -1,6 +1,7 @@
 import { Facebook, Twitter, Instagram } from "lucide-react";
 // import { convertToHTML } from "../utils/markdownConverter";
 import {convertToHTML} from "../utility/markdownConverter"
+import DiscussionContainer from "../components/reusable/DiscussionContainer";
 
 function DetailLayout({ image, description, title, websiteLink, facebookLink, instagramLink, twitterLink, telegramLink }) {
     const socialMediaIcons = [
@@ -77,6 +78,7 @@ function DetailLayout({ image, description, title, websiteLink, facebookLink, in
                     ))}
                 </div>
             </div>
+            <DiscussionContainer />
         </div>
     );
 }

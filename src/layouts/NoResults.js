@@ -1,8 +1,12 @@
 const NoResults = () => {
     return (
         <div 
-            className="flex flex-col items-center mt-10"
-            style={{ backgroundColor: 'rgba(139, 237, 242, 0.3)', height: '100vh' }}
+            className="flex flex-col items-center"
+            style={{ 
+                // backgroundColor: 'rgba(139, 237, 242, 0.3)',
+                height: '100vh',
+                marginTop: '6.9rem'
+            }}
         >
             <div className="flex justify-center items-center">
                 <img 

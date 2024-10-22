@@ -54,15 +54,24 @@ const VerificationComponent = () => {
           .unwrap()
           .then(() => {
             console.log("Welcome email sent successfully");
+          })
+          .catch((err) => {
+            console.error("Failed to send welcome email:", err);
+          })
+          .finally(() => {
             const timer = setTimeout(() => {
               dispatch(clearAuthState());
               navigate("/login");
-            }, 3000);
+            }, 500);
             return () => clearTimeout(timer);
-          })
-          .catch((err) => console.error("Failed to send welcome email:", err));
+          });
       } else {
         console.error("Invalid email address: Email is empty after trimming");
+        const timer = setTimeout(() => {
+          dispatch(clearAuthState());
+          navigate("/login");
+        }, 500);
+        return () => clearTimeout(timer);
       }
     }
   }, [isVerified, email, navigate, dispatch]);
@@ -89,7 +98,9 @@ const VerificationComponent = () => {
 
   // SHOWING THE LOADING OVERLAY COMPONENT WHEN THE USER IS SIGNING UP
   if (status === "loading") {
-    return <LoadingOverlay message="Verifying account..." />;
+    return (
+      <LoadingOverlay className="h-screen" message="Verifying account..." />
+    );
   }
 
   if (!email) {

@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Card from "./reusable/Card";
 import { useEffect } from "react";
 import { removedIsClicked,getFavorite } from "../features/slices/favoriteSlice";
+import NoResults from "../layouts/NoResults";
 
 const isDebug = true;  // Set to false to turn off console logging
 
@@ -18,7 +19,7 @@ const ScholarshipList = ({ scholarships, page}) => {
     }
 
     if (scholarships.length === 0) {
-        return <div style={{ textAlign: 'center', color: 'red', fontSize: '24px' }}>No results found :(</div>;
+        return <NoResults />
     }
 
     const dispatch = useDispatch();
