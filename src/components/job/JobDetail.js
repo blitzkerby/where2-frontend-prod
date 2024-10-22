@@ -23,7 +23,9 @@ const JobDetail = () => {
     let contact;
     let companyProfile;
     let jobDescription;
-    let jobRequirement
+    let jobRequirement;
+    let companyImage;
+    let companyName;
 
     useEffect(() => {
         dispatch(fetchCompany(params.jobId));
@@ -39,13 +41,15 @@ const JobDetail = () => {
         companyProfile = company.data.company.company_bg;
         jobDescription = company.data.job_desc;
         jobRequirement = company.data.job_require;
+        companyImage = company.data.company.img_url;
+        companyName = company.data.company_name
     };
 
     return (
         <>
             <div className={`lg:w-[676px] mt-[78px] flex-col mx-auto text-center `}>
-                <h1 className="pb-6"><b>Amazon Cafe</b></h1>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB6qQYTiaG58zHg3LwPcbPaqOrkFmAschW8A&s" className="w-160 h-160 rounded-full mx-auto" />
+                <h1 className="pb-6"><b>{companyName}</b></h1>
+                <img src={companyImage} className="w-160 h-160 rounded-full mx-auto" />
             </div>
             <DetailText title={"Company Information"} content={companyProfile} />
             <DetailText title={"Job Description"} content={jobDescription} />

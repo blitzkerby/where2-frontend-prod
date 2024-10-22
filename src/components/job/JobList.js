@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getFavorite } from "../../features/slices/favoriteSlice";
 import { removedIsClicked } from "../../features/slices/favoriteSlice";
-
 const JobList = ({ jobs, page }) => {
 
     const dispatch = useDispatch();
@@ -16,7 +15,7 @@ const JobList = ({ jobs, page }) => {
                 if (page === 1) {
                     dispatch(removedIsClicked());
                 }
-               await dispatch(getFavorite({ category: "job" }));
+                await dispatch(getFavorite({ category: "job" }));
             } catch (error) {
                 console.error("Error fetching favorites:", error);
             }
@@ -31,7 +30,7 @@ const JobList = ({ jobs, page }) => {
             <Card
                 key={job.id}
                 id={job.id}
-                image={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB6qQYTiaG58zHg3LwPcbPaqOrkFmAschW8A&s'}
+                image={job.company.img_url}
                 imageAlt={job.job_rquire}
                 title={job.company_name}
                 position={job.position}
