@@ -2,7 +2,8 @@ import { Facebook, Instagram, Twitter, Youtube, Chrome } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { cardBody, cardTitle, cardDescription } from './tailwindcardclass/cardClass';
-import Map from '../../assets/svg/map.svg';
+import EnabledMap from '../../assets/svg/EnabledMap.svg';   //map enabled
+import DisabledMap from '../../assets/svg/DisabledMap.svg';   //map disabled /* please remove comment */
 import BookMark from '../../assets/svg/bookmark.svg';
 import Button from './ButtonComponent';
 import MiniMap from '../../assets/svg/miniMap.svg'

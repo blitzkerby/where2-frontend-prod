@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { useState } from "react";
 import { BsArrowDownUp } from "react-icons/bs";
 import { LuX } from "react-icons/lu";
+
 import Accordion from "./Accordion";
 import DateRange from "./DateRange";
-import { useNavigate } from "react-router-dom";
+
 // import { items } from "./data";
 
 function FilterComponent ({ items }){
@@ -37,7 +38,7 @@ function FilterComponent ({ items }){
 			</div>	
 			{/* modal filter  */}
 			{openFilter && (
-			<div className="pt-4 fixed z-50">
+			<div className="pt-4 absolute z-50 min-w-[890px]">
 				<div className="md:w-[890px] border border-[#7cd1eb] h-full bg-white rounded-md drop-shadow-md relative">
 					<div className="pt-5 mx-12 ">
 						<div className="flex justify-end items-end">
