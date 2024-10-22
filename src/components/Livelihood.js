@@ -38,7 +38,7 @@ const Livelihood = () => {
     return (
         <section className="bg-[#F4F8FA]">
             <div className="flex flex-col align-middle justify-center gap-6 p-6 mt-[64px] h-max">
-                <img src={LiveliHood} alt="Hero photo of livelidhood page"/>
+                <img src={LiveliHood} className="h-full" alt="Hero photo of livelidhood page"/>
                 <WrapperComponent>
                 <CardSlider cards={cards} header={"Finish Graduation?"} />
                 </WrapperComponent>

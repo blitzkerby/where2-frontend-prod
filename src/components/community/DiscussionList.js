@@ -25,8 +25,8 @@ const DiscussionList = ({ isCreatingDiscussion, toggleDiscussionView }) => {
   if (loading) {
     return (
       <LoadingOverlay
-        className="min-h-screen"
-        message="We are fetching posts..."
+        className="abosolute min-h-screen"
+        message="We are fetching..."
       />
     );
   }

@@ -48,7 +48,7 @@ const HealthArticlePage = () => {
   if (loading)
     return (
       <LoadingSpinner
-        className="w-screen h-screen"
+        className="min-w-screen min-h-screen"
         message="We are fetching the health article for you..."
       />
     );

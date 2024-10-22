@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import ButtonComponent from "../reusable/Button";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import useComments from "./../../hooks/useComments";
-import useAuth from "../../hooks/useAuth";
-import ProfilePicture from "../reusable/PictureUpload";
+import useAuth from "./../../hooks/useAuth";
+import ProfilePicture from "./../reusable/PictureUpload";
 import ReplyForm from "../reusable/ReplyForm";
 import { Reply } from "lucide-react";
 import config from "./../../config";
@@ -15,7 +15,6 @@ const CommentSectionComponent = ({ discussionId, onCommentAdded }) => {
     comments,
     loading: isLoading,
     error: fetchError,
-    refetch,
   } = useComments(discussionId);
 
   const [showReplyForm, setShowReplyForm] = useState(false);
