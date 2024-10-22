@@ -81,7 +81,7 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.to}
-                  className="flex mb-[6px] pt-[8px] px-6 align-center justify-center mx-0 whitespace-nowrap text-gray-700 hover:text-blue-900 h-full"
+                  className="flex mb-[6px] pt-[8px] px-6 align-center justify-center mx-0 whitespace-nowrap text-gray-700 hover:text-cyan-500 h-full"
                 >
                   {item.name}
                 </Link>
