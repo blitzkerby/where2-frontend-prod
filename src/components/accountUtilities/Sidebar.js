@@ -37,7 +37,8 @@ const MenuItem = ({ item, depth = 0, onItemClick, isSelected }) => {
   return (
     <>
       <div
-        className={`flex items-center w-full h-full p-3 rounded-lg text-start leading-tight transition-all duration-300 ease-in-out transform hover:bg-gray-100 cursor-pointer ${
+        className={`flex items-center w-full h-full p-3 rounded-lg text-start leading-tight transition-all duration-300 ease-in-out transform hover:bg-cyan-100 focus:outline
+          0 cursor-pointer ${
           depth > 0 ? 'pl-' + (depth * 4 + 3) : ''
         } ${isSelected ? 'bg-gray-200' : ''}`}
         onClick={(e) => {

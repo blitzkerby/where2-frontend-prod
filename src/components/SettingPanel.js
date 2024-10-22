@@ -38,12 +38,13 @@ const SettingPanel = () => {
                 </div>
                 <form className="flex flex-col space-y-4" onSubmit={handleChangePassword}>
             <FormInput
-              label="Current Password"
+            label="Current Password"
             value={passwordCurrent}
             onChange={(e) => setPasswordCurrent(e.target.value)}
             required
             className="p-3 sm:p-4 h-fit"
             rounded
+            type="password"
            
           />
           <FormInput
@@ -53,6 +54,8 @@ const SettingPanel = () => {
             required
             className="p-3 sm:p-4 h-fit"
             rounded
+            type="password"
+                      
              
           />
         <FormInput

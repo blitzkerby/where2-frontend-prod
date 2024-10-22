@@ -8,6 +8,7 @@ const JobList = ({ jobs, page }) => {
 
     const dispatch = useDispatch();
     const { isClicked } = useSelector((state) => state.favorites);
+    let image;
 
     useEffect(() => {
         const fetchFavorites = async () => {
@@ -25,12 +26,13 @@ const JobList = ({ jobs, page }) => {
 
     return (
     <>
-    {jobs.map(job => {
+            {jobs.map(job => {
+        job.company_id? image = job.company.img_url: image = null
         return(
             <Card
                 key={job.id}
                 id={job.id}
-                image={job.company.img_url}
+                image={image}
                 imageAlt={job.job_rquire}
                 title={job.company_name}
                 position={job.position}
