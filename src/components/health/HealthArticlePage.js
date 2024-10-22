@@ -92,7 +92,7 @@ const HealthArticlePage = () => {
               {/* Main Article Content - Left Side */}
               <div className="lg:w-[65%] sm:w-full mb-8 lg:mb-0">
                 <WrapperComponent>
-                  <div className="bg-gray-900/50 backdrop-blur-sm w-full h-full rounded-2xl shadow-xl overflow-hidden">
+                  <div className="bg-gray-900/50 backdrop-blur-sm w-full h-full rounded-xl shadow-xl overflow-hidden">
                     <div className="relative">
                       <img
                         src={article.image || "default-image-url.jpg"}
