@@ -2,7 +2,6 @@ import { useState } from "react";
 import ButtonComponent from "./reusable/Button";
 import FormInput from "./reusable/InputField";
 import PictureUpload from "./reusable/ProfilePhotoUpload";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePassword } from "../features/slices/authSlice";
 import { LoadingSpinner } from "./reusable/Loading";
