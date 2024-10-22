@@ -1,11 +1,6 @@
-import React, { useState, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
-import { Trash, Pen } from "lucide-react";
+import React, { useState } from "react";
 import DeleteConfirmationModal from "./functions/DeleteConfirmationModal";
 import ButtonComponent from "./Button";
-import SearchBar from "./SearchBar";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import deleteUser from "./functions/DeleteUser";
 
 const ListingComponent = ({
   title,
@@ -13,84 +8,42 @@ const ListingComponent = ({
   columns,
   totalItems,
   additionalStats,
+  actions,
 }) => {
   const [showModal, setShowModal] = useState(false);
-  const [selectedUserId, setSelectedUserId] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [localData, setLocalData] = useState(data);
+  const [selectedItemId, setSelectedItemId] = useState(null);
 
-  const handleDelete = (id) => {
-    setSelectedUserId(id);
-    setShowModal(true);
+  const handleAction = (action, id) => {
+    if (action.requiresConfirmation) {
+      setSelectedItemId(id);
+      setShowModal(true);
+    } else {
+      action.onClick(id);
+    }
   };
 
-  const navigate = useNavigate();
-  const handleView = (id) => {
-    navigate(`/user/${id}`);
-  };
-
-  const queryClient = useQueryClient();
-
-  const mutation = useMutation({
-    mutationFn: deleteUser,
-    onMutate: async (deletedUserId) => {
-      await queryClient.cancelQueries(["users"]);
-
-      const previousUsers = queryClient.getQueryData(["users"]);
-
-      setLocalData((prevData) =>
-        prevData.filter((user) => user.id !== deletedUserId)
-      );
-
-      return { previousUsers };
-    },
-    onError: (error, userId, context) => {
-      setLocalData(context.previousUsers);
-      console.error("Error deactivating user:", error.message);
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries(["users"]);
-    },
-  });
-
-  const handleConfirmDelete = async () => {
-    if (!selectedUserId) return;
-    mutation.mutate(selectedUserId);
+  const handleConfirmAction = () => {
+    const confirmAction = actions.find(action => action.requiresConfirmation);
+    if (confirmAction) {
+      confirmAction.onClick(selectedItemId);
+    }
     setShowModal(false);
-    setSelectedUserId(null);
-    window.location.reload();
+    setSelectedItemId(null);
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
-    setSelectedUserId(null);
+    setSelectedItemId(null);
   };
 
-  const Data = useMemo(() => {
-    return localData.filter(
-      (item) =>
-        item.isActive &&
-        item.isVerified &&
-        columns.some(
-          (column) =>
-            item[column] &&
-            item[column]
-              .toString()
-              .toLowerCase()
-              .includes(searchTerm.toLowerCase())
-        )
-    );
-  }, [localData, columns, searchTerm]);
-  console.log("filterd dataaa", Data);
-
   return (
-    <section className="lg:w-full sm:w-[100%] sm:mr-[32px]  bg-white rounded-lg shadow-lg h-full">
+    <section className="lg:w-full sm:w-[100%] sm:mr-[32px] bg-white rounded-lg shadow-lg h-full">
       <div className="flex justify-between items-center py-5 w-[80%] mx-auto">
         <h1 className="text-3xl text-blue-600 font-bold">{title}</h1>
         <div className="flex gap-2 sm:hidden">
           <div className="bg-gray-600 text-white p-4 rounded-lg w-[160px]">
             <p className="text-sm">Total {title}</p>
-            <p className="text-4xl font-bold">{Data.length}</p>
+            <p className="text-4xl font-bold">{totalItems}</p>
           </div>
           {additionalStats &&
             additionalStats.map((stat, index) => (
@@ -116,7 +69,7 @@ const ListingComponent = ({
           </tr>
         </thead>
         <tbody className="w-full h-full">
-          {Data.map((item) => (
+          {data.map((item) => (
             <tr key={item.id} className="border-t h-full">
               {columns.map((column, index) => (
                 <td
@@ -128,23 +81,16 @@ const ListingComponent = ({
               ))}
               <td className="py-4">
                 <div className="flex gap-4 sm:gap-1 justify-center">
-                  <ButtonComponent
-                    variant="danger"
-                    onClick={() => handleDelete(item.id)}
-                  >
-                    <Trash />
-                  </ButtonComponent>
-                  {title == "USER LISTING" ? null : (
-                    <ButtonComponent variant="success">
-                      <Pen />
+                  {actions.map((action, index) => (
+                    <ButtonComponent
+                      key={index}
+                      variant={action.variant}
+                      onClick={() => handleAction(action, item.id)}
+                    >
+                      {action.icon}
+                      {action.label}
                     </ButtonComponent>
-                  )}
-                  <ButtonComponent
-                    variant="ghost"
-                    onClick={() => handleView(item.id)}
-                  >
-                    View
-                  </ButtonComponent>
+                  ))}
                 </div>
               </td>
             </tr>
@@ -155,9 +101,9 @@ const ListingComponent = ({
       <DeleteConfirmationModal
         show={showModal}
         onClose={handleCloseModal}
-        onConfirm={handleConfirmDelete}
-        warningMsg={"Are you sure you want to delete this item?"}
-        type={"Delete"}
+        onConfirm={handleConfirmAction}
+        warningMsg={"Are you sure you want to perform this action?"}
+        type={"Confirm"}
       />
     </section>
   );

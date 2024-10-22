@@ -9,7 +9,7 @@ import {
   BookOpenIcon,
   BeakerIcon,
 } from '@heroicons/react/24/solid';
-import { X, User, Heart, ChevronDown, ChevronRight, BookKey, Users, School, House, Briefcase, BadgeDollarSignIcon, ChartNoAxesColumnIncreasingIcon,GraduationCap } from "lucide-react";
+import { X, User, Heart, ChevronDown, ChevronRight, BookKey, Users, School, House, Briefcase, BadgeDollarSignIcon, ChartNoAxesColumnIncreasingIcon,GraduationCap , PanelsLeftBottom} from "lucide-react";
 
 import { SidebarContentContext } from "../reusable/Profile";
 
@@ -136,6 +136,7 @@ const Sidebar = ({ isOpen, onClose, userRole }) => {
       { label: 'Settings', icon: <Cog6ToothIcon className="h-5 w-5"/> , onClick: () => handleItemClick("setting", "setting")  },
       { label: 'Dashboard', icon: <ChartNoAxesColumnIncreasingIcon className="h-5 w-5" /> , onClick: () => handleItemClick("adminDashboard", "adminDashboard") },
       { label: 'Log out', icon: <PowerIcon className="h-5 w-5" /> , onClick: () => handleItemClick("logOut", "logOut")  },
+      { label: 'View your posts', icon: <PanelsLeftBottom className="h-5 w-5" /> , onClick: () => handleItemClick("adminContentListing", "adminContentListing")  },
     ],
     developer: [
       { label: 'Account', icon: <User className="w-5 h-5" />, onClick: () => handleItemClick("account", "account") },

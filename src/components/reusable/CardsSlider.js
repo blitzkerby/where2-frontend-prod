@@ -17,6 +17,7 @@ const CardSlider = ({ cards = [], header  }) => {
   ] : [];
 
   const totalCards = clonedCards.length;
+  
 
   useEffect(() => {
     setCurrentIndex(initialIndex);

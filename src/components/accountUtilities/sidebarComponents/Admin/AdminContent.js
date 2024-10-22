@@ -5,6 +5,8 @@ import axios from 'axios';
 import config from '../../../../config';
 import DropdownComponent from '../../../reusable/DropdownComponent';
 import useAuth from '../../../../hooks/useAuth';
+import PublicPhotoUpload from '../../../reusable/PublicPhotoUpload';
+// import { useFetchPublicPhoto } from '../../../../hooks/useFetchPublicPhoto';
 
 const dropdownItems = [
   { label: 'University' },
@@ -17,8 +19,8 @@ const entityConfig = {
     hasLocation: true,
     createEndpoint: config.contentCreation.createUniversity,
     fields: [
-      { name: 'university_name', label: 'University Name', type: 'text' },
-      { name: 'university_description', label: 'University Description', type: 'textarea' },
+      { name: 'name', label: 'University Name', type: 'text' },
+      { name: 'description', label: 'University Description', type: 'textarea' },
       { name: 'location', label: 'Location', type: 'text' },
     ],
   },
@@ -39,7 +41,7 @@ const entityConfig = {
   },
   'Accommodation': {
     hasLocation: true,
-    createEndpoint: config.contentCreation.createAccommodation,
+    createEndpoint: config.contentCreation,
     fields: [
       { name: 'accommodation_name', label: 'Accommodation Name', type: 'text' },
       { name: 'accommodation_description', label: 'Accommodation Description', type: 'textarea' },
@@ -57,8 +59,10 @@ const entityConfig = {
 const AdminEditor = () => {
   const { username, userId } = useAuth();
   const [entity, setEntity] = useState(localStorage.getItem('businessEntity') || 'University');
-  const [imageUrl, setImageUrl] = useState('');
   const [formData, setFormData] = useState({});
+
+  // const { imageUrl, isLoading, error } = useFetchPublicPhoto(userId, 'public');
+
   const [links, setLinks] = useState([
     { title: 'Telegram', url: '' },
     { title: 'Facebook', url: '' },
@@ -71,7 +75,7 @@ const AdminEditor = () => {
   useEffect(() => {
     const savedData = JSON.parse(localStorage.getItem(entityDataKey));
     if (savedData) {
-      setImageUrl(savedData.imageUrl || '');
+      // setImageUrl(savedData.imageUrl || '');
       setFormData(savedData.formData || {});
       setLinks(savedData.links || [
         { title: 'Telegram', url: '' },
@@ -91,11 +95,14 @@ const AdminEditor = () => {
     }
   }, [entity, entityDataKey, userId]);
 
+
   const selectEntity = (selectedEntity) => {
-    localStorage.setItem('businessEntity', selectedEntity.label);
+    localStorage.setItem('formType', selectedEntity.label);
     setEntity(selectedEntity.label);
     setFormData({});
   };
+
+  const formType = localStorage.getItem('formType');
 
   const handleInputChange = (fieldName, value) => {
     setFormData(prev => ({ ...prev, [fieldName]: value }));
@@ -108,19 +115,22 @@ const AdminEditor = () => {
   };
 
   const handleApplyChanges = async () => {
-    handleSaveChanges();
+    localStorage.removeItem(`${entity}Data`);
     alert('Changes saved successfully');
 
+    // Base data object with common fields and userId
     let data = {
       ...formData,
       facebook_url: links.find(link => link.title === 'Facebook')?.url || '',
       instagram_url: links.find(link => link.title === 'Instagram')?.url || '',
       telegram_url: links.find(link => link.title === 'Telegram')?.url || '',
       website: links.find(link => link.title === 'Website')?.url || '',
-      image_url: imageUrl,
+      // image_url: imageUrl,
       image_alt: formData[entityConfig[entity].fields[0].name],
+      userId: parseInt(userId),
     };
 
+    // Special case for Job offer due to different data structure
     if (entity === 'Job offer') {
       data = {
         company_id: parseInt(userId),
@@ -132,6 +142,7 @@ const AdminEditor = () => {
         position: data.position,
         deadline: data.deadline,
         work_hour: data.work_hour,
+        userId: parseInt(userId),
       };
     }
 
@@ -147,7 +158,7 @@ const AdminEditor = () => {
 
   const handleSaveChanges = () => {
     const data = {
-      imageUrl,
+      // imageUrl,
       formData,
       links,
     };
@@ -170,12 +181,13 @@ const AdminEditor = () => {
           </h2>
           <input
             type="text"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
+            // value={imageUrl}
+            // onChange={(e) => setImageUrl(e.target.value)}
             placeholder="Enter image URL"
             className="w-full p-2 border border-gray-300 rounded mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
-          {imageUrl && <img src={imageUrl} alt={entity} className="w-full h-48 rounded object-contain" />}
+          {/* {imageUrl && <img src={imageUrl} alt={entity} className="w-full h-48 rounded object-contain" />} */}
+          <PublicPhotoUpload/>
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-6">
