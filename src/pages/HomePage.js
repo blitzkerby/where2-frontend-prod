@@ -15,7 +15,9 @@ import Conten_Hero1 from "../assets/images/home-banner-neo.png";
 import MainHero from "../assets/images/content-module-hero1-no-bg.png";
 import SecondaryHero from "../assets/images/content-module-hero2.png";
 import CardSlider from "../components/reusable/CardsSlider";
-
+import LivelihoodHomePage from "../assets/images/livelihood-homepage.png";
+import UniversityHomePage from "../assets/images/university-homepage.png";
+import ScholarshipHomePage from "../assets/images/shcolarship-homepage.png"
 const hero1 = {
   title: "DISCOVER YOUR FUTURE.",
   subtitle: "Everything starts here.",
@@ -46,7 +48,7 @@ const header =[
     suggested: "SUGGESTED FOR YOU"
   }
 ]
-header.map(head => console.log(head.suggested))
+
 const headerCardFeature = [
   {
     suggested: "OUR FEATURE"
@@ -102,6 +104,26 @@ const cards = [
     image: "https://media.startupcambodia.gov.kh/platform/core/program/images/Turing_Hackathon_Cycle_4_Inspiration_to_Digital_Innovation.jpg",
   }
 ];
+const featureCards = [
+  {
+      title: "University",
+    image: UniversityHomePage ,
+    description: "Find out available scholarships.",
+      path: "/list/university"
+  },
+  {
+    title: "Scholarship",
+    image: ScholarshipHomePage,
+    description: "Find out available scholarships.",
+      path: "/list/Scholarship"
+  },
+  {
+    title: "Livelihood",
+    description: "Find support for your education.",
+      image: LivelihoodHomePage,
+      path: "/livelihood"
+  },
+];
 
 const HomePage = () => {
   return (
@@ -113,13 +135,13 @@ const HomePage = () => {
         </Hero>
       </WrapperComponent>
       <WrapperComponent>
-        <CardFeatureSlider cardFeature={cards} header={"OUR FEATURE"} />
+        <CardFeatureSlider cardFeature={featureCards} header={"OUR MAIN FEATURES"} />
       </WrapperComponent>
       <WrapperComponent>
         <Hero props={hero2} />
       </WrapperComponent>
       <WrapperComponent>
-        <CardSlider cards={cards} header={ "SUGGESTED FOR YOU"} />
+        <CardFeatureSlider cardFeature={cards} header={ "SUGGESTED FOR YOU"} />
       </WrapperComponent>
       <WrapperComponent>
         <SaveSection/>
