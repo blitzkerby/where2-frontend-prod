@@ -14,7 +14,7 @@ const AccommodationList = ({ accommodations, page }) => {
                 if (page === 1) {
                     dispatch(removedIsClicked());
                 }
-               await dispatch(getFavorite({ category: "accommodation", page, limit: 10 }));
+               await dispatch(getFavorite({ category: "accommodation"}));
             } catch (error) {
                 console.error("Error fetching favorites:", error);
             }
