@@ -5,6 +5,9 @@ import Card from "./reusable/Card";
 import { useEffect } from "react";
 import { removedIsClicked,getFavorite } from "../features/slices/favoriteSlice";
 
+//layouts
+import NoResults from "../layouts/NoResults";
+
 const isDebug = false;  // Set to false to turn off console logging
 
 /**
@@ -23,7 +26,8 @@ const UniversityList = ({ universities, page }) => {
     }
 
     if (universities.length === 0) {
-        return <div style={{ textAlign: 'center', color: 'red', fontSize: '24px' }}>No results found :(</div>;
+        // return <div style={{ textAlign: 'center', color: 'red', fontSize: '24px' }}>No results found :(</div>;
+        return <NoResults />
     }
 
     const dispatch = useDispatch();

@@ -15,6 +15,7 @@ import Conten_Hero1 from "../assets/images/home-banner-neo.png";
 import MainHero from "../assets/images/content-module-hero1-no-bg.png";
 import SecondaryHero from "../assets/images/content-module-hero2.png";
 import CardSlider from "../components/reusable/CardsSlider";
+import { searchUniversities } from "../features/slices/universitySlice";
 
 const hero1 = {
   title: "DISCOVER YOUR FUTURE.",
@@ -41,6 +42,7 @@ const hero2 = {
   button:"Find part time jobs",
   onSearch: () => {},
 };
+
 const header =[
   {
     suggested: "SUGGESTED FOR YOU"
@@ -109,7 +111,11 @@ const HomePage = () => {
       <Navbar />
       <WrapperComponent>
         <Hero props={hero1}>
-          <Searchbar searchPlaceholder={hero1.searchPlaceholder} />
+          <Searchbar 
+            handleSearch={searchUniversities}
+            searchPlaceholder="Search universities..."
+            category="university"
+          />
         </Hero>
       </WrapperComponent>
       <WrapperComponent>

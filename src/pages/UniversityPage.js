@@ -76,8 +76,11 @@ const UniversityPage = () => {
             <ListContainer>
                 {loading && <LoadingOverlay />}
                 {/* {error && <p>{error}</p>} */}
-                
-                <SearchBar handleSearch={searchUniversities} searchPlaceholder="Search universities..." category="university"/>
+                <SearchBar 
+                    handleSearch={searchUniversities}
+                    searchPlaceholder="Search universities..."
+                    category="university"
+                />
                 <Filter items={items}/>
                 <UniversityList universities={universities} />
                 <Pagination 
