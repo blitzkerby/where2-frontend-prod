@@ -71,8 +71,8 @@ const Navbar = () => {
   return (
     <>
       <nav className="bg-gray-100 h-[64px] w-full fixed top-0 left-0 right-0 z-[1002]">
-        <div className="sm:hidden flex justify-between gap-x-10 items-center px-4 py-3 h-full m-auto lg:w-9/12">
-          <Link to="/" className="text-xl font-bold hover:scale-105 tracking-tighter">
+        <div className="flex items-center justify-between h-full px-4 py-3 m-auto sm:hidden gap-x-10 lg:w-9/12">
+          <Link to="/" className="text-xl font-bold tracking-tighter hover:text-cyan-500">
             WHERE2
           </Link>
           <div className="flex align-center justify-between h-full mx-auto lg:w-[800px] tracking-tighter">
@@ -82,7 +82,7 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.to}
-                  className="flex mb-[6px] pt-[8px] px-6 align-center justify-center mx-0 whitespace-nowrap text-gray-700 hover:text-black hover:scale-105 h-full relative group"
+                  className="flex mb-[6px] pt-[8px] px-6 align-center justify-center mx-0 whitespace-nowrap text-gray-700 hover:text-cyan-500 h-full hover:underline decoration-[1px] underline-offset-5"
                 >
                   <span className="relative">
                     {item.name}
@@ -91,7 +91,7 @@ const Navbar = () => {
                 </Link>
               ))}
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 hover:text-cyan-500">
             {showDashboard && (
               <DashboardIcon username={username} entity={entity} />
             )}
@@ -100,16 +100,19 @@ const Navbar = () => {
                 <ProfilePicture userId={userId} />
               </Link>
             ) : (
-              <Link to="/login" className="relative w-8 h-8 r-4">
-                <ButtonComponent className={"pb-2 hover:scale-105"}>
-                  Login
-                </ButtonComponent>
+              <Link to="/login" className="w-8 h-8">
+                <div className="flex justify-center w-full h-full pt-1 align-middle">
+                  <User2
+                    size={22}
+                    className="flex justify-center align-center"
+                  />
+                </div>
               </Link>
             )}
           </div>
         </div>
 
-        <div className="lg:hidden sm:flex justify-between items-center px-4 py-3 h-full w-full">
+        <div className="items-center justify-between w-full h-full px-4 py-3 lg:hidden sm:flex">
           <Link to="/" className="text-xl font-bold">
             WHERE2
           </Link>
@@ -128,7 +131,7 @@ const Navbar = () => {
             <div className="h-[64px] p-4 border-b">
               <button
                 onClick={toggleMenu}
-                className="p-2 rounded-md hover:bg-gray-300 float-right"
+                className="float-right p-2 rounded-md hover:bg-gray-300"
                 aria-label="Close menu"
               >
                 <X size={20} />
@@ -142,7 +145,7 @@ const Navbar = () => {
                     <Link
                       key={item.name}
                       to={item.to}
-                      className="px-4 py-4 text-gray-700 hover:bg-gray-100 hover:scale-105 flex items-center"
+                      className="flex items-center px-4 py-4 text-gray-700 hover:bg-gray-100"
                       onClick={toggleMenu}
                     >
                       {item.logo}

@@ -42,6 +42,7 @@ const Card = ({
   id,
   size,
   price,
+  mapURL,
 }) => {
   const user = JSON.parse(localStorage.getItem('authData'));
   const navigate = useNavigate();
@@ -185,9 +186,17 @@ const Card = ({
                     </div> 
                   }
                 </div>
-                <Link to={location ? `/location/${location}` : ''}>
-                  <img src={location ? EnabledMap : DisabledMap} alt="Map" />
-                </Link>
+                {
+                  mapURL ? (
+                    <Link to={`/location/${location}`}>
+                      <img className="w-9" src={EnabledMap} alt="Map"/>
+                    </Link>
+                  ) : (
+                    <div>
+                      <img className="w-9" src={DisabledMap} alt="Map"/>
+                    </div>
+                  )
+                }
               </div>
               <Button className="text-1xl p-2 px-3" variant="primary" size="large" onClick={handleReadMoreClick}>
                 Read More

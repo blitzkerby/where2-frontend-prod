@@ -11,10 +11,11 @@ const cssStyles = {
     width: "inherit",
     padding: "0 1.6875rem",
     position: "relative",
-    transition: "border-radius 0.5s ease",
+    transition: "border-radius 0.5s ease, border-color 0.3s ease",
     border: "1px solid #d1d5db", /* border-gray-300 */
     backgroundColor: "rgba(255, 255, 255, 0.8)", /* bg-white bg-opacity-80 */
-    borderRadius: "10px"
+    borderRadius: "30px",
+    borderColor: "#d1d5db"
   },
   input: {
     width: "100%",
@@ -32,7 +33,8 @@ const cssStyles = {
     color: "#9ca3af" /* text-gray-400 */
   },
   formFocusWithin: {
-    borderRadius: "10px"
+    borderRadius: "10px",
+    borderColor: "rgba(144,150,156,0.7)",
   },
   formBlur: {
     borderRadius: "30px"
@@ -57,8 +59,13 @@ const SearchBar = ({ handleSearch, searchPlaceholder, category }) => {
     <form
       onSubmit={onSubmit}
       style={cssStyles.form}
-      onFocus={(e) => e.currentTarget.style.borderRadius = cssStyles.formFocusWithin.borderRadius}
-      onBlur={(e) => e.currentTarget.style.borderRadius = cssStyles.formBlur.borderRadius}
+      onFocus={(e) => {
+        Object.assign(e.currentTarget.style, cssStyles.formFocusWithin);
+      }}
+      onBlur={(e) => {
+        Object.assign(e.currentTarget.style, cssStyles.formBlur);
+        e.currentTarget.style.borderColor = cssStyles.form.borderColor; 
+      }}
     >
       <input
         type="text"

@@ -26,7 +26,7 @@ const AccommodationPage = () => {
     const { totalPage, data } = useSelector((state) => state.pagination);
 
     useEffect(() => {
-        dispatch(fetchAllList({page,model: 'Accommodation'}))
+        dispatch(fetchAllList({page,limit:10,model: 'Accommodation'}))
     },[dispatch, page])
     return (
         <div>
