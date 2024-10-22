@@ -11,7 +11,10 @@ import { fetchUniversities, searchUniversities, setUniversities } from '../featu
 
 import { LoadingOverlay } from '../components/reusable/Loading';
 
-import UniversityList from '../components/UniversityList';
+//layouts
+import ListLayout from '../layouts/ListLayout';
+
+//resuable
 import Navbar from '../components/reusable/Navbar';
 import Footer from '../components/reusable/Footer';
 import Filter from '../components/reusable/Filter';
@@ -63,7 +66,6 @@ const UniversityPage = () => {
         if (searchQuery !== "") {
             dispatch(searchUniversities({ page, query : searchQuery}));
         } else if (location !== "") {
-            // dispatch(filterByLocation({ page, location }));
             filterLocation()
         } else {
             dispatch(fetchUniversities({ page }));
@@ -75,11 +77,13 @@ const UniversityPage = () => {
             <Navbar />
             <ListContainer>
                 {loading && <LoadingOverlay />}
-                {/* {error && <p>{error}</p>} */}
-                
-                <SearchBar handleSearch={searchUniversities} searchPlaceholder="Search universities..." category="university"/>
+                <SearchBar 
+                    handleSearch={searchUniversities}
+                    searchPlaceholder="Search universities..."
+                    category="university"
+                />
                 <Filter items={items}/>
-                <UniversityList universities={universities} />
+                <ListLayout items={universities} category="university" page={page} />
                 <Pagination 
                     totalPage={totalPage} 
                     currentPage={page}

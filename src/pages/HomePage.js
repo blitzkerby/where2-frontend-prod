@@ -11,6 +11,9 @@ import Content_Hero2 from "../assets/images/content-module-hero2.png";
 import Conten_Hero1 from "../assets/images/home-banner-neo.png";
 // import Card from "../components/reusable/Card";
 
+// slices
+import { searchUniversities } from "../features/slices/universitySlice";
+
 // assets
 import MainHero from "../assets/images/content-module-hero1-no-bg.png";
 import SecondaryHero from "../assets/images/content-module-hero2.png";
@@ -18,6 +21,7 @@ import CardSlider from "../components/reusable/CardsSlider";
 import LivelihoodHomePage from "../assets/images/livelihood-homepage.png";
 import UniversityHomePage from "../assets/images/university-homepage.png";
 import ScholarshipHomePage from "../assets/images/shcolarship-homepage.png"
+
 const hero1 = {
   title: "DISCOVER YOUR FUTURE.",
   subtitle: "Everything starts here.",
@@ -131,7 +135,11 @@ const HomePage = () => {
       <Navbar />
       <WrapperComponent>
         <Hero props={hero1}>
-          <Searchbar searchPlaceholder={hero1.searchPlaceholder} />
+          <Searchbar 
+            handleSearch={searchUniversities}
+            searchPlaceholder="Search universities..."
+            category="university"
+          />
         </Hero>
       </WrapperComponent>
       <WrapperComponent>
@@ -144,10 +152,10 @@ const HomePage = () => {
         <CardFeatureSlider cardFeature={cards} header={ "SUGGESTED FOR YOU"} />
       </WrapperComponent>
       <WrapperComponent>
-        <SaveSection/>
+        <SaveSection />
       </WrapperComponent>
       <WrapperComponent>
-        <JoinUs/>
+        <JoinUs />
       </WrapperComponent>
       <WrapperComponent>
         <Footer />
@@ -157,5 +165,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-

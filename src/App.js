@@ -21,7 +21,6 @@ import DashboardComponent from "./components/accountUtilities/sidebarComponents/
 import DiscussionsPage from "./pages/DiscussionPage";
 import HealthPage from "./pages/HealthPage";
 import PublicOnlyROute from "./components/routes/PublicOnlyRoute";
-import CreateDiscussionPage from "./pages/CreateDiscussionPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import VisitProfile from "./components/accountUtilities/sidebarComponents/User/VisitProfile";
 import LivelihoodPage from "./pages/LivelihoodPage";
@@ -35,6 +34,7 @@ import UniversityDetailPage from "./pages/UniversityDetailPage";
 import LoggedInOnlyRoute from "./components/routes/LoggedInRoute";
 import HealthArticlePage from "./components/health/HealthArticlePage";
 import AboutUsPage from "./pages/AboutUsPage";
+
 
 const queryClient = new QueryClient();
 
@@ -104,7 +104,12 @@ const router = createBrowserRouter([
   { path: "/dashboard/:userName", element: <DashboardComponent /> },
   { path: "/profile/:userName", element: <UserProfile /> },
   { path: "/discussions", element: <DiscussionsPage /> },
-  { path: "/discussions/create", element: <CreateDiscussionPage /> },
+  {
+    path: "/community",
+    element: <DiscussionsPage />,
+    path: "/community",
+    element: <Navigate to="/discussions" replace />,
+  },
   { path: "/health", element: <HealthPage /> },
   { path: "/user/:userId", element: <VisitProfile /> },
   {
@@ -114,6 +119,12 @@ const router = createBrowserRouter([
       { path: "search", element: <UniversityPage /> },
       { path: ":id", element: <UniversityDetailPage /> },
     ],
+  },
+  {
+    path: "/discussion",
+    element: <DiscussionsPage />,
+    path: "/discussion",
+    element: <Navigate to="/discussions" replace />,
   },
   {
     path: "/list",

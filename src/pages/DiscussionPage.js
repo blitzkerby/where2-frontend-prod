@@ -1,30 +1,22 @@
-import React, { useState } from "react";
-import CreateDiscussionComponent from "./../components/community/CreateDiscussionComponent";
+import React, { useState, useEffect } from "react";
 import WrapperComponent from "./../components/reusable/WrapperComponent";
-import DiscussionsComponent from "./../components/DiscussionsComponent";
 import Footer from "./../components/reusable/Footer";
 import Navbar from "./../components/reusable/Navbar";
+import CreateDiscussion from "./../components/community/CreateDiscussion";
+import DiscussionList from "./../components/community/DiscussionList";
+import DiscussionContainer from "./../components/reusable/DiscussionContainer";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const DiscussionPage = () => {
-    const [isCreatingDiscussion, setIsCreatingDiscussion] = useState(false);
-  
-    const toggleDiscussionView = () => {
-      setIsCreatingDiscussion((prev) => !prev);
-    };
-  
-    return (
-      <>
-        <Navbar />
-        <WrapperComponent>
-          {isCreatingDiscussion ? (
-            <CreateDiscussionComponent />
-          ) : (
-            <DiscussionsComponent />
-          )}
-        </WrapperComponent>
-        <Footer />
-      </>
-    );
-  };
-  
-  export default DiscussionPage;
+  return (
+    <>
+      <Navbar />
+      <WrapperComponent>
+        <DiscussionContainer />
+      </WrapperComponent>
+      <Footer />
+    </>
+  );
+};
+
+export default DiscussionPage;

@@ -50,7 +50,7 @@ const TermsAndConditionsComponent = () => {
 
   // SHOWING THE LOADINGOVERLAY COMPONENT WHEN STATUS IS LOADING
   if (status === "loading") {
-    return <LoadingOverlay message="We are processing your request..." />;
+    return <LoadingOverlay className="h-screen" message="We are processing your request..." />;
   }
 
   return (

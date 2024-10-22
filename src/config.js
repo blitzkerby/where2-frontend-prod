@@ -5,6 +5,7 @@ const CLIENT_ID = process.env.REACT_APP_CLIENT_ID || "clientId";
 const config = {
   apiUrl: API_URL,
   env: ENV,
+  socketServer: 'ws://localhost:4000',
   isDevelopment: ENV === "development",
   isProduction: ENV === "production",
   auth: {
@@ -46,13 +47,14 @@ const config = {
   community: {
     createDiscussion: `${API_URL}/api/discussion`,
     getDiscussions: `${API_URL}/api/discussions`,
-    getUserDiscussions: (userId) =>
-      `${API_URL}/api/discussions/${userId}`,
+    getUserDiscussions: (userId) => `${API_URL}/api/discussions/${userId}`,
     addComment: (discussionId, commentId) =>
       `${API_URL}/api/discussions/${discussionId}/comment/${commentId}`,
     getAllComments: (discussionId) =>
       `${API_URL}/api/discussions/${discussionId}/comments`,
-    deleteDiscussion: (discussionId) => `${API_URL}/api/discussion/${discussionId}`,
+    deleteDiscussion: (discussionId) =>
+      `${API_URL}/api/discussion/${discussionId}`,
+    deleteComment: (commentId) => `${API_URL}/api/discussion/comment/${commentId}`,
   },
   job: {
     getAllJob: `${API_URL}/api/jobs`,
@@ -67,8 +69,8 @@ const config = {
       `${API_URL}/api/favorites/${cardId}/${category}`,
   },
   universities: {
-    getAllUniversity : `${API_URL}/api/list/university`,
-    getUniversityById : `${API_URL}/api/detail/university`,
+    getAllUniversity: `${API_URL}/api/list/university`,
+    getUniversityById: `${API_URL}/api/detail/university`,
   },
   scholarships: {
     getAllScholarships: `${API_URL}/api/list/scholarship`,
@@ -87,10 +89,10 @@ const config = {
   chatbot: {
     sendMessage: `${API_URL}/api/ai/summary`,
   },
-  contentCreation : {
-    createUniversity : `${API_URL}/api/detail/university/create`,
-    createJob : `${API_URL}/api/jobs/addJob`,
-    createAccomodation : `${API_URL}`
+  contentCreation: {
+    createUniversity: `${API_URL}/api/detail/university/create`,
+    createJob: `${API_URL}/api/jobs/addJob`,
+    createAccomodation: `${API_URL}`,
   },
   payment: {
     makePayment: `${API_URL}/api/bakong-payment`,
@@ -102,6 +104,7 @@ const config = {
     clientID: CLIENT_ID,
   },
   dashboard: {
+    getVerificationData: `${API_URL}/api/dashboard/get-verification-data`,
     getDiscussionsPerDay: `${API_URL}/api/dashboard/discussions-per-day`,
     getDeviceDistribution: `${API_URL}/api/dashboard/device-distribution`,
     getActiveAndViews: `${API_URL}/api/dashboard/active-and-views`,
@@ -111,12 +114,11 @@ const config = {
   health: {
     getAllHealthArticles: `${API_URL}/api/health/health-articles`,
     getHealthArticleById: (id) => `${API_URL}/api/health/health-articles/${id}`,
-  contentCreation : {
-    createUniversity : `${API_URL}/api/detail/university/create`,
-    createJob : `${API_URL}/api/jobs/addJob`,
-    createAccomodation : `${API_URL}`
-  }
-}
-}
+    contentCreation: {
+      createUniversity: `${API_URL}/api/detail/university/create`,
+      createJob: `${API_URL}/api/jobs/addJob`,
+      createAccomodation: `${API_URL}`,
+    },
+  },
+};
 export default config;
-

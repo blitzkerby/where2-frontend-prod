@@ -5,6 +5,7 @@ import { MessageCircleMore, LucideMessageCircleQuestion } from "lucide-react";
 import Menu from "./../../assets/svg/menu.svg";
 import useAuth from "./../../hooks/useAuth";
 import ProfilePicture from "./PictureUpload";
+import ButtonComponent from "./Button";
 import WrapperComponent from "./WrapperComponent";
 import {
   School,
@@ -83,7 +84,10 @@ const Navbar = () => {
                   to={item.to}
                   className="flex mb-[6px] pt-[8px] px-6 align-center justify-center mx-0 whitespace-nowrap text-gray-700 hover:text-cyan-500 h-full hover:underline decoration-[1px] underline-offset-5"
                 >
-                  {item.name}
+                  <span className="relative">
+                    {item.name}
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
+                  </span>
                 </Link>
               ))}
           </div>

@@ -93,7 +93,7 @@ const ResetPasswordComponent = () => {
   }
 
   if (status === "loading") {
-    return <LoadingOverlay message="We are resetting your password. Please be patient..."/>
+    return <LoadingOverlay className="h-screen" message="We are resetting your password. Please be patient..."/>
   }
 
   return (

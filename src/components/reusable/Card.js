@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
 
 //assets
-import Map from '../../assets/svg/map.svg';
+import EnabledMap from '../../assets/svg/EnabledMap.svg';   //map enabled
+import DisabledMap from '../../assets/svg/DisabledMap.svg';   //map disabled
 import MiniMap from '../../assets/svg/miniMap.svg';
 import BookMark from '../../assets/svg/bookmark.svg';
 import Calender from '../../assets/svg/calender.svg';
@@ -32,7 +33,7 @@ const Card = ({
   term,
   loan_size,
   interest,
-  location = '', 
+  location, 
   deadLine = '', 
   timeOut = '',
   route,
@@ -41,6 +42,7 @@ const Card = ({
   id,
   size,
   price,
+  mapURL,
 }) => {
   const user = JSON.parse(localStorage.getItem('authData'));
   const navigate = useNavigate();
@@ -184,9 +186,17 @@ const Card = ({
                     </div> 
                   }
                 </div>
-                <Link to="">
-                  <img src={Map} alt="Map" />
-                </Link>
+                {
+                  mapURL ? (
+                    <Link to={`/location/${location}`}>
+                      <img className="w-9" src={EnabledMap} alt="Map"/>
+                    </Link>
+                  ) : (
+                    <div>
+                      <img className="w-9" src={DisabledMap} alt="Map"/>
+                    </div>
+                  )
+                }
               </div>
               <Button className="text-1xl p-2 px-3" variant="primary" size="large" onClick={handleReadMoreClick}>
                 Read More

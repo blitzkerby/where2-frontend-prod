@@ -1,14 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  Legend,
+  Tooltip,
+} from "recharts";
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8"];
 
 const CustomedPieChart = ({
   fetchUrl,
-  title = 'Device Distribution',
-  dataKey = 'count',
-  nameKey = 'deviceType',
+  title = "Device Distribution",
+  dataKey = "count",
+  nameKey = "deviceType",
   height = 400,
   colors = COLORS,
 }) => {
@@ -49,7 +56,9 @@ const CustomedPieChart = ({
           fill="#8884d8"
           dataKey={dataKey}
           nameKey={nameKey}
-          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+          label={({ name, percent }) =>
+            `${name} ${(percent * 100).toFixed(0)}%`
+          }
         >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
