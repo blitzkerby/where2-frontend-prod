@@ -136,12 +136,12 @@ const HealthArticlePage = () => {
           
                 </WrapperComponent>
                 <div className="mt-6 bg-gray-900/50 backdrop-blur-sm rounded-2xl ">
-                <WrapperComponent>
-                <div className="text-black w-full">
-                      <DiscussionContainer/>
-                    </div>
-                </WrapperComponent>
-                    <VisitTracker path={location.pathname} />
+                    <WrapperComponent>
+                    <div className="text-black w-full">
+                          <DiscussionContainer/>
+                        </div>
+                    </WrapperComponent>
+                        <VisitTracker path={location.pathname} />
                   </div>
               </div>
             </div>

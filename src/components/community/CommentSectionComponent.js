@@ -7,6 +7,7 @@ import ProfilePicture from "./../reusable/PictureUpload";
 import ReplyForm from "../reusable/ReplyForm";
 import { Reply } from "lucide-react";
 import config from "./../../config";
+import { Trash } from "lucide-react";
 import axios from "axios";
 
 const CommentSectionComponent = ({ discussionId, onCommentAdded }) => {
@@ -88,7 +89,7 @@ const CommentSectionComponent = ({ discussionId, onCommentAdded }) => {
             onClick={() => setShowReplyForm(true)}
           >
             <Reply className="mt-1" size={18} />
-            <span className="mt-1 ml-1">reply</span>
+            <span className="mt-1 mr-1">reply</span>
           </ButtonComponent>
         </div>
       )}
@@ -141,11 +142,11 @@ const CommentSectionComponent = ({ discussionId, onCommentAdded }) => {
                       onClick={() => handleDelete(comment.id)}
                       disabled={deletingComments[comment.id]}
                     >
-                      {deletingComments[comment.id] ? "Deleting..." : "Delete"}
+                      {deletingComments[comment.id] ? "..." : <Trash size={18}/>}
                     </ButtonComponent>
                   </div>
                 )}
-                <div className="text-gray-700 whitespace-pre-wrap break-all w-full">
+                <div className="text-gray-700 whitespace-pre-wrap break-all w-full pl-4">
                   {comment.content.split(" ").map((word, index) => (
                     <React.Fragment key={index}>
                       <span className="break-all w-[90%] h-fit">{word}</span>

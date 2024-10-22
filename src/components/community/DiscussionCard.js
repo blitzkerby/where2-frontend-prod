@@ -8,6 +8,7 @@ import useAuth from "./../../hooks/useAuth";
 import ButtonComponent from "./../reusable/Button";
 import useComments from "./../../hooks/useComments";
 import config from "./../../config";
+import { Trash } from "lucide-react";
 import axios from "axios";
 
 const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
@@ -96,24 +97,24 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
 
   return (
     <div
-      className={`lg:p-5 sm:p-1 bg-white hover:scale-100 ${
+      className={`lg:p-5 sm:p-1 p-2 bg-white hover:scale-100 ${
         isExpanded ? "min-h-fit" : ""
       } rounded-lg shadow hover:shadow-lg cursor-pointer relative`}
       onClick={toggleExpand}
     >
-      <h3 className="text-2xl font-semibold mb-2 truncate">
+      <h3 className="text-2xl font-medium mb-2 truncate tracking-tight">
         {discussion.title}
       </h3>
 
       {discussion.location && (
-        <div className="text-sm text-gray-500 my-4 underline">
-          <span className="font-semibold tracking-tighter">Location:</span>{" "}
+        <div className="text-sm text-gray-500 my-4">
+          <span className="font-medium tracking-tight pl-4 underline">Location:</span>{" "}
           {discussion.location}
         </div>
       )}
 
       <p
-        className={`text-gray-600 mb-4 text-justify ${
+        className={`text-gray-600 mb-4 text-justify pl-4 ${
           isExpanded
             ? "whitespace-normal"
             : "overflow-hidden whitespace-nowrap text-ellipsis"
@@ -122,7 +123,7 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
         {discussion.content}
       </p>
 
-      <div className="flex justify-between items-center text-sm text-gray-500 mb-2">
+      <div className="flex justify-between items-center text-sm text-gray-500 mb-2 pl-4">
         {discussion.user && (
           <div
             className="flex items-center gap-2 cursor-pointer hover:text-gray-700"
@@ -145,7 +146,7 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
       </div>
 
       {isExpanded && (
-        <div onClick={handleCommentSectionClick}>
+        <div onClick={handleCommentSectionClick} className="pl-4">
           <CommentSectionComponent
             discussionId={discussion.id}
             onCommentAdded={handleCommentAdded}
@@ -165,7 +166,7 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
             onClick={handleDelete}
             disabled={isDeleting}
           >
-            {isDeleting ? "Deleting..." : "Delete"}
+            {isDeleting ? "..." : <Trash size={18} />}
           </ButtonComponent>
         </div>
       )}
