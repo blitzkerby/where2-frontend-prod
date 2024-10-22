@@ -107,7 +107,7 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
       </h3>
 
       {discussion.location && (
-        <div className="text-sm text-gray-500 my-4">
+        <div className="text-sm text-gray-500 my-4 text-justify">
           <span className="font-medium tracking-tight pl-4 underline">Location:</span>{" "}
           {discussion.location}
         </div>
@@ -142,7 +142,7 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
             </span>
           </div>
         )}
-        <span>{localComments.length} replies</span>
+        <span className="pr-4">{localComments.length} replies</span>
       </div>
 
       {isExpanded && (
