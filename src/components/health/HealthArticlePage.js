@@ -92,7 +92,7 @@ const HealthArticlePage = () => {
               {/* Main Article Content - Left Side */}
               <div className="lg:w-[65%] sm:w-full mb-8 lg:mb-0">
                 <WrapperComponent>
-                  <div className="bg-gray-900/50 backdrop-blur-sm w-full h-full rounded-xl shadow-xl overflow-hidden">
+                  <div className="bg-gray-900/50 backdrop-blur-sm w-full h-full lg:rounded-xl sm:rounded-l shadow-xl overflow-hidden">
                     <div className="relative">
                       <img
                         src={article.image || "default-image-url.jpg"}
@@ -102,7 +102,7 @@ const HealthArticlePage = () => {
                       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-gray-900 to-transparent" />
                     </div>
                     
-                    <div className="p-8">
+                    <div className="lg:p-8 sm:p-4">
                       <h1 className="text-4xl font-bold text-white mb-4 leading-tight">
                         {article.title}
                       </h1>
@@ -133,16 +133,16 @@ const HealthArticlePage = () => {
                     <h2 className="text-xl font-semibold mb-4 text-white">Quick Summary</h2>
                     <TextSummary textToSummarize={article.content} />
                   </div>
-                  
-                  <div className="mt-6 bg-gray-900/50 backdrop-blur-sm rounded-2xl p-4">
+          
+                </WrapperComponent>
+                <div className="mt-6 bg-gray-900/50 backdrop-blur-sm rounded-2xl ">
+                <WrapperComponent>
+                <div className="text-black w-full">
+                      <DiscussionContainer/>
+                    </div>
+                </WrapperComponent>
                     <VisitTracker path={location.pathname} />
                   </div>
-                </WrapperComponent>
-                
-                {/* Discussion Container */}
-                <div className="text-black">
-                  <DiscussionContainer />
-                </div>
               </div>
             </div>
           </div>

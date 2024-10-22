@@ -86,7 +86,7 @@ const DiscussionForm = ({ formData, handleChange, handleLocationChange, handleSu
           <div className="flex gap-4 justify-end">
             <ButtonComponent
               variant="outline"
-              onClick={() => navigate("/discussions")}
+              onClick={() => window.location.reload()}
               className={"mt-12 w-[197px] h-[38px] sm:w-[343px] sm:h-[50px]"}
               disabled={isSubmitting}
             >
