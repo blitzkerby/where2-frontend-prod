@@ -110,7 +110,7 @@ const HealthNavbar = () => {
                   <Link
                     key={item.name}
                     to={item.to}
-                    className="block px-4 py-4 text-gray-700 hover:scale-105 hover:bg-black flex items-center"
+                    className="block px-4 py-4 text-gray-700 hover:scale-105 hover:bg-gray-100 flex items-center"
                     onClick={toggleMenu}
                   >
                     {item.logo}

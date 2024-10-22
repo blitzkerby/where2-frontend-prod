@@ -120,9 +120,9 @@ const CreateDiscussion = ({ showForm }) => {
   }
 
   return (
-    <div className="lg:flex lg:gap-6">
+    <>
       {showForm && (
-        <div className="lg:w-2/3 mb-6 lg:mb-0">
+        <div className="lg:w-full mb-6 lg:mb-0">
           <DiscussionForm
             formData={formData}
             handleChange={handleChange}
@@ -133,27 +133,7 @@ const CreateDiscussion = ({ showForm }) => {
           />
         </div>
       )}
-      <div className="lg:w-1/3 lg:mt-[80px] lg:mb-[16px]">
-        <div className="bg-white rounded-lg shadow p-6 h-full">
-          {discussionsLoading ? (
-            <LoadingSpinner message="Loading discussions..." />
-          ) : discussionsError ? (
-            <div className="text-red-500">{discussionsError.message}</div>
-          ) : Array.isArray(discussions) && discussions.length > 0 ? (
-            <DiscussionList
-              discussions={discussions}
-              title={
-                location.pathname === "/discussions"
-                  ? "All Discussions"
-                  : "Related Discussions"
-              }
-            />
-          ) : (
-            <div>No discussions available.</div>
-          )}
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 

@@ -142,7 +142,7 @@ const Navbar = () => {
                     <Link
                       key={item.name}
                       to={item.to}
-                      className="px-4 py-4 text-gray-700 hover:bg-black hover:scale-105 flex items-center"
+                      className="px-4 py-4 text-gray-700 hover:bg-gray-100 hover:scale-105 flex items-center"
                       onClick={toggleMenu}
                     >
                       {item.logo}

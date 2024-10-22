@@ -5,17 +5,19 @@ import ContainerComponent from "./../reusable/ContainerComponent";
 import FormInput from "./../reusable/InputField";
 import ButtonComponent from "./../reusable/Button";
 import { MapPin } from "lucide-react";
+import { useLocation } from "react-router-dom";
 import { LoadingSpinner } from "./../reusable/Loading";
-import { v4 as uuidv4 } from "uuid";
-import config from "./../../config";
 
 
 const DiscussionForm = ({ formData, handleChange, handleLocationChange, handleSubmit, isSubmitting, error }) => {
     const navigate = useNavigate();
     const { isGettingLocation, getLocation, error: locationError } = useGeolocation();
+    const location = useLocation();
+
+    const notDiscussionPath = location.pathname !== '/discussions';
   
     return (
-      <ContainerComponent className="w-[80%] rounded-md" title="Create New Post">
+        <ContainerComponent className={`${notDiscussionPath ? "w-full" : ""} rounded-md`} title="Create New Post">
         <form onSubmit={handleSubmit} className="space-y-6">
           {error && (
             <div className="p-4 bg-red-50 border border-red-200 text-red-600 rounded-md">

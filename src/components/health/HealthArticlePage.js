@@ -25,17 +25,16 @@ const HealthArticlePage = () => {
   useEffect(() => {
     const fetchArticle = async () => {
       try {
+        setLoading(true);
         const apiUrl = config.health.getHealthArticleById(id);
         const response = await axios.get(apiUrl);
 
         if (response.data.status === "success" && response.data.data) {
           setArticle(response.data.data.healthArticle);
-          console.log("Article set:", response.data.data.healthArticle);
         } else {
           throw new Error("Invalid data format received from the server");
         }
       } catch (err) {
-        console.error("Error fetching article:", err);
         setError(
           err.message || "Failed to fetch article. Please try again later."
         );
@@ -49,8 +48,8 @@ const HealthArticlePage = () => {
   if (loading)
     return (
       <LoadingSpinner
-        className="h-screen"
-        message="We are creating the health article for you..."
+        className="w-screen h-screen"
+        message="We are fetching the health article for you..."
       />
     );
 
@@ -87,50 +86,65 @@ const HealthArticlePage = () => {
     return (
       <>
         <HealthNavbar />
-        <div className="bg-black min-h-screen text-white">
-          <div className="lg:w-[90%] sm:w-[99%] mx-auto lg:py-8 sm:py-3 px-4 sm:px-1 lg:px-8 mt-[64px]">
-            <div className="lg:flex lg:space-x-8">
+        <div className="bg-gradient-to-b from-black to-gray-900 min-h-screen text-white">
+          <div className="lg:w-[90%] sm:w-full mx-auto lg:py-12 sm:py-6 px-4 sm:px-2 lg:px-8 mt-[64px]">
+            <div className="lg:flex lg:gap-8">
               {/* Main Article Content - Left Side */}
               <div className="lg:w-[65%] sm:w-full mb-8 lg:mb-0">
                 <WrapperComponent>
-                  <div className="bg-gray-900 w-full h-full rounded-xl shadow-lg">
-                    <img
-                      src={article.image || "default-image-url.jpg"}
-                      alt={article.title}
-                      className="w-full h-[400px] object-cover lg:rounded-xl sm:rounded-md shadow-lg mb-6"
-                    />
-                    <h1 className="text-3xl font-extrabold text-white mb-4 leading-tight tracking-tight p-4">
-                      {article.title}
-                    </h1>
-                    <div className="flex items-center text-sm text-gray-400 mb-6 tracking-tighter p-4">
-                      <span className="font-medium">{article.author}</span>
-                      <span className="mx-2">•</span>
-                      <span>{formattedDate}</span>
+                  <div className="bg-gray-900/50 backdrop-blur-sm w-full h-full rounded-2xl shadow-xl overflow-hidden">
+                    <div className="relative">
+                      <img
+                        src={article.image || "default-image-url.jpg"}
+                        alt={article.title}
+                        className="w-full h-[450px] object-cover shadow-lg"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-gray-900 to-transparent" />
                     </div>
-                    <div className="prose prose-lg max-w-none text-gray-300 tracking-tighter text-justify p-4">
-                      {article.content}
+                    
+                    <div className="p-8">
+                      <h1 className="text-4xl font-bold text-white mb-4 leading-tight">
+                        {article.title}
+                      </h1>
+                      
+                      <div className="flex items-center space-x-4 text-sm text-gray-300 mb-8">
+                        <div className="flex items-center">
+                          <span className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-2">
+                            {article.author[0]}
+                          </span>
+                          <span className="font-medium">{article.author}</span>
+                        </div>
+                        <span>•</span>
+                        <span>{formattedDate}</span>
+                      </div>
+                      
+                      <div className="prose prose-lg max-w-none text-gray-200 leading-relaxed text-justify">
+                        {article.content}
+                      </div>
                     </div>
                   </div>
                 </WrapperComponent>
               </div>
     
               {/* Right Side Column - TextSummary and Discussion */}
-              <div className="lg:w-[35%] space-y-6">
+              <div className="lg:w-[35%] space-y-6 lg:sticky lg:top-24">
                 <WrapperComponent>
-                  <div className="bg-gray-900 rounded-xl p-6 shadow-lg">
+                  <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl shadow-xl p-6">
+                    <h2 className="text-xl font-semibold mb-4 text-white">Quick Summary</h2>
                     <TextSummary textToSummarize={article.content} />
+                  </div>
+                  
+                  <div className="mt-6 bg-gray-900/50 backdrop-blur-sm rounded-2xl p-4">
+                    <VisitTracker path={location.pathname} />
                   </div>
                 </WrapperComponent>
                 
-                {/* Discussion Container below TextSummary */}
+                {/* Discussion Container */}
                 <div className="text-black">
-                  <WrapperComponent>
                   <DiscussionContainer />
-                  </WrapperComponent>
                 </div>
               </div>
             </div>
-            <VisitTracker path={location.pathname} />
           </div>
         </div>
         <Footer />
