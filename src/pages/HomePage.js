@@ -157,9 +157,7 @@ const HomePage = () => {
       <WrapperComponent>
         <JoinUs />
       </WrapperComponent>
-      <WrapperComponent>
         <Footer />
-      </WrapperComponent>
     </div>
   );
 };

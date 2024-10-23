@@ -81,7 +81,7 @@ const CardFeatureSlider = ({ cardFeature, header  }) => {
           )}
         </div>
       </div>
-      <div className="absolute bottom-4 right-4 flex space-x-2">
+      <div className="absolute bottom-0 right-4 flex space-x-2">
         <button
           onClick={prevSlide}
           className="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors"
