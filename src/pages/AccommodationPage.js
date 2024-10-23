@@ -10,7 +10,7 @@ import Footer from '../components/reusable/Footer';
 import Pagination from '../components/reusable/Pagination';
 import ListContainer from '../components/reusable/ListContainer';
 import AccommodationList from '../components/AccommodationList';
-import { fetchAllList } from '../features/slices/paginationSlice';
+import { fetchAccommodations } from '../features/slices/accommodationSlice';
 /** Enable for debugging */
 const isDebug = true;
 
@@ -22,11 +22,11 @@ const AccommodationPage = () => {
     const searchQuery = urlParams.get('q') || '';
 
     const dispatch = useDispatch();
-    const { totalPage, data, error, loading } = useSelector((state) => state.pagination);
+    const { data, loading, error, totalPages } = useSelector((state) => state.accommodations);
 
     useEffect(() => {
-        dispatch(fetchAllList({page,limit:10,model: 'Accommodation'}))
-    },[dispatch, page])
+        dispatch(fetchAccommodations({page, limit, dispatch}))
+    },[dispatch, page, limit])
     return (
         <div>
             <Navbar />
@@ -35,7 +35,7 @@ const AccommodationPage = () => {
             {error && <p>{error}</p>}
                 <AccommodationList accommodations={data} page={page} />
             </ListContainer>
-            <Pagination totalPage={totalPage} currentPage={page} category='accommodation'/>
+            <Pagination totalPage={totalPages} limit={limit} currentPage={page} category='accommodation'/>
             <Footer />
         </div>
     )
