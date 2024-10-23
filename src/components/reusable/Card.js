@@ -11,7 +11,8 @@ import BookMark from '../../assets/svg/bookmark.svg';
 import Calender from '../../assets/svg/calender.svg';
 import MiniClock from '../../assets/svg/miniClock.svg';
 import { Facebook, Instagram, Twitter, Youtube, Chrome } from 'lucide-react';
-import FilledHeart from '../../assets/svg/filled-heart.svg'
+import FilledHeart from '../../assets/svg/filled-heart.svg';
+import Where2Logo from '../../assets/images/where2.jpg'
 import  {convertToHTML}  from '../../utility/markdownConverter';
 //components
 import Button from './ButtonComponent';
@@ -75,7 +76,7 @@ const Card = ({
   };
 
   const handleError = (event) => {
-    event.target.src = "https://i.pinimg.com/564x/1b/b6/95/1bb69534ae81c183c82154062df5d94f.jpg";
+    event.target.src = Where2Logo;
   };
 
   const socialMediaIcons = [
@@ -109,8 +110,8 @@ const Card = ({
         ) : (
           <img
             className="top-0 left-0 w-full h-full object-cover -z-10"
-            src="https://i.pinimg.com/564x/1b/b6/95/1bb69534ae81c183c82154062df5d94f.jpg"
-            alt="Bill is a wonderful pup!"
+            src={Where2Logo}
+            alt="where2 logo"
           />
         )}
       </div>
