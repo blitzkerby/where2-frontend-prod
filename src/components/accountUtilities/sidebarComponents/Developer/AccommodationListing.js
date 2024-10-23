@@ -1,6 +1,6 @@
 import ListingComponent from "../../../reusable/ListingComponent";
 
-const AccommodationListing = () => {
+const AccommodationListing = ({accommodations}) => {
   
   return (
     <ListingComponent
