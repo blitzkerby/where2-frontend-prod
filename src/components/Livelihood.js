@@ -39,9 +39,13 @@ const Livelihood = () => {
     return (
         <section className="bg-[#F4F8FA]">
             <div className="flex flex-col align-middle justify-center gap-6 p-6 mt-[64px] h-max">
-                <img src={LiveliHood} className="h-full" alt="Hero photo of livelidhood page"/>
                 <WrapperComponent>
-                <CardSlider cards={cards} header={"Conveniently Self-Supporting"} />
+                <div className="w-full lg:h-[925px] sm:h-[500px]">
+                    <img src={LiveliHood} className="h-full sm:min-h-full lg:object-fit sm:object-none" alt="Hero photo of livelidhood page"/>
+                </div>
+                </WrapperComponent>
+                <WrapperComponent>
+                <CardSlider cards={cards} header={"Conveniently Self-Supporting"} className="h-fit"/>
                 </WrapperComponent>
                 <section className="flex gap-x-12 px-12 mx-auto mb-[64px]">
                     {isMobile ? null : <div className="flex-1 content-center">
