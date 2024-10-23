@@ -22,7 +22,7 @@ const saveLogo = [
 	
 const saveSection = ()  => {
 	return (
-		<div className="flex flex-wrap justify-between sm:justify-center relative w-full max-w-6xl mx-auto">
+		<div className="flex flex-wrap justify-between sm:justify-center relative w-full max-w-6xl mx-auto my-[32px]">
 			{saveLogo.map((logo, index) => (
 				<div key={index} className="flex flex-col  items-center sm:h-[222px] sm:w-[222px] sm:space-x-2 space-y-2 mt-[50px] mb-[30px]">
 					<img src={logo.image} className="h-[96px] w-[96px]" />

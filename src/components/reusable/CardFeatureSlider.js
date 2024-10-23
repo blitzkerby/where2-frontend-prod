@@ -48,7 +48,7 @@ const CardFeatureSlider = ({ cardFeature, header  }) => {
   }, [nextSlide, isMobile]);
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto">
+    <div className="relative w-full max-w-6xl mx-auto my-[32px]">
       <div className="overflow-hidden w-full">
         <div className="p-5 text-blue-900 text-[38px] sm:text-[35.8px]">
           {header}
