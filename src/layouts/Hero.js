@@ -1,6 +1,7 @@
 import React from 'react';
-// import { Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import TypewriterEffect from './../styles/TypeWriterEffect';
+
 const Hero = ({ props, children }) => {
   const {
     button,
@@ -24,12 +25,12 @@ const Hero = ({ props, children }) => {
     gradientClipPath: { clipPath: "polygon(0 0, 100% 0, 100% 70%, 0 100%)" },
 
     /* textbox */
-    title: "text-h1 tracking-tight font-black text-[38px]",
+    title: "text-h1 tracking-tight font-black lg:text-[56px] sm:text-[38px]",
     subtitle: "text-h2 tracking-tight mb-8 text-[28px]",
-    contentWrapper: "absolute w-full z-10 mx-auto top-[7%] mt-section-top-margin max-w-[660px] ",
+    contentWrapper: "absolute w-full z-10 mx-auto top-[7%] mt-section-top-margin max-w-[660px] px-4",
 
     /* background image */
-    imageContainer: `mt-image-container-top-margin flex justify-center w-full h-full`,
+    imageContainer: `mt-image-container-top-margin flex justify-center w-full h-full hover:scale-110`,
     image: "object-contain sm:object-cover",
 
     /* partime job button */
@@ -51,7 +52,7 @@ const Hero = ({ props, children }) => {
           style={styles.gradientClipPath}
         />
         <div className={styles.contentWrapper}>
-          <h1 className={`${styles.title} ${titleColor}`}>{title}</h1>
+          <h1 className={`${styles.title} ${titleColor}`}><TypewriterEffect text={title}/></h1>
           <p className={`${styles.subtitle} ${subtitleColor}`}>{subtitle}</p>
 
           {button && (

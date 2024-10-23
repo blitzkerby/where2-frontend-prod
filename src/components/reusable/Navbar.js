@@ -44,24 +44,18 @@ const Navbar = () => {
     { logo: <LucideBriefcaseBusiness />, name: "Livelihood", to: "/livelihood", showMobile: true },
     { logo: <Activity />, name: "Health", to: "/health", showMobile: true },
     {
+      logo: <MessageCircleMore />,
+      name: "Community",
+      to: "/discussions",
+      showMobile: true,
+    },
+    {
       logo: <User2 />,
       name: "Profile",
       to: `/profile/${encodeURIComponent(username || entity)}`,
       showMobile: true,
       showDesktop: false,
     },
-    {
-      logo: <MessageCircleMore />,
-      name: "Community",
-      to: "/discussions",
-      showMobile: true,
-    },
-    // { logo: <School/>, name: "Universities", to: "/list/university" },
-    // { logo: <BookOpenTextIcon/>, name: "Scholarships", to: "/scholarships" },
-    // { logo: <LucideBriefcaseBusiness/>, name: "Livelihood", to: "/livelihood" },
-    // { logo: <BookMarked/>, name: "Bookmarks", to: "/bookmarks" },
-    // { logo: <ChartColumnIcon/>, name: "Dashboard", to: `/dashboard/${encodeURIComponent(username || entity)}` },
-    // { logo: <User2/>, name: "Profile", to: `/profile/${encodeURIComponent(username || entity)}` },
     { logo: <LucideMessageCircleQuestion/>, name: "About Us", to: "/about-us" },
   ];
 
@@ -84,10 +78,10 @@ const Navbar = () => {
                   to={item.to}
                   className="flex mb-[6px] pt-[8px] px-6 align-center justify-center mx-0 whitespace-nowrap text-gray-700 hover:text-cyan-500 h-full hover:underline decoration-[1px] underline-offset-5"
                 >
-                  {/* <span className="relative"> */}
+                  <span className="relative">
                     {item.name}
-                    {/* <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span> */}
-                  {/* </span> */}
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
+                  </span>
                 </Link>
               ))}
           </div>
@@ -100,14 +94,11 @@ const Navbar = () => {
                 <ProfilePicture userId={userId} />
               </Link>
             ) : (
-              <Link to="/login" className="w-8 h-8">
-                <div className="flex justify-center w-full h-full pt-1 align-middle">
-                  <User2
-                    size={22}
-                    className="flex justify-center align-center"
-                  />
-                </div>
-              </Link>
+            <Link to="/login" className="relative w-8 h-8 r-4">
+              <ButtonComponent className={"pb-2 hover:scale-105"}>
+                Login
+                </ButtonComponent>
+            </Link>
             )}
           </div>
         </div>

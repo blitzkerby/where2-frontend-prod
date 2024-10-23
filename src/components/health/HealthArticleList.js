@@ -60,7 +60,7 @@ const HealthArticleList = () => {
           </p>
         </header>
       </WrapperComponent>
-      <div className="lg:w-[90%] sm:w-[95%] mx-auto">
+      <div className="lg:w-[90%] sm:w-[95%] mx-auto sm:my-[32px]">
         <WrapperComponent>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-2">
             {articles.map((article) => (

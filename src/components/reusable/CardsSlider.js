@@ -55,11 +55,11 @@ const CardSlider = ({ cards = [], header  }) => {
   }, [currentIndex, totalCards, initialIndex]);
 
   return (
-    <div className="relative lg:h-[40vh] sm:h-[500px] w-full mx-auto my-[16px] bg-blue-100">
+    <div className="relative lg:h-fit sm:h-fit w-full mx-auto my-[16px]">
       <div className="text-[#367588]">
         <b>{header}</b>
       </div>
-      <div className="overflow-hidden w-full h-full my-[32px]">
+      <div className="overflow-hidden w-full h-fit my-[32px]">
         <div
           ref={containerRef}
           className={`flex transition-transform duration-300 ease-in-out ${

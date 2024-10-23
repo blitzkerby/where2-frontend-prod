@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 const DefaultCardToptitle= ({card}) =>{
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer shadow-3xl hover:scale-105">
       <div className="p-4">
         <h3 className="text-lg font-semibold mb-2 text-[#13188C]">{card.title}</h3>
-        <p className="text-sm text-[#255BAB]">{card.description}</p>
+        <p className="text-sm text-[#255BAB] truncate hover:whitespace-normal">{card.description}</p>
       </div>
       <Link to={card.path}>
         <img
