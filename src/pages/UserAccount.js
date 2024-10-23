@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import FormInput from "../components/reusable/InputField";
 import useAuth from "../hooks/useAuth";
@@ -9,20 +9,23 @@ import PictureUpload from "../components/reusable/ProfilePhotoUpload";
 const UserAccount = ({ userInfo }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { role, loading, isLoggedIn } = useAuth();
+  const { role, loading, isLoggedIn, token } = useAuth();
+
+  useEffect(() => {
+    if (!loading && (!role || !isLoggedIn || !token)) {
+      navigate("/login", { replace: true });
+    }
+  }, [loading, role, isLoggedIn, token, navigate]);
 
   if (loading) {
-    return <LoadingOverlay message="We are fetching your profile..." />;
+    return <LoadingOverlay className="h-screen" message="We are fetching your profile..." />;
   }
 
-  if (!role || !isLoggedIn) {
-    navigate("/login");
-    return null;
+  if (!userInfo) {
+    return <div>No user information available.</div>;
   }
 
-  const formattedDate = new Date(userInfo.createdAt).toLocaleDateString(
-    "en-CA"
-  );
+  const formattedDate = new Date(userInfo.createdAt).toLocaleDateString("en-CA");
 
   return (
     <section className="w-full h-full bg-white rounded-3xl mb-[32px] shadow-md border">

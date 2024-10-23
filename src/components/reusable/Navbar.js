@@ -5,6 +5,7 @@ import { MessageCircleMore, LucideMessageCircleQuestion } from "lucide-react";
 import Menu from "./../../assets/svg/menu.svg";
 import useAuth from "./../../hooks/useAuth";
 import ProfilePicture from "./PictureUpload";
+import ButtonComponent from "./Button";
 import WrapperComponent from "./WrapperComponent";
 import {
   School,
@@ -43,17 +44,17 @@ const Navbar = () => {
     { logo: <LucideBriefcaseBusiness />, name: "Livelihood", to: "/livelihood", showMobile: true },
     { logo: <Activity />, name: "Health", to: "/health", showMobile: true },
     {
+      logo: <MessageCircleMore />,
+      name: "Community",
+      to: "/discussions",
+      showMobile: true,
+    },
+    {
       logo: <User2 />,
       name: "Profile",
       to: `/profile/${encodeURIComponent(username || entity)}`,
       showMobile: true,
       showDesktop: false,
-    },
-    {
-      logo: <MessageCircleMore />,
-      name: "Community",
-      to: "/discussions",
-      showMobile: true,
     },
     { logo: <LucideMessageCircleQuestion/>, name: "About Us", to: "/about-us" },
   ];
@@ -93,14 +94,11 @@ const Navbar = () => {
                 <ProfilePicture userId={userId} />
               </Link>
             ) : (
-              <Link to="/login" className="w-8 h-8">
-                <div className="flex justify-center w-full h-full pt-1 align-middle">
-                  <User2
-                    size={22}
-                    className="flex justify-center align-center"
-                  />
-                </div>
-              </Link>
+            <Link to="/login" className="relative w-8 h-8 r-4">
+              <ButtonComponent className={"pb-2 hover:scale-105"}>
+                Login
+                </ButtonComponent>
+            </Link>
             )}
           </div>
         </div>
