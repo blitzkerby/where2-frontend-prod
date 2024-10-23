@@ -7,9 +7,6 @@ import DropdownComponent from '../../../reusable/DropdownComponent';
 import useAuth from '../../../../hooks/useAuth';
 import { v4 as uuidv4 } from 'uuid';
 import PublicPhotoUpload from '../../../reusable/PublicPhotoUpload';
-// import { useFetchPublicPhoto } from '../../../../hooks/useFetchPublicPhoto';
-
-
 
 const dropdownItems = [
   { label: 'University' },
@@ -65,7 +62,6 @@ const AdminEditor = () => {
   const [formData, setFormData] = useState({});
   const [postId, setPostId] = useState('');
 
-  // const { imageUrl, isLoading, error } = useFetchPublicPhoto(userId, 'public');
 
   const [links, setLinks] = useState([
     { title: 'Telegram', url: '' },
