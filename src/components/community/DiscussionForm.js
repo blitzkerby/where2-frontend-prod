@@ -33,7 +33,7 @@ const DiscussionForm = ({ formData, handleChange, handleLocationChange, handleSu
             placeholder="Title needs to be at least 10 characters long."
             required
           />
-          <div className="relative">
+          { notDiscussionPath ? "" :           <div className="relative">
             <FormInput
               name="location"
               label="Location"
@@ -59,7 +59,7 @@ const DiscussionForm = ({ formData, handleChange, handleLocationChange, handleSu
                 <MapPin size={20} />
               )}
             </ButtonComponent>
-          </div>
+          </div>}
           <div className="flex-1">
             <label
               htmlFor="content"

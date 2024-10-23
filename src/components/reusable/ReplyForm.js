@@ -8,7 +8,7 @@ import useComments from "./../../hooks/useComments";
 import useAuth from "./../../hooks/useAuth";
 import config from "./../../config";
 
-const ReplyForm = ({ discussionId, onReplySubmitted, onCancel }) => {
+const ReplyForm = ({ discussionId, onReplySubmitted, onCancel, isHealthPage }) => {
   const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -45,7 +45,6 @@ const ReplyForm = ({ discussionId, onReplySubmitted, onCancel }) => {
           onCancel();
         }
         
-        // Invalidate the comments query to trigger a refetch
         queryClient.invalidateQueries(["comments", discussionId]);
       } else {
         throw new Error("Invalid response format");
@@ -76,27 +75,40 @@ const ReplyForm = ({ discussionId, onReplySubmitted, onCancel }) => {
           onChange={(e) => setContent(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Max length 200 characters"
-          className="w-full min-h-[100px] mb-2 border rounded-md p-4"
+          className={`w-full min-h-[100px] mb-2 rounded-md p-4 focus:ring-2 focus:ring-opacity-50 ${
+            isHealthPage 
+              ? "bg-gray-800 border-gray-700 text-gray-200 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500" 
+              : "bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:ring-blue-600 focus:border-blue-600"
+          }`}
           disabled={isSubmitting}
           maxLength={200}
         />
-        <div className="text-sm text-gray-500 text-right">
+        <div className={`text-sm text-right ${
+          isHealthPage ? "text-gray-400" : "text-gray-500"
+        }`}>
           {content.length}/200 characters
         </div>
       </div>
+      
       {error && <div className="text-red-500 text-sm">{error}</div>}
+      
       <div className="flex justify-end gap-2">
         <ButtonComponent
-          variant="ghost"
+          variant={isHealthPage ? "ghost-dark" : "ghost"}
           onClick={onCancel}
           disabled={isSubmitting}
           type="button"
+          className={isHealthPage ? "text-gray-300 hover:text-gray-100" : ""}
         >
           Cancel
         </ButtonComponent>
         <ButtonComponent
           type="submit"
           disabled={isSubmitting || !content.trim()}
+          variant={isHealthPage ? "primary-dark" : "primary"}
+          className={isHealthPage 
+            ? "bg-blue-600 hover:bg-blue-700 text-white" 
+            : ""}
         >
           {isSubmitting ? "Replying..." : "Reply"}
         </ButtonComponent>

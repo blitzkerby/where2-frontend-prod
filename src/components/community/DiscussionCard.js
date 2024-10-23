@@ -9,14 +9,18 @@ import ButtonComponent from "./../reusable/Button";
 import useComments from "./../../hooks/useComments";
 import config from "./../../config";
 import { Trash } from "lucide-react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [localComments, setLocalComments] = useState(discussion.comments || []);
+  const location = useLocation();
   const { isMobile } = useIsMobile();
   const [isDeleting, setIsDeleting] = useState(false);
   const navigate = useNavigate();
+
+  const isHealthPagePath = location.pathname.startsWith("/health");
 
   const { userId, token, role } = useAuth();
 
@@ -64,7 +68,7 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
 
   // Handler for deleting the discussion
   const handleDelete = async (e) => {
-    e.stopPropagation(); // Prevent the event from bubbling up
+    e.stopPropagation();
     if (window.confirm("Are you sure you want to delete this discussion?")) {
       setIsDeleting(true);
 
@@ -97,9 +101,12 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
 
   return (
     <div
-      className={`lg:p-5 sm:p-1 p-2 bg-white hover:scale-100 ${
-        isExpanded ? "min-h-fit" : ""
-      } rounded-lg shadow hover:shadow-lg cursor-pointer relative`}
+      className={`lg:p-5 sm:p-1 p-2 rounded-lg shadow hover:shadow-lg cursor-pointer relative
+        ${isExpanded ? "min-h-fit" : ""}
+        ${isHealthPagePath 
+          ? "bg-gray-900 text-white hover:bg-gray-800" 
+          : "bg-white text-black hover:bg-gray-50"
+        }`}
       onClick={toggleExpand}
     >
       <h3 className="text-2xl font-medium mb-2 truncate tracking-tight">
@@ -107,26 +114,34 @@ const DiscussionCard = ({ discussion, onDeleteSuccess }) => {
       </h3>
 
       {discussion.location && (
-        <div className="text-sm text-gray-500 my-4 text-justify">
+        <div className={`text-sm my-4 text-justify ${
+          isHealthPagePath ? "text-gray-300" : "text-gray-500"
+        }`}>
           <span className="font-medium tracking-tight pl-4 underline">Location:</span>{" "}
           {discussion.location}
         </div>
       )}
 
       <p
-        className={`text-gray-600 mb-4 text-justify pl-4 ${
+        className={`mb-4 text-justify pl-4 ${
           isExpanded
             ? "whitespace-normal"
             : "overflow-hidden whitespace-nowrap text-ellipsis"
-        }`}
+        } ${isHealthPagePath ? "text-gray-300" : "text-gray-600"}`}
       >
         {discussion.content}
       </p>
 
-      <div className="flex justify-between items-center text-sm text-gray-500 mb-2 pl-4">
+      <div className={`flex justify-between items-center text-sm mb-2 pl-4 ${
+        isHealthPagePath ? "text-gray-400" : "text-gray-500"
+      }`}>
         {discussion.user && (
           <div
-            className="flex items-center gap-2 cursor-pointer hover:text-gray-700"
+            className={`flex items-center gap-2 cursor-pointer ${
+              isHealthPagePath 
+                ? "hover:text-gray-200" 
+                : "hover:text-gray-700"
+            }`}
             onClick={handleUserClick(discussion.user.id)}
           >
             {isMobile ? <span>By </span> : <span>Posted by </span>}
