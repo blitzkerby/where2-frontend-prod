@@ -22,6 +22,7 @@ import  {setIsClicked}  from '../../features/slices/favoriteSlice';
 
 
 
+
 const Card = ({
   image = "",
   imageAlt = '',

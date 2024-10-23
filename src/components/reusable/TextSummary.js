@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ButtonComponent from "./Button";
+import { Spinning } from "./../reusable/Loading"
 import config from "./../../config";
 
 const TextSummary = ({ textToSummarize }) => {
@@ -44,6 +45,10 @@ const TextSummary = ({ textToSummarize }) => {
     }
   };
 
+  setTimeout(() => {
+    setError("");
+  }, 500)
+
   return (
     <div className="space-y-4">
       <h2 className="text-md font-light text-white mb-4 tracking-tightest">
@@ -65,8 +70,8 @@ const TextSummary = ({ textToSummarize }) => {
       >
         {isLoading ? (
           <div className="flex items-center justify-center space-x-2">
-            <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></span>
-            <span>Summary...</span>
+            <Spinning/>
+            <span>Summarizing...</span>
           </div>
         ) : (
           "Summary"

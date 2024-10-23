@@ -31,7 +31,7 @@ const AboutUsPage = () => {
   return (
     <>
           <NavBar />
-          <div className="max-w-[1440px] mx-auto mt-[100px]">
+    <div className="max-w-[1440px] mx-auto mt-[100px]">
       {bioCard.map((card, index) => (
         <div key={index}>
           {index === 1 ?

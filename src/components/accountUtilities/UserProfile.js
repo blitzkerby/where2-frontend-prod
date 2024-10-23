@@ -4,6 +4,7 @@ import config from "../../config";
 import { LoadingOverlay } from "../reusable/Loading";
 import Navbar from "../reusable/Navbar";
 import Footer from "../reusable/Footer";
+import fetchProfile from "../reusable/functions/FetchProfile";
 
 export const getAuthData = () => {
   const authData = localStorage.getItem("authData");
@@ -25,29 +26,7 @@ export const getAuthData = () => {
   }
 };
 
-const fetchProfile = async () => {
-  try {
-    const { token, userId } = getAuthData();
-    console.log(userId);
-    const res = await fetch(config.profile.getMyProfile(userId), {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
 
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(errorData.message || `HTTP error! status: ${res.status}`);
-    }
-
-    const { data } = await res.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching profile:", error);
-    throw error;
-  }
-};
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);

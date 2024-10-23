@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import SubHeroSectionComponent from "./../components/reusable/SubHeroSectionComponent";
 import WrapperComponent from "./../components/reusable/WrapperComponent";
 import Footer from "./../components/reusable/Footer";
 import Navbar from "./../components/reusable/Navbar";
-import CreateDiscussion from "./../components/community/CreateDiscussion";
-import DiscussionList from "./../components/community/DiscussionList";
 import DiscussionContainer from "./../components/reusable/DiscussionContainer";
-import { useLocation, useNavigate } from "react-router-dom";
 
 const DiscussionPage = () => {
   return (
     <>
       <Navbar />
+      <WrapperComponent>
+        <SubHeroSectionComponent h1Text={'WELCOME TO W2COMMUNITY'} subH1Text={'A PLACE WHERE YOU CAN GATHER AND SHARE THINGS'} pText={'W2COMMUNITY is a place where you can share your thoughts, ideas, and experiences with the world. Whether you are a student, researcher, or an individual, W2COMMUNITY has something for you.'}/>
+      </WrapperComponent>
       <WrapperComponent>
         <DiscussionContainer />
       </WrapperComponent>

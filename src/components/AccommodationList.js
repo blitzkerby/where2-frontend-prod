@@ -1,11 +1,11 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import { removedIsClicked,getFavorite } from "../features/slices/favoriteSlice";
 import Card from "./reusable/Card";
 
 const AccommodationList = ({ accommodations, page }) => {
+    let image;
     const dispatch = useDispatch();
     const { isClicked } = useSelector((state) => state.favorites);
     useEffect(() => {
@@ -24,12 +24,13 @@ const AccommodationList = ({ accommodations, page }) => {
     
     return (
     <>
-    {accommodations.map(accommodation => {
+        {accommodations.map(accommodation => {
+        accommodation.image_url? image = accommodation.image_url.img1: image = null
         return(
             <Card
                 key={accommodation.id}
                 id={accommodation.id}
-                image={'https://th.bing.com/th/id/R.5a8394ded8bc846fa7be1d13d7ff568b?rik=eAfE14B5fVvw4A&pid=ImgRaw&r=0'}
+                image={image}
                 imageAlt={"room"}
                 title={accommodation.name}
                 price = {accommodation.price}

@@ -13,6 +13,8 @@ import AdminContent from "../accountUtilities/sidebarComponents/Admin/AdminConte
 import Logout from "./Logout.js";
 import CollectionPanel from "./CollectionPanel.js";
 import SettingPanel from "../SettingPanel.js";
+import adminContentListing from "../accountUtilities/sidebarComponents/Admin/AdminContentListing.js";
+
 
 export const SidebarContentContext = createContext();
 
@@ -21,6 +23,7 @@ const contentComponents = {
   account: UserAccount,
   userList: UserListing,
   jobList: PartTimeJobListing,
+  adminContentListing : adminContentListing,
   accommodationList: AccommodationListing,
   adminDashboard: AdminDashboard,
   adminContent: AdminContent,
@@ -31,7 +34,6 @@ const contentComponents = {
 
 const Profile = ({ userData, isPublic }) => {
   const [sidebarContent, setSidebarContent] = useState(() => {
-    
     return localStorage.getItem("sidebarContent") || "account";
   });
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -42,7 +44,7 @@ const Profile = ({ userData, isPublic }) => {
     const checkScreenSize = () => {
       const newIsMobile = window.innerWidth < 980;
       setIsMobile(newIsMobile);
-      setSidebarOpen(!newIsMobile); 
+      setSidebarOpen(!newIsMobile);
     };
 
     checkScreenSize();
@@ -52,7 +54,6 @@ const Profile = ({ userData, isPublic }) => {
   }, []);
 
   useEffect(() => {
-    
     localStorage.setItem("sidebarContent", sidebarContent);
   }, [sidebarContent]);
 
@@ -94,7 +95,11 @@ const Profile = ({ userData, isPublic }) => {
         )}
 
         {/* Main Content */}
-        <div className={`flex-grow max-h-[inherite] overflow-y-scroll ${isMobile ? "relative z-10" : ""}`}>
+        <div
+          className={`flex-grow max-h-[inherite] overflow-y-scroll ${
+            isMobile ? "relative z-10" : ""
+          }`}
+        >
           <div className="h-full">
             <div className="p-4">
               {isMobile && !sidebarOpen && (
@@ -105,10 +110,19 @@ const Profile = ({ userData, isPublic }) => {
                   <ChevronRight size={24} />
                 </button>
               )}
-              {sidebarContent !== "account" && sidebarContent !== "setting" && sidebarContent !== "logOut" ? (
+              {sidebarContent !== "account" &&
+              sidebarContent !== "setting" &&
+              sidebarContent !== "logOut" &&
+              sidebarContent !== "userList" &&
+              sidebarContent !== "schoolList" &&
+              sidebarContent !== "jobList" &&
+              sidebarContent !== "adminContent" &&
+              sidebarContent !== "adminContentListing" &&
+              sidebarContent !== "adminDashboard" ? (
                 <CollectionPanel category={sidebarContent} />
               ) : (
-                <ContentComponent userInfo={userData} />)}
+                <ContentComponent userInfo={userData} />
+              )}
             </div>
           </div>
         </div>

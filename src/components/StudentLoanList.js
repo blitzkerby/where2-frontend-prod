@@ -33,7 +33,7 @@ const StudentLoanList = ({ studentLoans, page }) => {
             <Card
                 key={loan.loan_id}
                 id={loan.loan_id}
-                image={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB6qQYTiaG58zHg3LwPcbPaqOrkFmAschW8A&s'}
+                image={loan.img_url}
                 imageAlt={loan.image_alt}
                 title={loan.bank_name}
                 description={loan.loan_type}

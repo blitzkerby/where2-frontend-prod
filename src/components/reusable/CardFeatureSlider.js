@@ -48,7 +48,7 @@ const CardFeatureSlider = ({ cardFeature, header  }) => {
   }, [nextSlide, isMobile]);
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto">
+    <div className="relative w-full max-w-6xl mx-auto my-[32px]">
       <div className="overflow-hidden w-full">
         <div className="p-5 text-blue-900 text-[38px] sm:text-[35.8px]">
           {header}
@@ -81,16 +81,16 @@ const CardFeatureSlider = ({ cardFeature, header  }) => {
           )}
         </div>
       </div>
-      <div className="absolute bottom-4 right-4 flex space-x-2">
+      <div className="absolute bottom-0 right-4 flex space-x-2">
         <button
           onClick={prevSlide}
-          className="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors"
+          className="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors hover:scale-105"
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
         <button
           onClick={nextSlide}
-          className="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors"
+          className="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors hover:scale-105"
         >
           <ChevronRight className="w-6 h-6" />
         </button>

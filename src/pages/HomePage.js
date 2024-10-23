@@ -131,7 +131,7 @@ const featureCards = [
 
 const HomePage = () => {
   return (
-    <div>
+    <>
       <Navbar />
       <WrapperComponent>
         <Hero props={hero1}>
@@ -157,10 +157,8 @@ const HomePage = () => {
       <WrapperComponent>
         <JoinUs />
       </WrapperComponent>
-      <WrapperComponent>
         <Footer />
-      </WrapperComponent>
-    </div>
+    </>
   );
 };
 

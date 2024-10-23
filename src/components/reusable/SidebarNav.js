@@ -56,7 +56,7 @@ const MenuItem = ({ item, depth = 0 }) => {
 
 const SidebarNav = ({ menuItems }) => {
   return (
-    <nav className="flex flex-col gap-1 min-w-[240px] p-2 font-sans text-base font-normal text-gray-700">
+    <nav className="flex flex-col gap-1 min-w-[240px] p-2 font-sans text-base font-normal text-gray-700 hover:scale-105">
       {menuItems.map((item, index) => (
         <MenuItem key={index} item={item} />
       ))}

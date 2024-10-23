@@ -40,6 +40,8 @@ const config = {
   photo: {
     getS3Url: `${API_URL}/api/user/s3Url`,
     uploadProfilePicture: `${API_URL}/api/user/profile-picture`,
+    uploadPublicPhoto: `${API_URL}/api/user/public`,
+    fetchPublicPhotoForPost: (userId, postId) => `${API_URL}/api/user/${userId}/public/${postId}`,
     fetchProfilePicture: (userId) =>
       `${API_URL}/api/user/${userId}/profile-picture`,
     fetchBatchProfilePictures: `${API_URL}/api/user/users/batch-profile-pictures`,
@@ -57,9 +59,10 @@ const config = {
     deleteComment: (commentId) => `${API_URL}/api/discussion/comment/${commentId}`,
   },
   job: {
-    getAllJob: `${API_URL}/api/jobs`,
-    getAssociatedCompany: (jobId) =>
-      `${API_URL}/api/jobs/associatedCompany/${jobId}`,
+    getAllJob: `${API_URL}/api/jobs/job-list`,
+    getAssociatedCompany: (jobId) => `${API_URL}/api/jobs/associatedCompany/${jobId}`,
+    approveJob : (jobId) => `${API_URL}/approve/${jobId}`,
+    getJob : (jobId) => `${API_URL}api/jobs/${jobId}`
   },
   favorite: {
     addFavorite: `${API_URL}/api/favorites/addFavorite`,
@@ -72,8 +75,9 @@ const config = {
     getAllList: (model) => `${API_URL}/api/list/${model}`,
   },
   universities: {
-    getAllUniversity: `${API_URL}/api/list/university`,
-    getUniversityById: `${API_URL}/api/detail/university`,
+    getAllUniversity : `${API_URL}/api/list/university`,
+    getUniversityList : `${API_URL}/api/detail/university/university-list`,
+    getUniversityById : `${API_URL}/api/detail/university`,
   },
   scholarships: {
     getAllScholarships: `${API_URL}/api/list/scholarship`,
@@ -91,11 +95,6 @@ const config = {
   },
   chatbot: {
     sendMessage: `${API_URL}/api/ai/summary`,
-  },
-  contentCreation: {
-    createUniversity: `${API_URL}/api/detail/university/create`,
-    createJob: `${API_URL}/api/jobs/addJob`,
-    createAccomodation: `${API_URL}`,
   },
   payment: {
     makePayment: `${API_URL}/api/bakong-payment`,
@@ -117,11 +116,11 @@ const config = {
   health: {
     getAllHealthArticles: `${API_URL}/api/health/health-articles`,
     getHealthArticleById: (id) => `${API_URL}/api/health/health-articles/${id}`,
-    contentCreation: {
-      createUniversity: `${API_URL}/api/detail/university/create`,
-      createJob: `${API_URL}/api/jobs/addJob`,
-      createAccomodation: `${API_URL}`,
-    },
   },
-};
+  contentCreation : {
+    createUniversity : `${API_URL}/api/detail/university/addUniversity`,
+    createJob : `${API_URL}/api/jobs/addJob`,
+    createAccomodation : `${API_URL}`
+  }
+}
 export default config;
