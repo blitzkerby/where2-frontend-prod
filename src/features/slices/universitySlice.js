@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import config from "../../config"
 import { setTotalPage } from './paginationSlice';
+import { setIsLoading } from './favoriteSlice';
 
 /**
  * Fetch all universities with pagination.
@@ -16,8 +17,7 @@ export const fetchUniversities = createAsyncThunk(
     async ({ page }, { dispatch }) => {
         try {
             const response = await axios.get(`${config.universities.getAllUniversity}?page=${page}`);
-
-            dispatch(setTotalPage(response.data.pagination.totalPages || 1));       
+            dispatch(setTotalPage(response.data.pagination.totalPages || 1));
             return response.data.list;
         } catch (error) {
             return []
@@ -65,6 +65,9 @@ const universitySlice = createSlice({
     reducers: {
         setUniversities: (state, action) => {
             state.universities = action.payload
+        },
+        setLoading: (state, action) => {
+            state.loading = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -126,5 +129,5 @@ const universitySlice = createSlice({
     },
 });
 
-export const { setUniversities } = universitySlice.actions;
+export const { setUniversities , setLoading } = universitySlice.actions;
 export default universitySlice.reducer;

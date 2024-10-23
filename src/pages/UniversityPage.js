@@ -6,8 +6,7 @@ import { useQueryParams } from '../hooks/useQueryParams';
 
 import { setTotalPage } from '../features/slices/paginationSlice';
 import { filterByLocation } from '../features/slices/filterSlice';
-
-import { fetchUniversities, searchUniversities, setUniversities } from '../features/slices/universitySlice';
+import { fetchUniversities, searchUniversities, setUniversities , setLoading } from '../features/slices/universitySlice';
 
 import { LoadingOverlay } from '../components/reusable/Loading';
 
@@ -45,10 +44,20 @@ const UniversityPage = () => {
         },
     ];
 
+
+    /**
+     * async function
+     * 
+     * Filters and updates the search results based on the location parameters
+     * 
+     * @param {Array} list - List of search results
+     * @param {number} totalPages - Total pages of results
+     */
     async function filterLocation(){
-        const { list , totalPages } = await filterByLocation({ page, location })
+        const { list , totalPages } = await filterByLocation({ page, location , category: "university"})
         dispatch(setUniversities(list))
         dispatch(setTotalPage(totalPages))
+        if (list.length > 0) setLoading(false)
     }
 
     /**
@@ -66,6 +75,7 @@ const UniversityPage = () => {
         if (searchQuery !== "") {
             dispatch(searchUniversities({ page, query : searchQuery}));
         } else if (location !== "") {
+            setLoading(true)
             filterLocation()
         } else {
             dispatch(fetchUniversities({ page }));
@@ -82,8 +92,17 @@ const UniversityPage = () => {
                     searchPlaceholder="Search universities..."
                     category="university"
                 />
-                <Filter items={items}/>
-                <ListLayout items={universities} category="university" page={page} />
+                <Filter 
+                    items={items}
+                    category={"university"}
+                    location={location}
+                />
+                <ListLayout 
+                    items={universities} 
+                    category="university"
+                    page={page} 
+                    isLoading={loading}    
+                />
                 <Pagination 
                     totalPage={totalPage} 
                     currentPage={page}

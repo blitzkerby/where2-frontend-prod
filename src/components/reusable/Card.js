@@ -10,7 +10,7 @@ import MiniMap from '../../assets/svg/miniMap.svg';
 import BookMark from '../../assets/svg/bookmark.svg';
 import Calender from '../../assets/svg/calender.svg';
 import MiniClock from '../../assets/svg/miniClock.svg';
-import { Facebook, Instagram, Twitter, Youtube, Chrome } from 'lucide-react';
+import { Facebook, Instagram, Twitter, Youtube, Chrome, ImageIcon } from 'lucide-react';
 import FilledHeart from '../../assets/svg/filled-heart.svg'
 import  {convertToHTML}  from '../../utility/markdownConverter';
 //components
@@ -23,7 +23,7 @@ import  {setIsClicked}  from '../../features/slices/favoriteSlice';
 
 
 const Card = ({
-  image = '',
+  image = "",
   imageAlt = '',
   title = '',
   description = '',
@@ -48,6 +48,7 @@ const Card = ({
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [heartClicked, setHeartClicked] = useState()
+  const [imageError, setImageError] = useState(false)
 
   useEffect(() => {
     setHeartClicked(isHeartClicked)
@@ -74,8 +75,8 @@ const Card = ({
     }
   };
 
-  const handleError = (event) => {
-    event.target.src = "https://i.pinimg.com/564x/1b/b6/95/1bb69534ae81c183c82154062df5d94f.jpg";
+  const handleError = () => {
+    setImageError(true)
   };
 
   const socialMediaIcons = [
@@ -96,25 +97,24 @@ const Card = ({
     <div className="relative clip-border-box rounded-xl border flex md:flex-row shadow-md
         lg:h-[348px] lg:w-[886px]
         sm:max-w-[600px] sm:w-[100%] sm:flex-col">
-      <div className="bg-cover bg-center rounded-xl flex-shrink-0
-          lg:w-[398px]
-          sm:w-[100%] sm:max-h-[348px]">
-        {image ? (
+      <div className="bg-cover bg-center flex items-center flex-shrink-0 overflow-hidden
+        lg:w-[398px] 
+        sm:w-[100%] sm:max-h-[348px]">
+        {imageError || !image ? (
+          <div className="top-0 left-0 w-full h-full flex items-center justify-center" style={{ backgroundColor: 'lightgrey' }}>
+            <ImageIcon size={48} color="gray" />
+          </div>
+        ) : (
           <img
-            className="top-0 left-0 w-full h-full object-cover -z-10"
+            className="top-0 left-0 w-full h-full object-cover"
             src={image}
             alt={imageAlt}
             onError={handleError}
           />
-        ) : (
-          <img
-            className="top-0 left-0 w-full h-full object-cover -z-10"
-            src="https://i.pinimg.com/564x/1b/b6/95/1bb69534ae81c183c82154062df5d94f.jpg"
-            alt="Bill is a wonderful pup!"
-          />
         )}
       </div>
-      <div className="flex-1 lg:pl-9 lg:pr-5 lg:py-3 sm:px-5 sm:py-5">
+      <div className="flex-1 lg:pl-9 lg:pr-5 lg:py-3 sm:px-5 sm:py-5
+        lg:max-w-[488px]">
         <div className="sm:mt-3">
           <div className="sm:mb-2">
             <h5 className="text-h4p font-bold">{title}</h5>
@@ -154,7 +154,7 @@ const Card = ({
               </p>
             </div> : null}
         </div>
-        <div className="flex flex-col lg:h-[62%] sm:h-[200px]">
+        <div className="flex flex-col lg:h-[62%] sm:max-h-[200px]">
           <div className="flex-1 text-clip overflow-hidden h-[10px]">
             <p className="text-justify">{convertToHTML(description)}</p>
           </div>

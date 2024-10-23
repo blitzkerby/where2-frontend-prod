@@ -7,14 +7,14 @@ const NoResults = () => {
                 marginTop: '6.9rem'
             }}
         >
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center" style={{ width: "250px", height: "250px"}}>
                 <img 
-                    src="https://i.imgur.com/NyzUIDt.png" 
+                    src="https://i.imgur.com/Qc15W5q.png"
                     alt="404 Not Found" 
-                    className="w-64 h-64 object-cover"
+                    className="object-cover"
                 />
             </div>
-            <h1 className="text-center" style={{ fontSize: '1.5rem', marginTop: '10px' }}>No results... (bawk!)</h1>
+            <h1 className="text-center" style={{ fontSize: '1.5rem' }}>No results...</h1>
         </div>
     )
 }
