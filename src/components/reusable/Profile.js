@@ -117,7 +117,8 @@ const Profile = ({ userData, isPublic }) => {
               sidebarContent !== "schoolList" &&
               sidebarContent !== "jobList" &&
               sidebarContent !== "adminContent" &&
-              sidebarContent !== "adminContentListing" ? (
+              sidebarContent !== "adminContentListing" &&
+              sidebarContent !== "adminDashboard" ? (
                 <CollectionPanel category={sidebarContent} />
               ) : (
                 <ContentComponent userInfo={userData} />
