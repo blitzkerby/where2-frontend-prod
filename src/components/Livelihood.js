@@ -54,17 +54,15 @@ const Livelihood = () => {
                     </div>}
                     <div className="flex-1 content-center">
                         <div>
-                            <WrapperComponent>
-                                <Link to={'/list/job'}>
-                                    <LivelihoodBox title={"Part Time Job"} content={"Invest in your future. Discover part-time jobs that help fund your education goals."} />
-                                </Link>
-                                <Link to={'/list/student-loan'}>
-                                    <LivelihoodBox title={"Student Loan"} content={"Simplify your student loan journey. Explore refinancing options and get personalized advice."} />
-                                </Link>
-                                <Link to={'/list/accommodation'}>
-                                    <LivelihoodBox title={"Accommodation"} content={"Enhance your learning experience with the perfect living space. Find accommodations that inspire and support your academic journey."} />
-                                </Link>
-                            </WrapperComponent>
+                            <Link to={'/list/job'}>
+                                <LivelihoodBox title={"Part Time Job"} content={"Invest in your future. Discover part-time jobs that help fund your education goals."} />
+                            </Link>
+                            <Link to={'/list/student-loan'}>
+                                <LivelihoodBox title={"Student Loan"} content={"Simplify your student loan journey. Explore refinancing options and get personalized advice."} />
+                            </Link>
+                            <Link to={'/list/accommodation'}>
+                                <LivelihoodBox title={"Accommodation"} content={"Enhance your learning experience with the perfect living space. Find accommodations that inspire and support your academic journey."} />
+                            </Link>
                         </div>
                     </div>
                 </section>
