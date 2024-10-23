@@ -84,13 +84,13 @@ const CardFeatureSlider = ({ cardFeature, header  }) => {
       <div className="absolute bottom-0 right-4 flex space-x-2">
         <button
           onClick={prevSlide}
-          className="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors"
+          className="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors hover:scale-105"
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
         <button
           onClick={nextSlide}
-          className="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors"
+          className="bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors hover:scale-105"
         >
           <ChevronRight className="w-6 h-6" />
         </button>
