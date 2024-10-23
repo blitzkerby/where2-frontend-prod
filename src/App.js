@@ -66,8 +66,9 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: (
-     
-        <RegisterPage />
+     <PublicOnlyROute>
+                <RegisterPage />
+     </PublicOnlyROute>
    
     ),
   },
@@ -150,14 +151,6 @@ const router = createBrowserRouter([
   { path: "/signup",element: <RegisterPage />},
   { path: "/scholarships", element: <ScholarshipPage/>},
   { path: "/profile/:userName", element: <UserProfile /> },
-  // {
-  //   path: "/universities",
-  //   element: <UniversityPage />,
-  //   children: [
-  //     { path: "search", element: <UniversityPage /> },
-  //     { path: ":id", element: <UniversityDetail/> }
-  //   ]
-  // },
   { path: "/livelihood", element: <LivelihoodPage /> },
   { path: "/forget-password", element: <ForgetPasswordPage /> },
   { path: "/signup/verification", element: <VerificationPage /> },
