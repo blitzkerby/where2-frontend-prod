@@ -2,7 +2,7 @@ import React from "react";
 import WrapperComponent from "./WrapperComponent";
 
 const BioCard = ({ children, variant = "left", bioCard, className = "" }) => {
-  const baseStyle = `flex items-center justify-center  sm:w-full sm:flex-col m-auto p-6 gap-6`;
+  const baseStyle = `flex items-center justify-center hover:scale-105 sm:w-full sm:flex-col m-auto p-6 gap-6 shadow-lg my-[32px] rounded-3xl sm:px-5`;
 
 
   const variants = {
@@ -18,21 +18,19 @@ const BioCard = ({ children, variant = "left", bioCard, className = "" }) => {
         <img
           src={bioCard.image}
           alt={bioCard.title}
-          className="min-w-full h-full"
+          className="min-w-full h-full rounded-2xl"
         />
       </div>
-      <div className="w-full p-4 rounded-md shadow-md sm:w-full lg:w-1/3">
+      <div className="w-full p-4 sm:w-full lg:w-1/3 lg:h-full">
         <h1 className="flex items-center justify-center w-full h-full ">
           {bioCard.title}
         </h1>
-        <div>
           <p
             className="flex items-center justify-center w-full h-full text-justify"
             dangerouslySetInnerHTML={{
               __html: bioCard.description.replace(/\n/g, "<br />"),
             }}
           />
-        </div>
       </div>
     </div>
     </WrapperComponent>
