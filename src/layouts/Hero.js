@@ -26,10 +26,10 @@ const Hero = ({ props, children }) => {
     /* textbox */
     title: "text-h1 tracking-tight font-black text-[38px]",
     subtitle: "text-h2 tracking-tight mb-8 text-[28px]",
-    contentWrapper: "absolute w-full z-10 mx-auto top-[7%] mt-section-top-margin max-w-[660px] ",
+    contentWrapper: "absolute w-full z-10 mx-auto top-[7%] mt-section-top-margin max-w-[660px] px-4",
 
     /* background image */
-    imageContainer: `mt-image-container-top-margin flex justify-center w-full h-full`,
+    imageContainer: `mt-image-container-top-margin flex justify-center w-full h-full hover:scale-105`,
     image: "object-contain sm:object-cover",
 
     /* partime job button */
