@@ -1,9 +1,9 @@
 import axios from 'axios';
 import config from '../../config';
 
-export async function filterByLocation({ location, page }) {
+export async function filterByLocation({ location, page , category }) {
     try {
-        const response = await axios.get(`${config.universities.getAllUniversity}?page=${page}&location=${location}`);
+        const response = await axios.get(`${config.list.getAllList(category)}?page=${page}&location=${location}`);
         
         const { list, pagination: { totalPages } = {} } = response.data;
 

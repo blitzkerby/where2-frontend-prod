@@ -8,6 +8,7 @@ import Pagination from "../components/reusable/Pagination";
 import ListContainer from "../components/reusable/ListContainer";
 import { useLocation } from 'react-router-dom';
 import { LoadingOverlay } from "../components/reusable/Loading";
+import ListLayout from "../layouts/ListLayout";
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -29,7 +30,8 @@ const JobPage = () => {
             <ListContainer>
             {loading && <LoadingOverlay/>}
             {error && <p>{error}</p>}
-            <JobList jobs={data} page={page}/>
+            {/* <JobList jobs={data} page={page}/> */}
+            <ListLayout itesm={data} category="job" page={page}/>
             </ListContainer>
             <Pagination totalPage={totalPage} currentPage={page} route={'jobs'} category={"job"} />
             <Footer />

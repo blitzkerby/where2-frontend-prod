@@ -71,6 +71,9 @@ const config = {
     removedFavorite: (cardId, category) =>
       `${API_URL}/api/favorites/${cardId}/${category}`,
   },
+  list:{
+    getAllList: (model) => `${API_URL}/api/list/${model}`,
+  },
   universities: {
     getAllUniversity : `${API_URL}/api/list/university`,
     getUniversityList : `${API_URL}/api/detail/university/university-list`,
