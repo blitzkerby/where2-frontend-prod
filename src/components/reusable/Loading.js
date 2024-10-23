@@ -36,4 +36,10 @@ const LoadingOverlay = ({ message = "Loading...", isFullScreen = false }) => {
   );
 };
 
-export { LoadingSpinner, LoadingOverlay }
+const Spinning = () => {
+  return (
+    <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></span>
+  )
+}
+
+export { LoadingSpinner, LoadingOverlay, Spinning }

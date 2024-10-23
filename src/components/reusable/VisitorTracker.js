@@ -17,7 +17,7 @@ const VisitTracker = ({ path }) => {
 
   if (role === 'admin' || role === 'developer') {
     return (
-      <div className="py-6">
+      <div className="py-2">
         <div className="w-full h-full">
           {visits.length === 0 ? (
             <span className="text-gray-500">No visits recorded yet.</span>

@@ -14,11 +14,11 @@ const BioCard = ({ children, variant = "left", bioCard, className = "" }) => {
   return (
     <WrapperComponent>
           <div className={componentStyle}>
-      <div className="w-[50%] h-[50%] lg:h-full sm:h-auto">
+      <div className="lg:w-[50%] h-[50%] lg:h-full sm:h-auto">
         <img
           src={bioCard.image}
           alt={bioCard.title}
-          className="w-full h-full "
+          className="min-w-full h-full"
         />
       </div>
       <div className="w-full p-4 rounded-md shadow-md sm:w-full lg:w-1/3">
@@ -27,7 +27,7 @@ const BioCard = ({ children, variant = "left", bioCard, className = "" }) => {
         </h1>
         <div>
           <p
-            className="flex items-center justify-center w-full h-full "
+            className="flex items-center justify-center w-full h-full text-justify"
             dangerouslySetInnerHTML={{
               __html: bioCard.description.replace(/\n/g, "<br />"),
             }}

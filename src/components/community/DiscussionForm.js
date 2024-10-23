@@ -33,7 +33,7 @@ const DiscussionForm = ({ formData, handleChange, handleLocationChange, handleSu
             placeholder="Title needs to be at least 10 characters long."
             required
           />
-          <div className="relative">
+          { notDiscussionPath ? "" :           <div className="relative">
             <FormInput
               name="location"
               label="Location"
@@ -59,7 +59,7 @@ const DiscussionForm = ({ formData, handleChange, handleLocationChange, handleSu
                 <MapPin size={20} />
               )}
             </ButtonComponent>
-          </div>
+          </div>}
           <div className="flex-1">
             <label
               htmlFor="content"
@@ -86,7 +86,7 @@ const DiscussionForm = ({ formData, handleChange, handleLocationChange, handleSu
           <div className="flex gap-4 justify-end">
             <ButtonComponent
               variant="outline"
-              onClick={() => navigate("/discussions")}
+              onClick={() => window.location.reload()}
               className={"mt-12 w-[197px] h-[38px] sm:w-[343px] sm:h-[50px]"}
               disabled={isSubmitting}
             >

@@ -1,33 +1,36 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import ButtonComponent from "../reusable/Button";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import useComments from "./../../hooks/useComments";
-import useAuth from "../../hooks/useAuth";
-import ProfilePicture from "../reusable/PictureUpload";
+import useAuth from "./../../hooks/useAuth";
+import ProfilePicture from "./../reusable/PictureUpload";
 import ReplyForm from "../reusable/ReplyForm";
 import { Reply } from "lucide-react";
 import config from "./../../config";
+import { Trash } from "lucide-react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 const CommentSectionComponent = ({ discussionId, onCommentAdded }) => {
   const { isLoggedIn, userId, role, token } = useAuth();
+  const location = useLocation();
+  const isHealthPagePath = location.pathname.startsWith("/health");
+  
   const {
     comments,
     loading: isLoading,
     error: fetchError,
-    refetch,
   } = useComments(discussionId);
 
   const [showReplyForm, setShowReplyForm] = useState(false);
   const [deletingComments, setDeletingComments] = useState({});
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const queryClient = useQueryClient(); // Get QueryClient from React Query
+  const queryClient = useQueryClient();
 
   const handleReplySubmitted = useCallback(
     (newComment) => {
       if (newComment && newComment.id && newComment.content) {
-        // Optimistically update the cache
         queryClient.setQueryData(["comments", discussionId], (oldData) => {
           const updatedComments = oldData ? [...oldData, newComment] : [newComment];
           return updatedComments;
@@ -57,13 +60,11 @@ const CommentSectionComponent = ({ discussionId, onCommentAdded }) => {
           },
         });
 
-        // Optimistically remove the comment from cache
         queryClient.setQueryData(["comments", discussionId], (oldData) => {
           return oldData ? oldData.filter(comment => comment.id !== commentId) : [];
         });
       } catch (err) {
         console.error("Error deleting comment:", err);
-        // Revert cache on error
         queryClient.invalidateQueries(["comments", discussionId]);
       } finally {
         setDeletingComments((prev) => ({ ...prev, [commentId]: false }));
@@ -78,18 +79,25 @@ const CommentSectionComponent = ({ discussionId, onCommentAdded }) => {
 
   return (
     <div className="mt-6 space-y-8">
-      <h2 className="text-sm tracking-tighter">
+      <h2 className={`text-sm tracking-tighter ${
+        isHealthPagePath ? "text-gray-300" : "text-gray-700"
+      }`}>
         Comments ({comments ? comments.length : 0})
       </h2>
+      
       {isLoggedIn && !showReplyForm && (
         <div className="w-full flex justify-end">
           <ButtonComponent
-            variant="ghost"
-            className="hover:visible text-sm text-gray-500 text-opacity-70 flex"
+            variant={isHealthPagePath ? "ghost-dark" : "ghost"}
+            className={`hover:visible text-sm flex ${
+              isHealthPagePath 
+                ? "text-gray-400 hover:text-gray-200" 
+                : "text-gray-500 hover:text-gray-700"
+            }`}
             onClick={() => setShowReplyForm(true)}
           >
             <Reply className="mt-1" size={18} />
-            <span className="mt-1 ml-1">reply</span>
+            <span className="mt-1 mr-1">reply</span>
           </ButtonComponent>
         </div>
       )}
@@ -99,6 +107,7 @@ const CommentSectionComponent = ({ discussionId, onCommentAdded }) => {
           discussionId={discussionId}
           onReplySubmitted={handleReplySubmitted}
           onCancel={() => setShowReplyForm(false)}
+          isHealthPage={isHealthPagePath}
         />
       )}
 
@@ -113,7 +122,11 @@ const CommentSectionComponent = ({ discussionId, onCommentAdded }) => {
         </div>
       )}
       {isLoading && (
-        <div className="text-gray-500 text-sm">Loading comments...</div>
+        <div className={`text-sm ${
+          isHealthPagePath ? "text-gray-400" : "text-gray-500"
+        }`}>
+          Loading comments...
+        </div>
       )}
 
       <div className="space-y-4 pl-8">
@@ -123,11 +136,17 @@ const CommentSectionComponent = ({ discussionId, onCommentAdded }) => {
             .map((comment) => (
               <div
                 key={comment.id}
-                className="bg-gray-50 p-4 rounded-lg relative"
+                className={`p-4 rounded-lg relative ${
+                  isHealthPagePath 
+                    ? "bg-gray-800 hover:bg-gray-700" 
+                    : "bg-gray-50 hover:bg-gray-100"
+                }`}
               >
                 <div className="flex items-center gap-2 mb-2">
                   <ProfilePicture userId={comment.user.id} size={6} />
-                  <span className="text-sm text-gray-600 truncate max-w-[200px]">
+                  <span className={`text-sm truncate max-w-[200px] ${
+                    isHealthPagePath ? "text-gray-300" : "text-gray-600"
+                  }`}>
                     {comment.user.email}
                   </span>
                 </div>
@@ -142,11 +161,13 @@ const CommentSectionComponent = ({ discussionId, onCommentAdded }) => {
                       onClick={() => handleDelete(comment.id)}
                       disabled={deletingComments[comment.id]}
                     >
-                      {deletingComments[comment.id] ? "Deleting..." : "Delete"}
+                      {deletingComments[comment.id] ? "..." : <Trash size={18}/>}
                     </ButtonComponent>
                   </div>
                 )}
-                <div className="text-gray-700 whitespace-pre-wrap break-all w-full">
+                <div className={`whitespace-pre-wrap break-all w-full pl-4 ${
+                  isHealthPagePath ? "text-gray-200" : "text-gray-700"
+                }`}>
                   {comment.content.split(" ").map((word, index) => (
                     <React.Fragment key={index}>
                       <span className="break-all w-[90%] h-fit">{word}</span>
