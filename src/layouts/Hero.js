@@ -30,7 +30,7 @@ const Hero = ({ props, children }) => {
     contentWrapper: "absolute w-full z-10 mx-auto top-[7%] mt-section-top-margin max-w-[660px] px-4",
 
     /* background image */
-    imageContainer: `mt-image-container-top-margin flex justify-center w-full h-full hover:scale-105`,
+    imageContainer: `mt-image-container-top-margin flex justify-center w-full h-full hover:scale-110`,
     image: "object-contain sm:object-cover",
 
     /* partime job button */
