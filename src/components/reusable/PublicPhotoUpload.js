@@ -1,20 +1,28 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { Edit2 } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
-import { useUploadPublicPhoto } from "./../../hooks/useFetchPublicPhoto";
+import { useFetchPublicPhoto, useUploadPublicPhoto } from "./../../hooks/useFetchPublicPhoto";
 import { LoadingOverlay } from "./Loading";
 
 const MAX_FILE_SIZE = 500 * 1024;
 
 
-const PublicPhotoUpload = () => {
+const PublicPhotoUpload = ({ postId }) => {
   const { userId } = useAuth();
-  const formType = localStorage.getItem('formType')
+  const formType = localStorage.getItem('formType');
+  
+  // Add state for the current image
+  const [currentImage, setCurrentImage] = useState(null);
 
-  console.log(formType);
+  const { imageUrl, isLoading, fetchPhoto } = useFetchPublicPhoto(userId, postId);
+  const { uploadPublicPhoto, isUploading, uploadError } = useUploadPublicPhoto();
 
-//   const { imageUrl, isLoading, error, fetchPhoto } = useFetchPublicPhoto(userId);
-  const { uploadPublicPhoto, isUploading, uploadError } = useUploadPublicPhoto(userId);
+  // Effect to update currentImage when imageUrl changes
+  useEffect(() => {
+    if (imageUrl) {
+      setCurrentImage(imageUrl);
+    }
+  }, [imageUrl]);
 
   const handleFileChange = async (e) => {
     const selectedFile = e.target.files[0];
@@ -26,25 +34,22 @@ const PublicPhotoUpload = () => {
       return;
     }
 
-    const newimageUrl = await uploadPublicPhoto(selectedFile, "public", formType);
-    // if (newimageUrl) {
-    //   fetchPhoto(formType);
-    // }
+    try {
+      // Upload the photo and get the response
+      const result = await uploadPublicPhoto(selectedFile, "public", formType, postId);
+      
+      if (result.success) {
+        // Update the current image immediately
+        setCurrentImage(result.imageUrl);
+        // Refresh the data from server
+        await fetchPhoto();
+      } else {
+        console.error('Upload failed:', result.error);
+      }
+    } catch (error) {
+      console.error('Error during upload:', error);
+    }
   };
-
-//   useEffect(() => {
-//     if (imageUrl) {
-//       console.log("Photo URL updated:", imageUrl);
-//     }
-//   }, [imageUrl]);
-
-//   if (isLoading) {
-//     return <LoadingOverlay message="We are fetching your profile picture." />;
-//   }
-
-  if (isUploading) {
-    return <LoadingOverlay message="We are uploading your profile picture." />;
-  }
 
   if (!userId) {
     return (
@@ -57,7 +62,7 @@ const PublicPhotoUpload = () => {
   return (
     <div className="relative">
       <img
-        // src={`${imageUrl || ""}?t=${Date.now()}`} // Cache busting
+        src={currentImage || '/default-profile.jpg'}
         alt="Public photo"
         className="w-full h-[400px] object-cover"
         onError={(e) => {
@@ -66,7 +71,7 @@ const PublicPhotoUpload = () => {
       />
       <label
         htmlFor="public"
-        className="absolute bottom-0 right-0 bg-white p-1 shadow-md cursor-pointer"
+        className="absolute bottom-0 right-0 bg-white p-1 shadow-md cursor-pointer hover:bg-gray-100 transition-colors"
       >
         <Edit2 size={16} />
       </label>
@@ -78,15 +83,15 @@ const PublicPhotoUpload = () => {
         className="hidden"
       />
       {isUploading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full">
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="loader"></div>
         </div>
       )}
-      {/* {(error || uploadError) && (
-        <div className="absolute inset-x-0 -bottom-6 text-red-500 text-xs text-center">
-          {error || uploadError}
+      {uploadError && (
+        <div className="absolute inset-x-0 bottom-0 bg-red-500 text-white text-sm py-1 px-2 text-center">
+          {uploadError}
         </div>
-      )} */}
+      )}
     </div>
   );
 };

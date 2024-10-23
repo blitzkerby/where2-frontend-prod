@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import FormInput from "../../components/reusable/InputField";
 import useAuth from "../../hooks/useAuth";
 import { LoadingOverlay } from "../../components/reusable/Loading";
-import VisitorTracker from "../../components/reusable/VisitorTracker";
 import PictureUpload from './PhotoUpload';
 import ContainerComponent from './ContainerComponent';
 import ProfilePicture from './PictureUpload';

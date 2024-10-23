@@ -41,7 +41,7 @@ const config = {
     getS3Url: `${API_URL}/api/user/s3Url`,
     uploadProfilePicture: `${API_URL}/api/user/profile-picture`,
     uploadPublicPhoto: `${API_URL}/api/user/public`,
-    fetchPublicPhoto: (userId) => `${API_URL}/api/user/${userId}/public`,
+    fetchPublicPhotoForPost: (userId, postId) => `${API_URL}/api/user/${userId}/public/${postId}`,
     fetchProfilePicture: (userId) =>
       `${API_URL}/api/user/${userId}/profile-picture`,
     fetchBatchProfilePictures: `${API_URL}/api/user/users/batch-profile-pictures`,

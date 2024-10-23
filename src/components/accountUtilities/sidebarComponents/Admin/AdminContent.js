@@ -5,8 +5,11 @@ import axios from 'axios';
 import config from '../../../../config';
 import DropdownComponent from '../../../reusable/DropdownComponent';
 import useAuth from '../../../../hooks/useAuth';
+import { v4 as uuidv4 } from 'uuid';
 import PublicPhotoUpload from '../../../reusable/PublicPhotoUpload';
 // import { useFetchPublicPhoto } from '../../../../hooks/useFetchPublicPhoto';
+
+
 
 const dropdownItems = [
   { label: 'University' },
@@ -60,6 +63,7 @@ const AdminEditor = () => {
   const { username, userId } = useAuth();
   const [entity, setEntity] = useState(localStorage.getItem('businessEntity') || 'University');
   const [formData, setFormData] = useState({});
+  const [postId, setPostId] = useState('');
 
   // const { imageUrl, isLoading, error } = useFetchPublicPhoto(userId, 'public');
 
@@ -73,9 +77,12 @@ const AdminEditor = () => {
   const entityDataKey = `${entity}Data`;
 
   useEffect(() => {
+    const newUuid = uuidv4();  // Generate a new UUID
+    setPostId(newUuid);      // Set the generated UUID to state
+    console.log('Generated UUID:', newUuid);
+
     const savedData = JSON.parse(localStorage.getItem(entityDataKey));
     if (savedData) {
-      // setImageUrl(savedData.imageUrl || '');
       setFormData(savedData.formData || {});
       setLinks(savedData.links || [
         { title: 'Telegram', url: '' },
@@ -128,6 +135,7 @@ const AdminEditor = () => {
       // image_url: imageUrl,
       image_alt: formData[entityConfig[entity].fields[0].name],
       userId: parseInt(userId),
+      postId
     };
 
     // Special case for Job offer due to different data structure
@@ -143,6 +151,7 @@ const AdminEditor = () => {
         deadline: data.deadline,
         work_hour: data.work_hour,
         userId: parseInt(userId),
+        postId
       };
     }
 
@@ -179,15 +188,7 @@ const AdminEditor = () => {
             <Image size={24} className="mr-2" />
             {entity} Image
           </h2>
-          <input
-            type="text"
-            // value={imageUrl}
-            // onChange={(e) => setImageUrl(e.target.value)}
-            placeholder="Enter image URL"
-            className="w-full p-2 border border-gray-300 rounded mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-          {/* {imageUrl && <img src={imageUrl} alt={entity} className="w-full h-48 rounded object-contain" />} */}
-          <PublicPhotoUpload/>
+          <PublicPhotoUpload postId={postId}/>
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-6">
@@ -197,10 +198,10 @@ const AdminEditor = () => {
           </h2>
           {entity === 'Job offer' && (
             <div className="mb-4">
-              <h2>Company ID (Read-only)</h2>
+              <h2>Post ID (Read-only)</h2>
               <input
                 type="text"
-                value={userId}
+                value={postId}
                 readOnly
                 className="w-full p-2 border border-gray-300 rounded mb-4 bg-gray-100"
               />
