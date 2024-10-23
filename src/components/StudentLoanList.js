@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useEffect } from "react";
 import { removedIsClicked,getFavorite } from "../features/slices/favoriteSlice";
+import WrapperComponent from "./reusable/WrapperComponent";
 
 
 
@@ -30,6 +31,7 @@ const StudentLoanList = ({ studentLoans, page }) => {
     <>
     {studentLoans.map(loan => {
         return (
+            <WrapperComponent>
             <Card
                 key={loan.loan_id}
                 id={loan.loan_id}
@@ -39,7 +41,6 @@ const StudentLoanList = ({ studentLoans, page }) => {
                 description={loan.loan_type}
                 interest={loan.interest_rate}
                 loan_size={loan.loan_limit}
-                currency={"KHR and USD"}
                 term={loan.loan_term}
                 // facebookLink={loan.updatedAt}
                 // instagramLink={loan.updatedAt}
@@ -48,12 +49,12 @@ const StudentLoanList = ({ studentLoans, page }) => {
                 // websiteLink={loan.createdAt}
                 location={loan.address}
                 deadLine={loan.deadline}
-                // timeOut={loan.salary}
                 type={"loan"}
-                route={loan.link}
+                redirect={loan.info_link}
                 isHeartClicked={isClicked[loan.loan_id]}
                 
-            />)
+                />
+            </WrapperComponent>)
         
     })}
     </>

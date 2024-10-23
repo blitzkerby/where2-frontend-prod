@@ -69,7 +69,7 @@ const FavoriteList = ({ favorites, category }) => {
                 deadLine={loan.deadline}
                 // timeOut={loan.salary}
                 type={"loan"}
-                route={loan.link}
+                redirect={loan.info_link}
 
             />
         ))
@@ -115,10 +115,10 @@ const FavoriteList = ({ favorites, category }) => {
         ))
     }
     ;
-  
+  console.log("Favorite", favorites)
     return (
         <>
-            {renderFavorite}
+            {!favorites[0]?<div>YOU HAVE NOT ADDED TO YOUR COLLECTION YET...</div>:<>{renderFavorite}</>}
         </>
       
     )

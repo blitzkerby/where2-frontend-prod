@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { removedIsClicked,getFavorite } from "../features/slices/favoriteSlice";
 import Card from "./reusable/Card";
+import WrapperComponent from "./reusable/WrapperComponent";
 
 const AccommodationList = ({ accommodations, page }) => {
     let image;
@@ -26,7 +27,8 @@ const AccommodationList = ({ accommodations, page }) => {
     <>
         {accommodations.map(accommodation => {
         accommodation.image_url? image = accommodation.image_url.img1: image = null
-        return(
+            return (
+            <WrapperComponent>
             <Card
                 key={accommodation.id}
                 id={accommodation.id}
@@ -46,7 +48,8 @@ const AccommodationList = ({ accommodations, page }) => {
                 type={"accommodation"}
                 isHeartClicked = {isClicked[accommodation.id]}
                 route={`/detail/accommodation/${ accommodation.id }`}
-            />)
+                    />
+                    </WrapperComponent>)
         
     })}
     </>

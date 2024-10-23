@@ -44,6 +44,7 @@ const Card = ({
   size,
   price,
   mapURL,
+  redirect
 }) => {
   const user = JSON.parse(localStorage.getItem('authData'));
   const navigate = useNavigate();
@@ -199,9 +200,16 @@ const Card = ({
                   )
                 }
               </div>
-              <Button className="text-1xl p-2 px-3" variant="primary" size="large" onClick={handleReadMoreClick}>
+              {!redirect ? (
+                <Button className="text-1xl p-2 px-3" variant="primary" size="large" onClick={handleReadMoreClick}>
+                  Read More
+                </Button>
+              ) : (<a href={redirect}>
+                  <Button className="text-1xl p-2 px-3" variant="primary" size="large" >
                 Read More
-              </Button>
+                  </Button>
+                  </a>
+              )}
             </div>
           </div>
         </div>

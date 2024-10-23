@@ -11,7 +11,7 @@ import MiniClock from '../../assets/svg/miniClock.svg';
 import Calender from '../../assets/svg/calender.svg';
 
 
-const FavoriteCard = ({ title, description, facebookLink, instagramLink, twitterLink, youtubeLink, websiteLink, location, deadLine, timeOut, route, type, position,salary, currency, interest, term, loan_size, size, address,price}) => {
+const FavoriteCard = ({ title, description, facebookLink, instagramLink, twitterLink, youtubeLink, websiteLink, location, deadLine, timeOut, route, type, position,salary, currency, interest, term, loan_size, size, address,price,redirect}) => {
     const socialMediaIcons = [
         { icon: Facebook, linkKey: facebookLink },
         { icon: Twitter, linkKey: twitterLink },
@@ -101,12 +101,18 @@ const FavoriteCard = ({ title, description, facebookLink, instagramLink, twitter
                         </div>
                         </div>
                         <div >
-                            <Link to={route} className="text-blue-500 hover:underline">
-                                <Button className="font- text-1xl p-2 px-3" variant="outline" size="large">
-                                    Read More
-                                </Button>
-                            </Link>
-
+                    {!redirect ? (
+                <Link to={route} className="text-blue-500 hover:underline">
+                <Button className="font- text-1xl p-2 px-3" variant="primary" size="large">
+                    Read More
+                </Button>
+                </Link>
+              ) : (<a href={redirect}>
+                  <Button className="text-1xl p-2 px-3" variant="primary" size="large" >
+                Read More
+                  </Button>
+                  </a>
+              )}
                         </div>
                     </div>
                 </div>
