@@ -38,7 +38,7 @@ const DiscussionList = ({ isCreatingDiscussion, toggleDiscussionView }) => {
   }
 
   return (
-    <div className={`${isHealthPagePath ? "text-white mt-[0]" : ""} w-[90%] py-4 mx-auto min-h-full mt-[128px] mb-[64px] shadow-md`}>
+    <div className={`${isHealthPagePath ? "text-white mt-[0]" : ""} w-[90%] py-4 px-3 mx-auto min-h-full my-[32px] shadow-md`}>
       <div className="flex justify-between h-full items-center">
         <h2 className={`text-xl font-semibold mt-4 tracking-tight`}>
           {isDiscussionsPath ? "Community Posts" : "Related Posts"}
