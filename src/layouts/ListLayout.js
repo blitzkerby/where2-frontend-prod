@@ -64,9 +64,7 @@ const ListLayout = ({ items, category, page , isLoading }) => {
     };
 
     return (
-        // <div className="min-h-screen flex flex-col items-start gap-5">
-            renderList()
-        // </div>
+        renderList()
     );
 };
 

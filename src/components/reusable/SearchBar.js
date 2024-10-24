@@ -12,8 +12,8 @@ const cssStyles = {
     padding: "0 1.6875rem",
     position: "relative",
     transition: "border-radius 0.5s ease, border-color 0.3s ease",
-    border: "1px solid #d1d5db", /* border-gray-300 */
-    backgroundColor: "rgba(255, 255, 255, 0.8)", /* bg-white bg-opacity-80 */
+    border: "1px solid #d1d5db", 
+    backgroundColor: "rgba(255, 255, 255, 0.8)", 
     borderRadius: "30px",
     borderColor: "#d1d5db"
   },
@@ -30,7 +30,7 @@ const cssStyles = {
     cursor: "pointer"
   },
   icon: {
-    color: "#9ca3af" /* text-gray-400 */
+    color: "#9ca3af"
   },
   formFocusWithin: {
     borderRadius: "10px",
