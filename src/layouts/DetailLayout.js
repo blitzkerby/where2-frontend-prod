@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Facebook, Twitter, Instagram, ImageIcon } from "lucide-react";
 
-import {convertToHTML} from "../utility/markdownConverter"
+import {convertToHTML} from "../utility/markdownConverter/markdownConverter"
 
 import DiscussionContainer from "../components/reusable/DiscussionContainer";
 
