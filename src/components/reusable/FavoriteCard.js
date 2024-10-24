@@ -9,7 +9,7 @@ import Button from './ButtonComponent';
 import MiniMap from '../../assets/svg/miniMap.svg'
 import MiniClock from '../../assets/svg/miniClock.svg';
 import Calender from '../../assets/svg/calender.svg';
-import { convertToHTML } from '../../utility/markdownConverter';
+import { convertToHTML } from '../../utility/markdownConverter/markdownConverter';
 
 const FavoriteCard = ({ title, description, facebookLink, instagramLink, twitterLink, youtubeLink, websiteLink, location, deadLine, timeOut, route, type, position,salary, currency, interest, term, loan_size, size, address,price,redirect}) => {
     const socialMediaIcons = [

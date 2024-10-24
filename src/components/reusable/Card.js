@@ -119,8 +119,8 @@ const Card = ({
 
           {type === 'job' && (
             <div className="job-info">
-              <p>Position: <span>{position}</span></p>
-              <p>Salary: <span>${salary}</span></p>
+              <p><b>Position</b>: <span>{position}</span></p>
+              <p><b>Salary</b>: <span>${salary}</span></p>
             </div>
           )}
 

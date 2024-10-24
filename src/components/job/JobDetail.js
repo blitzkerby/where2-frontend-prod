@@ -21,7 +21,7 @@ import {
     Building2,
     Clock,
     DollarSign,
-    Briefcase,
+  Briefcase,
   } from "lucide-react";
 
   const JobDetail = () => {
@@ -60,9 +60,9 @@ import {
     }
   
     const jobHighlights = [
-      { icon: <Clock className="w-5 h-5" />, label: "Job Type", value: company?.data?.job_type || "Full Time" },
+      { icon: <Clock className="w-5 h-5" />, label: "Job Type", value: company?.data?.job_type || "Part Time" },
       { icon: <DollarSign className="w-5 h-5" />, label: "Salary", value: company?.data?.salary || "Competitive" },
-      { icon: <Briefcase className="w-5 h-5" />, label: "Experience", value: company?.data?.experience || "2+ years" },
+      { icon: <Briefcase className="w-5 h-5" />, label: "Experience", value: company?.data?.experience || "Negotiation" },
     ];
   
     const contact = (
@@ -96,8 +96,8 @@ import {
     return (
       <div className="max-w-4xl mx-auto px-4 py-8 space-y-8">
         <CompanyHeader 
-          name={company?.data?.company?.name || "Company Name"}
-          imageUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB6qQYTiaG58zHg3LwPcbPaqOrkFmAschW8A&s"
+          name={company?.data?.company_name || "Company Name"}
+          imageUrl={company?.data?.company?.img_url}
           highlights={jobHighlights}
         />
         <DetailText 
