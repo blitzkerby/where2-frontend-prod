@@ -1,4 +1,5 @@
 import FavoriteCard from "./FavoriteCard";
+import config from "./../../config";
 
 const FavoriteList = ({ favorites, category }) => {
     let renderFavorite;
@@ -115,7 +116,11 @@ const FavoriteList = ({ favorites, category }) => {
         ))
     }
     ;
-  console.log("Favorite", favorites)
+    
+    if (config.env !== 'production') {
+        console.log('Favorites:', favorites);
+    }
+
     return (
         <>
             {!favorites[0]?<div>YOU HAVE NOT ADDED TO YOUR COLLECTION YET...</div>:<>{renderFavorite}</>}

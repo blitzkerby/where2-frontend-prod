@@ -1,9 +1,15 @@
-import { getAuthData } from "../../accountUtilities/UserProfile";
-import config from "../../../config";
+import { getAuthData } from "./../../accountUtilities/UserProfile";
+import config from "./../../../config";
 const fetchProfile = async () => {
     try {
       const { token, userId } = getAuthData();
-      console.log(userId);
+
+
+      if (config.env !== "production") {
+        console.log("Fetching profile for user:", userId);
+      }
+
+
       const res = await fetch(config.profile.getMyProfile(userId), {
         headers: {
           "Content-Type": "application/json",
