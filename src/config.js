@@ -21,7 +21,7 @@ const config = {
     refreshTokenUrl: `${API_URL}/api/users/refreshToken`,
     fetchProfileUrl: (username) => `${API_URL}/api/users/profile/${username}`,
     getUserRole: `${ API_URL }/api/users/login/getRole`,
-    updatePassword: (id) => `${ API_URL }/api/users/updatePassword/${id}`
+    updatePassword: (userId) => `${ API_URL }/api/users/updatePassword/${userId}`
   },
   user: {
     upload: `${API_URL}/api/upload`,

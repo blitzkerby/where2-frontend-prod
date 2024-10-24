@@ -23,7 +23,7 @@ import config from "./../../config"
             : null,
         };
   
-        if (config.isDevelopment) {
+        if (config.env !== 'production') {
           console.log("Registering user with data:", formattedUserData);
         }
   
@@ -66,12 +66,12 @@ import config from "./../../config"
       }
   
       try {
-        if (config.isDevelopment) {
+        if (config.env !== 'production') {
           console.log("Sending verification code for email:", email);
         }
         const response = await axios.post(config.auth.sendVerificationCodeUrl, { email });
         
-        if (config.isDevelopment) {
+        if (config.env !== 'production') {
           console.log("Server response:", response.data);
         }
         
@@ -101,14 +101,18 @@ import config from "./../../config"
     "auth/verifyAccount",
     async ({ verificationCode }, thunkAPI) => {
       try {
-        if (config.isDevelopment) {
+        if (config.env !== 'production') {
           console.log("Verification code being sent:", verificationCode);
         }
         const response = await axios.post(
           config.auth.verifyAccountUrl,
           { verificationCode }
         );
-        console.log("Server response:", response.data);
+
+        if (config.env !== 'production') {
+          console.log("Server response:", response.data);
+        }
+
         return response.data.message || "Registration successful. You can now log in.";
       } catch (error) {
         console.error("Verification error:", error.response?.data || error.message);
@@ -123,9 +127,17 @@ import config from "./../../config"
     "auth/resendVerificationCode",
     async ({ email }, thunkAPI) => {
       try {
-        console.log("Resending verification code for email:", email);
+
+        if (config.env !== 'production') {
+          console.log("Email being sent:", email);
+        }
+
         const response = await axios.post(config.auth.resendVerificationCodeUrl, { email });
-        console.log("Server response:", response.data);
+
+        if (config.env !== 'production') {
+          console.log("Server response:", response.data);
+        }
+
         return response.data.message || "Verification code resent successfully.";
       } catch (error) {
         console.error("Resend verification code error:", error.response?.data || error.message);
@@ -141,9 +153,17 @@ import config from "./../../config"
     "auth/sendWelcomeEmail",
     async ({ email }, thunkAPI) => {
       try {
-        console.log("Sending welcome email to:", email);
+
+        if (config.env !== 'production') {
+          console.log("Email being sent:", email);
+        }
+
         const response = await axios.post(config.auth.sendWelcomeEmailUrl, { email });
-        console.log("Server response:", response.data);
+
+        if (config.env !== 'production') {
+          console.log("Server response:", response.data);
+        }
+
         return response.data.message || "Welcome email sent successfully.";
       } catch (error) {
         console.error("Sending welcome email error:", error.response?.data || error.message);
@@ -159,7 +179,7 @@ import config from "./../../config"
     "auth/login",
     async ({ email, password }, thunkAPI) => {
       try {
-        if (config.isDevelopment) {
+        if (config.env !== 'production') {
           console.log("Logging in user:", { email, password });
         }
         const response = await axios.post(config.auth.loginUrl, {
@@ -176,10 +196,14 @@ import config from "./../../config"
           entity,
         };
 
-        console.log(token, id, userName, entity)
+        if (config.env !== 'production') {
+          console.log("Server response:", response.data);
+          console.log(token, id, userName, entity)
+        }
+
         localStorage.setItem("authData", JSON.stringify(authData));
         
-        if (config.isDevelopment) {
+        if (config.env !== 'production') {
           console.log("Login successful. Stored auth data:", authData);
         }
   
@@ -188,9 +212,7 @@ import config from "./../../config"
           user: data.user
         };
       } catch (error) {
-        if (config.isDevelopment) {
-          console.error("Login failed:", error);
-        }
+        console.error("Login error:", error.response?.data || error.message);
         return thunkAPI.rejectWithValue(
           handleAsyncError(error, "Failed to log in. Please try again.")
         );
@@ -202,7 +224,6 @@ import config from "./../../config"
   // LOGOUT USER
   export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     try {
-      await axios.post(config.auth.logoutUrl);
       localStorage.removeItem("authData");
       return "Logged out successfully.";
     } catch (error) {
@@ -220,9 +241,17 @@ import config from "./../../config"
     "auth/forgotPassword",
     async ({ email }, thunkAPI) => {
       try {
-        console.log("Sending forgot password request with email:", email);
+
+        if (config.env !== 'production') {
+          console.log("Sending forgot password request with email:", email);
+        }
+
         const response = await axios.post(config.auth.forgotPasswordUrl, { email });
-        console.log("Forgot password response:", response.data);
+
+        if (config.env !== 'production') {
+          console.log("Server response:", response.data);
+        }
+
         return {
           message: "Password reset email sent. Please check your inbox.",
           resetToken: response.data.token,
@@ -276,24 +305,31 @@ import config from "./../../config"
   );
 
   //Update Password
-export const updatePassword = createAsyncThunk(
-  "auth/updatePassword",
-  async ({ userId, passwordCurrent, password, passwordConfirm }, thunkAPI) => {
-    try {
-      const response = await axios.patch(config.auth.updatePassword(userId),
-      {
-        passwordCurrent,
-        password,
-        passwordConfirm
-      });
-      return response;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(
-        handleAsyncError(error, "Failed to Update password. Please try again.")
-      );
+  export const updatePassword = createAsyncThunk(
+    "auth/updatePassword",
+    async ({ userId, token, passwordCurrent, password, passwordConfirm }, thunkAPI) => {
+      try {
+        const response = await axios.patch(config.auth.updatePassword(userId), 
+          {
+            passwordCurrent,
+            password,
+            passwordConfirm
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        return response;
+      } catch (error) {
+        console.error(error)
+        return thunkAPI.rejectWithValue(
+          handleAsyncError(error, "Failed to update password. Please try again.")
+        );
+      }
     }
-  }
-);
+  );
 
   const authAdapter = createEntityAdapter();
   
@@ -488,11 +524,13 @@ export const updatePassword = createAsyncThunk(
         })
         .addCase(updatePassword.fulfilled, (state, action) => {
           state.status = "succeeded";
-          state.message = action.payload;
+          state.error = null;
+          state.message = action.payload.message;
         })
         .addCase(updatePassword.rejected, (state, action) => {
           state.status = "failed";
-          state.error = action.payload;
+          state.error = action.payload?.message || "Failed to update password";
+          state.message = null;
         });
     },
   });

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const joinUs = () => {
 	return (
-		<div className="relative w-full lg:h-[925px] h-[550px] mt-[32px] mb-[8px] pb-[64px]">
+		<div className="relative w-full lg:h-[600px] h-[300px] mt-[32px] mb-[8px] pb-[64px]">
 			<img src={KeepInWithUs} className="absolute top-0 left-0 w-full h-full object-cover" />
 			<div className="absolute inset-0 bg-black opacity-25"></div>
 			<div className="absolute inset-0 flex flex-col items-center justify-center">

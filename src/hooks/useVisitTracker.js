@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import config from './../config';
 import axios from 'axios';
 
 // CUSTOMED HOOK USED TO RECORD NUMBER OF VISITS EACH DAY TO A LOCATION
@@ -10,13 +11,20 @@ const useVisitTracker = (path, config) => {
   useEffect(() => {
     const trackVisit = async () => {
       try {
-        console.log('Tracking visit to:', config.user.visitorTrack);
+        if (config.env !== 'production') {
+          console.log('Tracking visit to:', config.user.visitorTrack);
+        }
+
         await axios.post(config.user.visitorTrack, { path }, {
           headers: { 'Content-Type': 'application/json' }
         });
-        console.log("Visit tracked successfully");
+
+        if (config.env !== 'production') {
+          console.log("Visit tracked successfully");
+        }
+
       } catch (error) {
-        console.error("Error tracking visit:", error.message, error.config);
+        console.error('Error tracking visit:', error.message, error.config);
         setError("Failed to track visit");
       }
     };
@@ -24,13 +32,15 @@ const useVisitTracker = (path, config) => {
     const fetchVisits = async () => {
       try {
         const today = new Date().toISOString().split('T')[0];
+
+        if (config.env !== 'production') {
+          console.log('Fetching visits for today:', config.user.visits);
+        }
         
-        console.log('Fetching visits for today:', config.user.visits);
         const response = await axios.get(config.user.visits, {
           params: { path, startDate: today, endDate: today }
         });
         
-        console.log('Response data:', response.data);
         
         if (response.data.success) {
           setVisits(response.data.visits || []);

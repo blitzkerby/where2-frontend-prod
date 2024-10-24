@@ -17,7 +17,7 @@ const LoginComponent = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/");
+        navigate("/", { replace: true });
     }
   }, [isAuthenticated, navigate]);
 
@@ -38,7 +38,7 @@ const LoginComponent = () => {
   };
 
   if (status === "loading") {
-    return <LoadingOverlay className="h-screen" message="We are logging you in..." />;
+    return <LoadingOverlay isFullScreen={true} message="We are logging you in..." />;
   }
 
   return (

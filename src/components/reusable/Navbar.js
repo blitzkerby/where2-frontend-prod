@@ -52,7 +52,7 @@ const Navbar = () => {
     {
       logo: <User2 />,
       name: "Profile",
-      to: `/profile/${encodeURIComponent(username || entity)}`,
+      to: `${isLoggedIn ? `/profile/${encodeURIComponent(username || entity)}` : "/login"}`,
       showMobile: true,
       showDesktop: false,
     },
