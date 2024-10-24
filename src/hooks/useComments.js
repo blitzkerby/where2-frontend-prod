@@ -16,7 +16,6 @@ const useComments = (discussionId) => {
 
       // Extract the comments array from the response
       const comments = response.data.data; // Access the 'data' array which contains the comments
-      console.log("Fetched comments:", comments);
 
       return comments; // Return the comments directly
     } catch (err) {
