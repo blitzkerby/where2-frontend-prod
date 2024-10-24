@@ -133,11 +133,7 @@ const SettingPanel = () => {
       )}
       
       <section className="w-full h-full bg-white rounded-3xl mb-8 shadow-md border pb-12">
-        <div className="lg:w-full lg:py-32 lg:px-16 lg:mx-auto h-full px-4 pb-6 pt-12 sm:px-6 lg:pb-0">
-          <div className="flex items-center justify-center mb-6">
-            <PictureUpload />
-          </div>
-          
+        <div className="lg:w-full lg:px-16 lg:mx-auto h-full px-4 pb-6 pt-12 sm:px-6 lg:pb-0">         
           <form className="flex flex-col space-y-4" onSubmit={handleChangePassword}>
             {renderPasswordInput(
               "Current Password",

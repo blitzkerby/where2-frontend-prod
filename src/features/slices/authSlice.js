@@ -224,7 +224,6 @@ import config from "./../../config"
   // LOGOUT USER
   export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     try {
-      await axios.post(config.auth.logoutUrl);
       localStorage.removeItem("authData");
       return "Logged out successfully.";
     } catch (error) {

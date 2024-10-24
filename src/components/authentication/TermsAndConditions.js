@@ -20,7 +20,7 @@ const termsAndConditions = [
 const TermsAndConditionsComponent = () => {
   // USED TO ONLY ENABLE THE BUTTON IF THE USER CHECKS THE BOX
   const [agreed, setAgreed] = useState(false);
-  const [showLoadingOverlay, setShowLoadingOverlay] = useSelector(false);
+  const [showLoadingOverlay, setShowLoadingOverlay] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
