@@ -5,14 +5,14 @@ import PictureUpload from "./reusable/PictureUpload";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePassword } from "../features/slices/authSlice";
 import { LoadingSpinner } from "./reusable/Loading";
-import { getAuthData } from "./accountUtilities/UserProfile";
+import useAuth from "../hooks/useAuth";
 const SettingPanel = () => {
-    const { userId } = getAuthData();
     const dispatch = useDispatch();
     const [passwordCurrent, setPasswordCurrent] = useState();
     const [password, setNewPassword] = useState();
     const [passwordConfirm, setNewConfirmPassword] = useState();
     const [isSuccess, setIsSuccess] = useState(false)
+    const { userId, token } = useAuth()
     const { status, error } = useSelector((state) => state.auth);
 
     const handleChangePassword = async (e) => {
@@ -20,11 +20,11 @@ const SettingPanel = () => {
         try {
             const changedPassword = await dispatch(updatePassword(
                { userId,
+                token,
                 passwordCurrent,
                 password,
                 passwordConfirm}
             ));
-          setIsSuccess(true)
         
           } catch (err) {
             console.error("Failed to Update Password. Please try again!");

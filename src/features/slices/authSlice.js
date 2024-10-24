@@ -306,24 +306,30 @@ import config from "./../../config"
   );
 
   //Update Password
-export const updatePassword = createAsyncThunk(
-  "auth/updatePassword",
-  async ({ userId, passwordCurrent, password, passwordConfirm }, thunkAPI) => {
-    try {
-      const response = await axios.patch(config.auth.updatePassword(userId),
-      {
-        passwordCurrent,
-        password,
-        passwordConfirm
-      });
-      return response;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(
-        handleAsyncError(error, "Failed to Update password. Please try again.")
-      );
+  export const updatePassword = createAsyncThunk(
+    "auth/updatePassword",
+    async ({ userId, token, passwordCurrent, password, passwordConfirm }, thunkAPI) => {
+      try {
+        const response = await axios.patch(config.auth.updatePassword(userId), 
+          {
+            passwordCurrent,
+            password,
+            passwordConfirm
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Sending token in the Authorization header
+            },
+          }
+        );
+        return response.data; // Make sure to return the response data
+      } catch (error) {
+        return thunkAPI.rejectWithValue(
+          handleAsyncError(error, "Failed to update password. Please try again.")
+        );
+      }
     }
-  }
-);
+  );
 
   const authAdapter = createEntityAdapter();
   

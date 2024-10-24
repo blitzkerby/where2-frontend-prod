@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import FormInput from "../components/reusable/InputField";
-import useAuth from "../hooks/useAuth";
-import { LoadingOverlay } from "../components/reusable/Loading";
-import VisitorTracker from "../components/reusable/VisitorTracker";
-import PictureUpload from "../components/reusable/PhotoUpload";
+import FormInput from "./../components/reusable/InputField";
+import useAuth from "./../hooks/useAuth";
+import { LoadingOverlay } from "./../components/reusable/Loading";
+import VisitorTracker from "./../components/reusable/VisitorTracker";
+import PictureUpload from "./../components/reusable/PhotoUpload";
 
 const UserAccount = ({ userInfo }) => {
   const location = useLocation();
