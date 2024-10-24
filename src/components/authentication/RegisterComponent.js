@@ -106,7 +106,7 @@ const RegisterComponent = () => {
   };
 
   if (status === "loading") {
-    return <LoadingOverlay className="h-screen" message="We are creating your account..."/>
+    return <LoadingOverlay isFullScreen={true} message="We are creating your account..."/>
   }
 
   const handleSubmit = async (e) => {

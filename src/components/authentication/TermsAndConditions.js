@@ -20,6 +20,7 @@ const termsAndConditions = [
 const TermsAndConditionsComponent = () => {
   // USED TO ONLY ENABLE THE BUTTON IF THE USER CHECKS THE BOX
   const [agreed, setAgreed] = useState(false);
+  const [showLoadingOverlay, setShowLoadingOverlay] = useSelector(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,7 +35,13 @@ const TermsAndConditionsComponent = () => {
       try {
         const response = await dispatch(register(registrationData)).unwrap();
         const email = response.email || registrationData.email;
-        navigate("/signup/verification", { state: { email } });
+
+        const timer = setTimeout(() => {
+          setShowLoadingOverlay(true);
+          navigate("/signup/verification", { state: { email } });
+        }, 500);
+
+        return () => clearTimeout(timer);
       } catch (err) {
         setError(
           err.message || "Username or email is not available. Please try again."
@@ -50,11 +57,13 @@ const TermsAndConditionsComponent = () => {
 
   // SHOWING THE LOADINGOVERLAY COMPONENT WHEN STATUS IS LOADING
   if (status === "loading") {
-    return <LoadingOverlay className="h-screen" message="We are processing your request..." />;
+    return <LoadingOverlay isFullScreen={true} message="We are processing your request..." />;
   }
 
   return (
-    <ContainerComponent>
+    <>
+      { showLoadingOverlay && <LoadingOverlay isFullScreen={true} message="We are processing your request..." /> }
+      <ContainerComponent>
       <div className="mb-4">
         <button
           onClick={handleBack}
@@ -117,6 +126,7 @@ const TermsAndConditionsComponent = () => {
         </p>
       </div>
     </ContainerComponent>
+    </>
   );
 };
 

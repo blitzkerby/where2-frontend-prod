@@ -22,7 +22,7 @@ const ForgetPasswordComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (email) {
-      if (config.isDevelopment) {
+      if (config.env !== 'production') {
         console.log("Submitting email:", email);
       }
       dispatch(forgotPassword({ email }));
@@ -30,7 +30,7 @@ const ForgetPasswordComponent = () => {
   };
 
   if (status === "loading") {
-    return <LoadingOverlay className="h-screen" message="We are sending a password reset link..."/>
+    return <LoadingOverlay isFullScreen={true} message="We are sending a password reset link..."/>
   }
 
   return (
@@ -48,6 +48,7 @@ const ForgetPasswordComponent = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          disabled={status === "loading" || status === "succeeded"}
           className={error ? "border-rose-400 border-[1px]" : ""}
         />
 
@@ -62,11 +63,6 @@ const ForgetPasswordComponent = () => {
             <p>
               {message || "If the email exists, a password reset link will be sent shortly. Please check your email."}
             </p>
-            {resetToken && (
-              <p>
-                Reset token received: {resetToken}
-              </p>
-            )}
           </div>
         )}
 

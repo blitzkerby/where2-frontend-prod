@@ -26,7 +26,7 @@ const UserAccount = ({ userInfo }) => {
   }, [loading, role, isLoggedIn, token, navigate]);
 
   if (loading) {
-    return <LoadingOverlay className="h-screen" message="We are fetching your profile..." />;
+    return <LoadingOverlay isFullScreen={true} message="We are fetching your profile..." />;
   }
 
   if (!userInfo) {
@@ -38,7 +38,7 @@ const UserAccount = ({ userInfo }) => {
   return (
     <>
       {showLoadingOverlay && (
-        <LoadingOverlay message="You're being redirected to the login page..." isFullScreen={true} />
+        <LoadingOverlay message="You are not logged in. You are being redirected to the login page..." isFullScreen={true} />
       )}
 
 <section className="w-full h-full pb-[30px] bg-white rounded-3xl mb-[32px] shadow-md border">
