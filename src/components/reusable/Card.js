@@ -1,30 +1,28 @@
-// dependencies
-import React, { useState,useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+// Card.js
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
-//assets
-import EnabledMap from '../../assets/svg/EnabledMap.svg';   //map enabled
-import DisabledMap from '../../assets/svg/DisabledMap.svg';   //map disabled
+// Assets
+import EnabledMap from '../../assets/svg/EnabledMap.svg';
+import DisabledMap from '../../assets/svg/DisabledMap.svg';
 import MiniMap from '../../assets/svg/miniMap.svg';
 import BookMark from '../../assets/svg/bookmark.svg';
 import Calender from '../../assets/svg/calender.svg';
 import MiniClock from '../../assets/svg/miniClock.svg';
+import FilledHeart from '../../assets/svg/filled-heart.svg';
 import { Facebook, Instagram, Twitter, Youtube, Chrome, ImageIcon } from 'lucide-react';
-import FilledHeart from '../../assets/svg/filled-heart.svg'
-import  {convertToHTML}  from '../../utility/markdownConverter';
-//components
+import { convertToHTML } from '../../utility/markdownConverter/markdownConverter';
 import Button from './ButtonComponent';
 
-//slice
-import { addFavorite, removeFavorite } from "../../features/slices/favoriteSlice";
-import  {setIsClicked}  from '../../features/slices/favoriteSlice';
+// Slice actions
+import { addFavorite, removeFavorite, setIsClicked } from '../../features/slices/favoriteSlice';
 
-
-
+// Styles
+import './Card.css';
 
 const Card = ({
-  image = "",
+  image,
   imageAlt = '',
   title = '',
   description = '',
@@ -34,12 +32,12 @@ const Card = ({
   term,
   loan_size,
   interest,
-  location, 
-  deadLine = '', 
+  location,
+  deadLine = '',
   timeOut = '',
   route,
   type,
-  isHeartClicked, 
+  isHeartClicked,
   id,
   size,
   price,
@@ -49,37 +47,34 @@ const Card = ({
   const user = JSON.parse(localStorage.getItem('authData'));
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [heartClicked, setHeartClicked] = useState()
-  const [imageError, setImageError] = useState(false)
+  const [heartClicked, setHeartClicked] = useState();
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
-    setHeartClicked(isHeartClicked)
-  },[isHeartClicked])
+    setHeartClicked(isHeartClicked);
+  }, [isHeartClicked]);
 
   const handleReadMoreClick = () => {
     navigate(route);
   };
-  
-  const handleHeartClick = async () => {
-    setHeartClicked(false)
-      await removeFavorite(id, type);
-    dispatch(setIsClicked({ id: id }))
 
-    };
-    
+  const handleHeartClick = async () => {
+    setHeartClicked(false);
+    await removeFavorite(id, type);
+    dispatch(setIsClicked({ id }));
+  };
+
   const handleRemoveHeartClick = async () => {
     if (user) {
-      setHeartClicked(true)
+      setHeartClicked(true);
       await addFavorite(id, type);
-      dispatch(setIsClicked({ id: id }))
-    } else if(window.confirm('Please login or Sign up to Add your Collection!') === true) {
+      dispatch(setIsClicked({ id }));
+    } else if (window.confirm('Please login or Sign up to Add your Collection!')) {
       navigate('/login');
     }
   };
 
-  const handleError = () => {
-    setImageError(true)
-  };
+  const handleError = () => setImageError(true);
 
   const socialMediaIcons = [
     { icon: Facebook, linkKey: facebookLink },
@@ -96,74 +91,60 @@ const Card = ({
   ];
 
   return (
-    <div className="relative clip-border-box rounded-xl border flex md:flex-row shadow-md
-        lg:h-[348px] lg:w-[886px]
-        sm:max-w-[600px] sm:w-[100%] sm:flex-col">
-      <div className="bg-cover bg-center flex items-center flex-shrink-0 overflow-hidden
-        lg:w-[398px] 
-        sm:w-[100%] sm:max-h-[348px]">
+    <div className="card-container">
+      <div className="image-container">
         {imageError || !image ? (
-          <div className="top-0 left-0 w-full h-full flex items-center justify-center" style={{ backgroundColor: 'lightgrey' }}>
+          <div className="placeholder">
             <ImageIcon size={48} color="gray" />
           </div>
         ) : (
-          <img
-            className="top-0 left-0 w-full h-full object-cover"
-            src={image}
-            alt={imageAlt}
-            onError={handleError}
-          />
+          <img className="image" src={image} alt={imageAlt} onError={handleError} />
         )}
       </div>
-      <div className="flex-1 lg:pl-9 lg:pr-5 lg:py-3 sm:px-5 sm:py-5
-        lg:max-w-[488px]">
-        <div className="sm:mt-3">
-          <div className="sm:mb-2">
-            <h5 className="text-h4p font-bold">{title}</h5>
-          </div>
-          <div className="flex sm:flex-col h-auto sm:mb-3 lg:my-2">
+
+      <div className="content">
+        <div className='body'>
+          <h5 className="title">{title.length > 50 ? `${title.substring(0, 47)}...` : title}</h5>
+
+          <div className="work-details">
             {workDetails.map(({ icon, linkKey }, index) => (
               linkKey && (
-                <div key={index} className="flex items-center text-[12px]">
-                  <div className="flex justify-center sm:w-[5%]">
-                    <img src={icon} alt={icon} />
-                  </div>
-                  <p className={`px-4 mr-4 text-nowrap ${index !== 2 ? 'lg:border-r-gray-200 lg:border-r-2' : ''}`}>
-                    {linkKey}
-                  </p>
+                <div key={index} className="detail">
+                  <img src={icon} alt="" />
+                  <p>{linkKey}</p>
                 </div>
               )
             ))}
           </div>
-            {type === "job"?  <div className="py-2">
-              <p className="py-1">Position :<span> {position}</span></p>
-              <p>Salary :<span> ${salary}</span></p>
-            </div> : null}
-            {type === "loan"? <div className="py-2">
-              <p>
-                Term:<span> {term}</span>
-              </p>
-              <p>
-                Interest Rate:<span> {interest}</span>
-              </p>
-            </div> : null}
-            {type === "accommodation"? <div className="py-2">
-              <p>
-                Size :<span> {size}</span>
-              </p>
-              <p>
-                Price:<span> {price}</span>
-              </p>
-            </div> : null}
+
+          {type === 'job' && (
+            <div className="job-info">
+              <p>Position: <span>{position}</span></p>
+              <p>Salary: <span>${salary}</span></p>
+            </div>
+          )}
+
+          {type === 'loan' && (
+            <div className="loan-info">
+              <p>Term: <span>{term}</span></p>
+              <p>Interest Rate: <span>{interest}</span></p>
+            </div>
+          )}
+
+          {type === 'accommodation' && (
+            <div className="accommodation-info">
+              <p>Size: <span>{size}</span></p>
+              <p>Price: <span>{price}</span></p>
+            </div>
+          )}
+
+          <div className="description">{convertToHTML(description.substring(0, 300))}</div>
         </div>
-        <div className="flex flex-col lg:h-[62%] sm:max-h-[200px]">
-          <div className="flex-1 text-clip overflow-hidden h-[10px]">
-            <p className="text-justify">{convertToHTML(description)}</p>
-          </div>
-          <div className="mt-auto text-center">
-            <div className="mb-4 flex justify-around max-w-[200px]">
-              {socialMediaIcons.map(({ icon: Icon, linkKey, isExternal }, index) => {
-                return linkKey ? (
+        <div className='footer'>
+          <div className="actions">
+            <div className="social-icons">
+              {socialMediaIcons.map(({ icon: Icon, linkKey, isExternal }, index) =>
+                linkKey ? (
                   isExternal ? (
                     <a href={linkKey} key={index} target="_blank" rel="noopener noreferrer">
                       <Icon />
@@ -173,43 +154,21 @@ const Card = ({
                       <Icon />
                     </Link>
                   )
-                ) : null;
-              })}
-            </div>
-            <div className="flex justify-between cursor-pointer">
-              <div className="w-[100px] flex justify-around">
-                <div>
-                  {heartClicked ? 
-                    <div>
-                      <img className="w-9" src={FilledHeart} alt="Bookmark" onClick={handleHeartClick} />
-                    </div> : 
-                    <div>
-                      <img src={BookMark} alt="Bookmark" onClick={handleRemoveHeartClick} />
-                    </div> 
-                  }
-                </div>
-                {
-                  mapURL ? (
-                    <Link to={`/location/${location}`}>
-                      <img className="w-9" src={EnabledMap} alt="Map"/>
-                    </Link>
-                  ) : (
-                    <div>
-                      <img className="w-9" src={DisabledMap} alt="Map"/>
-                    </div>
-                  )
-                }
-              </div>
-              {!redirect ? (
-                <Button className="text-1xl p-2 px-3" variant="primary" size="large" onClick={handleReadMoreClick}>
-                  Read More
-                </Button>
-              ) : (<a href={redirect}>
-                  <Button className="text-1xl p-2 px-3" variant="primary" size="large" >
-                Read More
-                  </Button>
-                  </a>
+                ) : null
               )}
+            </div>
+
+            <div className="buttons">
+              <img
+                className="heart-icon"
+                src={heartClicked ? FilledHeart : BookMark}
+                alt="Heart"
+                onClick={heartClicked ? handleHeartClick : handleRemoveHeartClick}
+              />
+              <Link to={`/location/${location}`}>
+                <img className="map-icon" src={mapURL ? EnabledMap : DisabledMap} alt="Map" />
+              </Link>
+              <Button className="p-2" onClick={handleReadMoreClick}>Read More</Button>
             </div>
           </div>
         </div>
