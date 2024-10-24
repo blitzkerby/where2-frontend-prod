@@ -27,11 +27,11 @@ const JobPage = () => {
         <>
             <Navbar />
             <ListContainer>
-            {loading && <LoadingOverlay/>}
-            {error && <p>{error}</p>}
-            <JobList jobs={data} page={page}/>
+                {loading && <LoadingOverlay/>}
+                {error && <p>{error}</p>}
+                <JobList jobs={data} page={page}/>
+                <Pagination totalPage={totalPage} currentPage={page} route={'jobs'} category={"job"} />
             </ListContainer>
-            <Pagination totalPage={totalPage} currentPage={page} route={'jobs'} category={"job"} />
             <Footer />
         </>
     )

@@ -3,7 +3,7 @@ import {
   Facebook, Twitter, Instagram, ImageIcon, Globe, Send,
   Share2, Bookmark, Eye, MessageCircle, Heart,Clock
 } from "lucide-react";
-import { convertToHTML } from "./../utility/markdownConverter";
+import {convertToHTML} from "../utility/markdownConverter/markdownConverter"
 import DiscussionContainer from "./../components/reusable/DiscussionContainer";
 
 const setLikeCount = []

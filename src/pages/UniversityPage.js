@@ -20,6 +20,8 @@ import Filter from '../components/reusable/Filter';
 import SearchBar from '../components/reusable/SearchBar';
 import Pagination from '../components/reusable/Pagination';
 import ListContainer from '../components/reusable/ListContainer';
+import WrapperComponent from '../components/reusable/WrapperComponent';
+import Card from '../components/reusable/Card';
 
 /** Enable for debugging */
 const isDebug = false;
