@@ -55,7 +55,7 @@ const CardSlider = ({ cards = [], header , ads }) => {
   }, [currentIndex, totalCards, initialIndex]);
 
   return (
-    <div className="relative lg:h-fit sm:h-fit w-full mx-auto my-[16px]">
+    <div className="relative lg:h-fit sm:h-fit w-full mx-auto my-[16px] max-w-[1440px]">
       <div className="text-[#367588]">
         <b>{header}</b>
       </div>
