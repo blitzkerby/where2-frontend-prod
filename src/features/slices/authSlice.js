@@ -322,8 +322,9 @@ import config from "./../../config"
             },
           }
         );
-        return response.data; 
+        return response;
       } catch (error) {
+        console.error(error)
         return thunkAPI.rejectWithValue(
           handleAsyncError(error, "Failed to update password. Please try again.")
         );
@@ -519,11 +520,13 @@ import config from "./../../config"
         })
         .addCase(updatePassword.fulfilled, (state, action) => {
           state.status = "succeeded";
-          state.message = action.payload;
+          state.error = null;
+          state.message = action.payload.message;
         })
         .addCase(updatePassword.rejected, (state, action) => {
           state.status = "failed";
-          state.error = action.payload;
+          state.error = action.payload?.message || "Failed to update password";
+          state.message = null;
         });
     },
   });
