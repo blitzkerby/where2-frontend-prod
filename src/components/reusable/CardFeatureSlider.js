@@ -49,8 +49,8 @@ const CardFeatureSlider = ({ cardFeature, header  }) => {
 
   return (
     <div className="relative w-full max-w-6xl mx-auto my-[32px]">
-      <div className="overflow-hidden w-full">
-        <div className="p-5 text-blue-900 text-[38px] sm:text-[35.8px]">
+      <div className="overflow-hidden w-full shadow-4xl sm:py-5">
+        <div className="p-5 text-blue-900 text-[32px] sm:text-[28px]">
           {header}
           {/* {header.length > 0 ? (
             header.map((item, index) => <b key={index}>{item.suggested}</b>)
@@ -60,7 +60,7 @@ const CardFeatureSlider = ({ cardFeature, header  }) => {
         </div>
         <div
           ref={containerRef}
-          className={`flex transition-transform duration-300 ease-in-out ${
+          className={`flex transition-transform duration-300 ease-in-out sm:px-6 ${
             !isTransitioning && 'transition-none'
           }`}
           style={{
@@ -71,7 +71,7 @@ const CardFeatureSlider = ({ cardFeature, header  }) => {
             cardFeature.map((card, index) => (
               <div
                 key={index}
-                className={`flex-shrink-0 p-2 ${isMobile ? 'w-full' : 'w-1/3'}`}
+                className={`flex-shrink-0 p-2 sm:py-2 sm:px-3 shadow-6xl ${isMobile ? 'w-full' : 'w-1/3'}`}
               >
                 <DefaultCardToptitle card={card} />
               </div>

@@ -6,9 +6,9 @@ const SubpageHeroSection = ({ h1Text, subH1Text, pText }) => {
       <div className="lg:w-[60%] mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 py-12">
         <div className="lg:w-1/2 sm:w-[80%] space-y-6 tracking-tighter">
           <h1 className="w-full text-black lg:text-5xl sm:text-4xl font-bold leading-tight sm:text-center sm:tracking-tightest">
-            <TypewriterEffect text={h1Text} speed={50} />
+            {h1Text ? <TypewriterEffect text={h1Text} speed={50} /> : ""}
             <br />
-            <TypewriterEffect text={subH1Text} speed={300} />
+            {subH1Text ? <TypewriterEffect text={subH1Text} speed={300} /> : ""}
           </h1>
 
           <p className="text-black/90 text-lg sm:text-l max-w-lg text-justify tracking-tightest">

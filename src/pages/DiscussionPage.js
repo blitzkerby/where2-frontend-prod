@@ -10,7 +10,7 @@ const DiscussionPage = () => {
     <>
       <Navbar />
       <WrapperComponent>
-        <SubHeroSectionComponent h1Text={'WELCOME TO W2COMMUNITY'} subH1Text={'A PLACE WHERE YOU CAN GATHER AND SHARE THINGS'} pText={'W2COMMUNITY is a place where you can share your thoughts, ideas, and experiences with the world. Whether you are a student, researcher, or an individual, W2COMMUNITY has something for you.'}/>
+        <SubHeroSectionComponent h1Text={'WELCOME TO W2COMMUNITY'} pText={'W2COMMUNITY is a place where you can share your thoughts, ideas, and experiences with the world. Whether you are a student, researcher, or an individual, W2COMMUNITY has something for you.'}/>
       </WrapperComponent>
       <WrapperComponent>
         <DiscussionContainer />
