@@ -1,4 +1,4 @@
-const NoResults = () => {
+const NoResults = ({errorMessage}) => {
     return (
         <div 
             className="flex flex-col items-center"
@@ -14,7 +14,7 @@ const NoResults = () => {
                     className="object-cover"
                 />
             </div>
-            <h1 className="text-center" style={{ fontSize: '1.5rem' }}>No results...</h1>
+            <h1 className="text-center" style={{ fontSize: '1.5rem' }}>{errorMessage ? (errorMessage) : "No result"}</h1>
         </div>
     )
 }

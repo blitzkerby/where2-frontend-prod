@@ -228,6 +228,7 @@ const AdminEditor = () => {
         </div>
       </div>
 
+      {entity == "University" ? (
       <div className="mt-6 bg-white rounded-lg shadow-md p-6">
         <h2 className="text-xl font-semibold mb-4 flex items-center text-indigo-700">
           <Link size={24} className="mr-2" />
@@ -252,6 +253,7 @@ const AdminEditor = () => {
           </div>
         ))}
       </div>
+      ) : (null)}
 
       <ButtonComComponent
         variant='success'

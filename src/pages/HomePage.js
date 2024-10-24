@@ -108,6 +108,29 @@ const cards = [
     image: "https://media.startupcambodia.gov.kh/platform/core/program/images/Turing_Hackathon_Cycle_4_Inspiration_to_Digital_Innovation.jpg",
   }
 ];
+const adsCards = [
+  {
+  title: "KBPRASAC",
+  image: "https://cdn6.aptoide.com/imgs/7/e/5/7e550f4e8f0e6c8e10e7d4e1caff29dd_fgraphic.png",
+  description : "now available on mobile devices"
+  },
+  {
+  title: "MORAKOT",
+  image: "https://www.topjobcambodia.com/photos/social/20210317-101029-morakot_technology.jpg",
+  description : "To build a simple, reliable, and innovative FinTech platform for the finance industry."
+  },
+  {
+  title: "PPC BANK",
+  image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK2dL66FMoDkXhF6zK5Pdvo7zlD9QmZ6nDow&s",
+  description : "Unlike purchasing a block of advertising space from a specific website through an ad agency or media buying company, ad impressions from pay per click ads are free. Your bank will only incur a cost when someone clicks on your ads."
+  },
+  {
+  title: "KOOMPI",
+  image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3GzeIN6tw_yng2zZgSt08cwCLrmQOo76Yeg&s",
+  description : "A versatile operating system that prioritizes user control and flexibility. It offers both an immutable and mutable OS, allowing users to switch seamlessly"
+  },
+
+]
 const featureCards = [
   {
       title: "University",
@@ -155,6 +178,7 @@ const HomePage = () => {
         <SaveSection />
       </WrapperComponent>
       <WrapperComponent>
+        <CardSlider cards={adsCards} header={"OUR PARTNERS"} ads={true}/>
         <JoinUs />
       </WrapperComponent>
         <Footer />

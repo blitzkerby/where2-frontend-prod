@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import DefaultCard from './DefaultCard';
 
-const CardSlider = ({ cards = [], header  }) => {
+const CardSlider = ({ cards = [], header , ads }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(true);
   const containerRef = useRef(null);
@@ -83,6 +83,7 @@ const CardSlider = ({ cards = [], header  }) => {
           )}
         </div>
       </div>
+      {ads ? (null) : (
       <div className="absolute bottom-[-10px] right-4 flex space-x-2">
         <button
           onClick={prevSlide}
@@ -97,6 +98,7 @@ const CardSlider = ({ cards = [], header  }) => {
           <ChevronRight className="w-6 h-6" />
         </button>
       </div>
+      )}
     </div>
   );
 };

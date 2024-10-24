@@ -6,12 +6,12 @@ import { useJobFunctions } from "../../../reusable/functions/JobAction";
 import ButtonComponent from "../../../reusable/Button";
 
 const PartTimeJobListing = () => {
-  const { JobFunctions } = useJobFunctions();
+  const { getJobFunctions } = useJobFunctions();
   const [partTimeJobs, setPartTimeJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [filteredJobs, setFilteredJobs] = useState([]);
-  const [showApproved, setShowApproved] = useState(false); // Toggle between approved/unapproved
+  const [showApproved, setShowApproved] = useState(false);
 
   const getAllPartTimeJobs = async () => {
     try {
@@ -21,7 +21,7 @@ const PartTimeJobListing = () => {
       }
       const data = await response.json();
       setPartTimeJobs(data.data.jobs);
-      setFilteredJobs(data.data.jobs); // Default to showing all jobs
+      setFilteredJobs(data.data.jobs);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -36,20 +36,31 @@ const PartTimeJobListing = () => {
   if (loading) {
     return <LoadingOverlay />;
   }
-  const showAllPost = () =>{
-    setFilteredJobs(partTimeJobs);
-  }
+
 
   const toggleApproval = () => {
-    setShowApproved(!showApproved); // Toggle between approved/unapproved
-
-    // Filter jobs based on the toggle state
+    setShowApproved(!showApproved);
     if (showApproved) {
-      const unapprovedJobs = partTimeJobs.filter(job => job.isApproved === false);
+      const unapprovedJobs = partTimeJobs.filter(job => !job.isApproved);
       setFilteredJobs(unapprovedJobs);
     } else {
-      const approvedJobs = partTimeJobs.filter(job => job.isApproved === true);
+      const approvedJobs = partTimeJobs.filter(job => job.isApproved);
       setFilteredJobs(approvedJobs);
+    }
+  };
+
+  // Update filtered jobs when a job's approval status changes
+  const handleJobStatusChange = (jobId, newApprovalStatus) => {
+    const updatedJobs = partTimeJobs.map(job => 
+      job.id === jobId ? { ...job, isApproved: newApprovalStatus } : job
+    );
+    setPartTimeJobs(updatedJobs);
+    
+    // Update filtered jobs based on current filter
+    if (showApproved) {
+      setFilteredJobs(updatedJobs.filter(job => job.isApproved));
+    } else {
+      setFilteredJobs(updatedJobs.filter(job => !job.isApproved));
     }
   };
 
@@ -58,17 +69,15 @@ const PartTimeJobListing = () => {
       <ButtonComponent onClick={toggleApproval}>
         {showApproved ? "Show Unapproved Posts" : "Show Approved Posts"}
       </ButtonComponent>
-      <ButtonComponent onClick={() => showAllPost()}>
-        Show All Posts
-      </ButtonComponent>
 
       <ListingComponent
         data={filteredJobs}
         title={showApproved ? "Approved Part-time Jobs" : "Unapproved Part-time Jobs"}
         columns={["id", "company_id", "company_name"]}
         isLoading={loading}
-        actions={JobFunctions}
+        actions={getJobFunctions(showApproved)} // Pass showApproved state to get appropriate actions
         totalItems={filteredJobs.length}
+        onStatusChange={handleJobStatusChange}
       />
     </main>
   );

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Edit2 } from "lucide-react";
+import { Edit2  , Image} from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 import { useFetchPublicPhoto, useUploadPublicPhoto } from "./../../hooks/useFetchPublicPhoto";
 import { LoadingOverlay } from "./Loading";
@@ -62,11 +62,11 @@ const PublicPhotoUpload = ({ postId }) => {
   return (
     <div className="relative">
       <img
-        src={currentImage || '/default-profile.jpg'}
+        src={currentImage || '/where2.jpg'}
         alt="Public photo"
         className="w-full h-[400px] object-cover"
         onError={(e) => {
-          e.target.src = "/default-profile.jpg";
+          e.target.src = "/where2.jpg";
         }}
       />
       <label

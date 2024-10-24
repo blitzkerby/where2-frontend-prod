@@ -1,12 +1,19 @@
 import { useNavigate } from "react-router-dom";
-import { Trash, Eye } from "lucide-react";
+import { X, Eye, Check } from "lucide-react";
+import config from "../../../config";
+import axios from "axios";
 
 export const useUniversityFunctions = () => {
     const navigate = useNavigate();
 
-    const handleDelete = async (id) => {
-        console.log("Delete action triggered for university with ID:", id);
-        // TODO: Implement actual delete functionality
+    const handleApprovePost = async (id) => {
+        console.log("approve action triggered for university with ID:", id);
+        try {
+            const response = await axios.patch(config.universities.approveUniversity(id));
+            console.log(response);
+        } catch (error) {
+            console.error("Failed to approve university with ID:", id, error);
+        }
     };
 
     const handleView = (id) => {
@@ -14,20 +21,45 @@ export const useUniversityFunctions = () => {
         navigate(`/detail/university/${id}`);
     };
 
-    const UniversityFunctions = [
-        {
-            variant: "danger",
-            icon: <Trash />,
-            onClick: handleDelete,
-            requiresConfirmation: true,
-        },
-        {
-            variant: "ghost",
-            icon: null,
-            label: "View",
-            onClick: handleView,
-        },
-    ];
+    const handleDisapprovePost = async (id) => {
+        console.log("Disapprove action triggered for university with ID:", id);
+        try {
+            const response = await axios.patch(config.universities.disapproveUniversity(id));
+            console.log(response);
+        } catch (error) {
+            console.error("Failed to disapprove university with ID:", id, error);
+        }
+    }
 
-    return { UniversityFunctions };
+    const getUniversityFunctions = (showApproved) => {
+        const baseActions = [
+            {
+                variant: "ghost",
+                icon: null,
+                label: "View",
+                onClick: (id) => handleView(id),
+            }
+        ];
+
+        if (!showApproved) {
+            baseActions.push({
+                variant: "success",
+                icon: <Check />,
+                onClick: (id) => handleApprovePost(id),
+                requiresConfirmation: true,
+            });
+        }
+        if (showApproved) {
+            baseActions.push({
+                variant: "danger",
+                icon: <X />,
+                onClick: (id) => handleDisapprovePost(id),
+                requiresConfirmation: true,
+            });
+        }
+
+        return baseActions;
+    };
+
+    return { getUniversityFunctions };
 };

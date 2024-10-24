@@ -58,12 +58,13 @@ const config = {
       `${API_URL}/api/discussion/${discussionId}`,
     deleteComment: (commentId) => `${API_URL}/api/discussion/comment/${commentId}`,
   },
-  job: {
-    getAllJob: `${API_URL}/api/jobs/job-list`,
-    getAssociatedCompany: (jobId) => `${API_URL}/api/jobs/associatedCompany/${jobId}`,
-    approveJob : (jobId) => `${API_URL}/approve/${jobId}`,
-    getJob : (jobId) => `${API_URL}api/jobs/${jobId}`
-  },
+ job : {
+  getAllJob: `${API_URL}/api/jobs/job-list`,
+  getAssociatedCompany: (jobId) => `${API_URL}/api/jobs/associatedCompany/${jobId}`,
+  approveJob: (jobId) => `${API_URL}/api/jobs/approve/${jobId}`,
+  disapproveJob : (jobId) => `${API_URL}/api/jobs/disapprove/${jobId}`,
+  getJob: (jobId) => `${API_URL}/api/jobs/${jobId}`,           
+},
   favorite: {
     addFavorite: `${API_URL}/api/favorites/addFavorite`,
     getFavorite: (userId, category) =>
@@ -78,6 +79,8 @@ const config = {
     getAllUniversity : `${API_URL}/api/list/university`,
     getUniversityList : `${API_URL}/api/detail/university/university-list`,
     getUniversityById : `${API_URL}/api/detail/university`,
+    approveUniversity : (universityId) => `${API_URL}/api/university/approve/${universityId}`,
+    disapproveUniversity : (universityId) => `${API_URL}/api/university/disapprove/${universityId}`,
   },
   scholarships: {
     getAllScholarships: `${API_URL}/api/list/scholarship`,

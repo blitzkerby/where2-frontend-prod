@@ -15,7 +15,6 @@ import CollectionPanel from "./CollectionPanel.js";
 import SettingPanel from "../SettingPanel.js";
 import adminContentListing from "../accountUtilities/sidebarComponents/Admin/AdminContentListing.js";
 
-
 export const SidebarContentContext = createContext();
 
 const contentComponents = {
@@ -23,11 +22,15 @@ const contentComponents = {
   account: UserAccount,
   userList: UserListing,
   jobList: PartTimeJobListing,
-  adminContentListing : adminContentListing,
+  adminContentListing: adminContentListing,
   accommodationList: AccommodationListing,
   adminDashboard: AdminDashboard,
   adminContent: AdminContent,
-  logOut: Logout,
+  logOut: ({ userInfo }) => {
+    // Clear sidebarContent from localStorage when rendering Logout component
+    localStorage.removeItem("sidebarContent");
+    return <Logout userInfo={userInfo} />;
+  },
   collectionPanel: CollectionPanel,
   setting: SettingPanel,
 };
@@ -54,7 +57,9 @@ const Profile = ({ userData, isPublic }) => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("sidebarContent", sidebarContent);
+    if (sidebarContent !== "logOut") {
+      localStorage.setItem("sidebarContent", sidebarContent);
+    }
   }, [sidebarContent]);
 
   if (loading) {
@@ -118,6 +123,7 @@ const Profile = ({ userData, isPublic }) => {
               sidebarContent !== "jobList" &&
               sidebarContent !== "adminContent" &&
               sidebarContent !== "adminContentListing" &&
+              sidebarContent !== "accommodationList" &&
               sidebarContent !== "adminDashboard" ? (
                 <CollectionPanel category={sidebarContent} />
               ) : (
