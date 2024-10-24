@@ -318,11 +318,11 @@ import config from "./../../config"
           },
           {
             headers: {
-              Authorization: `Bearer ${token}`, // Sending token in the Authorization header
+              Authorization: `Bearer ${token}`,
             },
           }
         );
-        return response.data; // Make sure to return the response data
+        return response.data; 
       } catch (error) {
         return thunkAPI.rejectWithValue(
           handleAsyncError(error, "Failed to update password. Please try again.")

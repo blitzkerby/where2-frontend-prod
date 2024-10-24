@@ -11,9 +11,11 @@ const SettingPanel = () => {
     const [passwordCurrent, setPasswordCurrent] = useState();
     const [password, setNewPassword] = useState();
     const [passwordConfirm, setNewConfirmPassword] = useState();
-    const [isSuccess, setIsSuccess] = useState(false)
+    const [isSuccess, setIsSuccess] = useState(false);
+    const [localError, setLocalError] = useState(false);
     const { userId, token } = useAuth()
     const { status, error } = useSelector((state) => state.auth);
+
 
     const handleChangePassword = async (e) => {
         e.preventDefault()
