@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { fetchAccommodation } from "../features/slices/accommodationSlice";
 import { LoadingOverlay } from "./reusable/Loading";
 import { MapPin, Phone, Home, DollarSign, Bed, Square, Calendar } from "lucide-react";
-
+import { convertToHTML } from "../utility/markdownConverter/markdownConverter";
 const AccommodationDetail = () => {
   const param = useParams();
   const dispatch = useDispatch();
@@ -114,7 +114,7 @@ const AccommodationDetail = () => {
             <div className="bg-white rounded-xl p-6 shadow-sm">
               <h2 className="text-xl font-semibold mb-4">Description</h2>
               <p className="text-gray-600 leading-relaxed">
-                {accommodation.description}
+                {convertToHTML(accommodation.description)}
               </p>
             </div>
           </div>

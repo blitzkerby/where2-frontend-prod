@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCompany } from "../../features/slices/jobSlice";
 import { useParams } from "react-router-dom";
+import { convertToHTML } from "../../utility/markdownConverter/markdownConverter";
 
 // import Gmail from "./../../assets/svg/gmail.svg";
 // import Website from "./../../assets/svg/website.svg";
@@ -102,17 +103,17 @@ import {
         />
         <DetailText 
           title="Company Information"
-          content={company?.data?.company?.company_bg || "N/A"}
+          content={convertToHTML(company?.data?.company?.company_bg) || "N/A"}
           icon={<Building2 className="w-5 h-5" />}
         />
         <DetailText 
           title="Job Description"
-          content={company?.data?.job_desc || "N/A"}
+          content={convertToHTML(company?.data?.job_desc) || "N/A"}
           icon={<Briefcase className="w-5 h-5" />}
         />
         <ContactCard 
           title="Job Requirements"
-          content={company?.data?.job_require || "N/A"}
+          content={convertToHTML(company?.data?.job_require)|| "N/A"}
           variant="requirement"
         />
         <ContactCard 
