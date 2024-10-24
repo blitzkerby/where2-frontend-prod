@@ -1,19 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ButtonComponent from "./reusable/Button";
 import FormInput from "./reusable/InputField";
 import PictureUpload from "./reusable/PictureUpload";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePassword } from "../features/slices/authSlice";
+import { updatePassword, clearStatus } from "../features/slices/authSlice";
 import { LoadingSpinner } from "./reusable/Loading";
 import { getAuthData } from "./accountUtilities/UserProfile";
+
 const SettingPanel = () => {
+
     const { userId } = getAuthData();
     const dispatch = useDispatch();
     const [passwordCurrent, setPasswordCurrent] = useState();
     const [password, setNewPassword] = useState();
     const [passwordConfirm, setNewConfirmPassword] = useState();
-    const [isSuccess, setIsSuccess] = useState(false)
     const { status, error } = useSelector((state) => state.auth);
+  useEffect(() => {
+    dispatch(clearStatus())
+  },[])
 
     const handleChangePassword = async (e) => {
         e.preventDefault()
@@ -24,7 +28,6 @@ const SettingPanel = () => {
                 password,
                 passwordConfirm}
             ));
-          setIsSuccess(true)
         
           } catch (err) {
             console.error("Failed to Update Password. Please try again!");
@@ -68,13 +71,13 @@ const SettingPanel = () => {
           className={error ? "border-rose-400 border-[1px]" : ""}
         />
         {error && <p className="text-red-500 text-sm">{error}</p>}
-        {isSuccess && <p className="text-green-500 text-sm">Password Changed Successfully!</p>}
+        {status === "succeeded"?<p className="text-green-500 text-sm">Password Changed Successfully!</p>:null}
         <div className="flex justify-center items-center">
           <ButtonComponent
             variant={"primary"}
             className="mt-2 w-[197px] h-[38px] sm:w-[343px] sm:h-[50px]"
             type="submit"
-            disabled={status === "loading" || status === "succeded"}
+            disabled={status === "loading" || status === "succeeded"}
           >
             {status === "loading" ? <LoadingSpinner /> : "Change Password"}
           </ButtonComponent>

@@ -323,6 +323,11 @@ export const updatePassword = createAsyncThunk(
         state.resetToken = null;
         state.registeredEmail = "";
       },
+      clearStatus: (state) => {
+        state.status = "idle";
+        state.error = null;
+        state.message = null;
+      }
     },
     extraReducers: (builder) => {
       builder
@@ -492,7 +497,7 @@ export const updatePassword = createAsyncThunk(
     },
   });
   
-  export const { clearAuthState } = authSlice.actions;
+  export const { clearAuthState, clearStatus } = authSlice.actions;
   
   export const {
     selectById: selectUserById,

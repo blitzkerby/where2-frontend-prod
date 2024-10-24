@@ -9,7 +9,7 @@ import Button from './ButtonComponent';
 import MiniMap from '../../assets/svg/miniMap.svg'
 import MiniClock from '../../assets/svg/miniClock.svg';
 import Calender from '../../assets/svg/calender.svg';
-
+import { convertToHTML } from '../../utility/markdownConverter';
 
 const FavoriteCard = ({ title, description, facebookLink, instagramLink, twitterLink, youtubeLink, websiteLink, location, deadLine, timeOut, route, type, position,salary, currency, interest, term, loan_size, size, address,price,redirect}) => {
     const socialMediaIcons = [
@@ -76,7 +76,7 @@ const FavoriteCard = ({ title, description, facebookLink, instagramLink, twitter
                             
                         
                         <div className="text-clip overflow-hidden w-full h-[200px]">
-                            <p className={`${cardDescription} mt-3 text-justify`}>{description}</p>
+                            <p className={`${cardDescription} mt-3 text-justify`}>{convertToHTML(description)}</p>
                         </div>
                     </div>
                     <div className="p-4 pt-0 flex justify-between">
