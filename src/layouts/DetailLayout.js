@@ -122,10 +122,10 @@ const DetailLayout = ({
       <div className="grid lg:grid-cols-3 gap-12">
         <div className="lg:col-span-2 space-y-6">
           <div className="flex items-center justify-between">
-            <h1 className="text-4xl font-bold text-gray-900 tracking-tight">{title}</h1>
+            <h1 className="lg:text-4xl text-xl font-bold text-gray-900 tracking-tight">{title}</h1>
           </div>
           
-          <div className="prose prose-lg max-w-none">
+          <div className="prose prose-lg max-w-none tracking-tight">
             {convertToHTML(description)}
           </div>
 

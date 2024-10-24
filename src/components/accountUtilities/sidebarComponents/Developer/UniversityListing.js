@@ -11,7 +11,7 @@ const UniversityListing = () => {
   const [filteredUniversities, setFilteredUniversities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showApproved, setShowApproved] = useState(false);
+  const [showApproved, setShowApproved] = useState(true); // Default to showing approved universities
 
   const getAllUniversities = async () => {
     try {
@@ -22,7 +22,10 @@ const UniversityListing = () => {
       const data = await response.json();
       const universityData = data.universities || [];
       setUniversities(universityData);
-      setFilteredUniversities(universityData);
+
+      // Filter and set initially approved universities
+      const approvedUniversities = universityData.filter(uni => uni.isApproved);
+      setFilteredUniversities(approvedUniversities);
       setLoading(false);
     } catch (err) {
       setError(err.message);
@@ -46,7 +49,6 @@ const UniversityListing = () => {
     return <div>No universities found.</div>;
   }
 
-
   const toggleApproval = () => {
     setShowApproved(!showApproved);
     if (showApproved) {
@@ -58,13 +60,12 @@ const UniversityListing = () => {
     }
   };
 
-  // Update filtered universities when approval status changes
   const handleUniversityStatusChange = (uniId, newApprovalStatus) => {
     const updatedUniversities = universities.map(uni => 
       uni.id === uniId ? { ...uni, isApproved: newApprovalStatus } : uni
     );
     setUniversities(updatedUniversities);
-    
+
     // Update filtered universities based on current filter
     if (showApproved) {
       setFilteredUniversities(updatedUniversities.filter(uni => uni.isApproved));
@@ -75,7 +76,7 @@ const UniversityListing = () => {
 
   return (
     <main>
-      <ButtonComponent onClick={toggleApproval}>
+      <ButtonComponent onClick={toggleApproval} className={'rounded-md'}>
         {showApproved ? "Show Unapproved Posts" : "Show Approved Posts"}
       </ButtonComponent>
 
