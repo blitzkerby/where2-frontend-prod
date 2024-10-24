@@ -13,7 +13,7 @@ import config from "./../../config";
 const ForgetPasswordComponent = () => {
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
-  const { status, error, message, resetToken } = useSelector((state) => state.auth);
+  const { status, error, message } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(clearAuthState());
