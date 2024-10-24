@@ -22,8 +22,7 @@ const AccommodationPage = () => {
     const searchQuery = urlParams.get('q') || '';
 
     const dispatch = useDispatch();
-    const { universities, loading, error } = useSelector((state) => state.universities);
-    const { totalPage, data } = useSelector((state) => state.pagination);
+    const { totalPage, data, error, loading } = useSelector((state) => state.pagination);
 
     useEffect(() => {
         dispatch(fetchAllList({page,limit:10,model: 'Accommodation'}))

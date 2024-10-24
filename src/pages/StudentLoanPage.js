@@ -9,6 +9,7 @@ import ListContainer from "../components/reusable/ListContainer";
 import { useLocation } from 'react-router-dom';
 import { LoadingOverlay } from "../components/reusable/Loading";
 import StudentLoanList from "../components/StudentLoanList";
+import NoResults from "../layouts/NoResults";
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { getFavorite } from "../../features/slices/favoriteSlice";
 import { removedIsClicked } from "../../features/slices/favoriteSlice";
 import WrapperComponent from "../reusable/WrapperComponent";
+import NoResults from "../../layouts/NoResults";
 const JobList = ({ jobs, page }) => {
 	const dispatch = useDispatch();
 	const { isClicked } = useSelector((state) => state.favorites);
@@ -22,7 +23,9 @@ const JobList = ({ jobs, page }) => {
 		};
 		fetchFavorites();
 	}, [page, dispatch]);
-
+	if (jobs.length === 0) {
+		return <NoResults />;
+	}
 	return (
 		<>
 			{jobs.map((job) => {

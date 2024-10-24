@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { removedIsClicked,getFavorite } from "../features/slices/favoriteSlice";
 import Card from "./reusable/Card";
 import WrapperComponent from "./reusable/WrapperComponent";
-
+import NoResults from "../layouts/NoResults";
 const AccommodationList = ({ accommodations, page }) => {
     let image;
     const dispatch = useDispatch();
@@ -22,7 +22,9 @@ const AccommodationList = ({ accommodations, page }) => {
         };
         fetchFavorites();
     }, [page, dispatch]);
-    
+    if (accommodations.length === 0) {
+		return <NoResults />;
+	}
     return (
     <>
         {accommodations.map(accommodation => {

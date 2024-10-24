@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { removedIsClicked,getFavorite } from "../features/slices/favoriteSlice";
 import WrapperComponent from "./reusable/WrapperComponent";
-
+import NoResults from "../layouts/NoResults";
 
 
 const StudentLoanList = ({ studentLoans, page }) => {
@@ -26,7 +26,9 @@ const StudentLoanList = ({ studentLoans, page }) => {
         };
         fetchFavorites();
     }, [page, dispatch]);
-
+	if (studentLoans.length === 0) {
+		return <NoResults />;
+	}
     return (
     <>
     {studentLoans.map(loan => {
