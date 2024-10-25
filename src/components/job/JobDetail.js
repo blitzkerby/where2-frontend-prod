@@ -24,6 +24,8 @@ import {
     DollarSign,
   Briefcase,
   } from "lucide-react";
+import NoResults from "../../layouts/NoResults";
+import DiscussionsContainer from "./../reusable/DiscussionContainer"
 
   const JobDetail = () => {
     const dispatch = useDispatch();
@@ -46,17 +48,7 @@ import {
   
     if (error) {
       return (
-        <div className="min-h-[400px] flex items-center justify-center">
-          <div className="text-center p-8 bg-red-50 rounded-lg">
-            <p className="text-red-600 font-medium">Error loading job details: {error}</p>
-            <button 
-              onClick={() => dispatch(fetchCompany(params.jobId))}
-              className="mt-4 px-4 py-2 bg-red-100 text-red-600 rounded-md hover:bg-red-200 transition-colors"
-            >
-              Try Again
-            </button>
-          </div>
-        </div>
+        <NoResults errorMessage={"The page you're looking for is not available..."}/>
       );
     }
   
@@ -95,6 +87,7 @@ import {
     );
   
     return (
+      <>      
       <div className="max-w-4xl mx-auto px-4 py-8 space-y-8">
         <CompanyHeader 
           name={company?.data?.company_name || "Company Name"}
@@ -121,7 +114,9 @@ import {
           content={contact}
           variant="contact"
         />
+      <DiscussionsContainer/>
       </div>
+      </>
     );
   };
   

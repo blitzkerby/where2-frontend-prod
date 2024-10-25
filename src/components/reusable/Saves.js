@@ -1,6 +1,6 @@
 import React from "react";
-import Clock from "../../assets/images/red-stopwatch-flat-style_78370-7251.avif"
-import Chess from "../../assets/images/chess_53876-25541.avif"
+import Clock from "../../assets/images//noe-banner-reframed.png"
+import Chess from "../../assets/images/chess_53876-25541.png"
 import Coins from "../../assets/images/cenik_04.png"
 const saveLogo = [
 	{
