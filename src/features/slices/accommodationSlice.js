@@ -12,12 +12,11 @@ import { setTotalPage } from "./paginationSlice";
  */
 export const fetchAccommodations = createAsyncThunk(
     'accommodation/fetchAccommodations',
-    async ({ page }, { dispatch }) => {
+    async ({page, limit}) => {
         try {
-            const response = await axios.get(`${config.accommodation.getAllAccommodation}?page=${page}`);
+            const response = await axios.get(`${ config.list.getAllList('accommodation')}?page=${page}&limit=${limit}`);
 
-            dispatch(setTotalPage(response.data.pagination.setTotalPage || 1))
-            return response.data.oneAccommodation;
+            return response.data;
         } catch (error) {
             return []
         }
@@ -43,6 +42,8 @@ const accommodationSlice = createSlice({
     initialState: {
         loading: true,
         error: null,
+        data: [],
+        totalPages: 1,
         accommodation: {},
     },
     reducers: {
@@ -57,6 +58,20 @@ const accommodationSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+        // Fetch all accommodations
+            .addCase(fetchAccommodations.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchAccommodations.fulfilled, (state, action) => {
+                state.loading = false;
+                state.data = action.payload.list;
+                state.totalPages = action.payload.pagination.totalPages
+            })
+            .addCase(fetchAccommodations.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload || action.error.message;
+            })
             // Fetch accommodation by ID
             .addCase(fetchAccommodation.pending, (state) => {
                 state.loading = true;
