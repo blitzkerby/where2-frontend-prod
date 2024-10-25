@@ -12,7 +12,7 @@ import { setTotalPage } from "./paginationSlice";
  */
 export const fetchAccommodations = createAsyncThunk(
     'accommodation/fetchAccommodations',
-    async ({page, limit, dispatch}) => {
+    async ({page, limit}) => {
         try {
             const response = await axios.get(`${ config.list.getAllList('accommodation')}?page=${page}&limit=${limit}`);
 
