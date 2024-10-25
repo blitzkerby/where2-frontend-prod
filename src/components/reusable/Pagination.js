@@ -15,7 +15,7 @@ const isDebug = false;
  * @param {string} searchQuery - The search query parameter if exists
  * @returns {JSX.Element} - Renders the pagination buttons
  */
-const Pagination = ({ totalPage, limit, currentPage, category, searchQuery = '' }) => {
+const Pagination = ({ totalPage, limit = 10, currentPage, category, searchQuery = '' }) => {
     const navigate = useNavigate();
 
     const buildURL = (newPage) => {
