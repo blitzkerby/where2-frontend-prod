@@ -89,12 +89,14 @@ const Card = ({
     { icon: Calender, linkKey: deadLine },
     { icon: MiniMap, linkKey: location },
   ];
-
+  if (description.length >= 250) {
+    description = `${description.substring(0,250)}...`
+  }
   return (
     <div className="card-container">
       <div className="image-container">
         {imageError || !image ? (
-          <div className="placeholder">
+          <div className="image">
             <ImageIcon size={48} color="gray" />
           </div>
         ) : (
@@ -138,7 +140,7 @@ const Card = ({
             </div>
           )}
 
-          <div className="description">{convertToHTML(description.substring(0, 300))}</div>
+          <div className="description">{convertToHTML(description)}</div>
         </div>
         <div className='footer'>
           <div className="actions">
