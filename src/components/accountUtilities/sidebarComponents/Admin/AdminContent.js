@@ -210,7 +210,7 @@ const AdminEditor = () => {
                   value={formData[field.name] || ''}
                   onChange={(e) => handleInputChange(field.name, e.target.value)}
                   rows={4}
-                  className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 h-fit"
                   placeholder={field.label}
                 />
               ) : (

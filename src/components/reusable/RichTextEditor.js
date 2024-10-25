@@ -1,98 +1,104 @@
-import React, { useState, useRef } from 'react';
-import { 
-  Bold, 
-  Italic, 
-  List,
-  Link as LinkIcon,
-} from 'lucide-react';
+import React, { useState } from 'react';
+import { Bold, Link as LinkIcon, List } from 'lucide-react';
 
-const RichTextEditor = ({ value, onChange, placeholder }) => {
-  const [isAddingLink, setIsAddingLink] = useState(false);
-  const editorRef = useRef(null);
+const RichTextEditor = ({ value, onChange }) => {
+  const [text, setText] = useState(value || '');
+  const [selection, setSelection] = useState({ start: 0, end: 0 });
 
-  const handleFormat = (command) => {
-    document.execCommand(command, false, null);
-    if (editorRef.current) {
-      editorRef.current.focus();
+  const handleTextChange = (e) => {
+    const newText = e.target.value;
+    setText(newText);
+    onChange(newText);
+  };
+
+  const saveSelection = () => {
+    const textarea = document.getElementById('rich-textarea');
+    setSelection({
+      start: textarea.selectionStart,
+      end: textarea.selectionEnd
+    });
+  };
+
+  const insertFormatting = (format) => {
+    const textarea = document.getElementById('rich-textarea');
+    const start = selection.start;
+    const end = selection.end;
+    const currentText = textarea.value;
+    let newText = '';
+
+    switch (format) {
+      case 'bold':
+        newText = currentText.slice(0, start) + '**' + 
+                  currentText.slice(start, end) + '**' + 
+                  currentText.slice(end);
+        break;
+      case 'link':
+        const url = prompt('Enter URL:');
+        if (url) {
+          newText = currentText.slice(0, start) + '[' + 
+                    currentText.slice(start, end) + '](' + url + ')' + 
+                    currentText.slice(end);
+        }
+        break;
+      case 'bullet':
+        // Split selected text into lines and add bullets
+        const selectedText = currentText.slice(start, end);
+        const bulletedText = selectedText
+          .split('\n')
+          .map(line => line.trim() ? '- ' + line : line)
+          .join('\n');
+        newText = currentText.slice(0, start) + bulletedText + currentText.slice(end);
+        break;
+      default:
+        return;
     }
-  };
 
-  const handleLink = () => {
-    setIsAddingLink(true);
-    // Store the current selection
-    const selection = window.getSelection();
-    const range = selection.getRangeAt(0);
-    
-    // After a short delay, prompt for the URL
-    setTimeout(() => {
-      const url = prompt('Enter the URL:');
-      if (url) {
-        // Restore the selection
-        selection.removeAllRanges();
-        selection.addRange(range);
-        // Create the link
-        document.execCommand('createLink', false, url);
-      }
-      setIsAddingLink(false);
-      if (editorRef.current) {
-        editorRef.current.focus();
-      }
-    }, 0);
-  };
-
-  const handleContentChange = (e) => {
-    const content = e.target.innerHTML;
-    onChange(content);
+    setText(newText);
+    onChange(newText);
   };
 
   return (
-    <div className="border border-gray-300 rounded-lg overflow-hidden">
-      <div className="bg-gray-50 border-b border-gray-300 p-2 flex gap-2">
+    <div className="w-full">
+      <div className="flex gap-2 mb-2 p-2 bg-gray-100 rounded">
         <button
-          onClick={() => handleFormat('bold')}
-          className="p-2 hover:bg-gray-200 rounded transition-colors"
+          onClick={() => insertFormatting('bold')}
+          className="p-2 hover:bg-gray-200 rounded"
           title="Bold"
         >
-          <Bold size={18} className={`${document.queryCommandState('bold') ? 'text-blue-500' : ''}`} />
+          <Bold size={16} />
         </button>
         <button
-          onClick={() => handleFormat('italic')}
-          className="p-2 hover:bg-gray-200 rounded transition-colors"
-          title="Italic"
-        >
-          <Italic size={18} className={`${document.queryCommandState('italic') ? 'text-blue-500' : ''}`} />
-        </button>
-        <button
-          onClick={() => handleFormat('insertUnorderedList')}
-          className="p-2 hover:bg-gray-200 rounded transition-colors"
-          title="Bullet List"
-        >
-          <List size={18} className={`${document.queryCommandState('insertUnorderedList') ? 'text-blue-500' : ''}`} />
-        </button>
-        <button
-          onClick={handleLink}
-          className={`p-2 hover:bg-gray-200 rounded transition-colors ${isAddingLink ? 'bg-gray-200' : ''}`}
+          onClick={() => insertFormatting('link')}
+          className="p-2 hover:bg-gray-200 rounded"
           title="Insert Link"
         >
-          <LinkIcon size={18} className={`${document.queryCommandState('createLink') ? 'text-blue-500' : ''}`} />
+          <LinkIcon size={16} />
+        </button>
+        <button
+          onClick={() => insertFormatting('bullet')}
+          className="p-2 hover:bg-gray-200 rounded"
+          title="Bullet List"
+        >
+          <List size={16} />
         </button>
       </div>
-
-      <div
-        ref={editorRef}
-        contentEditable
-        className="p-4 min-h-[200px] focus:outline-none"
-        dangerouslySetInnerHTML={{ __html: value }}
-        onInput={handleContentChange}
-        placeholder={placeholder}
-        onKeyDown={(e) => {
-          // Ensure Enter key works properly with lists
-          if (e.key === 'Enter' && document.queryCommandState('insertUnorderedList')) {
-            // Let the browser handle the Enter key naturally in list mode
-            return;
-          }
-        }}
+      <textarea
+        id="rich-textarea"
+        value={text}
+        onChange={handleTextChange}
+        onSelect={saveSelection}
+        rows={4}
+        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        placeholder="Enter description (supports markdown formatting)"
       />
+      <div className="mt-2 text-sm text-gray-500">
+        Formatting tips:
+        <ul className="list-disc ml-4">
+          <li>Use **text** for bold</li>
+          <li>Click link button to add URLs</li>
+          <li>Select text and click bullet for lists</li>
+        </ul>
+      </div>
     </div>
   );
 };

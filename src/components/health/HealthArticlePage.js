@@ -11,6 +11,10 @@ import Footer from "./../reusable/Footer";
 import DiscussionContainer from "./../reusable/DiscussionContainer";
 import TextSummary from "./../reusable/TextSummary";
 import config from "./../../config";
+import RelevantLinks from "../reusable/RelevantLinks";
+import {
+  Facebook, Twitter, Instagram, ImageIcon, Globe, Send
+} from "lucide-react";
 
 const HealthArticlePage = () => {
   const [article, setArticle] = useState(null);
@@ -19,6 +23,15 @@ const HealthArticlePage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const socialMediaLinks = [
+    { 
+      icon: Globe, 
+      link: "https://twitter.com/", 
+      label: "Website",
+      bgGradient: "from-gray-600 to-gray-700"
+    },
+  ];
 
   const currentPath = location.pathname;
 
@@ -133,6 +146,7 @@ const HealthArticlePage = () => {
                     <h2 className="text-xl font-semibold mb-4 text-white">Quick Summary</h2>
                     <TextSummary textToSummarize={article.content} />
                   </div>
+                <RelevantLinks links={socialMediaLinks}/>
           
                 </WrapperComponent>
                 <div className="mt-6 bg-gray-900/50 backdrop-blur-sm rounded-2xl ">
