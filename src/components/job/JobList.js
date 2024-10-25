@@ -48,7 +48,7 @@ const JobList = ({ jobs, page }) => {
 							// websiteLink={job.createdAt}
 							location={job.location}
 							deadLine={job.deadline}
-							timeOut={job.salary}
+							timeOut={job.work_hour}
 							type={"job"}
 							isHeartClicked={isClicked[job.id]}
 							route={`/detail/job/${job.id}`}
