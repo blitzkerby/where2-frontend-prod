@@ -25,8 +25,8 @@ const AccommodationPage = () => {
     const { data, loading, error, totalPages } = useSelector((state) => state.accommodations);
 
     useEffect(() => {
-        dispatch(fetchAccommodations({page, limit, dispatch}))
-    },[dispatch, page, limit])
+        dispatch(fetchAccommodations({page, limit}))
+    },[page, limit])
     return (
         <div>
             <Navbar />
