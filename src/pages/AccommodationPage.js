@@ -11,6 +11,7 @@ import Pagination from '../components/reusable/Pagination';
 import ListContainer from '../components/reusable/ListContainer';
 import AccommodationList from '../components/AccommodationList';
 import { fetchAllList } from '../features/slices/paginationSlice';
+
 /** Enable for debugging */
 const isDebug = true;
 
