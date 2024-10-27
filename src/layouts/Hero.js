@@ -31,7 +31,7 @@ const Hero = ({ props, children }) => {
 
     /* background image */
     imageContainer: `mt-image-container-top-margin flex justify-center w-full h-full hover:scale-110`,
-    image: "object-contain sm:object-cover max-w-[1440px]",
+    image: "object-contain",
 
     /* partime job button */
     button: "border rounded-[100px] bg-[#A9EBFF] w-fit px-[18px] py-[5px] text-[#375761] drop-shadow-lg ",

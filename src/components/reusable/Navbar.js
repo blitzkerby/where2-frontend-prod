@@ -7,22 +7,14 @@ import useAuth from "./../../hooks/useAuth";
 import ProfilePicture from "./PictureUpload";
 import ButtonComponent from "./Button";
 import WrapperComponent from "./WrapperComponent";
-import {
-  School,
-  BookOpenTextIcon,
-  LucideBriefcaseBusiness,
-  User2,
-  Activity,
-  ChartNoAxesCombinedIcon,
-} from "lucide-react";
+import {  School,  BookOpenTextIcon,  LucideBriefcaseBusiness,  User2,  Activity,  ChartNoAxesCombinedIcon,} from "lucide-react";
 
 const MenuIcon = <img src={Menu} alt="Menu Item" />;
+
 const DashboardIcon = ({ username, entity }) => {
   const actualIdentifier = username || entity || "entity";
   const encodedIdentifier = encodeURIComponent(actualIdentifier);
-  // DECODED URL
   const dynamicDashboardUrl = `/dashboard/${encodedIdentifier}`;
-
   return (
     <Link to={dynamicDashboardUrl}>
       <ChartNoAxesCombinedIcon />
@@ -33,7 +25,6 @@ const DashboardIcon = ({ username, entity }) => {
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { isLoggedIn, username, entity, showDashboard, userId } = useAuth();
-
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -52,7 +43,7 @@ const Navbar = () => {
     {
       logo: <User2 />,
       name: "Profile",
-      to: `/profile/${encodeURIComponent(username || entity)}`,
+      to: `${isLoggedIn ? `/profile/${encodeURIComponent(username || entity)}` : "/login"}`,
       showMobile: true,
       showDesktop: false,
     },
@@ -102,7 +93,6 @@ const Navbar = () => {
             )}
           </div>
         </div>
-
         <div className="items-center justify-between w-full h-full px-4 py-3 lg:hidden sm:flex">
           <Link to="/" className="text-xl font-bold">
             WHERE2
@@ -115,39 +105,38 @@ const Navbar = () => {
           </button>
         </div>
       </nav>
-
-      {isOpen && (
-        <div className="lg:hidden fixed inset-y-0 right-0 w-64 bg-white shadow-lg transition-transform duration-300 ease-in-out transform translate-x-0 z-[1003]">
-          <div className="flex flex-col h-full">
-            <div className="h-[64px] p-4 border-b">
-              <button
-                onClick={toggleMenu}
-                className="float-right p-2 rounded-md hover:bg-gray-300"
-                aria-label="Close menu"
-              >
-                <X size={20} />
-              </button>
-            </div>
-            <WrapperComponent>
-              <div className="flex-grow overflow-y-auto">
-                {menuItems
-                  .filter((item) => item.showMobile)
-                  .map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.to}
-                      className="flex items-center px-4 py-4 text-gray-700 hover:bg-gray-100"
-                      onClick={toggleMenu}
-                    >
-                      {item.logo}
-                      <span className="ml-4">{item.name}</span>
-                    </Link>
-                  ))}
-              </div>
-            </WrapperComponent>
+      <div
+        className={`lg:hidden fixed inset-y-0 right-0 w-64 bg-white shadow-lg transition-transform duration-300 ease-in-out transform ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        } z-[1003]`}
+      >
+        <div className="flex flex-col h-full">
+          <div className="h-[64px] p-4 border-b">
+            <button
+              onClick={toggleMenu}
+              className="float-right p-2 rounded-md hover:bg-gray-300"
+              aria-label="Close menu"
+            >
+              <X size={20} />
+            </button>
           </div>
+            <div className="flex-grow overflow-y-auto">
+              {menuItems
+                .filter((item) => item.showMobile)
+                .map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.to}
+                    className="flex items-center px-4 py-4 text-gray-700 hover:bg-gray-100"
+                    onClick={toggleMenu}
+                  >
+                    {item.logo}
+                    <span className="ml-4">{item.name}</span>
+                  </Link>
+                ))}
+            </div>
         </div>
-      )}
+      </div>
     </>
   );
 };

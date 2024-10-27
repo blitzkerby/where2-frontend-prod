@@ -51,7 +51,6 @@ const useAuth = () => {
         username: userName || "",
         entity: entity || "",
         role: userRole,
-        // DASHBOARD IS SHOWN ONLY TO THE ADMIN AND DEVELOPER; IF THE ROLE IS NOT IN THE TWO, ITS HIDDEN
         showDashboard: userRole === "admin" || userRole === "developer",
         loading: false,
         userId: id || null,
@@ -102,7 +101,7 @@ const useAuth = () => {
     } catch (error) {
       console.error("Login error:", error);
       clearAuthData();
-      throw error; // Re-throw the error for the component to handle
+      throw error;
     }
   }, [fetchUserDataAndRole, clearAuthData]);
 

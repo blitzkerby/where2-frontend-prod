@@ -1,24 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import FormInput from "../components/reusable/InputField";
-import useAuth from "../hooks/useAuth";
-import { LoadingOverlay } from "../components/reusable/Loading";
-import VisitorTracker from "../components/reusable/VisitorTracker";
-import PictureUpload from "../components/reusable/PhotoUpload";
+import FormInput from "./../components/reusable/InputField";
+import useAuth from "./../hooks/useAuth";
+import { LoadingOverlay } from "./../components/reusable/Loading";
+import VisitorTracker from "./../components/reusable/VisitorTracker";
+import PictureUpload from "./../components/reusable/PhotoUpload";
 
 const UserAccount = ({ userInfo }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [showLoadingOverlay, setShowLoadingOverlay] = useState(false);
   const { role, loading, isLoggedIn, token } = useAuth();
 
   useEffect(() => {
     if (!loading && (!role || !isLoggedIn || !token)) {
-      navigate("/login", { replace: true });
+      setShowLoadingOverlay(true);
+      const timer = setTimeout(() => {
+        setShowLoadingOverlay(false);
+
+        navigate("/login", { replace: true });
+      }, 2000);
+
+      return () => clearTimeout(timer);
     }
   }, [loading, role, isLoggedIn, token, navigate]);
 
   if (loading) {
-    return <LoadingOverlay className="h-screen" message="We are fetching your profile..." />;
+    return <LoadingOverlay isFullScreen={true} message="We are fetching your profile..." />;
   }
 
   if (!userInfo) {
@@ -28,7 +36,12 @@ const UserAccount = ({ userInfo }) => {
   const formattedDate = new Date(userInfo.createdAt).toLocaleDateString("en-CA");
 
   return (
-    <section className="w-full h-full pb-[30px] bg-white rounded-3xl mb-[32px] shadow-md border">
+    <>
+      {showLoadingOverlay && (
+        <LoadingOverlay message="You are not logged in. You are being redirected to the login page..." isFullScreen={true} />
+      )}
+
+<section className="w-full h-full pb-[30px] bg-white rounded-3xl mb-[32px] shadow-md border">
       <div className="lg:w-full lg:py-[128px] lg:px-[64px] lg:mx-auto h-full px-4 pb-6 pt-12 sm:px-6 lg:pb-0">
         <div className="flex items-center justify-center mb-6">
           <PictureUpload userId={userInfo.id} folder = {'profile-picture'}/>
@@ -122,6 +135,7 @@ const UserAccount = ({ userInfo }) => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 

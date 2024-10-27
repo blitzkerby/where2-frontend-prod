@@ -20,7 +20,7 @@ const Logout = () => {
 
     return (
         <>
-            {loading && <LoadingOverlay message="We are logging you out..."/>}
+            {loading && <LoadingOverlay isFullScreen={true} message="We are logging you out..."/>}
             {!loading && handleLogout()}
         </>
     );

@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 import { fetchAccommodation } from "../features/slices/accommodationSlice";
 import { LoadingOverlay } from "./reusable/Loading";
 import { MapPin, Phone, Home, DollarSign, Bed, Square, Calendar } from "lucide-react";
-
+import { convertToHTML } from "../utility/markdownConverter/markdownConverter";
+import DiscussionContainer from "./reusable/DiscussionContainer";
 const AccommodationDetail = () => {
   const param = useParams();
   const dispatch = useDispatch();
@@ -30,6 +31,8 @@ const AccommodationDetail = () => {
   if (error) return <div className="text-red-500 p-4">{error}</div>;
 
   return (
+
+    <main>    
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Header Section */}
@@ -114,7 +117,7 @@ const AccommodationDetail = () => {
             <div className="bg-white rounded-xl p-6 shadow-sm">
               <h2 className="text-xl font-semibold mb-4">Description</h2>
               <p className="text-gray-600 leading-relaxed">
-                {accommodation.description}
+                {convertToHTML(accommodation.description)}
               </p>
             </div>
           </div>
@@ -146,7 +149,11 @@ const AccommodationDetail = () => {
           </div>
         </div>
       </div>
+    <div>
+    <DiscussionContainer/>
     </div>
+    </div>
+    </main>
   );
 };
 

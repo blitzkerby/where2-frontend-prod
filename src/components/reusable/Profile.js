@@ -14,6 +14,7 @@ import Logout from "./Logout.js";
 import CollectionPanel from "./CollectionPanel.js";
 import SettingPanel from "../SettingPanel.js";
 import adminContentListing from "../accountUtilities/sidebarComponents/Admin/AdminContentListing.js";
+import DiscussionList from "../community/DiscussionList.js";
 
 export const SidebarContentContext = createContext();
 
@@ -33,6 +34,7 @@ const contentComponents = {
   },
   collectionPanel: CollectionPanel,
   setting: SettingPanel,
+  discussionListing : DiscussionList,
 };
 
 const Profile = ({ userData, isPublic }) => {
@@ -124,7 +126,8 @@ const Profile = ({ userData, isPublic }) => {
               sidebarContent !== "adminContent" &&
               sidebarContent !== "adminContentListing" &&
               sidebarContent !== "accommodationList" &&
-              sidebarContent !== "adminDashboard" ? (
+              sidebarContent !== "adminDashboard" &&
+              sidebarContent !== "discussionListing"? (
                 <CollectionPanel category={sidebarContent} />
               ) : (
                 <ContentComponent userInfo={userData} />

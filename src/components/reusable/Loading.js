@@ -23,14 +23,14 @@ const LoadingSpinner = ({
 
 const LoadingOverlay = ({ message = "Loading...", isFullScreen = false }) => {
   const overlayClasses = isFullScreen
-    ? "fixed inset-0 bg-black bg-opacity-50 z-50"
+    ? "fixed inset-0 bg-white bg-opacity-90 z-1000"
     : "absolute inset-0 bg-white bg-opacity-75";
 
   return (
     <div className={`${overlayClasses} flex items-center justify-center`}>
       <div className="text-center">
         <LoadingSpinner size={48} className="mb-4" />
-        <p className="text-lg font-semibold">{message}</p>
+        <p className="text-lg font-semibold text-gray-800">{message}</p>
       </div>
     </div>
   );

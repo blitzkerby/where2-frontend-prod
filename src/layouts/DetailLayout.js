@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { 
-  Facebook, Twitter, Instagram, ImageIcon, Globe, Send,
-  Share2, Bookmark, Eye, MessageCircle, Heart,Clock
-} from "lucide-react";
+import { Facebook, Twitter, Instagram, ImageIcon, Globe, Send} from "lucide-react";
 import {convertToHTML} from "../utility/markdownConverter/markdownConverter"
 import DiscussionContainer from "./../components/reusable/DiscussionContainer";
-
-const setLikeCount = []
+import RelevantLinks from "../components/reusable/RelevantLinks";
 
 const DetailLayout = ({ 
   image, 
@@ -62,22 +58,6 @@ const DetailLayout = ({
     }
   ];
 
-  const handleLike = () => {
-    setLiked(!liked);
-    setLikeCount(prev => liked ? prev - 1 : prev + 1);
-  };
-
-
-
-  const ShareButton = () => (
-    <button 
-      className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors duration-300"
-      onClick={() => navigator.clipboard.writeText(window.location.href)}
-    >
-      <Share2 className="w-4 h-4" />
-      <span>Share</span>
-    </button>
-  );
 
   return (
     <div className={`max-w-6xl mx-auto px-4 py-16 transition-opacity duration-1000 text-justify ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
@@ -122,10 +102,10 @@ const DetailLayout = ({
       <div className="grid lg:grid-cols-3 gap-12">
         <div className="lg:col-span-2 space-y-6">
           <div className="flex items-center justify-between">
-            <h1 className="text-4xl font-bold text-gray-900 tracking-tight">{title}</h1>
+            <h1 className="lg:text-4xl text-xl font-bold text-gray-900 tracking-tight">{title}</h1>
           </div>
           
-          <div className="prose prose-lg max-w-none">
+          <div className="prose prose-lg max-w-none tracking-tight">
             {convertToHTML(description)}
           </div>
 
@@ -153,28 +133,9 @@ const DetailLayout = ({
               )
             )}
           </div>
+          <RelevantLinks links={socialMediaLinks} />
 
-          {/* Links Section */}
-          <div className="bg-white rounded-xl shadow-lg p-6 space-y-4 hover:shadow-xl transition-shadow duration-300 mx-5">
-            <h3 className="text-xl font-semibold text-gray-900 pb-4 border-b border-gray-200">
-              Relevant Links
-            </h3>
-            <div className="space-y-3">
-              {socialMediaLinks.map(({ link, label }) => 
-                link && (
-                  <a
-                    key={label}
-                    href={link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-gray-600 hover:text-gray-900 transition-colors duration-200 truncate hover:bg-gray-50 p-2 rounded-lg"
-                  >
-                    {label}
-                  </a>
-                )
-              )}
-            </div>
-          </div>
+
       <div className="h-fit w-full">
         <DiscussionContainer />
       </div>

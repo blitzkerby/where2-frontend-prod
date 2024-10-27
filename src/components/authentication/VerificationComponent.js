@@ -14,59 +14,60 @@ import { LoadingOverlay } from "./../reusable/Loading";
 
 const VerificationComponent = () => {
   const [verificationCode, setVerificationCode] = useState("");
-  // SET THE TIME LEFT TO LIMIT THE NUMBER OF ATTEMPTS (PREVENTING SPAM OF CLICKS)
   const [timeLeft, setTimeLeft] = useState(600);
+  const [inputError, setInputError] = useState(false);
+  const [resendMessage, setResendMessage] = useState("");
+  
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { status, error, message, isVerified } = useSelector(
-    (state) => state.auth
-  );
-
+  
+  const { status, error, message, isVerified } = useSelector(state => state.auth);
   const email = location.state?.email || "";
 
   useEffect(() => {
     dispatch(clearAuthState());
   }, [dispatch]);
 
-  // IF THERE IS NO EMAIL, RETURNING THE USER TO THE SIGNUP PAGE
   useEffect(() => {
     if (!email) {
       navigate("/signup");
     }
-  }, [email, navigate, dispatch]);
+  }, [email, navigate]);
 
-  // SET TIMER FOR THE RESEND CODE
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
+      setTimeLeft(prevTime => (prevTime > 0 ? prevTime - 1 : 0));
     }, 1000);
-
+    
     return () => clearInterval(timer);
   }, []);
 
   useEffect(() => {
+    if (inputError) {
+      const timeout = setTimeout(() => setInputError(false), 3000);
+      return () => clearTimeout(timeout);
+    }
+  }, [inputError]);
+
+  useEffect(() => {
     if (isVerified) {
       const trimmedEmail = email.trim();
-
+      
       if (trimmedEmail) {
         dispatch(sendWelcomeEmail({ email: trimmedEmail }))
           .unwrap()
-          .then(() => {
-            console.log("Welcome email sent successfully");
-          })
-          .catch((err) => {
-            console.error("Failed to send welcome email:", err);
-          })
+          .then(() => console.log("Welcome email sent successfully"))
+          .catch(err => console.error("Failed to send welcome email:", err))
           .finally(() => {
             const timer = setTimeout(() => {
               dispatch(clearAuthState());
               navigate("/login");
-            }, 500);
+            }, 100);
             return () => clearTimeout(timer);
           });
       } else {
-        console.error("Invalid email address: Email is empty after trimming");
+        console.error("Invalid email address: Email is empty.");
         const timer = setTimeout(() => {
           dispatch(clearAuthState());
           navigate("/login");
@@ -76,30 +77,35 @@ const VerificationComponent = () => {
     }
   }, [isVerified, email, navigate, dispatch]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (email && verificationCode) {
-      dispatch(verifyAccount({ email, verificationCode }))
-        .unwrap()
-        .catch((err) => console.error("Verification failed:", err));
+      try {
+        await dispatch(verifyAccount({ email, verificationCode })).unwrap();
+      } catch (err) {
+        console.error("Verification failed:", err);
+        setInputError(true);
+        setVerificationCode(""); // Reset verification code on error
+      }
     }
   };
 
-  const handleResendCode = () => {
+  const handleResendCode = async () => {
     if (email && timeLeft === 0) {
-      dispatch(resendVerificationCode({ email }))
-        .unwrap()
-        .then(() => setTimeLeft(600))
-        .catch((err) =>
-          console.error("Failed to resend verification code:", err)
-        );
+      try {
+        await dispatch(resendVerificationCode({ email })).unwrap();
+        setTimeLeft(600);
+        setResendMessage("Verification code resent successfully!");
+      } catch (e) {
+        console.error("Failed to resend verification code:", e);
+        setResendMessage("Failed to resend verification code. Please try again.");
+      }
     }
   };
 
-  // SHOWING THE LOADING OVERLAY COMPONENT WHEN THE USER IS SIGNING UP
   if (status === "loading") {
     return (
-      <LoadingOverlay className="h-screen" message="Verifying account..." />
+      <LoadingOverlay isFullScreen={true} message="We are verifying your account..." />
     );
   }
 
@@ -110,7 +116,7 @@ const VerificationComponent = () => {
   return (
     <ContainerComponent title="VERIFY ACCOUNT" className="lg:h-[718px]">
       <p className="text-sm text-gray-600 text-center mb-6">
-        Please enter the verification code sent to {email}
+        Please enter the verification code sent to <span className="font-bold text-sky-500 underline">{email}</span>
       </p>
       <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
         <FormInput
@@ -120,6 +126,8 @@ const VerificationComponent = () => {
           value={verificationCode}
           onChange={(e) => setVerificationCode(e.target.value)}
           required
+          className={inputError ? "border-red-500" : ""}
+          error={inputError && "Verification code is required"}
         />
         <p className="text-sm text-gray-500">
           Code will expire in {Math.floor(timeLeft / 60)}:
@@ -128,8 +136,7 @@ const VerificationComponent = () => {
         {error && <p className="text-red-500 text-sm text-center">{error}</p>}
         {isVerified && (
           <p className="text-green-500 text-sm text-center">
-            {message ||
-              "Account verified successfully. Redirecting to login..."}
+            {message || "Account verified successfully. Redirecting to login..."}
           </p>
         )}
         <div className="flex justify-center items-center">
@@ -137,7 +144,7 @@ const VerificationComponent = () => {
             variant="primary"
             className="mt-2 w-[197px] h-[38px] sm:w-[343px] sm:h-[50px]"
             type="submit"
-            disabled={status === "loading" || status === "succeeded"}
+            disabled={status === "loading" || status === "succeeded" || !verificationCode}
           >
             {status === "loading" ? <LoadingOverlay /> : "Verify"}
           </ButtonComponent>
@@ -147,7 +154,7 @@ const VerificationComponent = () => {
         <button
           onClick={handleResendCode}
           className="text-[rgb(0,122,255)] underline text-sm"
-          disabled={timeLeft > 0}
+          // disabled={timeLeft > 0}
         >
           Resend Code
         </button>

@@ -19,9 +19,10 @@ const entityConfig = {
     hasLocation: true,
     createEndpoint: config.contentCreation.createUniversity,
     fields: [
-      { name: 'name', label: 'University Name', type: 'text' },
       { name: 'description', label: 'University Description', type: 'textarea' },
+      { name: 'name', label: 'University Name', type: 'text' },
       { name: 'location', label: 'Location', type: 'text' },
+      {name : 'image_url' , label: 'Image URL', type: 'text'}
     ],
   },
   'Job offer': {
@@ -128,10 +129,8 @@ const AdminEditor = () => {
       instagram_url: links.find(link => link.title === 'Instagram')?.url || '',
       telegram_url: links.find(link => link.title === 'Telegram')?.url || '',
       website: links.find(link => link.title === 'Website')?.url || '',
-      // image_url: imageUrl,
       image_alt: formData[entityConfig[entity].fields[0].name],
       userId: parseInt(userId),
-      postId
     };
 
     // Special case for Job offer due to different data structure
@@ -211,7 +210,7 @@ const AdminEditor = () => {
                   value={formData[field.name] || ''}
                   onChange={(e) => handleInputChange(field.name, e.target.value)}
                   rows={4}
-                  className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 h-fit"
                   placeholder={field.label}
                 />
               ) : (

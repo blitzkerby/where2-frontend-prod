@@ -44,6 +44,7 @@ const ListLayout = ({ items, category, page , isLoading }) => {
         }
 
         return items.map((item, index) => (
+            <WrapperComponent>
             <Card
                 key={index}
                 image={item.image_url}
@@ -59,7 +60,8 @@ const ListLayout = ({ items, category, page , isLoading }) => {
                 id={item.id}
                 type={category}
                 isHeartClicked={isClicked[item.id]}
-            />
+                />
+                </WrapperComponent>
         ));
     };
 

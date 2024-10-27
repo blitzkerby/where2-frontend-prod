@@ -8,7 +8,6 @@ import config from "../../../config";
         'Content-Type': 'application/json',
       },
     });
-  
     if (!response.ok) {
       const error = await response.json();
       throw new Error(error.message || 'Error deactivating user');

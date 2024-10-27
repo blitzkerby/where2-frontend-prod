@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCompany } from "../../features/slices/jobSlice";
 import { useParams } from "react-router-dom";
+import { convertToHTML } from "../../utility/markdownConverter/markdownConverter";
 
 // import Gmail from "./../../assets/svg/gmail.svg";
 // import Website from "./../../assets/svg/website.svg";
@@ -23,6 +24,11 @@ import {
     DollarSign,
   Briefcase,
   } from "lucide-react";
+import NoResults from "../../layouts/NoResults";
+import DiscussionsContainer from "./../reusable/DiscussionContainer"
+import axios from "axios";
+import config from "../../config";
+
 
   const JobDetail = () => {
     const dispatch = useDispatch();
@@ -30,14 +36,10 @@ import {
     const params = useParams();
   
     useEffect(() => {
-      const fetchCreatorData = async () => {
-        const creatorData = await fetchProfile();
-        console.log(creatorData);
-      };
-  
-      fetchCreatorData();
       dispatch(fetchCompany(params.jobId));
     }, [dispatch, params.jobId]);
+
+
   
     if (isLoading) {
       return <LoadingSkeleton />;
@@ -45,17 +47,7 @@ import {
   
     if (error) {
       return (
-        <div className="min-h-[400px] flex items-center justify-center">
-          <div className="text-center p-8 bg-red-50 rounded-lg">
-            <p className="text-red-600 font-medium">Error loading job details: {error}</p>
-            <button 
-              onClick={() => dispatch(fetchCompany(params.jobId))}
-              className="mt-4 px-4 py-2 bg-red-100 text-red-600 rounded-md hover:bg-red-200 transition-colors"
-            >
-              Try Again
-            </button>
-          </div>
-        </div>
+        <NoResults errorMessage={"The page you're looking for is not available..."}/>
       );
     }
   
@@ -94,6 +86,7 @@ import {
     );
   
     return (
+      <>      
       <div className="max-w-4xl mx-auto px-4 py-8 space-y-8">
         <CompanyHeader 
           name={company?.data?.company_name || "Company Name"}
@@ -102,17 +95,17 @@ import {
         />
         <DetailText 
           title="Company Information"
-          content={company?.data?.company?.company_bg || "N/A"}
+          content={convertToHTML(company?.data?.company?.company_bg) || "N/A"}
           icon={<Building2 className="w-5 h-5" />}
         />
         <DetailText 
           title="Job Description"
-          content={company?.data?.job_desc || "N/A"}
+          content={convertToHTML(company?.data?.job_desc) || "N/A"}
           icon={<Briefcase className="w-5 h-5" />}
         />
         <ContactCard 
           title="Job Requirements"
-          content={company?.data?.job_require || "N/A"}
+          content={convertToHTML(company?.data?.job_require)|| "N/A"}
           variant="requirement"
         />
         <ContactCard 
@@ -120,7 +113,9 @@ import {
           content={contact}
           variant="contact"
         />
+      <DiscussionsContainer/>
       </div>
+      </>
     );
   };
   
