@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import ButtonComponent from "./reusable/Button";
 import FormInput from "./reusable/InputField";
-import PictureUpload from "./reusable/PictureUpload";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePassword } from "./../features/slices/authSlice";
 import { LoadingSpinner } from "./reusable/Loading";
 import useAuth from "./../hooks/useAuth";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { EyeIcon, EyeOffIcon, AlertTriangle } from "lucide-react";
 import { clearAuthState, logout } from "./../features/slices/authSlice";
 import { LoadingOverlay } from "./reusable/Loading";
-
+import deleteUser from "./reusable/functions/DeleteUser";
+import DeleteConfirmationModal from "./reusable/functions/DeleteConfirmationModal";
 
 const SettingPanel = () => {
   const dispatch = useDispatch();
@@ -23,6 +23,7 @@ const SettingPanel = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showLogoutOverlay, setShowLogoutOverlay] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [validationErrors, setValidationErrors] = useState({
     length: false,
     letter: false,
@@ -69,7 +70,7 @@ const SettingPanel = () => {
     }
 
     try {
-      const resultAction = await dispatch(updatePassword({
+      await dispatch(updatePassword({
         userId,
         token,
         passwordCurrent,
@@ -77,16 +78,12 @@ const SettingPanel = () => {
         passwordConfirm
       })).unwrap();
 
-      // Clear form on success
       setPasswordCurrent('');
       setNewPassword('');
       setNewConfirmPassword('');
-
-      // Show overlay with success message
       setShowLogoutOverlay(true);
 
       setTimeout(async () => {
-        // Log out user after successful password update
         await dispatch(logout());
         navigate('/login');
       }, 3000);
@@ -94,6 +91,17 @@ const SettingPanel = () => {
     } catch (err) {
       console.error('Failed to update password:', err);
       setLocalError(err || 'An error occurred. Please try again.');
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    try {
+      await deleteUser(userId);
+      dispatch(logout());
+      navigate('/login');
+    } catch (error) {
+      console.error('Failed to delete account:', error);
+      setLocalError('Failed to delete account. Please try again.');
     }
   };
 
@@ -113,7 +121,7 @@ const SettingPanel = () => {
       <button
         type="button"
         onClick={() => setShow(!show)}
-        className="absolute right-3 bottom-1 transform -translate-y-1/2"
+        className="absolute right-3 top-1/2 transform -translate-y-1/2"
       >
         {!show ? 
           <EyeOffIcon className="h-5 w-5 text-gray-400" /> : 
@@ -132,73 +140,114 @@ const SettingPanel = () => {
         />
       )}
       
-      <section className="w-full h-full bg-white rounded-3xl mb-8 shadow-md border pb-12">
-        <div className="lg:w-full lg:px-16 lg:mx-auto h-full px-4 pb-6 pt-12 sm:px-6 lg:pb-0">         
-          <form className="flex flex-col space-y-4" onSubmit={handleChangePassword}>
-            {renderPasswordInput(
-              "Current Password",
-              passwordCurrent,
-              setPasswordCurrent,
-              showCurrentPassword,
-              setShowCurrentPassword,
-              localError
-            )}
+      <DeleteConfirmationModal
+        show={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        onConfirm={handleDeleteAccount}
+        type="Delete Account"
+        warningMsg="Are you sure you want to delete your account? This action cannot be undone and you will lose all your data permanently."
+      />
 
-            {renderPasswordInput(
-              "New Password",
-              password,
-              setNewPassword,
-              showNewPassword,
-              setShowNewPassword,
-              localError
-            )}
+      <div className="max-w-4xl mx-auto p-4">
+        <section className="w-full bg-white rounded-3xl mb-8 shadow-md border">
+          <div className="lg:w-full lg:px-16 lg:mx-auto px-4 py-8 sm:px-6">
+            <div className="border-b pb-8 mb-8">
+              <h2 className="text-2xl font-semibold text-gray-900 mb-6">Password Settings</h2>         
+              <form className="flex flex-col space-y-6 max-w-md" onSubmit={handleChangePassword}>
+                {renderPasswordInput(
+                  "Current Password",
+                  passwordCurrent,
+                  setPasswordCurrent,
+                  showCurrentPassword,
+                  setShowCurrentPassword,
+                  localError
+                )}
 
-            {/* Password Requirements */}
-            <div className="grid grid-cols-1 gap-2 text-sm">
-              <div className={`flex items-center gap-2 ${validationErrors.length ? 'text-green-500' : 'text-gray-500'}`}>
-                <div className={`w-2 h-2 rounded-full ${validationErrors.length ? 'bg-green-500' : 'bg-gray-300'}`} />
-                <span>At least 6 characters</span>
-              </div>
-              <div className={`flex items-center gap-2 ${validationErrors.letter ? 'text-green-500' : 'text-gray-500'}`}>
-                <div className={`w-2 h-2 rounded-full ${validationErrors.letter ? 'bg-green-500' : 'bg-gray-300'}`} />
-                <span>At least one letter</span>
-              </div>
-              <div className={`flex items-center gap-2 ${validationErrors.number ? 'text-green-500' : 'text-gray-500'}`}>
-                <div className={`w-2 h-2 rounded-full ${validationErrors.number ? 'bg-green-500' : 'bg-gray-300'}`} />
-                <span>At least one number</span>
-              </div>
+                {renderPasswordInput(
+                  "New Password",
+                  password,
+                  setNewPassword,
+                  showNewPassword,
+                  setShowNewPassword,
+                  localError
+                )}
+
+                <div className="grid grid-cols-1 gap-2 text-sm bg-gray-50 p-4 rounded-lg">
+                  <div className={`flex items-center gap-2 ${validationErrors.length ? 'text-green-500' : 'text-gray-500'}`}>
+                    <div className={`w-2 h-2 rounded-full ${validationErrors.length ? 'bg-green-500' : 'bg-gray-300'}`} />
+                    <span>At least 6 characters</span>
+                  </div>
+                  <div className={`flex items-center gap-2 ${validationErrors.letter ? 'text-green-500' : 'text-gray-500'}`}>
+                    <div className={`w-2 h-2 rounded-full ${validationErrors.letter ? 'bg-green-500' : 'bg-gray-300'}`} />
+                    <span>At least one letter</span>
+                  </div>
+                  <div className={`flex items-center gap-2 ${validationErrors.number ? 'text-green-500' : 'text-gray-500'}`}>
+                    <div className={`w-2 h-2 rounded-full ${validationErrors.number ? 'bg-green-500' : 'bg-gray-300'}`} />
+                    <span>At least one number</span>
+                  </div>
+                </div>
+
+                {renderPasswordInput(
+                  "Confirm New Password",
+                  passwordConfirm,
+                  setNewConfirmPassword,
+                  showConfirmPassword,
+                  setShowConfirmPassword,
+                  localError
+                )}
+
+                {localError && (
+                  <p className="text-rose-500 text-sm font-medium">{localError}</p>
+                )}
+
+                {status === "succeeded" && message && (
+                  <p className="text-green-500 text-sm font-medium">{message}</p>
+                )}
+
+                <div className="flex justify-start">
+                  <ButtonComponent
+                    variant="primary"
+                    className="px-6 py-2 min-w-[150px]"
+                    type="submit"
+                    disabled={status === "loading"}
+                  >
+                    {status === "loading" ? <LoadingSpinner /> : "Change Password"}
+                  </ButtonComponent>
+                </div>
+              </form>
             </div>
 
-            {renderPasswordInput(
-              "Confirm New Password",
-              passwordConfirm,
-              setNewConfirmPassword,
-              showConfirmPassword,
-              setShowConfirmPassword,
-              localError
-            )}
-
-            {localError && (
-              <p className="text-rose-500 text-sm font-medium">{localError}</p>
-            )}
-
-            {status === "succeeded" && message && (
-              <p className="text-green-500 text-sm font-medium">{message}</p>
-            )}
-
-            <div className="flex justify-center items-center">
-              <ButtonComponent
-                variant="primary"
-                className="mt-2 w-[197px] h-[38px] sm:w-[343px] sm:h-[50px]"
-                type="submit"
-                disabled={status === "loading"}
-              >
-                {status === "loading" ? <LoadingSpinner /> : "Change Password"}
-              </ButtonComponent>
+            <div className="space-y-6">
+              <h2 className="text-2xl font-semibold text-gray-900 flex items-center gap-2">
+                <span className="text-red-500">Danger Zone</span>
+              </h2>
+              <div className="border-2 border-red-100 rounded-lg p-6 bg-red-50">
+                <div className="flex items-start space-x-4">
+                  <div className="mt-1">
+                    <AlertTriangle className="h-6 w-6 text-red-500" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-medium text-red-800">Delete Account</h3>
+                    <p className="mt-2 text-sm text-gray-600">
+                      Once you delete your account, there is no going back. Please be certain.
+                      All of your data including saved preferences, history, and personal information will be permanently removed.
+                    </p>
+                    <div className="mt-4">
+                      <ButtonComponent
+                        variant="danger"
+                        className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition-colors"
+                        onClick={() => setShowDeleteModal(true)}
+                      >
+                        Delete Account
+                      </ButtonComponent>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </form>
-        </div>
-      </section>
+          </div>
+        </section>
+      </div>
     </>
   );
 };

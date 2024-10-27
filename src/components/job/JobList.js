@@ -5,11 +5,13 @@ import { getFavorite } from "../../features/slices/favoriteSlice";
 import { removedIsClicked } from "../../features/slices/favoriteSlice";
 import WrapperComponent from "../reusable/WrapperComponent";
 import NoResults from "../../layouts/NoResults";
+import defaultImg from './../../assets/images/where2.jpg'
 const JobList = ({ jobs, page }) => {
 	const dispatch = useDispatch();
 	const { isClicked } = useSelector((state) => state.favorites);
 	let image;
 
+	console.log('sdfbjkdfsajbkfdhksajhdjklafskhjadfshjkfsjhdfsahjkdffdsajhkdfsahj job list')
 	useEffect(() => {
 		const fetchFavorites = async () => {
 			try {
@@ -28,36 +30,34 @@ const JobList = ({ jobs, page }) => {
 	}
 	return (
 		<>
-			{jobs.map((job) => {
-				job.company_id ? (image = job.company.img_url) : (image = null);
-				return (
-					<WrapperComponent>
-						<Card
-							key={job.id}
-							id={job.id}
-							image={image}
-							imageAlt={job.job_rquire}
-							title={job.company_name}
-							position={job.position}
-							salary={job.salary}
-							description={job.job_desc}
-							// facebookLink={job.updatedAt}
-							// instagramLink={job.updatedAt}
-							// twitterLink={job.createdAt}
-							// youtubeLink={job.createdAt}
-							// websiteLink={job.createdAt}
-							location={job.location}
-							deadLine={job.deadline}
-							timeOut={job.work_hour}
-							type={"job"}
-							isHeartClicked={isClicked[job.id]}
-							route={`/detail/job/${job.id}`}
-						/>
-					</WrapperComponent>
-				);
-			})}
+		  {jobs.map((job) => {
+			if (job.isApproved) {
+			  const image = job.company_id ? job.company.img_url : defaultImg;
+			  return (
+				<WrapperComponent key={job.id}>
+				  <Card
+					id={job.id}
+					image={image}
+					imageAlt={job.job_require}
+					title={job.company_name}
+					position={job.position}
+					salary={job.salary}
+					description={job.job_desc}
+					location={job.location}
+					deadLine={job.deadline}
+					timeOut={job.work_hour}
+					type={"job"}
+					isHeartClicked={isClicked[job.id]}
+					route={`/detail/job/${job.id}`}
+				  />
+				</WrapperComponent>
+			  );
+			}
+			return null;
+		  })}
 		</>
-	);
+	  );
+	  
 };
 
 export default JobList;

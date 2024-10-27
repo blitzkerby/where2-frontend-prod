@@ -3,14 +3,17 @@ import { X, Eye, Check } from "lucide-react";
 import config from "../../../config";
 import axios from "axios";
 
-export const useUniversityFunctions = () => {
+export const useUniversityFunctions = (onUniversityUpdate) => {
     const navigate = useNavigate();
 
     const handleApprovePost = async (id) => {
         console.log("approve action triggered for university with ID:", id);
         try {
             const response = await axios.patch(config.universities.approveUniversity(id));
-            console.log(response);
+            if (response.status === 200) {
+                // Update the UI immediately after successful API call
+                onUniversityUpdate(id, true);
+            }
         } catch (error) {
             console.error("Failed to approve university with ID:", id, error);
         }
@@ -25,7 +28,10 @@ export const useUniversityFunctions = () => {
         console.log("Disapprove action triggered for university with ID:", id);
         try {
             const response = await axios.patch(config.universities.disapproveUniversity(id));
-            console.log(response);
+            if (response.status === 200) {
+                // Update the UI immediately after successful API call
+                onUniversityUpdate(id, false);
+            }
         } catch (error) {
             console.error("Failed to disapprove university with ID:", id, error);
         }

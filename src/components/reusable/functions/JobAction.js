@@ -3,7 +3,7 @@ import { X, Eye, Check } from "lucide-react";
 import config from "../../../config";
 import axios from "axios";
 
-export const useJobFunctions = () => {
+export const useJobFunctions = (onJobUpdate) => {
   const navigate = useNavigate();
 
   const handleView = (id) => {
@@ -15,23 +15,28 @@ export const useJobFunctions = () => {
     console.log("Job with ID:", id, "approve function called");
     try {
       const response = await axios.patch(config.job.approveJob(id));
-      console.log(response);
+      if (response.status === 200) {
+        // Update the UI immediately after successful API call
+        onJobUpdate(id, true);
+      }
     } catch (error) {
       console.error("Failed to approve job with ID:", id, error);
     }
   };
 
-  const handledisapprovePost = async (id) => {
+  const handleDisapprovePost = async (id) => {
     console.log("Job with ID:", id, "disapprove function called");
     try {
       const response = await axios.patch(config.job.disapproveJob(id));
-      console.log(response);
+      if (response.status === 200) {
+        // Update the UI immediately after successful API call
+        onJobUpdate(id, false);
+      }
     } catch (error) {
       console.error("Failed to disapprove job with ID:", id, error);
     }
-  }
+  };
 
-  // Return a function that generates the appropriate actions based on showApproved state
   const getJobFunctions = (showApproved) => {
     const baseActions = [
       {
@@ -42,7 +47,6 @@ export const useJobFunctions = () => {
       }
     ];
 
-    // Only add the approve button if we're not showing approved posts
     if (!showApproved) {
       baseActions.push({
         variant: "success",
@@ -52,12 +56,13 @@ export const useJobFunctions = () => {
         requiresConfirmation: true,
       });
     }
-    if (showApproved){
+    
+    if (showApproved) {
       baseActions.push({
         variant: "danger",
         icon: <X />,
         label: "",
-        onClick: (id) => handledisapprovePost(id),
+        onClick: (id) => handleDisapprovePost(id),
         requiresConfirmation: true,
       });
     }

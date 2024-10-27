@@ -36,6 +36,7 @@ const config = {
   analytics: {
     getAllUsers: `${API_URL}/api/users/user-list`,
     deleteUserById: (userId) => `${API_URL}/api/users/delete-user/${userId}`,
+    reactivateUserById: (userId) => `${API_URL}/api/users/reactivate-user/${userId}`
   },
   photo: {
     getS3Url: `${API_URL}/api/user/s3Url`,

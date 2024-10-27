@@ -6,12 +6,27 @@ import { useUniversityFunctions } from "../../../reusable/functions/UniversityFu
 import ButtonComponent from "../../../reusable/Button";
 
 const UniversityListing = () => {
-  const { getUniversityFunctions } = useUniversityFunctions();
   const [universities, setUniversities] = useState([]);
   const [filteredUniversities, setFilteredUniversities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showApproved, setShowApproved] = useState(true); // Default to showing approved universities
+  const [showApproved, setShowApproved] = useState(true);
+
+  // Pass the update function to useUniversityFunctions
+  const handleUniversityUpdate = (uniId, newApprovalStatus) => {
+    const updatedUniversities = universities.map(uni =>
+      uni.id === uniId ? { ...uni, isApproved: newApprovalStatus } : uni
+    );
+    setUniversities(updatedUniversities);
+    
+    // Update filtered universities based on current view
+    const newFilteredUniversities = updatedUniversities.filter(uni => 
+      showApproved ? uni.isApproved : !uni.isApproved
+    );
+    setFilteredUniversities(newFilteredUniversities);
+  };
+
+  const { getUniversityFunctions } = useUniversityFunctions(handleUniversityUpdate);
 
   const getAllUniversities = async () => {
     try {
@@ -26,9 +41,9 @@ const UniversityListing = () => {
       // Filter and set initially approved universities
       const approvedUniversities = universityData.filter(uni => uni.isApproved);
       setFilteredUniversities(approvedUniversities);
-      setLoading(false);
     } catch (err) {
       setError(err.message);
+    } finally {
       setLoading(false);
     }
   };
@@ -51,27 +66,10 @@ const UniversityListing = () => {
 
   const toggleApproval = () => {
     setShowApproved(!showApproved);
-    if (showApproved) {
-      const unapprovedUniversities = universities.filter(uni => !uni.isApproved);
-      setFilteredUniversities(unapprovedUniversities);
-    } else {
-      const approvedUniversities = universities.filter(uni => uni.isApproved);
-      setFilteredUniversities(approvedUniversities);
-    }
-  };
-
-  const handleUniversityStatusChange = (uniId, newApprovalStatus) => {
-    const updatedUniversities = universities.map(uni => 
-      uni.id === uniId ? { ...uni, isApproved: newApprovalStatus } : uni
+    const newFilteredUniversities = universities.filter(uni => 
+      !showApproved ? uni.isApproved : !uni.isApproved
     );
-    setUniversities(updatedUniversities);
-
-    // Update filtered universities based on current filter
-    if (showApproved) {
-      setFilteredUniversities(updatedUniversities.filter(uni => uni.isApproved));
-    } else {
-      setFilteredUniversities(updatedUniversities.filter(uni => !uni.isApproved));
-    }
+    setFilteredUniversities(newFilteredUniversities);
   };
 
   return (
@@ -86,7 +84,6 @@ const UniversityListing = () => {
         columns={["id", "email", "name", "role"]}
         totalItems={filteredUniversities.length}
         actions={getUniversityFunctions(showApproved)}
-        onStatusChange={handleUniversityStatusChange}
       />
     </main>
   );

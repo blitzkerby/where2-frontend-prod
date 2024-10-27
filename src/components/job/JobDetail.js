@@ -26,6 +26,9 @@ import {
   } from "lucide-react";
 import NoResults from "../../layouts/NoResults";
 import DiscussionsContainer from "./../reusable/DiscussionContainer"
+import axios from "axios";
+import config from "../../config";
+
 
   const JobDetail = () => {
     const dispatch = useDispatch();
@@ -33,14 +36,10 @@ import DiscussionsContainer from "./../reusable/DiscussionContainer"
     const params = useParams();
   
     useEffect(() => {
-      const fetchCreatorData = async () => {
-        const creatorData = await fetchProfile();
-        console.log(creatorData);
-      };
-  
-      fetchCreatorData();
       dispatch(fetchCompany(params.jobId));
     }, [dispatch, params.jobId]);
+
+
   
     if (isLoading) {
       return <LoadingSkeleton />;
