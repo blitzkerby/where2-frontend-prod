@@ -14,11 +14,6 @@ import { searchUniversities } from "../features/slices/universitySlice";
 
 // assets
 import CardSlider from "../components/reusable/CardsSlider";
-import LivelihoodHomePage from "../assets/images/livelihood-homepage.png";
-import UniversityHomePage from "../assets/images/university-homepage.png";
-import ScholarshipHomePage from "../assets/images/shcolarship-homepage.png"
-import defaultImage from "../assets/images/where2.jpg"
-import { title } from "process";
 
 
 const hero1 = {
@@ -28,7 +23,6 @@ const hero1 = {
   backgroundGradient: "bg-gray-primary",
   titleColor: "text-blue-900",
   subtitleColor: "text-blue-600",
-  mainImageSrc: "https://i.imgur.com/dACQws5.png",
   mainImageSrc: "https://i.imgur.com/dACQws5.png",
   mainImageSrc: "https://i.imgur.com/dACQws5.png",
   mainImageAlt: "University building",
@@ -45,12 +39,10 @@ const hero2 = {
   subtitleColor: "text-blue-600",
   mainImageSrc: "https://i.imgur.com/4LZH1N6.png",
   mainImageSrc: "https://i.imgur.com/4LZH1N6.png",
-  mainImageSrc: "https://i.imgur.com/4LZH1N6.png",
   mainImageAlt: "University building",
   button:"Find part time jobs",
   onSearch: () => {},
 };
-
 
 
 const header =[
@@ -166,8 +158,8 @@ path: "https://anbschool.org/"
 ]
 const featureCards = [
   {
-      title: "University",
-    image: UniversityHomePage ,
+    title: "University",
+    image: "https://i.imgur.com/nLz3Gqg.png",
     description: "Find out available scholarships.",
     path: "/list/university"
   },
